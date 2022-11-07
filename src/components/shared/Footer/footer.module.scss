@@ -1,0 +1,139 @@
+@import '../../../scss/variables.scss';
+
+.footer {
+  background: $app-light-gray-color;
+  display: flex;
+  justify-content: center;
+  padding: 30px 0 40px 0;
+
+  &-upper {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #d8d8d8;
+    padding-bottom: 10px;
+
+    @media screen and (max-width: 850px) {
+      flex-wrap: wrap;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    &__logo {
+      width: 400px;
+
+      p {
+        color: $app-dark-color;
+        font-size: 15px;
+        line-height: 1.5;
+        font-weight: 500;
+      }
+
+      div {
+        @media screen and (max-width: 850px) {
+          position: absolute;
+          top: 50px;
+          left: 35%;
+        }
+
+        @media screen and (max-width: 720px) {
+          left: 32%;
+          font-size: 22px;
+
+          &::before {
+            width: 27px;
+            height: 27px;
+          }
+        }
+
+        @media screen and (max-width: 550px) {
+          left: 30%;
+        }
+
+        @media screen and (max-width: 490px) {
+          left: 28%;
+        }
+
+        @media screen and (max-width: 450px) {
+          left: 26%;
+        }
+
+        @media screen and (max-width: 400px) {
+          left: 23%;
+        }
+        
+        @media screen and (max-width: 365px) {
+          left: 21%;
+        }
+      }
+
+      @media screen and (max-width: 850px) {
+        order: 2;
+        width: 100%;
+      }
+    }
+
+    &__links {
+      display: flex;
+
+      h3 {
+        font-size: 18px;
+        color: $app-dark-color;
+        margin: 0;
+        margin-bottom: 15px;
+      }
+
+      ul:nth-child(1) {
+        margin-right: 60px;
+      }
+
+      ul {
+        li {
+          margin-bottom: 8px;
+
+          a {
+            text-decoration: none;
+            font-size: 15px;
+            color: $app-dark-color;
+            font-weight: 500;
+
+            @media screen and (max-width: 720px) {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+
+      @media screen and (max-width: 850px) {
+        width: 100%;
+        margin-top: 70px;
+        order: 1;
+        justify-content: space-around;
+      }
+    }
+  }
+
+  &-lower {
+    text-align: center;
+
+    @media screen and (max-width: 600px) {
+      text-align: left;
+    }
+
+    p {
+      color: $app-dark-color;
+      line-height: 1.5;
+      font-weight: 500;
+      font-size: 15px;
+    }
+
+    span {
+      color: $app-dark-color;
+      font-weight: 500;
+      font-size: 15px;
+    }
+  }
+}

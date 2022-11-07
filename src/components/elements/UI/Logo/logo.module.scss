@@ -1,0 +1,21 @@
+@import '../../../../scss/variables.scss';
+
+.logo {
+  position: relative;
+  font-size: 25px;
+  color: $app-gray-color;
+  font-weight: 600;
+  margin-left: 45px;
+  margin-right: 60px;
+
+  &::before {
+    position: absolute;
+    content: '';
+    width: 30px;
+    height: 30px;
+    top: 0px;
+    left: -45px;
+    border-radius: 50%;
+    background: $app-main-color;
+  }
+}
