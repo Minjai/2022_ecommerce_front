@@ -1,0 +1,84 @@
+@import './../../../scss/variables.scss';
+
+.header {
+  &__title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    background: $app-light-gray-color;
+
+    p {
+      margin: 0;
+      color: $app-main-color;
+      font-size: 13px;
+      font-weight: 500;
+    }
+  }
+
+  &__body {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+  }
+
+  &__left {
+    display: flex;
+  }
+
+  &-burger {
+    width: 45px;
+    height: 27px;
+    position: relative;
+    cursor: pointer;
+    border: none;
+    background: none;
+    background-color: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    span {
+      width: 100%;
+      height: 2px;
+      background-color: $app-gray-color;
+    }
+  }
+
+  &-search {
+    background: none;
+    cursor: pointer;
+    border: none;
+    margin-left: 15px;
+
+    svg {
+      font-size: 26px;
+      color: $app-dark-color;
+    }
+  }
+
+  &-right {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+
+      & li:nth-child(1){
+        margin-right: 15px;
+      }
+
+      li {
+        a {
+          font-size: 26px;
+
+          svg {
+            color: $app-dark-color;
+          }
+        }
+      }
+    }
+  }
+}

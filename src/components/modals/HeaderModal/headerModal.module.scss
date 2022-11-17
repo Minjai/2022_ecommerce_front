@@ -1,0 +1,37 @@
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(39, 43, 48, 0.5);
+  transition: 0.3s;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+
+  &-wrapper {
+    position: absolute;
+    width: 95%;
+    height: 100%;
+    top: 0;
+    left: -95%;
+    background: #fff;
+    transition: .3s;
+
+    &__container{
+      width: 90%;
+      margin: 0 auto;
+      border: 1px solid red;
+    }
+  }
+}
+
+#modal_active {
+  opacity: 1;
+  pointer-events: all;
+
+  .modal-wrapper {
+    left: 0;
+  }
+}

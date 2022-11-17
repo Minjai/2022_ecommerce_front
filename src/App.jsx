@@ -2,6 +2,7 @@ import AppLayout from './components/layouts/AppLayout';
 import { appRoutes } from './constants/appRoutes';
 import { Route, Routes } from 'react-router-dom';
 import { paths } from './constants/paths';
+import "swiper/css";
 
 const App = () => {
   return (

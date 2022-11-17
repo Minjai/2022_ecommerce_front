@@ -1,7 +1,13 @@
+import ConsultationList from '../../components/lists/ConsultationList';
+import ContactUs from '../../components/partials/ContactUs';
+
 const Consultation = () => {
   return (
-    <div>Consultation</div>
-  )
-}
+    <>
+      <ConsultationList />
+      <ContactUs />
+    </>
+  );
+};
 
-export default Consultation
+export default Consultation;

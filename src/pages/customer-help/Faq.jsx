@@ -1,7 +1,15 @@
+import ContactUs from '../../components/partials/ContactUs';
+import NewSearch from '../../components/elements/NewSearch';
+import FaqList from '../../components/lists/FaqList';
+
 const Faq = () => {
   return (
-    <div>Faq</div>
-  )
-}
+    <>
+      <NewSearch />
+      <FaqList/>
+      <ContactUs />
+    </>
+  );
+};
 
-export default Faq
+export default Faq;

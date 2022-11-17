@@ -1,0 +1,28 @@
+@import '../../../scss/variables.scss';
+
+.pagination {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+
+  &__list {
+    display: flex;
+
+    span {
+      cursor: pointer;
+      font-size: 20px;
+      color: $app-gray-color;
+      font-weight: 600;
+      margin: 0 15px;
+    }
+
+    p {
+      font-size: 20px;
+      margin: 0 10px;
+    }
+
+    &_active {
+      color: $app-main-color !important;
+    }
+  }
+}

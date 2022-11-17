@@ -14,19 +14,7 @@ const Header = () => {
   return (
     <header>
       <div className={cls['header-upper']}>
-        <a href="url">Announcement</a>
-        <div className={cls['header-currency']}>
-          <span>
-            USD {'($)'} <BsChevronDown />
-          </span>
-          <div>
-            <ul>
-              {currencyLink.map(({ id, text }) => (
-                <li key={id}>{text}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <a href="url">[Notice] Free Shipping Worldwide</a>
       </div>
       <div className={cls['header-mid']}>
         <Logo />
@@ -55,7 +43,7 @@ const Header = () => {
                     cls[
                       to === paths.CATEGORY
                         ? 'category-list'
-                        : to === paths.CUSTOMER_HELP
+                        : to === `${paths.CUSTOMER_HELP}/`
                         ? 'customer-list'
                         : ''
                     ]
@@ -73,6 +61,18 @@ const Header = () => {
             </li>
           ))}
         </ul>
+        <div className={cls['header-currency']}>
+          <span>
+            USD {'($)'} <BsChevronDown />
+          </span>
+          <div>
+            <ul>
+              {currencyLink.map(({ id, text }) => (
+                <li key={id}>{text}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </header>
   );

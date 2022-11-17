@@ -1,9 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import FormInput from '../../elements/FormInput';
-import Button from '../../elements/UI/Button';
+import Button from '../../elements/UI/FormButton';
 import { useForm } from 'react-hook-form';
 import cls from './loginForm.module.scss';
 import * as yup from 'yup';
+import { useNavigate } from 'react-router-dom';
+import { paths } from '../../../constants/paths';
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -18,7 +20,10 @@ const LoginForm = () => {
     reset,
   } = useForm({
     resolver: yupResolver(schema),
+    mode: 'all',
   });
+
+  const navigate = useNavigate();
 
   const handleFormSubmit = (e) => {};
 
@@ -31,16 +36,19 @@ const LoginForm = () => {
           type={'email'}
           rules={register('email')}
         />
+        {errors.email && <p>{errors.email.message}</p>}
         <FormInput
           placeholder={'Password'}
           type={'password'}
           rules={register('password')}
         />
+        {errors.password && <p>{errors.password.message}</p>}
         <span>Forgot password?</span>
         <Button type="submit">Log In</Button>
       </form>
-      <span>
-        Don't have an account? <a href="link">Sign Up</a>
+      <span className={cls['login__confirm']}>
+        Don't have an account?{' '}
+        <b onClick={() => navigate(`/${paths.SIGNUP}`)}>Sign Up</b>
       </span>
     </div>
   );

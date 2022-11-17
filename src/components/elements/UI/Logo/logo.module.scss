@@ -18,4 +18,28 @@
     border-radius: 50%;
     background: $app-main-color;
   }
+
+  @media screen and (max-width: 1400px) {
+    font-size: 23px;
+
+    &::before {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  @media screen and (max-width: 1050px) {
+    width: 150px;
+    font-size: 20px;
+
+    &::before {
+      top: -1px;
+      width: 26px;
+      height: 26px;
+    }
+  }
+
+  @media screen and (max-width: 830px) {
+    margin: 0;
+  }
 }

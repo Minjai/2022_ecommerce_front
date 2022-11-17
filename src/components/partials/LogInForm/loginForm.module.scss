@@ -1,3 +1,5 @@
-.login{
-  text-align: center;
+@import '../../../scss/mixins.scss';
+
+.login {
+  @include authForm
 }

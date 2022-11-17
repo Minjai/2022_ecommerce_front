@@ -1,18 +1,21 @@
 import Consultation from '../pages/customer-help/Consultation';
 import CustomerHelp from '../pages/customer-help/CustomerHelp';
 import Signup from '../pages/authorization/Signup';
+import CustomerPost from '../pages/CustomerPost';
 import Login from '../pages/authorization/Login';
 import News from '../pages/customer-help/News';
 import Faq from '../pages/customer-help/Faq';
-import ContactUs from '../pages/ContactUs';
 import Category from '../pages/Category';
+import Contacts from '../pages/Contacts';
 import Redirect from '../pages/Redirect';
+import AboutUs from '../pages/AboutUs';
 import Reviews from '../pages/Reviews';
 import Order from '../pages/Order';
 import Best from '../pages/Best';
 import Home from '../pages/Home';
 import Cart from '../pages/Cart';
 import { paths } from './paths';
+import SingleProduct from '../pages/SingleProduct';
 
 export const appRoutes = [
   {
@@ -84,12 +87,22 @@ export const appRoutes = [
   },
   {
     id: 11,
-    path: paths.REVIEW,
-    element: <Reviews />,
+    path: paths.ABOUT,
+    element: <AboutUs />,
   },
   {
     id: 12,
     path: paths.CONTACT,
-    element: <ContactUs />,
+    element: <Contacts />,
   },
+  {
+    id: 13,
+    path: paths.CUSTOMER_POST,
+    element: <CustomerPost />,
+  },
+  {
+    id: 14,
+    path: paths.PRODUCT,
+    element: <SingleProduct/>
+  }
 ];

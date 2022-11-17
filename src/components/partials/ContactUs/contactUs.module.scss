@@ -1,0 +1,54 @@
+@import '../../../scss/variables.scss';
+
+.contact-us{
+  margin-top: 100px;
+  background: $app-light-gray-color;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__body{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__content{
+      h4{
+        margin: 0;
+        font-size: 26px;
+        font-weight: 600;
+        color: $app-dark-color;
+      }
+
+      p{
+        margin: 25px 0 0 0;
+        width: 500px;
+        color: $app-gray-color;
+        font-weight: 600;
+        line-height: 1.5;
+      }
+    }
+
+    &__button{
+      button{
+        width: 50px;
+        height: 46px;
+        background-color: $app-main-color;
+        border-radius: 50%;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg{
+          font-size: 30px;
+          color: #fff;
+        }
+      }
+    }
+  }
+}

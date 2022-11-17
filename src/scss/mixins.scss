@@ -1,0 +1,172 @@
+@import './variables.scss';
+
+@mixin authForm() {
+  text-align: center;
+
+  h3 {
+    font-size: 35px;
+    margin: 0;
+    color: $app-dark-color;
+
+    @media screen and (max-width: 1400px) {
+      font-size: 32px;
+    }
+
+    @media screen and (max-width: 550px) {
+      font-size: 29px;
+    }
+
+    @media screen and (max-width: 450px) {
+      font-size: 27px;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    margin: 0 auto;
+
+    @media screen and (max-width: 550px) {
+      width: 90%;
+    }
+
+    input {
+      margin-top: 30px;
+      border-radius: 5px;
+      color: $app-dark-color;
+
+      &::placeholder {
+        color: $app-dark-color;
+        opacity: 0.5;
+
+        @media screen and (max-width: 900px) {
+          opacity: 1;
+          font-size: 15px;
+          font-weight: 600;
+          color: #b1b6bd;
+        }
+
+        @media screen and (max-width: 450px) {
+          font-size: 14px;
+        }
+      }
+    }
+
+    span {
+      font-weight: 500;
+      margin-top: 15px;
+      align-self: flex-start;
+      cursor: pointer;
+      color: $app-main-color;
+
+      @media screen and (max-width: 900px) {
+        font-size: 14px;
+      }
+
+      @media screen and (max-width: 450px) {
+        font-size: 12px;
+      }
+    }
+  }
+
+  &__confirm {
+    margin-top: 20px;
+    color: $app-dark-color;
+    font-weight: 500;
+    display: block;
+
+    b {
+      color: $app-main-color;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    @media screen and (max-width: 900px) {
+      font-size: 15px;
+    }
+
+    @media screen and (max-width: 450px) {
+      font-size: 12px;
+    }
+  }
+}
+
+@mixin carousel-paginaiton() {
+  .swiper-button-next {
+    color: gray;
+    margin-right: -10px;
+    background-color: white;
+    width: 45px;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 50%;
+
+    &::before {
+      content: '';
+      position: absolute;
+      right: 11px;
+      width: 22px;
+      bottom: 49%;
+      height: 2px;
+      background: gray;
+      cursor: pointer;
+    }
+
+    &::after {
+      font-size: 22px;
+      position: absolute;
+      right: 9px;
+      top: 24%;
+    }
+  }
+
+  .swiper-button-prev {
+    color: gray;
+    margin-left: -10px;
+    background-color: white;
+    width: 45px;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 50%;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      width: 22px;
+      bottom: 49%;
+      height: 2px;
+      background: gray;
+      cursor: pointer;
+    }
+
+    &::after {
+      font-size: 22px;
+      position: absolute;
+      left: 9px;
+      top: 24%;
+    }
+  }
+}
+
+@mixin category-button {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+
+  &__child {
+    padding: 17px 20px;
+    cursor: pointer;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 40px;
+    margin-right: 20px;
+    margin-bottom: 25px;
+
+    p {
+      margin: 0;
+      color: $app-gray-color;
+      opacity: 0.7;
+      font-weight: 600;
+    }
+  }
+}

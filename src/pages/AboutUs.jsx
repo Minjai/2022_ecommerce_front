@@ -1,7 +1,18 @@
+import PageTitle from '../components/elements/UI/PageTitle';
+import PageWrapper from '../components/layouts/PageWrapper';
+import AboutUsInfo from '../components/partials/AboutUsInfo';
+import ContactUs from '../components/partials/ContactUs';
+
 const AboutUs = () => {
   return (
-    <div>AboutUs</div>
-  )
-}
+    <PageWrapper>
+      <div className="container">
+        <PageTitle>About Us</PageTitle>
+        <AboutUsInfo />
+        <ContactUs/>
+      </div>
+    </PageWrapper>
+  );
+};
 
-export default AboutUs
+export default AboutUs;

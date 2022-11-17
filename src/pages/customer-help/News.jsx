@@ -1,7 +1,15 @@
+import ContactUs from '../../components/partials/ContactUs';
+import NewSearch from '../../components/elements/NewSearch';
+import NewsList from '../../components/lists/NewsList';
+
 const News = () => {
   return (
-    <div>news</div>
-  )
-}
+    <>
+      <NewSearch />
+      <NewsList />
+      <ContactUs />
+    </>
+  );
+};
 
-export default News
+export default News;

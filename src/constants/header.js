@@ -1,24 +1,24 @@
 import { BsChevronDown } from 'react-icons/bs';
-import { paths } from "./paths";
+import { paths } from './paths';
 
 export const currencyLink = [
   {
     id: 1,
-    text: 'USD ($)'
+    text: 'USD ($)',
   },
   {
     id: 2,
-    text: 'USD ($)'
+    text: 'USD ($)',
   },
   {
     id: 3,
-    text: 'USD ($)'
+    text: 'USD ($)',
   },
   {
     id: 4,
-    text: 'USD ($)'
+    text: 'USD ($)',
   },
-]
+];
 
 export const headerMidLinks = [
   {
@@ -33,13 +33,13 @@ export const headerMidLinks = [
   },
   {
     id: 3,
-    to: paths.CART,
-    text: 'Cart',
+    to: paths.ORDERS,
+    text: 'Alarm',
   },
   {
     id: 4,
-    to: paths.ORDERS,
-    text: 'Orders',
+    to: paths.CART,
+    text: 'Cart',
   },
 ];
 
@@ -53,34 +53,34 @@ export const headerLowerLinks = [
     id: 2,
     to: paths.CATEGORY,
     text: 'Category',
-    icon: <BsChevronDown/>,
+    icon: <BsChevronDown />,
     list: [
       {
         id: 1,
         text: 'Hair Loss',
-        icon: <BsChevronDown/>,
+        icon: <BsChevronDown />,
       },
       {
         id: 2,
         text: 'Sleeping Aid',
-        icon: <BsChevronDown/>,
+        icon: <BsChevronDown />,
       },
       {
         id: 3,
         text: 'Skin Care',
-        icon: <BsChevronDown/>,
+        icon: <BsChevronDown />,
       },
       {
         id: 4,
         text: "Hair's Health",
-        icon: <BsChevronDown/>,
+        icon: <BsChevronDown />,
       },
       {
         id: 5,
-        text: "Weight Loss",
-        icon: <BsChevronDown/>,
-      }
-    ]
+        text: 'Weight Loss',
+        icon: <BsChevronDown />,
+      },
+    ],
   },
   {
     id: 3,
@@ -89,9 +89,9 @@ export const headerLowerLinks = [
   },
   {
     id: 4,
-    to: `${paths.CUSTOMER_HELP}/`,
+    to: `${paths.CUSTOMER_HELP}/${paths.NEWS}`,
     text: 'Customer Help',
-    icon: <BsChevronDown/>,
+    icon: <BsChevronDown />,
     list: [
       {
         id: 1,
@@ -105,7 +105,7 @@ export const headerLowerLinks = [
         id: 3,
         text: '1:1 General Consulation',
       },
-    ]
+    ],
   },
   {
     id: 5,
@@ -122,4 +122,22 @@ export const headerLowerLinks = [
     to: paths.CONTACT,
     text: 'Contact Us',
   },
-]
+];
+
+export const customerHelpLinks = [
+  {
+    id: 1,
+    to: paths.NEWS,
+    text: 'News',
+  },
+  {
+    id: 2,
+    to: paths.FAQ,
+    text: 'FAQ',
+  },
+  {
+    id: 3,
+    to: paths.CONSULTATION,
+    text: '1:1 General Constulatation',
+  },
+];

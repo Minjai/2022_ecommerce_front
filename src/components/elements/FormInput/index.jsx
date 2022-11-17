@@ -1,6 +1,8 @@
+import cls from './formInput.module.scss'
+
 const FormInput = ({ placeholder, type, rules, }) => {
   return (
-    <input placeholder={placeholder} type={type} {...rules}/>
+    <input className={cls['form-input']} placeholder={placeholder} type={type} {...rules}/>
   )
 }
 

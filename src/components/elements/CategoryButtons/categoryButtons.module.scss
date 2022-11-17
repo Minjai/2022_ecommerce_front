@@ -1,0 +1,17 @@
+@import '../../../scss/variables.scss';
+@import '../../../scss/mixins.scss';
+
+.category-buttons {
+  @include category-button;
+}
+
+#active {
+  border: none;
+  background: $app-main-color;
+
+  p {
+    color: #fff; 
+    opacity: 1;
+    margin: 0;
+  }
+}

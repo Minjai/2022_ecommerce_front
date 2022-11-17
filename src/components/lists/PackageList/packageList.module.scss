@@ -1,0 +1,92 @@
+@import '../../../scss/variables.scss';
+
+.package{
+  width: 90%;
+  margin-top: 30px;
+
+  &__header{
+    height: 50px;
+    background: $app-light-gray-color;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    span{
+      color: $app-dark-color;
+      font-weight: 500;
+      font-size: 20px;
+    }
+  }
+
+  &__body{
+    &__child{
+      display: flex;
+      align-content: center;
+      justify-content: space-between;
+      padding: 15px 20px;
+      border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+      cursor: pointer;
+
+      div{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      & div:first-child{
+        width: 40%;
+        padding-right: 50px;
+
+        span{
+          border-radius: 50%;
+          border: 1px solid $app-gray-color;
+          width: 21px;
+          height: 21px;
+          position: relative;
+        }
+
+        .active{
+          &::before{
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            left: 20%;
+            top: 20%;
+            background: $app-main-color;
+            border-radius: 50%;
+          }
+        }
+
+        p{
+          margin: 0;
+          color: $app-dark-color;
+          font-weight: 500;
+          font-size: 20px;
+        }
+      }
+
+      & div:last-child{
+        width: 43%;
+
+        p{
+          color: #A6A6A6;
+          font-size: 17px;
+          margin: 0;
+          font-weight: 600;
+        }
+
+        svg{
+          color: $app-dark-color;
+          font-size: 20px;
+        }
+
+        b{
+          color: $app-main-color;
+          font-size: 17px;
+        }
+      }
+    }
+  }
+}

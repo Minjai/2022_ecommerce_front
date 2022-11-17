@@ -13,5 +13,7 @@ export const paths = {
   CONTACT: 'contact-us',
   NEWS: 'news',
   FAQ: 'faq',
-  CONSULTATION: 'consultation'
+  CONSULTATION: 'consultation',
+  CUSTOMER_POST: 'costumer-post',
+  PRODUCT: 'product/:id'
 };

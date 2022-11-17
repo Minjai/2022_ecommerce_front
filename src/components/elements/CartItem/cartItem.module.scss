@@ -1,0 +1,65 @@
+@import '../../../scss/variables.scss';
+
+.cart-item{
+  border-bottom: 2px solid $app-light-gray-color;
+  padding: 20px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 180px;
+
+  &__image{
+    height: 100%;
+    display: flex;
+    align-content: center;
+
+    img{
+      width: 150px;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    div{
+      margin-left: 30px;
+      padding-top: 20px;
+
+      p{
+        font-size: 22px;
+        color: $app-dark-color;
+        margin: 0 0 15px 0;
+        font-weight: 500;
+      }
+
+      b{
+        color: #9A9A9A;
+        font-size: 17px;
+        font-weight: 500;
+        margin-bottom: 15px;
+        display: block;
+      }
+
+      span{
+        font-size: 19px;
+        font-weight: 500;
+        color: $app-dark-color;
+      }
+    }
+  }
+
+  &__closer{
+    span{
+      background-color: rgba(128, 128, 128, 0.5);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      padding: 2px;
+      justify-content: center;
+      align-items: center;
+
+      svg{
+        color: #fff;
+        font-size: 25px;
+      }
+    }
+  }
+}

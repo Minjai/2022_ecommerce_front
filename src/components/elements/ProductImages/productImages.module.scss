@@ -1,0 +1,29 @@
+@import '../../../scss/variables.scss';
+
+.product-images{
+  width: 52%;
+
+  &__current{
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+  }
+
+  div{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    img{
+      width: 90px;
+      height: 80px;
+      margin-top: 25%;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    .active{
+      border: 2px solid $app-main-color;
+    }
+  }
+}

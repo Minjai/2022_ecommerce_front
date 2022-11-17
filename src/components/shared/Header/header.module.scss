@@ -14,16 +14,21 @@
 }
 
 .header-upper {
-  position: relative;
-  text-align: center;
-  padding: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  background-color: $app-light-gray-color;
 
   a {
     text-decoration: none;
     color: $app-main-color;
     font-size: 15px;
-    font-weight: 500;
-    margin-top: 20px;
+    font-weight: 600;
+
+    @media screen and (max-width: 1400px) {
+      font-size: 13px;
+    }
   }
 }
 
@@ -31,34 +36,43 @@
   position: absolute;
   right: 60px;
   height: 30px;
-  top: 10px;
+  top: 25px;
+  width: 95px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 30px;
+  box-shadow: 0px 0px 2px 2px rgba(128, 128, 128, 0.2);
+
+  @media screen and (max-width: 950px) {
+    right: 33px;
+  }
 
   span {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: $app-gray-color;
-    font-weight: 500;
+    color: $app-dark-color;
+    font-weight: 600;
     font-size: 15px;
     cursor: pointer;
 
     svg {
-      margin-left: 5px;
+      color: $app-dark-color;
+      margin-left: 4px;
+      font-size: 13px;
     }
   }
 
   div {
     position: absolute;
     width: 130%;
-    bottom: -140px;
-    left: -27%;
-    height: 140px;
-    padding-top: 6px;
+    top: 34px;
+    left: 0%;
+    padding: 6px 0;
     background: #fff;
     box-shadow: 0px 0px 2px 2px #0000001c;
+    z-index: 2;
     @extend %list-none;
 
     ul {
@@ -67,11 +81,14 @@
       list-style: none;
       font-weight: 500;
       color: $app-gray-color;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
 
       li {
         cursor: pointer;
         font-size: 15px;
-        margin: 10px 0;
+        margin: 8px 0;
       }
     }
   }
@@ -79,14 +96,48 @@
   &:hover div {
     @extend %list-active;
   }
+
+  @media screen and (max-width: 1400px) {
+    width: 89px;
+    height: 29px;
+    top: 20px;
+
+    span {
+      font-size: 13px;
+
+      svg {
+        font-size: 12px;
+      }
+    }
+
+    div {
+      top: 32px;
+
+      ul {
+        li {
+          font-size: 13px;
+        }
+      }
+    }
+  }
 }
+
 .header-mid {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 60px;
-  border-top: 1px solid #b9b9b9;
+  flex-wrap: wrap;
   padding-top: 35px;
+
+  @media screen and (max-width: 1400px) {
+    padding-top: 40px;
+  }
+
+  @media screen and (max-width: 950px) {
+    padding: 35px 30px 0 30px;
+  }
+
 }
 
 .header-links {
@@ -104,6 +155,10 @@
         color: $app-dark-color;
         font-weight: 500;
         font-size: 18px;
+
+        @media screen and (max-width: 1400px) {
+          font-size: 13px;
+        }
       }
     }
   }
@@ -111,8 +166,11 @@
 
 .header-lower {
   margin-top: 30px;
-  padding-bottom: 30px;
-  border-bottom: 1px solid #b9b9b9;
+  padding-bottom: 25px;
+  padding-top: 25px;
+  border-bottom: 1px solid #b9b9b9c5;
+  border-top: 1px solid #b9b9b9c5;
+  position: relative;
 
   ul {
     list-style: none;
@@ -134,9 +192,17 @@
         align-items: center;
 
         svg {
-          color: $app-gray-color;
+          color: $app-dark-color;
           margin-left: 10px;
           font-size: 18px;
+        }
+
+        @media screen and (max-width: 1400px) {
+          font-size: 15px;
+
+          svg {
+            font-size: 14px;
+          }
         }
       }
 
@@ -147,10 +213,11 @@
       div {
         position: absolute;
         left: 0;
-        top: 135%;
+        top: 130%;
         background: #fff;
         padding: 25px 0;
         box-shadow: 0px 0px 2px 2px #0000001c;
+        z-index: 2;
         @extend %list-none;
 
         ul {
@@ -174,6 +241,21 @@
             svg {
               transform: rotate(-90deg);
               font-size: 15px;
+              font-weight: 500;
+            }
+          }
+        }
+
+        @media screen and (max-width: 1400px) {
+          padding: 15px 0;
+
+          ul {
+            li {
+              font-size: 14px;
+
+              svg {
+                font-size: 12px;
+              }
             }
           }
         }
@@ -181,10 +263,43 @@
 
       .customer-list {
         width: 100%;
+
+        @media screen and (max-width: 1400px) {
+          width: 140%;
+        }
       }
 
       .category-list {
         width: 270px;
+
+        @media screen and (max-width: 1400px) {
+          width: 210px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1400px) {
+    margin-top: 60px;
+  }
+
+  @media screen and (max-width: 1150px) {
+    >ul {
+      justify-content: flex-start;
+      padding-left: 48px;
+    }
+  }
+
+  @media screen and (max-width: 950px) {
+    margin-top: 40px;
+
+    >ul {
+      padding-left: 25px;
+    }
+
+    ul{
+      li{
+        margin: 0 10px;
       }
     }
   }

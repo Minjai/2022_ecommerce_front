@@ -4,6 +4,8 @@
   box-sizing: border-box;
 }
 
+textarea,
+button,
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
@@ -11,6 +13,7 @@ body {
 
 .container {
   width: 1430px;
+  margin: 0 auto;
 
   @media screen and (max-width: 1500px){
     width: 1200px;
@@ -22,5 +25,6 @@ body {
 }
 
 .page-wrapper{
-  margin-top: 30px;
+  margin-top: 50px;
+  margin-bottom: 90px;
 }

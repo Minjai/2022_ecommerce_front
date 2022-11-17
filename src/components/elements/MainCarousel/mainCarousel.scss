@@ -1,0 +1,25 @@
+@import '../../../scss/variables.scss';
+@import '../../../scss/mixins.scss';
+
+.main-carousel {
+  width: 100%;
+  height: 800px;
+}
+
+.mySwiper {
+  @include carousel-paginaiton;
+}
+
+.main-swiper {
+  width: 108%;
+  left: -4%;
+  height: 100%;
+  position: absolute;
+
+  .swiper-slide div {
+    background-color: $app-light-gray-color;
+    width: 92%;
+    height: 100%;
+    margin: 0 auto;
+  }
+}

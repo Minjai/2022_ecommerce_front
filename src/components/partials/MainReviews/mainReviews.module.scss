@@ -1,0 +1,17 @@
+@import '../../../scss/variables.scss';
+
+.reviews {
+  margin-top: 70px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+
+    span {
+      color: $app-gray-color;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  }
+}
