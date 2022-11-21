@@ -1,0 +1,121 @@
+@import '/src/scss/variables.scss';
+
+.points {
+  margin-top: 80px;
+
+  &__header {
+    color: $app-dark-color;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 23px;
+
+    span {
+      color: $app-main-color;
+      font-size: 20px;
+    }
+  }
+
+  &__body {
+    margin-top: 30px;
+    display: flex;
+
+    > span {
+      border: 1px solid rgba(128, 128, 128, 0.3);
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 17px;
+      border-radius: 5px;
+      width: 195px;
+      height: 45px;
+      position: relative;
+      margin-right: 25px;
+
+      p {
+        cursor: pointer;
+        margin: 0;
+        padding: 0 20px;
+        width: 100%;
+        height: 45px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      ul {
+        width: 100%;
+        position: absolute;
+        list-style: none;
+        top: 45px;
+        left: 0;
+        padding: 5px 0;
+        margin: 0;
+        opacity: 0;
+        pointer-events: none;
+        background: #fff;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border: 1px solid rgba(128, 128, 128, 0.3);
+        box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
+
+        li {
+          padding: 5px 15px;
+          cursor: pointer;
+          font-size: 15px;
+          font-weight: 600;
+          color: $app-dark-color;
+        }
+      }
+    }
+
+    > .active {
+      p {
+        svg {
+          transform: rotate(180deg);
+        }
+      }
+
+      ul {
+        opacity: 1;
+        pointer-events: all;
+        border-top: none;
+      }
+    }
+
+    > button {
+      padding: 0 25px;
+      border-radius: 30px;
+      height: 45px;
+      background: $app-main-color;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .picker {
+      margin-right: 25px;
+      height: 45px;
+
+      > div {
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        svg {
+          top: 10px !important;
+        }
+
+        span {
+          color: $app-dark-color !important;
+        }
+
+        border: 1px solid rgba(128, 128, 128, 0.3) !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+}

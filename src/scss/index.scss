@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import './variables.scss';
 
 * {
   box-sizing: border-box;
@@ -15,16 +16,64 @@ body {
   width: 1430px;
   margin: 0 auto;
 
-  @media screen and (max-width: 1500px){
+  @media screen and (max-width: 1500px) {
     width: 1200px;
   }
 
-  @media screen and (max-width: 1280px){
+  @media screen and (max-width: 1280px) {
     width: 90%;
   }
 }
 
-.page-wrapper{
+.page-wrapper {
   margin-top: 50px;
   margin-bottom: 90px;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.w-50 {
+  width: 48%;
+}
+
+.user-width {
+  width: 75%;
+}
+
+.rs-calendar-table-cell-content {
+  border-radius: 0 !important;
+}
+
+.rs-calendar-table-cell-in-range {
+  div {
+    background: #ef854362 !important;
+  }
+}
+
+.rs-calendar-table-cell-content:hover{
+  background: #ef854362 !important;
+  color: $app-dark-color !important;
+}
+
+.rs-calendar-table-cell-selected-start .rs-calendar-table-cell-content,
+.rs-calendar-table-cell-selected-end .rs-calendar-table-cell-content{
+  background: $app-main-color !important;
+
+  span{
+    color: #fff;
+  }
+}
+
+.rs-picker-toolbar-right {
+  button {
+    background: $app-main-color !important;
+  }
+}
+
+.rs-calendar-table-cell-is-today .rs-calendar-table-cell-content {
+  box-shadow: inset 0 0 0 1px $app-main-color !important;
 }

@@ -8,10 +8,9 @@ const CustomerNav = () => {
 
   return (
     <div className={cls['customer-nav']}>
-      {customerHelpLinks.map(({ activeClass, id, text, to }) => (
+      {customerHelpLinks.map(({ id, text, to }) => (
         <span key={id} className={cls[params['*'] === to ? 'customerLink' : '']}>
           <RouterLink
-            activeClass={activeClass}
             to={to}
           >
             {text}

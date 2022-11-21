@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Pagination from '../../elements/Pagination';
 import cls from './newsList.module.scss';
 
@@ -30,11 +31,17 @@ const data = [
 ];
 
 const NewsList = () => {
+  const navigate = useNavigate();
+
   return (
     <div className={cls['news-list']}>
       <div className={cls['news-list__body']}>
         {data.map(({ id, date, text }) => (
-          <div key={id} className={cls['news-list__child']}>
+          <div
+            onClick={() => navigate(`/news/${id}`)}
+            key={id}
+            className={cls['news-list__child']}
+          >
             <p>{text}</p>
             {date}
           </div>

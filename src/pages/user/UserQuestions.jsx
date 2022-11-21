@@ -1,7 +1,11 @@
+import QuestionsList from '../../components/lists/QuestionsList';
+
 const UserQuestions = () => {
   return (
-    <div>Questions</div>
-  )
-}
+    <div className="user-width">
+      <QuestionsList />
+    </div>
+  );
+};
 
-export default UserQuestions
+export default UserQuestions;

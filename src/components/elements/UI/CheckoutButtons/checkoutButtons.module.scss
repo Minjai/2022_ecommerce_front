@@ -1,0 +1,26 @@
+@import '../../../../scss/variables.scss';
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  button {
+    width: 49%;
+    height: 60px;
+    outline: none;
+    cursor: pointer;
+    background: none;
+    font-weight: 500;
+    font-size: 18px;
+    border-radius: 30px;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    color: $app-dark-color;
+  }
+
+  .active {
+    border: none;
+    background: $app-main-color;
+    color: #fff;
+  }
+}

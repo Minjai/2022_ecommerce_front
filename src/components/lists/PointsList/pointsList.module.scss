@@ -1,0 +1,88 @@
+@import '/src/scss/variables.scss';
+
+.user-width {
+  margin-top: 50px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    h3 {
+      margin: 0;
+      color: $app-dark-color;
+      font-size: 23px;
+    }
+
+    span {
+      color: $app-main-color;
+      font-weight: 700;
+      font-size: 18px;
+    }
+  }
+
+  &__body {
+    margin-top: 30px;
+
+    &__header {
+      border-top: 1px solid rgba(128, 128, 128, 0.3);
+      border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+      padding: 25px 0 25px 90px;
+      display: flex;
+      justify-content: space-between;
+      color: $app-dark-color;
+      font-weight: 600;
+      font-size: 19px;
+
+      div {
+        span:nth-child(1) {
+          margin-right: 140px;
+        }
+      }
+    }
+
+    &__list {
+      &__child {
+        border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+        padding: 20px 0;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        >span{
+          position: absolute;
+          left: 1;
+          bottom: 38px;
+          color: $app-dark-color;
+          font-size: 20px;
+          font-weight: 600;
+        }
+
+        div{
+          margin-left: 90px;
+          display: flex;
+          align-items: center;
+
+          span{
+            color: $app-dark-color;
+            font-weight: 500;
+            font-size: 18px;
+          }
+
+          p{
+            margin-left: 90px;
+            padding: 0;
+            color: $app-gray-color;
+            font-weight: 600;
+            font-size: 18px;
+          }
+        }
+
+        b{
+          color: $app-main-color;
+          font-size: 17px;
+        }
+      }
+    }
+  }
+}

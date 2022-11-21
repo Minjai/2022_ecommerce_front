@@ -1,0 +1,196 @@
+@import '/src/scss/variables.scss';
+
+.review {
+  margin-top: 50px;
+
+  &-header {
+    color: $app-dark-color;
+    margin: 0;
+    font-size: 24px;
+  }
+
+  &-body {
+    margin-top: 35px;
+    border-top: 1px solid rgba(128, 128, 128, 0.3);
+    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+    padding: 20px 0;
+
+    &__child {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h4 {
+        color: #9a9a9a;
+        margin: 0;
+        font-size: 18px;
+        width: 10%;
+      }
+
+      div {
+        display: flex;
+        width: 86%;
+
+        img {
+          width: 120px;
+          height: 100px;
+          margin-right: 20px;
+        }
+
+        > span {
+          p {
+            margin: 5px 0;
+            font-weight: 600;
+            color: $app-dark-color;
+            font-size: 18px;
+          }
+
+          b {
+            color: #9a9a9a;
+            font-weight: 600;
+            font-size: 18px;
+          }
+
+          h5 {
+            color: $app-dark-color;
+            font-size: 19px;
+            margin: 5px 0 0 0;
+          }
+        }
+      }
+    }
+  }
+
+  &-footer {
+    padding-top: 40px;
+
+    div {
+      display: flex;
+
+      > p {
+        width: 11%;
+        margin: 0;
+        color: #9a9a9a;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      > span {
+        margin-left: 30px;
+        width: 120px;
+        color: $app-main-color;
+        cursor: pointer;
+        font-size: 23px;
+
+        p {
+          display: inline;
+          margin: 0;
+        }
+      }
+
+      .input-file {
+        margin-left: 25px;
+        position: relative;
+        display: inline-block;
+        align-self: center;
+
+        &-btn {
+          position: relative;
+          display: inline-block;
+          cursor: pointer;
+          outline: none;
+          text-decoration: none;
+          font-size: 14px;
+          vertical-align: middle;
+          color: $app-gray-color;
+          text-align: center;
+          border-radius: 4px;
+          background-color: $app-light-gray-color;
+          line-height: 22px;
+          height: 40px;
+          padding: 10px 20px;
+          box-sizing: border-box;
+          border: none;
+          margin: 0;
+          transition: background-color 0.2s;
+        }
+
+        &-text {
+          padding: 0 10px;
+          line-height: 40px;
+          display: inline-block;
+          font-size: 14px;
+          color: #b1b1b1;
+        }
+      }
+
+      .input-file input[type='file'] {
+        position: absolute;
+        z-index: -1;
+        opacity: 0;
+        display: block;
+        width: 0;
+        height: 0;
+      }
+    }
+  }
+
+  &-details {
+    margin-top: 40px;
+
+    p {
+      margin-top: 25px !important;
+    }
+
+    textarea {
+      margin-left: 30px;
+      width: 60%;
+      border: 1px solid rgba(128, 128, 128, 0.3);
+      border-radius: 10px;
+      resize: none;
+      font-weight: 500;
+      padding: 20px;
+      font-size: 18px;
+      height: 400px;
+      outline: none;
+
+      &::placeholder {
+        color: #b1b1b1;
+        font-weight: 400;
+      }
+    }
+  }
+
+  &-select {
+    margin-top: 30px;
+
+    p {
+      margin-top: 5px !important;
+    }
+  }
+
+  &-button {
+    padding-left: 60px;
+    margin-top: 50px;
+
+    button {
+      margin-right: 15px;
+      outline: none;
+      border: 1px solid rgba(128, 128, 128, 0.3);
+      cursor: pointer;
+      border-radius: 30px;
+      color: $app-dark-color;
+      font-weight: 500;
+      width: 230px;
+      font-size: 17px;
+      height: 50px;
+      background: none;
+    }
+
+    .active {
+      background: $app-main-color;
+      border: none;
+      color: #fff;
+    }
+  }
+}

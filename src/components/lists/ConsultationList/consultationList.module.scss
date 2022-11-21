@@ -2,6 +2,7 @@
 
 .consultation {
   margin-top: 40px;
+  position: relative;
 
   &-create {
     text-align: right;
@@ -36,7 +37,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 45%;
+        width: 40%;
         height: 100%;
 
         span{
@@ -73,12 +74,13 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 45%;
+        width: 35%;
         font-size: 17px;
 
         span{
           color: $app-main-color;
           font-weight: 600;
+          cursor: pointer;
         }
 
         p{
@@ -89,5 +91,17 @@
         }
       }
     }
+  }
+}
+
+#active{
+  .consultation-create {
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+  }
+
+  .consultation-list{
+    margin-bottom: 60px;
   }
 }

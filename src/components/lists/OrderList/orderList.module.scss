@@ -1,0 +1,137 @@
+@import '/src/scss/variables.scss';
+
+.order {
+  margin-top: 30px;
+
+  &__child {
+    border-radius: 10px;
+    margin-bottom: 40px;
+    overflow: hidden;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+
+    &__header {
+      background: $app-light-gray-color;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 25px;
+
+      div {
+        display: flex;
+
+        span:last-child {
+          margin-left: 100px;
+        }
+      }
+
+      span {
+        p {
+          color: $app-dark-color;
+          font-size: 17px;
+          font-weight: 600;
+        }
+      }
+    }
+
+    &__body {
+      padding: 20px 25px 50px 25px;
+      position: relative;
+
+      h4 {
+        width: 100%;
+        color: $app-dark-color;
+        margin: 0 0 30px 0;
+        font-size: 22px;
+      }
+      
+      .active {
+        color: $app-main-color;
+      }
+      
+      &__content {
+        margin-top: 35px;
+        display: flex;
+        flex-wrap: wrap;
+
+
+        img {
+          width: 23%;
+          height: 190px;
+          margin-right: 3%;
+        }
+
+        div {
+          width: 74%;
+
+          p {
+            margin: 0;
+            color: $app-dark-color;
+            font-size: 18px;
+            font-weight: 600;
+          }
+
+          span {
+            color: #9a9a9a;
+            font-weight: 600;
+            display: block;
+            margin: 5px 0;
+            font-size: 17px;
+          }
+
+          button {
+            margin-top: 20px;
+            border: 1px solid rgba(128, 128, 128, 0.3);
+            outline: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            background: none;
+            font-weight: 600;
+            color: $app-dark-color;
+            border-radius: 30px;
+          }
+        }
+      }
+
+      &__buttons {
+        position: absolute;
+        right: 30px;
+        bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        button {
+          display: block;
+          border: 1px solid rgba(128, 128, 128, 0.3);
+          color: $app-dark-color;
+          font-weight: 600;
+          cursor: pointer;
+          outline: none;
+          border-radius: 30px;
+          height: 50px;
+          width: 200px;
+          background: none;
+          margin-top: 15px;
+        }
+
+        .active {
+          border: none;
+          color: #fff;
+          background: $app-main-color;
+        }
+
+        #invalid{
+          pointer-events: none;
+          opacity: .6;
+          color: $app-gray-color;
+        }
+
+        p {
+          margin: 10px 0 0 0;
+          color: $app-main-color;
+          font-weight: 600;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

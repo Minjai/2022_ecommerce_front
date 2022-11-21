@@ -1,0 +1,52 @@
+@import '/src/scss/variables.scss';
+
+.transfer{
+  &__title{
+    position: relative;
+    margin: 0;
+    color: $app-dark-color;
+    font-size: 40px;
+
+    span{
+      border: 2px solid $app-main-color;
+      border-radius: 50%;
+      color: $app-main-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 45px;
+      height: 45px;
+      position: absolute;
+      left: -60px;
+      top: 5px;
+
+      svg{
+        font-size: 30px;
+      }
+    }
+  }
+
+  p{
+    color: $app-dark-color;
+    font-size: 17px;
+    margin: 25px 0;
+    line-height: 1.5;
+    font-weight: 600;
+  }
+
+  &__body{
+    h3{
+      color: $app-dark-color;
+      font-size: 22px;
+      margin: 30px 0;
+    }
+  }
+
+  &__footer{
+    margin: 60px 0;
+
+    .active{
+      color: $app-main-color;
+    }
+  }
+}

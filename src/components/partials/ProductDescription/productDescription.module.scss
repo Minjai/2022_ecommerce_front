@@ -1,0 +1,48 @@
+@import '../../../scss/variables.scss';
+
+.description{
+  margin: 80px 0 60px 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+
+  &__child{
+    overflow: hidden;
+    height: 80px;
+    border-top: 1px solid rgba(128, 128, 128, 0.3);
+
+    span{
+      height: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 22px;
+      color: $app-dark-color;
+      cursor: pointer;
+      font-weight: 600;
+
+      svg{
+        color: $app-gray-color;
+        font-size: 23px;
+      }
+    }
+
+    ul{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li{
+        width: 90%;
+        font-size: 19px;
+        color: $app-gray-color;
+        font-weight: 500;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  #active{
+    overflow: auto;
+    height: auto;
+    padding-bottom: 30px;
+  }
+}

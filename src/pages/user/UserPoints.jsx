@@ -1,7 +1,13 @@
-const Points = () => {
-  return (
-    <div>Points</div>
-  )
-}
+import OrderHistory from '../../components/partials/OrderHistory';
+import PointsList from '../../components/lists/PointsList';
 
-export default Points
+const UserPoints = () => {
+  return (
+    <div className='user-width'>
+      <PointsList />
+      <OrderHistory/>
+    </div>
+  );
+};
+
+export default UserPoints;

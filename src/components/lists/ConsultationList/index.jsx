@@ -37,13 +37,15 @@ const data = [
   },
 ];
 
-const ConsultationList = () => {
+const ConsultationList = ({ bottom }) => {
   const navigate = useNavigate();
 
   return (
-    <div className={cls['consultation']}>
+    <div id={cls[bottom ? 'active' : '']} className={cls['consultation']}>
       <div className={cls['consultation-create']}>
-        <button onClick={() => navigate(`/${paths.CUSTOMER_POST}`)}>Create a Post</button>
+        <button onClick={() => navigate(`/${paths.CUSTOMER_POST}`)}>
+          Create a Post
+        </button>
       </div>
       <div className={cls['consultation-list']}>
         {data.map(({ id, date, image, order, question, user, answers }) => (
@@ -56,16 +58,16 @@ const ConsultationList = () => {
               </p>
             </div>
             <div className={cls['consultation-list__child__right']}>
-              <span>{answers.length} replies</span>
+              <span onClick={() => navigate(`/${paths.CONSULTATION}/${id}`)}>
+                {answers.length} replies
+              </span>
               <p>{user}</p>
               <p>{date}</p>
             </div>
           </div>
         ))}
       </div>
-      <div>
-        <Pagination />
-      </div>
+      <Pagination />
     </div>
   );
 };

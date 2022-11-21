@@ -1,0 +1,135 @@
+@import '/src/scss/variables.scss';
+
+.user {
+  margin-top: 50px;
+
+  &-board {
+    h3 {
+      margin: 0;
+      font-size: 25px;
+      color: $app-dark-color;
+      font-weight: 600;
+    }
+
+    &__body {
+      width: 100%;
+      height: 300px;
+      margin-top: 30px;
+      border-radius: 5px;
+      background: $app-light-gray-color;
+      display: flex;
+      justify-content: space-between;
+
+      div {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+        color: $app-main-color;
+
+        b {
+          font-size: 38px;
+        }
+
+        span {
+          font-size: 25px;
+          font-weight: 600;
+        }
+      }
+
+      div:first-child {
+        &::before {
+          content: '';
+          position: absolute;
+          right: -0.5px;
+          top: 25%;
+          width: 1px;
+          height: 50%;
+          background: $app-gray-color;
+        }
+      }
+    }
+  }
+
+  &-status {
+    margin: 80px 0;
+
+    h3 {
+      margin: 0;
+      font-size: 28px;
+      color: $app-dark-color;
+      font-weight: 600;
+    }
+
+    &__body {
+      margin-top: 30px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(128, 128, 128, 0.3);
+      position: relative;
+      display: flex;
+
+      &__month{
+        right: 0;
+        top: -40px;
+        position: absolute;
+        color: $app-dark-color;
+        font-weight: 600;
+        font-size: 15px;
+      }
+
+      &__child {
+        display: flex;
+
+        div {
+          text-align: center;
+
+          span {
+            color: $app-main-color;
+            font-size: 28px;
+            font-weight: 600;
+          }
+
+          p {
+            color: $app-dark-color;
+            font-weight: 600;
+            line-height: 1.5;
+            font-size: 18px;
+          }
+        }
+
+        svg {
+          align-self: center;
+          margin: 0 20px;
+          font-size: 30px;
+          color: $app-gray-color;
+        }
+      }
+
+      &__lastChild {
+        width: 18%;
+        margin-left: 40px;
+        border-left: 1px solid gray;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        p {
+          margin: 10px 0;
+          color: $app-dark-color;
+          font-weight: 600;
+          padding-left: 30px;
+          font-size: 17px;
+          display: flex;
+          justify-content: space-between;
+
+          span{
+            font-weight: 700;
+          }
+        }
+      }
+    }
+  }
+}

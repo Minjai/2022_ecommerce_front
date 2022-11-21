@@ -67,10 +67,10 @@ const data = [
   },
 ];
 
-const ReviewsCarousel = () => {
+const ReviewsCarousel = ({ description }) => {
   return (
     <div className={cls['review-carousel']}>
-      <Description>Reviews Highlight</Description>
+      <Description>{description}</Description>
       <div className={cls['review-carousel__list']}>
         <Swiper
           slidesPerView={2}

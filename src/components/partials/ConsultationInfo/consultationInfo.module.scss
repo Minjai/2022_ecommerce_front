@@ -1,0 +1,111 @@
+@import '/src/scss/variables.scss';
+
+.consultation{
+  margin-top: 40px;
+  
+  &__child{
+    padding-top: 60px;
+    margin-bottom: 50px;
+    border-top: 1px solid rgba(128, 128, 128, 0.3);
+
+    &__title{
+      font-weight: 500;
+      font-size: 18px;
+
+      p{
+        color: $app-dark-color;
+        margin: 0 0 10px 0;
+        font-weight: 700;
+      }
+
+      span{
+        color: $app-dark-color;
+        font-weight: 500;
+
+        b{
+          font-weight: 500;
+          margin-left: 10px;
+        }
+      }
+    }
+
+    &__body{
+      margin-top: 60px;
+
+      p{
+        line-height: 2;
+        margin: 50px 0 0 0;
+        color: $app-dark-color;
+        font-weight: 500;
+      }
+
+      span{
+        cursor: pointer;
+        margin-top: 5px;
+        color: $app-main-color;
+        font-size: 18px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+
+        svg{
+          margin-right: 10px;
+          font-size: 23px;
+        }
+      }
+    }
+  }
+
+  &-comment{
+    border-top: 1px solid #8080804d;
+    padding-top: 40px;
+    text-align: right;
+
+    p{
+      text-align: center;
+      color: $app-dark-color;
+      font-weight: 600;
+      font-size: 18px;
+      margin: 0;
+    }
+
+    textarea{
+      width: 70%;
+      height: 400px;
+      margin: 30px 15%;
+      border: 1px solid #8080804d;
+      border-radius: 10px;
+      outline: none;
+      padding: 15px;
+      resize: none;
+    }
+
+    span{
+      margin-right: 215px;
+      border-radius: 30px;
+      cursor: pointer;
+      padding: 15px 25px;
+      color: $app-dark-color;
+      font-weight: 500;
+      border: 1px solid #8080804d;
+    }
+  }
+
+  &__footer{
+    text-align: center;
+    margin-top: 50px;
+
+    button{
+      background: $app-main-color;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      outline: none;
+      width: 230px;
+      height: 50px;
+    }
+  }
+}

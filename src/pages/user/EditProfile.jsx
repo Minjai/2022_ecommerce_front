@@ -1,7 +1,11 @@
+import EditForm from '../../components/partials/EditForm';
+
 const EditProfile = () => {
   return (
-    <div>EditProfile</div>
-  )
-}
+    <div className="user-width">
+      <EditForm />
+    </div>
+  );
+};
 
-export default EditProfile
+export default EditProfile;

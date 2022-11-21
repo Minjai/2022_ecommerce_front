@@ -1,7 +1,11 @@
+import UserReviewList from '../../components/lists/UserReviewList';
+
 const UserReviews = () => {
   return (
-    <div>Reviews</div>
-  )
-}
+    <div className="user-width">
+      <UserReviewList />
+    </div>
+  );
+};
 
-export default UserReviews
+export default UserReviews;

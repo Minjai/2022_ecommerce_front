@@ -1,7 +1,11 @@
+import ChangeForm from '../../components/partials/PasswordForm';
+
 const ChangePassword = () => {
   return (
-    <div>ChangePassword</div>
-  )
-}
+    <div className="user-width">
+      <ChangeForm />
+    </div>
+  );
+};
 
-export default ChangePassword
+export default ChangePassword;
