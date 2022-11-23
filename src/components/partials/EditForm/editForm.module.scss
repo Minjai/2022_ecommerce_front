@@ -31,6 +31,10 @@
       }
     }
 
+    input:first-child{
+      pointer-events: none;
+    }
+
     button {
       cursor: pointer;
       width: 100%;

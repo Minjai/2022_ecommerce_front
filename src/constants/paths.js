@@ -25,6 +25,7 @@ export const paths = {
   CONSULTATION_INFO: 'consultation/:id',
   USER: 'user',
   ORDER_HISTORY: 'order-history',
+  USER_PROFILE: 'profile',
   POINTS: 'points',
   QUESTIONS: 'questions',
   USER_REVIEWS: 'reviews',
@@ -32,3 +33,9 @@ export const paths = {
   CHANGE_PASSWORD: "change-password",
   WRITE_REVIEW: "write-review"
 };
+
+export const modalPaths = {
+  CONSULTATION: 'consultation',
+  REVIEW: 'review',
+  ORDER: 'order'
+}

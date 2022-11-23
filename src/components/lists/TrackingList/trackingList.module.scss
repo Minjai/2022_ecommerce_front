@@ -1,0 +1,33 @@
+@import '/src/scss/variables.scss';
+
+.tracking-list {
+  width: 40%;
+  margin-top: 30px;
+  padding: 10px 30px;
+  border-radius: 20px;
+  border: 1px solid gray;
+
+  &__child {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span {
+      color: $app-dark-color;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    button{
+      outline: none;
+      border: none;
+      background: $app-main-color;
+      cursor: pointer;
+      color: #fff;
+      font-weight: 500;
+      padding: 3px 30px;
+      border-radius: 30px;
+    }
+  }
+}

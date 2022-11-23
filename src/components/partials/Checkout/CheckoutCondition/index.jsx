@@ -40,10 +40,12 @@ const CheckoutCondition = () => {
               </b>
               None
             </span>
-            <textarea
-              placeholder="This field is required"
-              name="feedback"
-            ></textarea>
+            {!state.drug && (
+              <textarea
+                placeholder="This field is required"
+                name="feedback"
+              ></textarea>
+            )}
             <b>* This field is required</b>
           </div>
           <div className={cls['condition__field']}>
@@ -61,6 +63,13 @@ const CheckoutCondition = () => {
               </b>
               None
             </span>
+            {!state.medication && (
+              <textarea
+                placeholder="This field is required"
+                name="feedback"
+              ></textarea>
+            )}
+            <b>* This field is required</b>
           </div>
           <div className={cls['condition__field']}>
             <p>
@@ -77,10 +86,12 @@ const CheckoutCondition = () => {
               </b>
               None
             </span>
-            <textarea
-              placeholder="This field is required"
-              name="feedback"
-            ></textarea>
+            {!state.treatments && (
+              <textarea
+                placeholder="This field is required"
+                name="feedback"
+              ></textarea>
+            )}
             <b>* This field is required</b>
           </div>
           <div className={`flex ${cls['condition__child']}`}>

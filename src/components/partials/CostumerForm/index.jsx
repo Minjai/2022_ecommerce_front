@@ -29,8 +29,8 @@ const schema = yup.object().shape({
 const CostumerForm = () => {
   const [categoryActive, setCategoryActive] = useState(false);
   const [productActive, setProductActive] = useState(false);
-  const [category, setCategory] = useState('Optional');
-  const [product, setProduct] = useState('Optional');
+  const [category, setCategory] = useState('None');
+  const [product, setProduct] = useState('None');
 
   const {
     formState: { errors },

@@ -23,8 +23,10 @@ const QuestionsList = () => {
                 {select} <AiOutlineDown />
               </p>
               <ul>
-                <li onClick={() => handleRange('React')}>React</li>
-                <li onClick={() => handleRange('Redux')}>React</li>
+                <li onClick={() => handleRange('Past 3 months')}>Past 3 months</li>
+                <li onClick={() => handleRange('Past 6 months')}>Past 6 months</li>
+                <li onClick={() => handleRange('Past 12 months')}>Past 12 months</li>
+                <li onClick={() => handleRange('All order')}>All order</li>
               </ul>
             </span>
             <button>Ask New</button>

@@ -22,10 +22,10 @@
         span {
           border: 1px solid rgba(128, 128, 128, 0.3);
           border-radius: 30px;
-          font-weight: 500;
+          font-weight: 600;
           font-size: 17px;
           border-radius: 5px;
-          width: 180px;
+          width: 195px;
           height: 45px;
           position: relative;
           margin-right: 25px;
@@ -46,9 +46,9 @@
             width: 100%;
             position: absolute;
             list-style: none;
-            top: 39px;
+            top: 45px;
             left: 0;
-            padding: 0;
+            padding: 5px 0;
             margin: 0;
             opacity: 0;
             pointer-events: none;
@@ -59,11 +59,10 @@
             box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
 
             li {
-              padding: 10px 15px;
-              border-top: 1px solid rgba(128, 128, 128, 0.3);
+              padding: 5px 15px;
               cursor: pointer;
-              font-size: 16px;
-              font-weight: 500;
+              font-size: 15px;
+              font-weight: 600;
               color: $app-dark-color;
             }
           }

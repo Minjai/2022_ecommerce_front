@@ -1,7 +1,16 @@
 import { AiOutlineRight } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
+import { paths } from '../../../constants/paths';
 import cls from './userStatus.module.scss';
 
 const UserStatus = () => {
+  const navigate = useNavigate();
+
+  const newPageHandler = (path) => {
+    window.scrollTo(window.scrollX, 150);
+    navigate(path);
+  };
+
   return (
     <div className={cls['user']}>
       <div className={cls['user-board']}>
@@ -69,11 +78,11 @@ const UserStatus = () => {
       </div>
       <div className={cls['user-board']}>
         <div className={cls['user-board__body']}>
-          <div>
+          <div onClick={() => newPageHandler(`/user/${paths.USER_REVIEWS}`)}>
             <b>2</b>
             <span>reviews</span>
           </div>
-          <div>
+          <div onClick={() => newPageHandler(`/user/${paths.QUESTIONS}`)}>
             <b>3</b>
             <span>questions</span>
           </div>

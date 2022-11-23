@@ -26,6 +26,11 @@
     font-size: 15px;
     font-weight: 600;
 
+    &:hover{
+      text-decoration: none;
+      color: $app-main-color;
+    }
+
     @media screen and (max-width: 1400px) {
       font-size: 13px;
     }

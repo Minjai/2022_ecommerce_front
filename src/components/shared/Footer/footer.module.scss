@@ -95,7 +95,7 @@
         li {
           margin-bottom: 8px;
 
-          a {
+          span {
             text-decoration: none;
             font-size: 15px;
             color: $app-dark-color;
@@ -119,6 +119,7 @@
 
   &-lower {
     text-align: center;
+    margin-top: 20px;
 
     @media screen and (max-width: 600px) {
       text-align: left;

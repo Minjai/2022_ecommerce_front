@@ -1,7 +1,16 @@
+import { useNavigate } from 'react-router-dom';
+import { paths } from '../../../constants/paths';
 import Logo from '../../elements/UI/Logo';
 import cls from './footer.module.scss';
 
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const navigateHandler = (path) => {
+    window.scrollTo(window.scrollX, 150);
+    navigate(path);
+  };
+
   return (
     <footer className={cls['footer']}>
       <div className="container">
@@ -18,22 +27,42 @@ const Footer = () => {
             <ul>
               <h3>Policies</h3>
               <li>
-                <a href="#link">Our Policy</a>
+                <span>Our Policy</span>
               </li>
               <li>
-                <a href="#link">Terms & Contidions</a>
+                <span>Terms & Contidions</span>
               </li>
             </ul>
             <ul>
               <h3>Customer Help</h3>
               <li>
-                <a href="#link">News</a>
+                <span
+                  onClick={() =>
+                    navigateHandler(`${paths.CUSTOMER_HELP}/${paths.NEWS}`)
+                  }
+                >
+                  News
+                </span>
               </li>
               <li>
-                <a href="#link">FAQ</a>
+                <span
+                  onClick={() =>
+                    navigateHandler(`${paths.CUSTOMER_HELP}/${paths.FAQ}`)
+                  }
+                >
+                  FAQ
+                </span>
               </li>
               <li>
-                <a href="#link">1: 1 Consultations</a>
+                <span
+                  onClick={() =>
+                    navigateHandler(
+                      `${paths.CUSTOMER_HELP}/${paths.CONSULTATION}`
+                    )
+                  }
+                >
+                  1: 1 Consultations
+                </span>
               </li>
             </ul>
           </div>

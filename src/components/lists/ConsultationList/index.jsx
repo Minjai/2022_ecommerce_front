@@ -1,8 +1,10 @@
+import { setContent, setModal } from '../../../store/slices/modal';
 import Pagination from '../../elements/Pagination';
 import cls from './consultationList.module.scss';
-import { paths } from '../../../constants/paths';
+import { modalPaths, paths } from '../../../constants/paths';
 import { useNavigate } from 'react-router-dom';
 import { CiLock } from 'react-icons/ci';
+import { useDispatch } from 'react-redux';
 
 const data = [
   {
@@ -14,6 +16,7 @@ const data = [
     user: 'react',
     date: '01/01/2020',
     answers: [1, 2],
+    access: true,
   },
   {
     id: 2,
@@ -24,6 +27,7 @@ const data = [
     user: 'react',
     date: '01/01/2020',
     answers: [1, 2],
+    access: false,
   },
   {
     id: 3,
@@ -34,11 +38,19 @@ const data = [
     user: 'react',
     date: '01/01/2020',
     answers: [1, 2],
+    access: false,
   },
 ];
 
 const ConsultationList = ({ bottom }) => {
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const modalHandler = () => {
+    dispatch(setModal(true));
+    dispatch(setContent(modalPaths.CONSULTATION));
+  };
 
   return (
     <div id={cls[bottom ? 'active' : '']} className={cls['consultation']}>
@@ -48,24 +60,32 @@ const ConsultationList = ({ bottom }) => {
         </button>
       </div>
       <div className={cls['consultation-list']}>
-        {data.map(({ id, date, image, order, question, user, answers }) => (
-          <div className={cls['consultation-list__child']} key={id}>
-            <div className={cls['consultation-list__child__left']}>
-              <span>{order}</span>
-              <img src={image} alt="consutation-pic" />
-              <p>
-                <CiLock /> {question}
-              </p>
+        {data.map(
+          ({ id, date, image, order, question, user, answers, access }) => (
+            <div className={cls['consultation-list__child']} key={id}>
+              <div className={cls['consultation-list__child__left']}>
+                <span>{order}</span>
+                <img src={image} alt="consutation-pic" />
+                <p>
+                  <CiLock /> {question}
+                </p>
+              </div>
+              <div className={cls['consultation-list__child__right']}>
+                <span
+                  onClick={
+                    access
+                      ? () => navigate(`/${paths.CONSULTATION}/${id}`)
+                      : modalHandler
+                  }
+                >
+                  {answers.length} replies
+                </span>
+                <p>{user}</p>
+                <p>{date}</p>
+              </div>
             </div>
-            <div className={cls['consultation-list__child__right']}>
-              <span onClick={() => navigate(`/${paths.CONSULTATION}/${id}`)}>
-                {answers.length} replies
-              </span>
-              <p>{user}</p>
-              <p>{date}</p>
-            </div>
-          </div>
-        ))}
+          )
+        )}
       </div>
       <Pagination />
     </div>

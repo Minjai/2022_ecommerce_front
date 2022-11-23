@@ -6,11 +6,18 @@ import 'swiper/css/navigation';
 const CategoryCarousel = ({ data }) => {
   return (
     <Swiper
-      slidesPerView={7}
       spaceBetween={50}
       navigation={true}
       modules={[Navigation]}
       className={`mySwiper ${cls['category-swiper']}`}
+      breakpoints={{
+        900: {
+          slidesPerView: 6,
+        },
+        1300: {
+          slidesPerView: 7,
+        },
+      }}
     >
       {data.map((item) => (
         <SwiperSlide key={item.id}>

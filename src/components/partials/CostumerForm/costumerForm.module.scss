@@ -34,12 +34,13 @@
         display: flex;
         justify-content: space-between;
         color: $app-gray-color;
-        font-weight: 600;
+        font-weight: 500;
         font-size: 16px;
         margin-bottom: 20px;
 
         > span {
           margin-top: 15px;
+          font-weight: 600;
         }
 
         .costumer-input {

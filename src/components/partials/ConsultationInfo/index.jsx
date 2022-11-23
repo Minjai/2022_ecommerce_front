@@ -1,9 +1,9 @@
-import { BiEnvelope } from 'react-icons/bi';
-import { useNavigate } from 'react-router-dom';
 import cls from './consultationInfo.module.scss';
+import { useNavigate } from 'react-router-dom';
+import { BiEnvelope } from 'react-icons/bi';
 
 const ConsultationInfo = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div className={cls['consultation']}>

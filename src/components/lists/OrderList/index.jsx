@@ -1,7 +1,16 @@
+import { setContent, setModal } from '../../../store/slices/modal';
+import { modalPaths } from '../../../constants/paths';
 import cls from './orderList.module.scss';
-import React from 'react';
+import { useDispatch } from 'react-redux';
 
 const OrderList = ({ data }) => {
+  const dispatch = useDispatch();
+
+  const orderModalHandler = () => {
+    dispatch(setModal(true));
+    dispatch(setContent(modalPaths.ORDER));
+  };
+
   return (
     <div className={cls['order']}>
       <div className={cls['order__child']}>
@@ -22,7 +31,7 @@ const OrderList = ({ data }) => {
           </span>
         </div>
         <div className={cls['order__child__body']}>
-          <h4>Awaiting Payment</h4>
+          <h4 className="active">Awaiting Payment</h4>
           <div className={cls['order__child__body__content']}>
             <img
               src={
@@ -62,7 +71,7 @@ const OrderList = ({ data }) => {
           </span>
         </div>
         <div className={cls['order__child__body']}>
-          <h4 className={cls['active']}>Awaiting Payment</h4>
+          <h4 className={cls['active']}>Please re-submit your payment</h4>
           <div className={cls['order__child__body__content']}>
             <img
               src={
@@ -100,7 +109,7 @@ const OrderList = ({ data }) => {
           </span>
         </div>
         <div className={cls['order__child__body']}>
-          <h4>Delivered</h4>
+          <h4>Shipped</h4>
           <div className={cls['order__child__body__content']}>
             <img
               src={
@@ -128,7 +137,7 @@ const OrderList = ({ data }) => {
             </div>
           </div>
           <div className={cls['order__child__body__buttons']}>
-            <button>Cancel Order</button>
+            <button onClick={orderModalHandler}>View Tracking</button>
             <button id={cls['invalid']} className={cls['active']}>
               Make a Payment
             </button>

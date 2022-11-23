@@ -24,13 +24,14 @@ import Cart from '../pages/Cart';
 import { paths } from './paths';
 import SingleConsultation from '../pages/SingleConsultation';
 import UserPage from '../pages/user/UserPage';
-import OrderHistory from '../pages/user/OrderHistory';
 import UserPoints from '../pages/user/UserPoints';
 import UserQuestions from '../pages/user/UserQuestions';
 import UserReviews from '../pages/user/UserReviews';
 import EditProfile from '../pages/user/EditProfile';
 import ChangePassword from '../pages/user/ChangePassword';
 import WriteReview from '../pages/user/WriteReview';
+import UserProfile from '../pages/user/UserProfile';
+import UserOrder from '../pages/user/UserOrder';
 
 export const appRoutes = [
   {
@@ -165,7 +166,12 @@ export const appRoutes = [
       {
         id: paths.ORDER_HISTORY,
         path: paths.ORDER_HISTORY,
-        element: <OrderHistory />,
+        element: <UserOrder />,
+      },
+      {
+        id: paths.USER_PROFILE,
+        path: paths.USER_PROFILE,
+        element: <UserProfile />,
       },
       {
         id: paths.POINTS,

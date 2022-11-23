@@ -1,3 +1,5 @@
+@import '/src/scss/variables.scss';
+
 .modal {
   position: fixed;
   left: 0;
@@ -6,9 +8,15 @@
   height: 100vh;
   background: rgba(39, 43, 48, 0.5);
   transition: 0.3s;
-  z-index: 2;
+  z-index: 10;
   opacity: 0;
   pointer-events: none;
+
+  &-container {
+    position: relative;
+    overflow-y: scroll;
+    height: 100%;
+  }
 
   &-wrapper {
     position: absolute;
@@ -17,12 +25,261 @@
     top: 0;
     left: -95%;
     background: #fff;
-    transition: .3s;
+    transition: 0.3s;
 
-    &__container{
+    &__container {
       width: 90%;
       margin: 0 auto;
-      border: 1px solid red;
+    }
+
+    &__header {
+      margin-top: 20px;
+      padding-left: 44px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      span {
+        svg {
+          font-size: 23px;
+          color: $app-gray-color;
+        }
+      }
+    }
+
+    &__mid {
+      margin-top: 15px;
+      padding: 15px 0;
+      background: $app-light-gray-color;
+
+      .modal-wrapper__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      &__links {
+        span {
+          font-weight: 600;
+          cursor: pointer;
+          color: $app-main-color;
+          position: relative;
+          margin-right: 25px;
+
+          @media screen and (max-width: 600px){
+            font-size: 15px;
+          }
+        }
+
+        span:nth-child(1)::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: -14px;
+          height: 100%;
+          width: 1px;
+          background: $app-main-color;
+        }
+      }
+
+      &__currency {
+        height: 20px;
+        display: flex;
+        position: relative;
+
+        span {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          color: $app-dark-color;
+          font-weight: 600;
+
+          p {
+            margin: 0 15px 0 0;
+            font-size: 14px;
+          }
+
+          svg {
+            font-size: 14px;
+          }
+        }
+
+        ul {
+          width: 100%;
+          top: 23px;
+          margin: 0;
+          padding: 0;
+          left: 0;
+          opacity: 0;
+          position: absolute;
+          list-style: none;
+          background: #fff;
+          box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
+          transform: scale(0.9);
+          pointer-events: none;
+
+          li {
+            cursor: pointer;
+            padding: 5px 10px;
+          }
+        }
+      }
+
+      #active {
+        span {
+          svg {
+            transform: rotate(180deg);
+          }
+        }
+
+        ul {
+          opacity: 1;
+          transform: scale(1);
+          pointer-events: all;
+        }
+      }
+    }
+
+    &__body {
+      &__userLinks {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-around;
+        color: $app-dark-color;
+        padding: 0 15px;
+
+        span {
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font-size: 22px;
+
+          p {
+            margin: 3px 0 0 0;
+            font-weight: 500;
+            font-size: 16px;
+          }
+
+          @media screen and (max-width: 600px){
+            p{
+              font-size: 15px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 600px){
+          justify-content: space-between;
+
+          span{
+            p{
+              font-size: 15px;
+            }
+          }
+        }
+      }
+
+      &__list {
+        margin-top: 15px;
+        margin-bottom: 25px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+
+        >div {
+          border-top: 1px solid rgba(128, 128, 128, 0.3);
+          
+          a {
+            width: 100%;
+            height: 100%;
+            display: block;
+            font-weight: 700;
+            font-size: 16px;
+            color: $app-dark-color;
+            text-decoration: none;
+            cursor: pointer;
+
+            @media screen and (max-width: 600px){
+              font-size: 17px;
+            }
+
+            p{
+              margin: 0;
+              padding: 12px;
+            }
+          }
+
+          span {
+            font-weight: 700;
+            font-size: 16px;
+            color: $app-dark-color;
+            width: 100%;
+            height: 100%;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            @media screen and (max-width: 600px){
+              font-size: 16px;
+            }
+
+            svg{
+              font-size: 13px;
+            }
+          }
+
+          ul{
+            margin: 0;
+            padding: 0 0 10px 20px;
+            list-style: none;
+            display: none;
+
+            li{
+              color: $app-dark-color;
+              font-weight: 500;
+              margin-bottom: 10px;
+            }
+          }
+        }
+
+        .active{
+          span{
+            svg{
+              transform: rotate(180deg);
+            }
+          }
+
+          ul{
+            display: block;
+          }
+        }
+      }
+    }
+
+    &__footer{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      button{
+        width: 49%;
+        height: 38px;
+        cursor: pointer;
+        border-radius: 30px;
+        outline: none;
+        background: none;
+        border: 1px solid rgba(128, 128, 128, 0.3);
+        font-weight: 500;
+        color: $app-dark-color;
+        margin-bottom: 15px;
+
+        font-size: 12px;
+      }
+
+      .full{
+        width: 100%;
+      }
     }
   }
 }

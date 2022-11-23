@@ -1,6 +1,9 @@
+import { setContent, setModal } from '../../../store/slices/modal';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { modalPaths } from '../../../constants/paths';
 import { useState, useEffect } from 'react';
 import cls from './reviewForm.module.scss';
+import { useDispatch } from 'react-redux';
 
 const ReviewForm = () => {
   const [rating, setRating] = useState([]);
@@ -19,6 +22,13 @@ const ReviewForm = () => {
 
     setRating(data);
   }, [stars]);
+
+  const dispatch = useDispatch()
+
+  const handleReviewModal = () => {
+    dispatch(setModal(true))
+    dispatch(setContent(modalPaths.REVIEW))
+  }
 
   return (
     <div className={cls['review']}>
@@ -67,7 +77,7 @@ const ReviewForm = () => {
       </div>
       <div className={cls['review-button']}>
         <button>Cancel</button>
-        <button className={cls['active']}>Post</button>
+        <button onClick={(handleReviewModal)} className={cls['active']}>Post</button>
       </div>
     </div>
   );

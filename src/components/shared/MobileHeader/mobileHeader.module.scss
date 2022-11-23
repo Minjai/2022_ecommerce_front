@@ -1,6 +1,9 @@
 @import './../../../scss/variables.scss';
 
 .header {
+  padding-bottom: 25px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+  
   &__title {
     display: flex;
     justify-content: center;

@@ -1,11 +1,11 @@
 import UserStatus from '../../components/partials/UserStatus';
 
-const OrderHistory = () => {
+const UserProfile = () => {
   return (
-    <div className='user-width'>
+    <div className="user-width">
       <UserStatus />
     </div>
   );
 };
 
-export default OrderHistory;
+export default UserProfile;
