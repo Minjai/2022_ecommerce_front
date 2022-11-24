@@ -6,6 +6,10 @@
   justify-content: center;
   padding: 30px 0 40px 0;
 
+  @media screen and (max-width: 600px) {
+    padding: 30px 15px 40px 15px;
+  }
+
   &-upper {
     position: relative;
     display: flex;
@@ -26,11 +30,12 @@
     &__logo {
       width: 400px;
 
-      p {
+      >p {
         color: $app-dark-color;
         font-size: 15px;
         line-height: 1.5;
         font-weight: 500;
+        margin-top: 10px;
       }
 
       div {
@@ -89,6 +94,10 @@
 
       ul:nth-child(1) {
         margin-right: 60px;
+
+        @media screen and (max-width: 850px) {
+          margin-right: 0;
+        }
       }
 
       ul {
@@ -114,6 +123,10 @@
         order: 1;
         justify-content: space-around;
       }
+
+      @media screen and (max-width: 550px) {
+        justify-content: space-between;
+      }
     }
   }
 
@@ -130,6 +143,7 @@
       line-height: 1.5;
       font-weight: 500;
       font-size: 15px;
+      margin-bottom: 10px;
     }
 
     span {

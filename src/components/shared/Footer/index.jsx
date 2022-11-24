@@ -61,7 +61,7 @@ const Footer = () => {
                     )
                   }
                 >
-                  1: 1 Consultations
+                  1 : 1 General Consultations
                 </span>
               </li>
             </ul>

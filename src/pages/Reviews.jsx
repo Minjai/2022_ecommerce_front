@@ -62,7 +62,9 @@ const Reviews = () => {
     <PageWrapper>
       <div className="container">
         <PageTitle>Review</PageTitle>
-        <ReviewsCarousel description={'Reviews Highlights'} />
+        <br />
+        <Description>Reviews Highlights</Description>
+        <ReviewsCarousel />
         <Description>Reviews Library</Description>
         <ReviewsList reviews={data} />
         <Pagination />

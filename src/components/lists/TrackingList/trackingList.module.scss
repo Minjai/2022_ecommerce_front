@@ -7,6 +7,10 @@
   border-radius: 20px;
   border: 1px solid gray;
 
+  @media screen and (max-width: 1200px) {
+    width: 60%;
+  }
+
   &__child {
     margin: 20px 0;
     display: flex;

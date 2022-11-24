@@ -1,6 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import cls from './reviewsCarousel.module.scss';
-import Description from '../UI/Description';
 import { Navigation, Grid } from 'swiper';
 import ReviewItem from '../ReviewItem';
 import 'swiper/css/navigation';
@@ -67,10 +66,9 @@ const data = [
   },
 ];
 
-const ReviewsCarousel = ({ description }) => {
+const ReviewsCarousel = () => {
   return (
     <div className={cls['review-carousel']}>
-      <Description>{description}</Description>
       <div className={cls['review-carousel__list']}>
         <Swiper
           slidesPerView={2}
@@ -81,7 +79,18 @@ const ReviewsCarousel = ({ description }) => {
           spaceBetween={30}
           navigation={true}
           modules={[Navigation, Grid]}
-          className="mySwiper"
+          className={`mySwiper ${cls['review-swiper']}`}
+          breakpoints={{
+            300: {
+              slidesPerView: 1,
+            },
+            800: {
+              slidesPerView: 1.7,
+            },
+            1100: {
+              slidesPerView: 2,
+            },
+          }}
         >
           {data.map((item) => (
             <SwiperSlide className={cls['review-slide']} key={item.id}>

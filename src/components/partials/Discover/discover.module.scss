@@ -2,6 +2,7 @@
 
 .discover {
   margin-top: 70px;
+  flex-wrap: wrap;
   display: flex;
 
   &__child {
@@ -9,6 +10,10 @@
     text-align: center;
     background: $app-light-gray-color;
     padding: 60px 0;
+
+    @media screen and (max-width: 800px){
+      width: 100%;
+    }
 
     h4 {
       font-size: 31px;
@@ -42,6 +47,49 @@
       color: $app-dark-color;
       font-size: 18px;
       background: none;
+    }
+
+    @media screen and (max-width: 1400px) {
+      padding: 30px 0;
+      
+      h4{
+        font-size: 22px;
+      }
+
+      img{
+        width: 70px;
+      }
+
+      p{
+        font-size: 12px;
+      }
+
+      button{
+        margin-top: 20px;
+        width: 171px;
+        font-size: 12px;
+        height: 35px;
+      }
+    }
+
+    @media screen and (max-width: 950px) {
+      p{
+        width: 60%;
+      }
+
+      img{
+        margin-top: 15px;
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      p{
+        width: 80%;
+      }
+
+      button{
+        width: 190px;
+      }
     }
   }
 }

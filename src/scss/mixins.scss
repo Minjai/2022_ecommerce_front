@@ -33,7 +33,7 @@
     }
 
     input {
-      margin-top: 30px;
+      margin: 15px 0;
       border-radius: 5px;
       color: $app-dark-color;
 
@@ -52,6 +52,10 @@
           font-size: 14px;
         }
       }
+    }
+
+    p{
+      color: $app-main-color;
     }
 
     span {
@@ -119,6 +123,25 @@
       right: 9px;
       top: 24%;
     }
+
+    @media screen and (max-width: 700px) {
+      width: 35px;
+      height: 35px;
+      margin-right: 10px;
+
+      &::before {
+        right: 8px;
+        width: 16px;
+        bottom: 49%;
+        height: 1px;
+      }
+
+      &::after {
+        font-size: 15px;
+        right: 7px;
+        top: 27%;
+      }
+    }
   }
 
   .swiper-button-prev {
@@ -146,6 +169,25 @@
       left: 9px;
       top: 24%;
     }
+
+    @media screen and (max-width: 700px) {
+      width: 35px;
+      height: 35px;
+      margin-left: 10px;
+
+      &::before {
+        left: 8px;
+        width: 16px;
+        bottom: 49%;
+        height: 1px;
+      }
+
+      &::after {
+        font-size: 15px;
+        left: 7px;
+        top: 27%;
+      }
+    }
   }
 }
 
@@ -167,6 +209,25 @@
       color: $app-gray-color;
       opacity: 0.7;
       font-weight: 600;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    justify-content: space-between;
+    margin-top: 10px;
+
+    &__child {
+      width: 23.5%;
+      height: 38px;
+      margin: 10px 0 0 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      p{
+        font-size: 12px;
+      }
     }
   }
 }

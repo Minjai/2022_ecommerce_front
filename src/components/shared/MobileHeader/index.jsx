@@ -1,5 +1,7 @@
+import { setContent, setModal } from '../../../store/slices/modal';
 import { setActiveBurger } from '../../../store/slices/burger';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { modalPaths } from '../../../constants/paths';
 import cls from './mobileHeader.module.scss';
 import { TfiSearch } from 'react-icons/tfi';
 import { VscBell } from 'react-icons/vsc';
@@ -11,6 +13,11 @@ const MobileHeader = () => {
 
   const setModalHandler = () => {
     dispatch(setActiveBurger(true));
+  };
+
+  const searchModalHandler = () => {
+    dispatch(setContent(modalPaths.SEARCH));
+    dispatch(setModal(true));
   };
 
   return (
@@ -25,7 +32,7 @@ const MobileHeader = () => {
             <span></span>
             <span></span>
           </button>
-          <button className={cls['header-search']}>
+          <button onClick={searchModalHandler} className={cls['header-search']}>
             <TfiSearch />
           </button>
         </div>
@@ -33,14 +40,14 @@ const MobileHeader = () => {
         <div className={cls['header-right']}>
           <ul>
             <li>
-              <a href="list">
+              <span>
                 <VscBell />
-              </a>
+              </span>
             </li>
             <li>
-              <a href="list">
+              <span>
                 <AiOutlineShoppingCart />
-              </a>
+              </span>
             </li>
           </ul>
         </div>

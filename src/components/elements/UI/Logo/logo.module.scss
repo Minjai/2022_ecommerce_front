@@ -1,28 +1,31 @@
 @import '../../../../scss/variables.scss';
 
 .logo {
-  position: relative;
-  font-size: 25px;
-  color: $app-gray-color;
-  font-weight: 600;
-  margin-left: 45px;
-  margin-right: 60px;
+  display: flex;
+  align-items: center;
 
-  &::before {
-    position: absolute;
-    content: '';
+  span {
+    display: block;
     width: 30px;
     height: 30px;
-    top: 0px;
-    left: -45px;
     border-radius: 50%;
     background: $app-main-color;
+    margin-right: 10px;
+  }
+
+  p {
+    font-size: 25px;
+    color: $app-gray-color;
+    font-weight: 600;
+    margin: 0;
   }
 
   @media screen and (max-width: 1400px) {
-    font-size: 23px;
+    p{
+      font-size: 18px;
+    }
 
-    &::before {
+    span {
       width: 28px;
       height: 28px;
     }
@@ -32,8 +35,7 @@
     width: 150px;
     font-size: 20px;
 
-    &::before {
-      top: -1px;
+    span {
       width: 26px;
       height: 26px;
     }

@@ -3,7 +3,8 @@ import cls from './logo.module.scss';
 const Logo = () => {
   return (
     <div className={cls['logo']}>
-      <span>Logotest Test</span>
+      <span></span>
+      <p>Logotest Test</p>
     </div>
   );
 };

@@ -4,6 +4,26 @@
 .main-carousel {
   width: 100%;
   height: 800px;
+
+  @media screen and (max-width: 1700px) {
+    height: 650px;
+  }
+
+  @media screen and (max-width: 1400px) {
+    height: 580px;
+  }
+
+  @media screen and (max-width: 1400px) {
+    height: 580px;
+  }
+
+  @media screen and (max-width: 1000px) {
+    height: 500px;
+  }
+
+  @media screen and (max-width: 700px) {
+    height: 425px;
+  }
 }
 
 .mySwiper {
@@ -21,5 +41,21 @@
     width: 92%;
     height: 100%;
     margin: 0 auto;
+  }
+
+  @media screen and (max-width: 700px) {
+    left: 0;
+    width: 100%;
+
+    .swiper-slide div {
+      width: 100%;
+    }
+
+    .swiper-button-next ,
+    .swiper-button-prev {
+      &::before {
+        bottom: 48%;
+      }
+    }
   }
 }

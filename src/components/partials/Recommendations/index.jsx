@@ -36,7 +36,10 @@ const products = [
 const Recommendations = () => {
   return (
     <div className={cls['recommend']}>
-      <Description>Recommendations</Description>
+        <div className={cls['recommend__header']}>
+        <Description>Recommendations</Description>
+        <span>View More</span>
+      </div>
       <ProductList products={products}/>
     </div>
   )

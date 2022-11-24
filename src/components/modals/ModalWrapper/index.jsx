@@ -3,6 +3,7 @@ import TrackingList from '../../lists/TrackingList/index.jsx';
 import { modalPaths } from '../../../constants/paths.js';
 import { useSelector } from 'react-redux';
 import cls from './modal.module.scss';
+import MobileSearch from '../../partials/MobileSearch/index.jsx';
 
 const ModalWrapper = () => {
   const { isActive, content } = useSelector((state) => state.modal);
@@ -21,13 +22,15 @@ const ModalWrapper = () => {
             'Your review has been successfully posted. You can view your reviews on my page or review page.'
           }
         />
-      ) : (
+      ) : content === modalPaths.ORDER ? (
         <CustomContent
           title={'We have shipped your order!'}
           description={'Here are your tracking informations'}
         >
           <TrackingList />
         </CustomContent>
+      ) : (
+        <MobileSearch/>
       )}
     </div>
   );

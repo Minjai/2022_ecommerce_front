@@ -2,6 +2,7 @@
 
 .reviews {
   margin-top: 70px;
+  position: relative;
 
   &__header {
     display: flex;
@@ -12,6 +13,27 @@
       color: $app-gray-color;
       font-weight: 600;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+
+      @media screen and (max-width: 700px) {
+        margin-right: 100px;
+      }
     }
+
+    @media screen and (max-width: 700px) {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0px;
+    }
+  }
+
+  @media screen and (max-width: 1400px) {
+    margin-top:20px;
+  }
+
+  @media screen and (max-width: 700px) {
+    margin-top: 0px;
   }
 }

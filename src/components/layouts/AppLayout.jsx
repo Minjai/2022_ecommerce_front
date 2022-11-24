@@ -8,16 +8,17 @@ import Header from '../shared/Header';
 import { useEffect } from 'react';
 
 const AppLayout = () => {
+  const { isActive: isModal } = useSelector((state) => state.modal);
   const { isActive } = useSelector((state) => state.burger);
 
   useEffect(() => {
-    if (isActive) {
+    if (isActive || isModal) {
       window.document.body.style.overflow = 'hidden';
     } else {
       window.document.body.style.overflowY = 'scroll';
       window.document.body.style.overflowX = 'hidden';
     }
-  }, [isActive]);
+  }, [isActive, isModal]);
 
   return (
     <>

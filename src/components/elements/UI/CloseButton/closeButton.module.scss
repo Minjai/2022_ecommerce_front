@@ -5,4 +5,8 @@
   font-size: 23px;
   cursor: pointer;
   color: #707070;
+
+  @media screen and (max-width: 900px) {
+    font-size: 28px;
+  }
 }

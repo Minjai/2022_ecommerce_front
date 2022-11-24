@@ -1,3 +1,29 @@
-.recommend{
+@import '../../../scss/variables.scss';
+
+.recommend {
   margin-top: 70px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    span {
+      color: $app-gray-color;
+      font-weight: 600;
+      cursor: pointer;
+
+      @media screen and (max-width: 700px) {
+        font-size: 15px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1400px) {
+    margin-top: 20px;
+  }
+
+  @media screen and (max-width: 700px) {
+    margin-top: 5px;
+  }
 }
