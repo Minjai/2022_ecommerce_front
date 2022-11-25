@@ -33,7 +33,6 @@ export const headerMidLinks = [
   },
   {
     id: 3,
-    to: paths.ORDERS,
     text: 'Alarm',
   },
   {

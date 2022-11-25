@@ -3,14 +3,23 @@ import {
   headerLowerLinks,
   headerMidLinks,
 } from '../../../constants/header';
+import { setContent, setModal } from '../../../store/slices/modal';
+import { modalPaths, paths } from '../../../constants/paths';
 import SearchInput from '../../elements/SearchInput';
 import RouterLink from '../../elements/RouterLink';
-import { paths } from '../../../constants/paths';
 import { BsChevronDown } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
 import Logo from '../../elements/UI/Logo';
 import cls from './header.module.scss';
 
 const Header = () => {
+  const dispatch = useDispatch();
+
+  const alarmHandler = () => {
+    dispatch(setContent(modalPaths.ALARM));
+    dispatch(setModal(true));
+  };
+
   return (
     <header>
       <div className={cls['header-upper']}>
@@ -23,7 +32,11 @@ const Header = () => {
           <ul>
             {headerMidLinks.map(({ id, to, text }) => (
               <li key={id}>
-                <RouterLink to={to}>{text}</RouterLink>
+                {text === 'Alarm' ? (
+                  <span onClick={alarmHandler}>{text}</span>
+                ) : (
+                  <RouterLink to={to}>{text}</RouterLink>
+                )}
               </li>
             ))}
           </ul>

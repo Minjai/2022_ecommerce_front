@@ -14,7 +14,7 @@ const ReviewItem = ({ review }) => {
           <span>{category}</span>
           <Rating productRating={rating} />
         </div>
-        <h4>{title}</h4>
+        <h4>{title} Lorem, ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, nisi?</h4>
         <span>
           {user} {date}
         </span>

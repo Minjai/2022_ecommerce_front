@@ -1,14 +1,48 @@
-.paginated-list{
+.paginated-list {
   margin-top: 50px;
 
-  &__body{
+  &__body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
   }
 
-  &__child{
+  &__child {
     width: 24%;
     margin-bottom: 30px;
+  }
+
+  @media screen and (max-width: 1400px) {
+    margin-top: 15px;
+  }
+
+  @media screen and (max-width: 1150px) {
+    &__child {
+      width: 32%;
+    }
+  }
+
+  @media screen and (max-width: 850px) {
+    &__child {
+      width: 49%;
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    &__child {
+      div {
+        div:nth-child(1) {
+          height: 180px !important;
+        }
+
+        div:nth-child(2) {
+          div{
+            span{
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
   }
 }

@@ -12,11 +12,16 @@ const CategoryCarousel = ({ data }) => {
       className={`mySwiper ${cls['category-swiper']}`}
       breakpoints={{
         300: {
+          slidesPerView: 3.2,
+          spaceBetween: 10,
+        },
+        400: {
           slidesPerView: 3.6,
           spaceBetween: 10,
         },
         600: {
-          spaceBetween: 20, 
+          spaceBetween: 20,
+          slidesPerView: 4,
         },
         900: {
           spaceBetween: 20,
@@ -28,6 +33,7 @@ const CategoryCarousel = ({ data }) => {
         },
         1300: {
           slidesPerView: 7,
+          spaceBetween: 30,
         },
       }}
     >

@@ -155,6 +155,17 @@
     li {
       margin-left: 20px;
 
+      span{
+        color: $app-dark-color;
+        font-weight: 600;
+        font-size: 18px;
+        cursor: pointer;
+
+        @media screen and (max-width: 1400px) {
+          font-size: 13px;
+        }
+      }
+
       a {
         text-decoration: none;
         color: $app-dark-color;

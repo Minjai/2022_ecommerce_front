@@ -4,6 +4,7 @@ import { modalPaths } from '../../../constants/paths.js';
 import { useSelector } from 'react-redux';
 import cls from './modal.module.scss';
 import MobileSearch from '../../partials/MobileSearch/index.jsx';
+import AlarmContent from '../../partials/AlarmContent/index.jsx';
 
 const ModalWrapper = () => {
   const { isActive, content } = useSelector((state) => state.modal);
@@ -29,9 +30,9 @@ const ModalWrapper = () => {
         >
           <TrackingList />
         </CustomContent>
-      ) : (
+      ) : content === modalPaths.SEARCH ? (
         <MobileSearch/>
-      )}
+      ) : <AlarmContent/>}
     </div>
   );
 };

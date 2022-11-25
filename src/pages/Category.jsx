@@ -3,6 +3,7 @@ import CategoryButtons from '../components/elements/CategoryButtons';
 import PaginatedList from '../components/lists/PaginatedList';
 import PageTitle from '../components/elements/UI/PageTitle';
 import PageWrapper from '../components/layouts/PageWrapper';
+import MainReviews from '../components/partials/MainReviews';
 
 const data = [
   {
@@ -170,6 +171,7 @@ const Category = () => {
         <CategoryCarousel data={data} />
         <CategoryButtons data={categories} />
         <PaginatedList data={products} />
+        {window.innerWidth < 700 && <MainReviews />}
       </div>
     </PageWrapper>
   );

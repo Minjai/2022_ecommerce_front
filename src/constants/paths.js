@@ -38,5 +38,6 @@ export const modalPaths = {
   CONSULTATION: 'consultation',
   REVIEW: 'review',
   ORDER: 'order',
-  SEARCH: 'search'
+  SEARCH: 'search',
+  ALARM: 'alarm'
 }

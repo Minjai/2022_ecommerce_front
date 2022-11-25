@@ -8,12 +8,20 @@
 }
 
 .review-slide {
-  height: 200px !important;
+  height: 210px !important;
 
   > div {
     border: 1px solid rgba(128, 128, 128, 0.2);
     border-radius: 10px;
     overflow: hidden;
+  }
+
+  @media screen and (max-width: 1000px) {
+    height: 185px !important;
+  }
+
+  @media screen and (max-width: 500px) {
+    height: 165px !important;
   }
 }
 

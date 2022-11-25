@@ -1,7 +1,8 @@
 import { setContent, setModal } from '../../../store/slices/modal';
 import { setActiveBurger } from '../../../store/slices/burger';
+import { modalPaths, paths } from '../../../constants/paths';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { modalPaths } from '../../../constants/paths';
+import { useNavigate } from 'react-router-dom';
 import cls from './mobileHeader.module.scss';
 import { TfiSearch } from 'react-icons/tfi';
 import { VscBell } from 'react-icons/vsc';
@@ -9,14 +10,15 @@ import Logo from '../../elements/UI/Logo';
 import { useDispatch } from 'react-redux';
 
 const MobileHeader = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const setModalHandler = () => {
     dispatch(setActiveBurger(true));
   };
 
-  const searchModalHandler = () => {
-    dispatch(setContent(modalPaths.SEARCH));
+  const modalHandler = (path) => {
+    dispatch(setContent(path));
     dispatch(setModal(true));
   };
 
@@ -32,7 +34,10 @@ const MobileHeader = () => {
             <span></span>
             <span></span>
           </button>
-          <button onClick={searchModalHandler} className={cls['header-search']}>
+          <button
+            onClick={() => modalHandler(modalPaths.SEARCH)}
+            className={cls['header-search']}
+          >
             <TfiSearch />
           </button>
         </div>
@@ -40,12 +45,12 @@ const MobileHeader = () => {
         <div className={cls['header-right']}>
           <ul>
             <li>
-              <span>
+              <span onClick={() => modalHandler(modalPaths.ALARM)}>
                 <VscBell />
               </span>
             </li>
             <li>
-              <span>
+              <span onClick={() => navigate(`/${paths.CART}`)}>
                 <AiOutlineShoppingCart />
               </span>
             </li>
