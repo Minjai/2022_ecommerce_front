@@ -1,10 +1,10 @@
 @import '../../../scss/variables.scss';
 
-.news-input{
+.news-input {
   margin-top: 40px;
   display: flex;
 
-  span{
+  span {
     display: block;
     width: 50%;
     height: 60px;
@@ -13,7 +13,7 @@
     position: relative;
     padding: 0 15px;
 
-    input{
+    input {
       position: absolute;
       top: 0;
       width: 88%;
@@ -22,38 +22,85 @@
       outline: none;
       font-size: 17px;
 
-      &::placeholder{
+      &::placeholder {
         color: $app-gray-color;
         font-size: 17px;
       }
     }
 
-    button{
+    button {
       position: absolute;
       right: 10px;
       width: 7%;
       height: 100%;
-      cursor: pointer;
       border: none;
+      cursor: auto;
       background: none;
 
-      svg{
+      svg {
         color: $app-dark-color;
         font-size: 25px;
       }
     }
+
+    @media screen and (max-width: 1400px) {
+      height: 50px;
+
+      input {
+        &::placeholder {
+          font-size: 15px;
+        }
+      }
+
+      button {
+        top: 4%;
+
+        svg {
+          font-size: 20px;
+        }
+      }
+    }
+
+    @media screen and (max-width: 1250px) {
+      height: 45px;
+
+      input {
+        font-size: 15px;
+
+        &::placeholder {
+          font-size: 14px;
+        }
+      }
+    }
+
+    @media screen and (max-width: 700px) {
+      width: 100%;
+
+      button{
+        cursor: pointer;
+      }
+    }
   }
 
-  &__searchButton{
+  &__searchButton {
     width: 140px;
     margin-left: 25px;
     background: $app-main-color;
-    font-weight: 600; 
+    font-weight: 600;
     color: #fff;
     border: none;
     outline: none;
     cursor: pointer;
     border-radius: 30px;
     font-size: 18px;
+
+    @media screen and (max-width: 1400px) {
+      font-size: 16px;
+      width: 150px;
+    }
+
+    @media screen and (max-width: 700px) {
+      display: none;
+    }
   }
 }

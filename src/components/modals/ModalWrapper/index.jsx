@@ -1,13 +1,22 @@
+import MobileSearch from '../../partials/MobileSearch/index.jsx';
+import AlarmContent from '../../partials/AlarmContent/index.jsx';
 import CustomContent from '../content/CustomContent/index.jsx';
 import TrackingList from '../../lists/TrackingList/index.jsx';
 import { modalPaths } from '../../../constants/paths.js';
 import { useSelector } from 'react-redux';
 import cls from './modal.module.scss';
-import MobileSearch from '../../partials/MobileSearch/index.jsx';
-import AlarmContent from '../../partials/AlarmContent/index.jsx';
+import { useEffect } from 'react';
 
 const ModalWrapper = () => {
   const { isActive, content } = useSelector((state) => state.modal);
+
+  useEffect(() => {
+    if(window.innerWidth > 700){
+      window.scrollTo(window.scrollX, 18);
+    }else{
+      window.scrollTo(window.scrollX, 0);
+    }
+  }, [isActive])
 
   return (
     <div id={cls[isActive ? 'active' : '']} className={cls['modal']}>

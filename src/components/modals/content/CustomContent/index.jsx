@@ -1,7 +1,7 @@
 import CloseButton from '../../../elements/UI/CloseButton';
 import { setModal } from '../../../../store/slices/modal';
-import cls from './custom.module.scss';
 import { useDispatch } from 'react-redux';
+import cls from './custom.module.scss';
 
 const CustomContent = ({ title, description, children }) => {
   const dispatch = useDispatch();

@@ -1,10 +1,10 @@
 import { setContent, setModal } from '../../../store/slices/modal';
+import { modalPaths, paths } from '../../../constants/paths';
 import Pagination from '../../elements/Pagination';
 import cls from './consultationList.module.scss';
-import { modalPaths, paths } from '../../../constants/paths';
 import { useNavigate } from 'react-router-dom';
-import { CiLock } from 'react-icons/ci';
 import { useDispatch } from 'react-redux';
+import { CiLock } from 'react-icons/ci';
 
 const data = [
   {

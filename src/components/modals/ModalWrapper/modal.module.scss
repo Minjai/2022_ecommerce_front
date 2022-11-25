@@ -13,8 +13,19 @@
   z-index: 10;
   transition: .3s;
 
-  @media screen and (max-width: 900px) {
-    background: #fff;
+  @media screen and (max-width: 750px) {
+    padding: 50px 20px;
+    top: 115px;
+    align-items: flex-start;
+  }
+
+  @media screen and (max-width: 750px) {
+    top: 97px;
+  }
+
+
+  @media screen and (max-width: 450px) {
+    padding: 30px 10px;
   }
 }
 

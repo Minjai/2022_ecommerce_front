@@ -11,6 +11,18 @@
     width: 60%;
   }
 
+  @media screen and (max-width: 800px) {
+    width: 70%;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 90%;
+  }
+
   &__child {
     margin: 20px 0;
     display: flex;

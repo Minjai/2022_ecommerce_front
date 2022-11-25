@@ -1,19 +1,23 @@
 @import '../../../scss/variables.scss';
 
-.cart{
+.cart {
   border-top: 2px solid $app-light-gray-color;
   margin-top: 40px;
 
-  &-footer{
+  &-footer {
     margin-top: 30px;
 
-    &__subTotal{
+    @media screen and (max-width: 550px) {
+      margin-top: 20px;
+    }
+
+    &__subTotal {
       margin-left: auto;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
 
-      span{
+      span {
         width: 200px;
         display: flex;
         align-items: center;
@@ -23,13 +27,21 @@
         margin-top: 15px;
         font-weight: 500;
 
-        p{
+        p {
           margin: 0;
+        }
+
+        @media screen and (max-width: 550px) {
+          width: 100%;
+          color: $app-gray-color;
+          font-weight: 600;
+          font-size: 15px;
+          margin-top: 12px
         }
       }
     }
 
-    &__total{
+    &__total {
       padding-right: 30px;
       margin-top: 30px;
       background-color: $app-light-gray-color;
@@ -38,26 +50,36 @@
       align-items: center;
       height: 67px;
 
-      span{
+      span {
         display: flex;
         font-size: 22px;
         color: $app-dark-color;
         font-weight: 600;
         align-items: center;
 
-        p{
+        p {
           margin: 0 0 0 40px;
+        }
+      }
+
+      @media screen and (max-width: 550px) {
+        padding: 0 10px;
+        
+        span{
+          width: 100%;
+          justify-content: space-between;
+          font-size: 20px;
         }
       }
     }
 
-    &__buttons{
+    &__buttons {
       margin-top: 45px;
       display: flex;
       flex-direction: column;
       align-items: center;
 
-      button{
+      button {
         width: 405px;
         height: 53px;
         border: none;
@@ -66,15 +88,19 @@
         border-radius: 30px;
         font-size: 15px;
         font-weight: 600;
+
+        @media screen and (max-width: 550px) {
+          width: 100%;
+        }
       }
-      
-      button:first-child{
+
+      button:first-child {
         background: $app-main-color;
         color: #fff;
         margin-bottom: 15px;
       }
 
-      button:last-child{
+      button:last-child {
         border: 1px solid rgba(128, 128, 128, 0.3);
         background: #fff;
         color: $app-dark-color;

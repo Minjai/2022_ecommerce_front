@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-  isActive: false,
-  content: ''
+  isActive: true,
+  content: 'review'
 }
 
 const modalSlice = createSlice({
