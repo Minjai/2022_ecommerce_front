@@ -5,6 +5,16 @@
   box-sizing: border-box;
 }
 
+.rs-anim-fade{
+  @media screen and (max-width: 425px) {
+    left: 110px !important;
+  }
+
+  @media screen and (max-width: 365px) {
+    left: 90px !important;
+  }
+}
+
 html{
   scroll-behavior: smooth;
 }

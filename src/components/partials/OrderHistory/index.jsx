@@ -44,7 +44,7 @@ const OrderHistory = () => {
         />
         <button>Search</button>
       </div>
-      {/* <OrderList /> */}
+      <OrderList />
       <Pagination />
     </div>
   );

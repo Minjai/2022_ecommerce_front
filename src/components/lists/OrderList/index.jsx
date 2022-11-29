@@ -80,7 +80,7 @@ const OrderList = ({ data }) => {
               alt="order-product-pic"
             />
             <div>
-              <p>Item name goes here</p>
+              <p>Item name goes here Lorem ipsum dolor sit amet.</p>
               <span>100 ea</span>
               <p>$14.40</p>
             </div>

@@ -3,6 +3,10 @@
 .question {
   margin-top: 50px;
 
+  @media screen and (max-width: 850px) {
+    margin-top: 10px;
+  }
+
   &__header {
     h3 {
       color: $app-dark-color;
@@ -12,6 +16,10 @@
       @media screen and (max-width: 1400px) {
         font-size: 22px;
       }
+
+      @media screen and (max-width: 600px) {
+        font-size: 21px;
+      }
     }
 
     &__child {
@@ -19,6 +27,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
+
+      @media screen and (max-width: 850px) {
+        margin-top: 15px;
+      }
 
       div {
         display: flex;
@@ -50,6 +63,7 @@
             width: 100%;
             position: absolute;
             list-style: none;
+            z-index: 2;
             top: 45px;
             left: 0;
             padding: 5px 0;
@@ -126,6 +140,51 @@
             font-size: 12px;
           }
         }
+
+        @media screen and (max-width: 600px) {
+          span {
+            height: 45px;
+            width: 170px;
+
+            p {
+              height: 43px;
+              font-size: 12px;
+            }
+
+            ul {
+              top: 44px;
+            }
+          }
+
+          button {
+            width: 126px;
+            height: 45px;
+            font-size: 14px;
+          }
+        }
+
+        @media screen and (max-width: 450px) {
+          width: 100%;
+          justify-content: space-between;
+
+          span{
+            width: 68%;
+          }
+
+          button{
+            width: 30%;
+          }
+        }
+
+        @media screen and (max-width: 410px) {
+          span{
+            width: 64%;
+          }
+
+          button{
+            width: 32%;
+          }
+        }
       }
 
       > p {
@@ -137,6 +196,16 @@
         @media screen and (max-width: 1400px) {
           font-size: 16px;
         }
+
+        @media screen and (max-width: 600px) {
+          font-size: 17px;
+        }
+
+        @media screen and (max-width: 450px) {
+          position: absolute;
+          right: 0;
+          top: -45px;
+        }
       }
     }
   }
@@ -144,6 +213,10 @@
   &__body {
     margin-top: 35px;
     border-top: 1px solid rgba(128, 128, 128, 0.3);
+
+    @media screen and (max-width: 700px) {
+      margin-top: 25px;
+    }
 
     &__child {
       height: 100px;
@@ -156,14 +229,15 @@
         height: 84px;
       }
 
-      div {
+      > div {
         width: 45%;
         height: 100%;
         display: flex;
         align-items: center;
+        position: relative;
       }
 
-      div:nth-child(1) {
+      > div:nth-child(1) {
         span {
           font-size: 19px;
           font-weight: 500;
@@ -177,20 +251,27 @@
           margin-right: 20px;
         }
 
-        svg {
-          color: $app-gray-color;
-          font-size: 30px;
-        }
+        div {
+          display: flex;
+          align-items: center;
 
-        p {
-          font-size: 18px;
-          font-weight: 500;
-          color: $app-dark-color;
-          margin: 0 0 0 15px;
+          svg {
+            color: $app-gray-color;
+            font-size: 30px;
+          }
+
+          p {
+            font-size: 18px;
+            font-weight: 500;
+            color: $app-dark-color;
+            width: 350px;
+            height: 22px;
+            overflow: hidden;
+            margin: 0 0 0 15px;
+          }
         }
 
         @media screen and (max-width: 1400px) {
-          p,
           span {
             font-size: 14px;
           }
@@ -199,13 +280,170 @@
             width: 74px;
           }
 
-          svg {
-            font-size: 23px;
+          > div {
+            svg {
+              font-size: 23px;
+            }
+
+            p {
+              font-size: 14px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 1200px) {
+          div {
+            p {
+              width: 250px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 1050px) {
+          div {
+            p {
+              width: 200px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 900px) {
+          div {
+            p {
+              width: 150px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 850px) {
+          div {
+            p {
+              width: 250px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 800px) {
+          div {
+            p {
+              width: 200px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 735px) {
+          div {
+            p {
+              width: 170px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 700px) {
+          width: 30%;
+          margin-right: 32px;
+
+          img {
+            width: 100px;
+            margin-right: 0;
+          }
+
+          div {
+            left: 187px;
+            top: 6px;
+            position: absolute;
+
+            p {
+              width: 350px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 620px) {
+          div {
+            p {
+              width: 300px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 600px) {
+          width: 35%;
+
+          div {
+            left: 211px;
+
+            p {
+              width: 250px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 560px) {
+          div {
+            left: 190px;
+
+            p {
+              width: 200px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 500px) {
+          span {
+            margin-right: 25px;
+          }
+
+          div {
+            left: 150px;
+
+            svg {
+              font-size: 16px;
+            }
+
+            p {
+              width: 150px;
+              margin-left: 8px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 475px) {
+          div {
+            left: 145px;
+          }
+        }
+
+        @media screen and (max-width: 460px) {
+          width: 35%;
+        }
+
+        @media screen and (max-width: 425px) {
+          div {
+            left: 140px;
+          }
+
+          span {
+            margin-right: 20px;
+          }
+        }
+
+        @media screen and (max-width: 400px) {
+          div {
+            left: 135px;
+
+            p {
+              width: 150px;
+            }
+          }
+
+          span {
+            margin-right: 20px;
           }
         }
       }
 
-      div:nth-child(2) {
+      > div:nth-child(2) {
         display: flex;
         justify-content: flex-end;
 
@@ -227,6 +465,98 @@
           p {
             font-size: 14px;
           }
+        }
+
+        @media screen and (max-width: 700px) {
+          width: 70%;
+          justify-content: flex-start;
+          align-items: flex-end;
+          padding-bottom: 6px;
+
+          p {
+            margin-left: 20px;
+          }
+        }
+
+        @media screen and (max-width: 600px) {
+          width: 60%;
+        }
+
+        @media screen and (max-width: 450px) {
+          width: 55%;
+
+          p {
+            margin-left: 20px;
+          }
+        }
+      }
+    }
+
+    #active {
+      @media screen and (max-width: 700px) {
+        justify-content: flex-start;
+      }
+
+      > div:nth-child(1) {
+        @media screen and (max-width: 700px) {
+          width: 5%;
+          margin-right: 27px;
+
+          > div {
+            left: 55px;
+
+            p {
+              width: 400px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 580px) {
+          margin-right: 30px;
+
+          > div {
+            p {
+              width: 350px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 500px) {
+          margin-right: 12px;
+          
+          > div {
+            left: 30px;
+
+            p {
+              width: 300px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 425px) {
+          margin-right: 10px;
+          
+          > div {
+            left: 25px;
+
+            p {
+              width: 250px;
+            }
+          }
+        }
+      }
+
+      > div:nth-child(2) {
+        @media screen and (max-width: 700px) {
+          width: 85%;
+
+          p {
+            margin-left: 20px;
+          }
+        }
+
+        @media screen and (max-width: 580px) {
+          width: 60%;
         }
       }
     }
