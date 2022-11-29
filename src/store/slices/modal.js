@@ -1,22 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  isActive: true,
-  content: 'review'
-}
+  isActive: false,
+  content: '',
+};
 
 const modalSlice = createSlice({
   name: 'modalSlice',
   initialState,
   reducers: {
     setModal: (state, action) => {
-      state.isActive = action.payload
+      state.isActive = action.payload;
     },
     setContent: (state, action) => {
-      state.content = action.payload
-    }
-  }
-})
+      state.content = action.payload;
+    },
+  },
+});
 
-export const { setContent, setModal } = modalSlice.actions
-export default modalSlice.reducer
+export const { setContent, setModal } = modalSlice.actions;
+export default modalSlice.reducer;

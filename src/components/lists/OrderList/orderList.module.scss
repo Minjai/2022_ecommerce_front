@@ -29,6 +29,16 @@
           font-size: 17px;
           font-weight: 600;
         }
+
+        @media screen and (max-width: 1400px) {
+          p:nth-child(1) {
+            font-size: 14px;
+          }
+
+          p:nth-child(2) {
+            font-size: 12px;
+          }
+        }
       }
     }
 
@@ -41,17 +51,20 @@
         color: $app-dark-color;
         margin: 0 0 30px 0;
         font-size: 22px;
+
+        @media screen and (max-width: 1400px) {
+          font-size: 18px;
+        }
       }
-      
+
       .active {
         color: $app-main-color;
       }
-      
+
       &__content {
         margin-top: 35px;
         display: flex;
         flex-wrap: wrap;
-
 
         img {
           width: 23%;
@@ -89,6 +102,30 @@
             border-radius: 30px;
           }
         }
+
+        @media screen and (max-width: 1400px) {
+          margin-top: 25px;
+
+          img {
+            width: 20%;
+            height: 127px;
+          }
+
+          div {
+            p {
+              font-size: 14px;
+            }
+            span {
+              font-size: 14px;
+            }
+
+            button{
+              font-size: 12px;
+              height: 38px;
+              width: 134px;
+            }
+          }
+        }
       }
 
       &__buttons {
@@ -119,9 +156,9 @@
           background: $app-main-color;
         }
 
-        #invalid{
+        #invalid {
           pointer-events: none;
-          opacity: .6;
+          opacity: 0.6;
           color: $app-gray-color;
         }
 
@@ -130,6 +167,21 @@
           color: $app-main-color;
           font-weight: 600;
           font-size: 16px;
+        }
+
+        @media screen and (max-width: 1400px) {
+          bottom: 20px;
+          right: 20px;
+
+          button{
+            font-size: 12px;
+            width: 192px;
+            height: 40px;
+          }
+
+          p{
+            font-size: 12px;
+          }
         }
       }
     }

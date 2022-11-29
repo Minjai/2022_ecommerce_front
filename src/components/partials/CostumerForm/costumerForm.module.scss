@@ -5,6 +5,11 @@
   margin: 0 auto;
   margin-top: 60px;
 
+  @media screen and (max-width: 750px) {
+    margin-top: 30px;
+    width: 100%;
+  }
+
   &__title {
     text-align: center;
 
@@ -13,6 +18,14 @@
       font-size: 28px;
       font-weight: 600;
       color: $app-dark-color;
+
+      @media screen and (max-width: 1400px) {
+        font-size: 22px;
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      text-align: left;
     }
   }
 
@@ -22,24 +35,42 @@
     color: $app-dark-color;
     font-weight: 500;
     font-size: 17px;
+
+    @media screen and (max-width: 1400px) {
+      margin-top: 0px;
+      margin-bottom: 20px;
+      font-size: 12px;
+    }
   }
 
   &__body {
     margin-top: 60px;
 
+    @media screen and (max-width: 1400px) {
+      margin-top: 30px;
+    }
+
+    @media screen and (max-width: 500px) {
+      margin-top: 10px;
+    }
+
     form {
       margin-top: 50px;
+
+      @media screen and (max-width: 500px) {
+        margin-top: 20px;
+      }
 
       > label {
         display: flex;
         justify-content: space-between;
         color: $app-gray-color;
         font-weight: 500;
-        font-size: 16px;
         margin-bottom: 20px;
 
         > span {
           margin-top: 15px;
+          font-size: 16px;
           font-weight: 600;
         }
 
@@ -94,6 +125,10 @@
             opacity: 0;
             pointer-events: none;
 
+            @media screen and (max-width: 500px) {
+              top: 51px;
+            }
+
             li {
               padding: 15px 15px;
               font-weight: 500;
@@ -120,7 +155,7 @@
           display: inline-block;
           align-self: center;
           margin-left: 25px;
-          
+
           &-btn {
             position: relative;
             display: inline-block;
@@ -147,11 +182,11 @@
             line-height: 40px;
             display: inline-block;
             font-size: 14px;
-            color: #B1B1B1;
+            color: #b1b1b1;
           }
         }
 
-        .input-file input[type=file]{
+        .input-file input[type='file'] {
           position: absolute;
           z-index: -1;
           opacity: 0;
@@ -159,10 +194,85 @@
           width: 0;
           height: 0;
         }
+
+        @media screen and (max-width: 1400px) {
+          span {
+            font-size: 14px;
+          }
+
+          .costumer-input {
+            height: 46px;
+            font-size: 14px;
+          }
+
+          textarea {
+            height: 328px;
+            width: 77%;
+            font-size: 14px;
+          }
+        }
+
+        @media screen and (max-width: 500px) {
+          flex-wrap: wrap;
+          margin-bottom: 0;
+
+          > span {
+            font-size: 15px;
+          }
+
+          > div,
+          .costumer-input {
+            height: 53px;
+            width: 100%;
+          }
+
+          textarea {
+            width: 100%;
+            height: 385px;
+          }
+
+          > span {
+            margin-bottom: 10px;
+          }
+        }
       }
 
-      .costumer-label{
+      .costumer-label {
         justify-content: flex-start;
+
+        @media screen and (max-width: 1400px) {
+          span {
+            margin-right: 32px;
+          }
+        }
+
+        @media screen and (max-width: 630px) {
+          span {
+            margin-right: 25px;
+          }
+        }
+
+        @media screen and (max-width: 600px) {
+          span {
+            margin-right: 20px;
+          }
+        }
+
+        @media screen and (max-width: 560px) {
+          span {
+            margin-right: 15px;
+          }
+        }
+
+        @media screen and (max-width: 535px) {
+          span {
+            margin-right: 10px;
+          }
+        }
+
+        @media screen and (max-width: 500px) {
+          margin-top: 15px;
+        }
       }
     }
 
@@ -182,6 +292,27 @@
         font-weight: 500;
         background: none;
         font-size: 16px;
+
+        @media screen and (max-width: 1400px) {
+          height: 40px;
+          width: 192px;
+          font-size: 14px;
+        }
+
+        @media screen and (max-width: 500px) {
+          width: 100%;
+          margin: 0 0 10px 0;
+          height: 50px;
+        }
+      }
+
+      @media screen and (max-width: 500px) {
+        display: flex;
+        flex-direction: column;
+
+        button:nth-child(1){
+          order: 1;
+        }
       }
 
       #active {

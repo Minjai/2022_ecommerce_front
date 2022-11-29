@@ -1,0 +1,97 @@
+@import '/src/scss/variables.scss';
+@import '/src/scss/mixins.scss';
+
+.category-skeleton {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  height: 160px;
+
+  &__child {
+    background: $app-light-gray-color;
+    width: 12%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+
+    @media screen and (max-width: 1550px) {
+      height: 140px;
+    }
+
+    @media screen and (max-width: 400px) {
+      width: 260px !important;
+      height: 80px !important;
+    }
+    
+    @include skeleton-animation
+  }
+
+  @media screen and (max-width: 1280px) {
+    div:last-child {
+      display: none;
+    }
+
+    &__child {
+      width: 14%;
+    }
+  }
+
+  @media screen and (max-width: 1100px) {
+    div:nth-child(6) {
+      display: none;
+    }
+
+    &__child {
+      width: 18%;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    div:nth-child(5) {
+      display: none;
+    }
+
+    &__child {
+      width: 22%;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    height: 120px;
+
+    &__child {
+      width: 200px;
+      height: 120px;
+    }
+
+    div:nth-child(1) {
+      left: 0;
+    }
+
+    div:nth-child(2) {
+      left: 15px;
+    }
+
+    div:nth-child(3) {
+      left: 25px;
+    }
+
+    div:nth-child(4) {
+      left: 35px;
+    }
+  }
+
+  @media screen and (max-width: 460px) {
+    height: 100px;
+
+    &__child {
+      height: 100px;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    height: 90px;
+  }
+}

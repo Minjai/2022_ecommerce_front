@@ -1,8 +1,8 @@
 import ProductDescription from '../components/partials/ProductDescription';
-import ReviewsCarousel from '../components/elements/ReviewsCarousel';
 import ConsultationList from '../components/lists/ConsultationList';
 import Description from '../components/elements/UI/Description';
 import ProductInfo from '../components/partials/ProductInfo';
+import MainReviews from '../components/partials/MainReviews';
 import PageWrapper from '../components/layouts/PageWrapper';
 
 const description = [
@@ -32,7 +32,7 @@ const SingleProduct = () => {
       <div className="container">
         <ProductInfo />
         <ProductDescription list={description} />
-        <ReviewsCarousel description={'Reviews'} />
+        <MainReviews/>
         <br />
         <Description>1:1 General Consultations</Description>
         <ConsultationList bottom={true} />

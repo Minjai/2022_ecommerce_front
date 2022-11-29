@@ -4,7 +4,6 @@ import cls from './editForm.module.scss';
 import * as yup from 'yup';
 
 const schema = yup.object().shape({
-  userEmail: yup.string().email().required(),
   userName: yup.string().required(),
 });
 
@@ -17,25 +16,24 @@ const EditForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const handler = (state) => {
-    
-  };
+  const handler = (state) => {};
 
   return (
     <div className={cls['edit']}>
-      <h3>Edit Profile</h3>
+      <h3>{window.innerWidth > 850 ? 'Edit Profile' : 'Edit My Profile'}</h3>
       <div className={cls['edit__body']}>
         <form onSubmit={handleSubmit(handler)}>
+          {window.innerWidth < 600 && <span>Email</span>}
           <input
-            type="email"
-            {...register('userEmail')}
-            placeholder="User email"
+            className={cls['noClick']}
+            type="text"
+            placeholder={window.innerWidth > 600 ? 'User email' : ''}
           />
-          {errors.userEmail && <p>{errors.userEmail.message}</p>}
+          {window.innerWidth < 600 && <span>User name</span>}
           <input
             type="text"
             {...register('userName')}
-            placeholder="User name"
+            placeholder={window.innerWidth > 600 ? 'User name' : ''}
           />
           {errors.userName && <p>{errors.userName.message}</p>}
           <button type="submit">Save</button>

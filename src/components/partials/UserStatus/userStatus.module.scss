@@ -9,6 +9,10 @@
       font-size: 25px;
       color: $app-dark-color;
       font-weight: 600;
+
+      @media screen  and (max-width: 1400px){
+        font-size: 22px;
+      }
     }
 
     &__body {
@@ -52,6 +56,20 @@
           background: $app-gray-color;
         }
       }
+
+      @media screen  and (max-width: 1400px){
+        height: 200px;
+
+        div{
+          b{
+            font-size: 33px;
+          }
+
+          span{
+            font-size: 16px;
+          }
+        }
+      }
     }
   }
 
@@ -63,6 +81,10 @@
       font-size: 28px;
       color: $app-dark-color;
       font-weight: 600;
+
+      @media screen  and (max-width: 1400px){
+        font-size: 23px;
+      }
     }
 
     &__body {
@@ -79,6 +101,10 @@
         color: $app-dark-color;
         font-weight: 600;
         font-size: 15px;
+
+        @media screen  and (max-width: 1400px){
+          font-size: 12px;
+        }
       }
 
       &__child {
@@ -107,6 +133,22 @@
           font-size: 30px;
           color: $app-gray-color;
         }
+
+        @media screen  and (max-width: 1400px){
+          div{
+            span{
+              font-size: 23px;
+            }
+
+            p{
+              font-size: 12px;
+            }
+          }
+
+          svg{
+            font-size: 17px;
+          }
+        }
       }
 
       &__lastChild {
@@ -128,6 +170,16 @@
 
           span{
             font-weight: 700;
+          }
+        }
+        
+        @media screen  and (max-width: 1400px){
+          p{
+            font-size: 12px;
+
+            span{
+              font-size: 13px;
+            }
           }
         }
       }

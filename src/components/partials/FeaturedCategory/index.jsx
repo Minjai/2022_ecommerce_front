@@ -1,3 +1,4 @@
+import CategorySkeleton from '../../skeletons/CategorySkeleton';
 import CategoryCarousel from '../../elements/CategoryCarousel';
 import Description from '../../elements/UI/Description';
 import './featuredCategory.scss';
@@ -58,6 +59,7 @@ const FeaturedCategory = () => {
     <div className="featured-category">
       <Description>Featured Categories</Description>
       <CategoryCarousel data={data} />
+      {/* <CategorySkeleton /> */}
     </div>
   );
 };

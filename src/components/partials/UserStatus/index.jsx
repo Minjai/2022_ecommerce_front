@@ -7,7 +7,7 @@ const UserStatus = () => {
   const navigate = useNavigate();
 
   const newPageHandler = (path) => {
-    window.scrollTo(window.scrollX, 150);
+    window.scrollTo(window.scrollX, 0);
     navigate(path);
   };
 
@@ -78,11 +78,11 @@ const UserStatus = () => {
       </div>
       <div className={cls['user-board']}>
         <div className={cls['user-board__body']}>
-          <div onClick={() => newPageHandler(`/user/${paths.USER_REVIEWS}`)}>
+          <div onClick={() => newPageHandler(`/${paths.MY_PAGE}/${paths.USER_REVIEWS}`)}>
             <b>2</b>
             <span>reviews</span>
           </div>
-          <div onClick={() => newPageHandler(`/user/${paths.QUESTIONS}`)}>
+          <div onClick={() => newPageHandler(`/${paths.MY_PAGE}/${paths.QUESTIONS}`)}>
             <b>3</b>
             <span>questions</span>
           </div>

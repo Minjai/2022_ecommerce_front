@@ -18,6 +18,16 @@
       font-weight: 700;
       font-size: 18px;
     }
+
+    @media screen and (max-width: 1400px) {
+      h3 {
+        font-size: 22px;
+      }
+
+      span {
+        font-size: 16px;
+      }
+    }
   }
 
   &__body {
@@ -38,6 +48,17 @@
           margin-right: 140px;
         }
       }
+
+      @media screen and (max-width: 1400px) {
+        font-size: 15px;
+        padding: 20px 0 20px 90px;
+
+        div {
+          span:nth-child(1) {
+            margin-right: 129px;
+          }
+        }
+      }
     }
 
     &__list {
@@ -49,27 +70,27 @@
         justify-content: space-between;
         align-items: center;
 
-        >span{
+        > span {
           position: absolute;
           left: 1;
-          bottom: 38px;
+          bottom: 18px;
           color: $app-dark-color;
           font-size: 20px;
           font-weight: 600;
         }
 
-        div{
+        div {
           margin-left: 90px;
           display: flex;
           align-items: center;
 
-          span{
+          span {
             color: $app-dark-color;
             font-weight: 500;
             font-size: 18px;
           }
 
-          p{
+          p {
             margin-left: 90px;
             padding: 0;
             color: $app-gray-color;
@@ -78,9 +99,29 @@
           }
         }
 
-        b{
+        b {
           color: $app-main-color;
           font-size: 17px;
+        }
+
+        @media screen and (max-width: 1400px) {
+          padding: 20px 0;
+
+          > span {
+            font-size: 14px;
+            bottom: 23px;
+          }
+
+          div {
+            p,
+            span {
+              font-size: 14px;
+            }
+          }
+
+          b{
+            font-size: 14px;
+          }
         }
       }
     }

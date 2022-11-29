@@ -54,7 +54,7 @@
       }
     }
 
-    p{
+    p {
       color: $app-main-color;
     }
 
@@ -225,9 +225,39 @@
       justify-content: center;
       align-items: center;
 
-      p{
+      p {
         font-size: 12px;
       }
+    }
+  }
+}
+
+@mixin skeleton-animation {
+  &::before {
+    content: '';
+    width: 140%;
+    height: 100%;
+    background: rgba(207, 207, 207, 0.582);
+    background: linear-gradient(
+      90deg,
+      rgba(207, 207, 207, 0) 10%,
+      rgba(200, 200, 200, 0.2637429971988795) 46%,
+      rgba(171, 171, 171, 0.196516106442577) 100%,
+      rgba(147, 223, 91, 1) 100%,
+      rgba(149, 222, 95, 1) 100%,
+      rgba(189, 189, 189, 0) 100%
+    );
+    position: absolute;
+    left: 10%;
+    animation: skeletonMove 1.5s linear infinite;
+  }
+
+  @keyframes skeletonMove {
+    0% {
+      left: -40%;
+    }
+    100% {
+      left: 100%;
     }
   }
 }

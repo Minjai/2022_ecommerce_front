@@ -40,7 +40,7 @@ const UserReviewList = () => {
                 <li onClick={() => handleRange('All order')}>All order</li>
               </ul>
             </span>
-            <button onClick={() => navigate(`/user/${paths.WRITE_REVIEW}`)}>
+            <button onClick={() => navigate(`/${paths.MY_PAGE}/${paths.WRITE_REVIEW}`)}>
               Write New
             </button>
           </div>

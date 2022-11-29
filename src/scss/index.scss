@@ -17,14 +17,10 @@ body {
 }
 
 .container {
-  width: 1430px;
+  width: 1200px;
   margin: 0 auto;
 
-  @media screen and (max-width: 1550px) {
-    width: 1200px;
-  }
-
-  @media screen and (max-width: 1280px) {
+  @media screen and (max-width: 1300px) {
     width: 90%;
   }
 
@@ -37,8 +33,13 @@ body {
   margin-top: 50px;
   margin-bottom: 90px;
 
-  @media screen and (max-width: 700px) {
-    margin-top: 30px;
+  @media screen and (max-width: 1000px) {
+    margin-top: 25px;
+    margin-bottom: 50px;
+  }
+
+  @media screen and (max-width: 550px) {
+    margin-top: 15px;
   }
 }
 
@@ -54,6 +55,14 @@ body {
 
 .user-width {
   width: 75%;
+
+  @media screen and (max-width: 950px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 850px) {
+    width: 100%;
+  }
 }
 
 .rs-calendar-table-cell-content {

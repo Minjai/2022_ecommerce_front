@@ -8,7 +8,12 @@ const RouterLink = ({ to, children }) => {
   });
 
   return (
-    <Link to={to} className={cls[match ? 'activeLink' : '']}>
+    <Link
+      to={to}
+      className={
+        cls[match ? 'activeLink' : '']
+      }
+    >
       {children}
     </Link>
   );

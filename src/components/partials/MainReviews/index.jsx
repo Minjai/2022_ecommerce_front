@@ -1,4 +1,5 @@
 import ReviewsCarousel from '../../elements/ReviewsCarousel';
+import ReviewSkeleton from '../../skeletons/ReviewSkeleton';
 import Description from '../../elements/UI/Description';
 import { paths } from '../../../constants/paths';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +9,7 @@ const MainReviews = () => {
   const navigate = useNavigate();
 
   const reviewHandler = () => {
-    window.scrollTo(window.scrollX, 150);
+    window.scrollTo(window.scrollX, 0);
     navigate(paths.REVIEW);
   };
 
@@ -19,6 +20,7 @@ const MainReviews = () => {
         <span onClick={reviewHandler}>View More</span>
       </div>
       <ReviewsCarousel />
+      {/* <ReviewSkeleton/> */}
     </div>
   );
 };

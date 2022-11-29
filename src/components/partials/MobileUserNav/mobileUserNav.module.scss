@@ -1,0 +1,61 @@
+@import '/src/scss/variables.scss';
+
+.mobile-usernav {
+  width: 100%;
+  margin-top: 40px;
+  border-top: 1px solid #8080804d;
+
+  &__child {
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+    border-bottom: 1px solid #8080804d;
+    padding-bottom: 15px;
+
+    span {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 60px;
+      font-size: 16px;
+      font-weight: 600;
+      color: $app-dark-color;
+    }
+
+    ul{
+      margin: 0;
+      padding: 0 0 0 15px;
+      list-style-type: none;
+
+      li{
+        margin-bottom: 5px;
+
+        a{
+          font-size: 14px;
+          text-decoration: none;
+          color: $app-dark-color;
+          font-weight: 600;
+        }
+      }
+
+      .active{
+        a{
+          color: $app-main-color;
+        }
+      }
+    }
+  }
+
+  #active_drop{
+    height: auto;
+    overflow: auto;
+
+    span{
+      svg{
+        transform: rotate(180deg);
+      }
+    }
+  }
+}

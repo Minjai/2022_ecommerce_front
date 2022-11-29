@@ -1,6 +1,7 @@
 import CategoryButtons from '../../elements/CategoryButtons';
 import Description from '../../elements/UI/Description';
 import ProductList from '../../lists/ProductList';
+import ProductListSkeleton from '../../skeletons/ProductListSkeleton';
 import cls from './popularProducts.module.scss';
 
 const products = [
@@ -80,6 +81,7 @@ const PopularProducts = () => {
       </div>
       <CategoryButtons data={categories}/>
       <ProductList products={products} />
+      {/* <ProductListSkeleton/> */}
     </div>
   );
 };

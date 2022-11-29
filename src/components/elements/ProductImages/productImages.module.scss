@@ -2,11 +2,27 @@
 
 .product-images{
   width: 52%;
+  
+  @media screen and (max-width: 850px) {
+    width: 100%;
+  }
 
   &__current{
     width: 100%;
     height: 550px;
     object-fit: cover;
+
+    @media screen and (max-width: 1400px) {
+      height: 420px;
+    }
+
+    @media screen and (max-width: 1000px) {
+      height: 380px;
+    }
+
+    @media screen and (max-width: 600px) {
+      height: 370px;
+    }
   }
 
   div{
@@ -24,6 +40,14 @@
 
     .active{
       border: 2px solid $app-main-color;
+    }
+    
+    @media screen and (max-width: 480px) {
+      img{
+        height: 65px;
+        margin: 0 1.5%;
+        width: 22%;
+      }
     }
   }
 }

@@ -23,7 +23,7 @@ export const paths = {
   CHECK_OUT_FOURTH: 'fourth',
   SINGLE_NEW: 'news/:id',
   CONSULTATION_INFO: 'consultation/:id',
-  USER: 'user',
+  MY_PAGE: 'my-page',
   ORDER_HISTORY: 'order-history',
   USER_PROFILE: 'profile',
   POINTS: 'points',

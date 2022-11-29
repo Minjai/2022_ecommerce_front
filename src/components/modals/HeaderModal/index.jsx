@@ -73,7 +73,7 @@ const HeaderModal = () => {
               <div className={cls['modal-wrapper__body__userLinks']}>
                 <span
                   onClick={() =>
-                    navigateHandler(`/${paths.USER}/${paths.USER_PROFILE}`)
+                    navigateHandler(`/${paths.MY_PAGE}/${paths.USER_PROFILE}`)
                   }
                 >
                   <AiOutlineUser />
@@ -85,7 +85,7 @@ const HeaderModal = () => {
                 </span>
                 <span
                   onClick={() =>
-                    navigateHandler(`/${paths.USER}/${paths.ORDER_HISTORY}`)
+                    navigateHandler(`/${paths.MY_PAGE}/${paths.ORDER_HISTORY}`)
                   }
                 >
                   <TbTruckDelivery />

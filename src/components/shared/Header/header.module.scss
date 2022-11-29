@@ -3,11 +3,13 @@
 %list-none {
   pointer-events: none;
   transition: 0.3s;
+  transition-delay: .3s;
   opacity: 0;
   transform: translateY(10px);
 }
 
 %list-active {
+  transition-delay: 0s;
   opacity: 1;
   pointer-events: all;
   transform: translateY(0);
@@ -38,20 +40,16 @@
 }
 
 .header-currency {
-  position: absolute;
-  right: 60px;
+  top: 0px;
+  right: 0;
   height: 30px;
-  top: 25px;
   width: 95px;
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 30px;
   box-shadow: 0px 0px 2px 2px rgba(128, 128, 128, 0.2);
-
-  @media screen and (max-width: 950px) {
-    right: 33px;
-  }
 
   span {
     display: flex;
@@ -105,7 +103,7 @@
   @media screen and (max-width: 1400px) {
     width: 89px;
     height: 29px;
-    top: 20px;
+    top: 0px;
 
     span {
       font-size: 13px;
@@ -128,21 +126,25 @@
 }
 
 .header-mid {
+  width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 60px;
   flex-wrap: wrap;
   padding-top: 35px;
+  margin: 0 auto;
 
   @media screen and (max-width: 1400px) {
     padding-top: 40px;
   }
 
-  @media screen and (max-width: 950px) {
-    padding: 35px 30px 0 30px;
+  @media screen and (max-width: 1300px) {
+    width: 90%;
   }
 
+  @media screen and (max-width: 950px) {
+    padding: 35px 0 0 0;
+  }
 }
 
 .header-links {
@@ -187,135 +189,145 @@
   border-bottom: 1px solid #b9b9b9c5;
   border-top: 1px solid #b9b9b9c5;
   position: relative;
+  
+  >div{
+    width: 1200px;
+    position: relative;
+    margin: 0 auto;
 
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
+    @media screen and (max-width: 1300px) {
+      width: 90%;
+    }
 
-    li {
-      margin: 0 13px;
-      position: relative;
-
-      a {
-        color: $app-dark-color;
-        font-weight: 600;
-        font-size: 23px;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-
-        svg {
+    >ul {
+      list-style: none;
+      margin: 0 auto;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+  
+      li {
+        margin: 0 13px;
+        position: relative;
+  
+        a {
           color: $app-dark-color;
-          margin-left: 10px;
-          font-size: 18px;
-        }
-
-        @media screen and (max-width: 1400px) {
-          font-size: 15px;
-
-          svg {
-            font-size: 14px;
-          }
-        }
-      }
-
-      &:hover div {
-        @extend %list-active;
-      }
-
-      div {
-        position: absolute;
-        left: 0;
-        top: 120%;
-        background: #fff;
-        padding: 25px 0;
-        box-shadow: 0px 0px 2px 2px #0000001c;
-        z-index: 2;
-        @extend %list-none;
-
-        ul {
+          font-weight: 600;
+          font-size: 23px;
+          text-decoration: none;
           display: flex;
-          flex-direction: column;
           align-items: center;
-          margin: 0 auto;
-          width: 65%;
-
-          li {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: $app-gray-color;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 16px;
-            margin: 10px 0;
-
+  
+          svg {
+            color: $app-dark-color;
+            margin-left: 10px;
+            font-size: 18px;
+          }
+  
+          @media screen and (max-width: 1400px) {
+            font-size: 15px;
+  
             svg {
-              transform: rotate(-90deg);
-              font-size: 15px;
-              font-weight: 500;
+              font-size: 14px;
             }
           }
         }
-
-        @media screen and (max-width: 1400px) {
-          padding: 15px 0;
-
+  
+        &:hover div {
+          @extend %list-active;
+        }
+  
+        div {
+          position: absolute;
+          left: 0;
+          top: 120%;
+          background: #fff;
+          padding: 25px 0;
+          box-shadow: 0px 0px 2px 2px #0000001c;
+          z-index: 2;
+          @extend %list-none;
+  
           ul {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 auto;
+            padding: 0;
+            width: 65%;
+  
             li {
-              font-size: 14px;
-
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              color: $app-gray-color;
+              cursor: pointer;
+              font-weight: 500;
+              font-size: 16px;
+              margin: 10px 0;
+  
               svg {
-                font-size: 12px;
+                transform: rotate(-90deg);
+                font-size: 15px;
+                font-weight: 500;
+              }
+            }
+          }
+  
+          @media screen and (max-width: 1400px) {
+            padding: 15px 0;
+  
+            ul {
+              li {
+                font-size: 14px;
+  
+                svg {
+                  font-size: 12px;
+                }
               }
             }
           }
         }
-      }
-
-      .customer-list {
-        width: 100%;
-
-        @media screen and (max-width: 1400px) {
-          width: 140%;
+  
+        .customer-list {
+          width: 100%;
+  
+          @media screen and (max-width: 1400px) {
+            width: 140%;
+          }
         }
-      }
-
-      .category-list {
-        width: 270px;
-
-        @media screen and (max-width: 1400px) {
-          width: 210px;
+  
+        .category-list {
+          width: 270px;
+  
+          @media screen and (max-width: 1400px) {
+            width: 210px;
+          }
         }
       }
     }
   }
 
   @media screen and (max-width: 1400px) {
-    margin-top: 60px;
+    margin-top: 45px;
   }
 
   @media screen and (max-width: 1150px) {
-    >ul {
-      justify-content: flex-start;
-      padding-left: 48px;
+    >div{
+      >ul {
+        justify-content: flex-start;
+      }
     }
   }
 
   @media screen and (max-width: 950px) {
     margin-top: 40px;
 
-    >ul {
-      padding-left: 25px;
-    }
-
-    ul{
-      li{
-        margin: 0 10px;
+    >div{
+      ul{
+        li{
+          margin: 3px 10px;
+        }
       }
     }
   }

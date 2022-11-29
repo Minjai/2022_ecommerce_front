@@ -1,11 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import FormInput from '../../elements/FormInput';
 import Button from '../../elements/UI/FormButton';
+import { paths } from '../../../constants/paths';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import cls from './loginForm.module.scss';
 import * as yup from 'yup';
-import { useNavigate } from 'react-router-dom';
-import { paths } from '../../../constants/paths';
+import axios from 'axios';
+import { axiosInstance } from '../../../constants/axios';
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -25,7 +27,14 @@ const LoginForm = () => {
 
   const navigate = useNavigate();
 
-  const handleFormSubmit = (e) => {};
+  const handleFormSubmit = async (e) => {
+    const response = await axiosInstance.post('token',{
+      username: e.email,
+      password: e.password,
+    }) 
+
+    console.log(response);
+  };
 
   return (
     <div className={cls['login']}>

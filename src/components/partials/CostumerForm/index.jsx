@@ -29,8 +29,8 @@ const schema = yup.object().shape({
 const CostumerForm = () => {
   const [categoryActive, setCategoryActive] = useState(false);
   const [productActive, setProductActive] = useState(false);
-  const [category, setCategory] = useState('None');
-  const [product, setProduct] = useState('None');
+  const [category, setCategory] = useState('Optional');
+  const [product, setProduct] = useState('Optional');
 
   const {
     formState: { errors },
@@ -65,7 +65,7 @@ const CostumerForm = () => {
         </p>
         <form onSubmit={handleSubmit(costumerFormHandler)}>
           <label>
-            <span>User Name</span>
+            <span>{window.innerWidth > 500 ? 'User Name' : 'User ID'}</span>
             <input
               className={cls['costumer-input']}
               type="text"
@@ -135,7 +135,7 @@ const CostumerForm = () => {
             </label>
           </label>
           <div className={cls['costumer__body__buttons']}>
-            <button>Cancel</button>
+            <button>{window.innerWidth > 500 ? 'Cancel' : 'Go Back'}</button>
             <button id={cls['active']} type="submit">
               Post
             </button>

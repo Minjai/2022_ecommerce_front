@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom';
 import Pagination from '../../elements/Pagination';
+import { useNavigate } from 'react-router-dom';
 import cls from './newsList.module.scss';
 
 const data = [

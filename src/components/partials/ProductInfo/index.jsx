@@ -56,9 +56,9 @@ const ProductInfo = () => {
   const [method, setMethod] = useState('');
 
   const methodHandler = (str) => {
-    setMethod(str)
-    setActive(false)
-  }
+    setMethod(str);
+    setActive(false);
+  };
 
   return (
     <div className={cls['product']}>
@@ -72,19 +72,21 @@ const ProductInfo = () => {
         <span>Contains TEST</span>
         <PackageList list={list} />
         <div className={cls['product-info__footer']}>
-          <h4>Shipping Method</h4>
-          <div
-            id={cls[active ? 'active' : '']}
-            className={cls['product-info__footer__list']}
-          >
-            <span onClick={() => setActive((prev) => !prev)}>
-              <p>Free (7 - 14 Business Days)</p>
-              <FiChevronDown />
-            </span>
-            <ul>
-              <li onClick={() => methodHandler('react')}>React</li>
-              <li onClick={() => methodHandler('react')}>React</li>
-            </ul>
+          <div>
+            <h4>Shipping Method</h4>
+            <div
+              id={cls[active ? 'active' : '']}
+              className={cls['product-info__footer__list']}
+            >
+              <span onClick={() => setActive((prev) => !prev)}>
+                <p>Free (7 - 14 Business Days)</p>
+                <FiChevronDown />
+              </span>
+              <ul>
+                <li onClick={() => methodHandler('react')}>React</li>
+                <li onClick={() => methodHandler('react')}>React</li>
+              </ul>
+            </div>
           </div>
           <button className={cls['cart-btn']}>Add to Cart</button>
           <button>Purchase now</button>

@@ -6,7 +6,10 @@ import * as yup from 'yup';
 const schema = yup.object().shape({
   oldPassword: yup.string().min(5).max(15).required(),
   newPassword: yup.string().min(5).max(15).required(),
-  confirmPassword: yup.string().oneOf([yup.ref('newPassword'), null]).required(),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref('newPassword'), null])
+    .required(),
 });
 
 const ChangeForm = () => {
@@ -22,27 +25,30 @@ const ChangeForm = () => {
 
   return (
     <div className={cls['change']}>
-      <h3>Change Password</h3>
+      <h3>{window.innerWidth > 850 ? 'Change Password' : 'Edit My Profile'}</h3>
       <div className={cls['change__body']}>
         <form onSubmit={handleSubmit(handler)}>
+          {window.innerWidth < 600 && <span>Old Password</span>}
           <input
             type="password"
             {...register('oldPassword')}
-            placeholder="Old Password"
+            placeholder={window.innerWidth > 600 ? 'Old Password' : ''}
           />
-          {errors.oldPassword && <p>{errors.oldPassword.message}</p>}
+          <p>{errors?.oldPassword?.message}</p>
+          {window.innerWidth < 600 && <span>New Password</span>}
           <input
             type="password"
             {...register('newPassword')}
-            placeholder="New Password"
+            placeholder={window.innerWidth > 600 ? 'New Password' : ''}
           />
-          {errors.newPassword && <p>{errors.newPassword.message}</p>}
+          <p>{errors?.newPassword?.message}</p>
+          {window.innerWidth < 600 && <span>Confirm Password</span>}
           <input
             type="password"
             {...register('confirmPassword')}
-            placeholder="Confirm Password"
+            placeholder={window.innerWidth > 600 ? 'Confirm Password' : ''}
           />
-          {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+          <p>{errors?.confirmPassword?.message}</p>
           <button type="submit">Save</button>
         </form>
       </div>

@@ -160,7 +160,7 @@ export const appRoutes = [
   },
   {
     id: 18,
-    path: `${paths.USER}/*`,
+    path: `${paths.MY_PAGE}/*`,
     element: <UserPage />,
     routes: [
       {

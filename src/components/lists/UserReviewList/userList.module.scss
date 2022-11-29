@@ -8,6 +8,10 @@
       color: $app-dark-color;
       font-size: 23px;
       margin: 0;
+
+      @media screen and (max-width: 1400px){
+        font-size: 22px;
+      }
     }
 
     &__child {
@@ -96,6 +100,32 @@
           font-weight: 600;
           cursor: pointer;
         }
+
+        @media screen and (max-width: 1400px){
+          span{
+            height: 34px;
+            width: 142px;
+
+            p{
+              height: 32px;
+              font-size: 12px;
+            }
+
+            ul{
+              top: 33px;
+
+              li{
+                font-size: 12px;
+              }
+            }
+          }
+
+          button{
+            height: 34px;
+            width: 101;
+            font-size: 12px;  
+          }
+        }
       }
 
       > p {
@@ -103,6 +133,10 @@
         font-weight: 600;
         font-size: 18px;
         margin: 0;
+
+        @media screen and (max-width: 1400px){
+          font-size: 16px;
+        }
       }
     }
   }
@@ -117,6 +151,10 @@
       display: flex;
       justify-content: space-between;
       border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+
+      @media screen and (max-width: 1400px){
+        height: 84px;
+      }
 
       div {
         height: 100%;
@@ -147,6 +185,17 @@
           line-height: 1.5;
           margin: 0 0 0 15px;
         }
+
+        @media screen and (max-width: 1400px){
+          p,
+          span{
+            font-size: 14px;
+          }
+
+          img{
+            width: 74px;
+          }
+        }
       }
 
       div:nth-child(2) {
@@ -164,6 +213,12 @@
           color: $app-main-color;
           font-weight: 600;
           font-size: 18px;
+        }
+
+        @media screen and (max-width: 1400px){
+          p{
+            font-size: 14px;
+          }
         }
       }
     }

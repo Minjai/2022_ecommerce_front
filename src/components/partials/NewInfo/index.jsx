@@ -8,7 +8,7 @@ const NewInfo = ({ id }) => {
     <div className={cls['new']}>
       <div className={cls['new__title']}>
         <span>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam,
+          Lorem ipsum, dolor sit amet
           quae.
         </span>
         <span>01/01/2020</span>

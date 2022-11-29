@@ -43,47 +43,49 @@ const Header = () => {
         </div>
       </div>
       <div className={cls['header-lower']}>
-        <ul>
-          {headerLowerLinks.map(({ id, text, icon, to, list }) => (
-            <li key={id}>
-              <RouterLink to={to}>
-                {text}
-                {icon}
-              </RouterLink>
-              {list && (
-                <div
-                  className={
-                    cls[
-                      to === paths.CATEGORY
-                        ? 'category-list'
-                        : to === `${paths.CUSTOMER_HELP}/`
-                        ? 'customer-list'
-                        : ''
-                    ]
-                  }
-                >
-                  <ul>
-                    {list.map((item) => (
-                      <li key={item.id}>
-                        {item.text} {item.icon}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
-        <div className={cls['header-currency']}>
-          <span>
-            USD {'($)'} <BsChevronDown />
-          </span>
-          <div>
-            <ul>
-              {currencyLink.map(({ id, text }) => (
-                <li key={id}>{text}</li>
-              ))}
-            </ul>
+        <div>
+          <ul>
+            {headerLowerLinks.map(({ id, text, icon, to, list }) => (
+              <li key={id}>
+                <RouterLink to={to}>
+                  {text}
+                  {icon}
+                </RouterLink>
+                {list && (
+                  <div
+                    className={
+                      cls[
+                        to === paths.CATEGORY
+                          ? 'category-list'
+                          : to === `${paths.CUSTOMER_HELP}/`
+                          ? 'customer-list'
+                          : ''
+                      ]
+                    }
+                  >
+                    <ul>
+                      {list.map((item) => (
+                        <li key={item.id}>
+                          {item.text} {item.icon}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+          <div className={cls['header-currency']}>
+            <span>
+              USD {'($)'} <BsChevronDown />
+            </span>
+            <div>
+              <ul>
+                {currencyLink.map(({ id, text }) => (
+                  <li key={id}>{text}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

@@ -41,7 +41,9 @@ const MobileHeader = () => {
             <TfiSearch />
           </button>
         </div>
-        <Logo />
+        <span onClick={() => navigate(paths.HOME)}>
+          <Logo />
+        </span>
         <div className={cls['header-right']}>
           <ul>
             <li>

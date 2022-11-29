@@ -1,3 +1,4 @@
+import PageTitle from '../../elements/UI/PageTitle';
 import cls from './consultationInfo.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { BiEnvelope } from 'react-icons/bi';
@@ -7,6 +8,7 @@ const ConsultationInfo = () => {
 
   return (
     <div className={cls['consultation']}>
+      <PageTitle>1 : 1 General Consultation</PageTitle>
       <div className={cls['consultation__child']}>
         <div className={cls['consultation__child__title']}>
           <p>I have a question</p>
@@ -32,7 +34,7 @@ const ConsultationInfo = () => {
           </span>
         </div>
       </div>
-      <div className={cls['consultation__child']}>
+      <div id={cls['active']} className={cls['consultation__child']}>
         <div className={cls['consultation__child__title']}>
           <p>Re: I have a question</p>
           <span>
@@ -55,9 +57,15 @@ const ConsultationInfo = () => {
         </div>
       </div>
       <div className={cls['consultation-comment']}>
-        <p>Comment:</p>
-        <textarea name="" id="" cols="30" rows="10"></textarea>
-        <span>Submit Comment</span>
+        <div>
+          <p>Comment:</p>
+          <textarea
+            placeholder="Enter details of your question"
+            cols="30"
+            rows="10"
+          ></textarea>
+          <span>Submit Comment</span>
+        </div>
       </div>
       <div className={cls['consultation__footer']}>
         <button onClick={() => navigate(-1)}>Go Back</button>

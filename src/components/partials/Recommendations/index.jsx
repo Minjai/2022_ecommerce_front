@@ -1,6 +1,7 @@
-import Description from "../../elements/UI/Description"
-import ProductList from "../../lists/ProductList";
-import cls from './recommend.module.scss'
+import Description from '../../elements/UI/Description';
+import ProductList from '../../lists/ProductList';
+import ProductListSkeleton from '../../skeletons/ProductListSkeleton';
+import cls from './recommend.module.scss';
 
 const products = [
   {
@@ -36,13 +37,14 @@ const products = [
 const Recommendations = () => {
   return (
     <div className={cls['recommend']}>
-        <div className={cls['recommend__header']}>
+      <div className={cls['recommend__header']}>
         <Description>Recommendations</Description>
         <span>View More</span>
       </div>
-      <ProductList products={products}/>
+      <ProductList products={products} />
+      {/* <ProductListSkeleton /> */}
     </div>
-  )
-}
+  );
+};
 
-export default Recommendations
+export default Recommendations;

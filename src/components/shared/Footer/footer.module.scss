@@ -42,11 +42,15 @@
         @media screen and (max-width: 850px) {
           position: absolute;
           top: 5px;
-          left: 43%;
+          left: 41%;
+        }
+
+        @media screen and (max-width: 775px) {
+          left: 38%;
         }
 
         @media screen and (max-width: 720px) {
-          left: 40%;
+          left: 37%;
           font-size: 20px;
 
           &::before {
@@ -55,24 +59,28 @@
           }
         }
 
-        @media screen and (max-width: 550px) {
-          left: 38%;
-        }
-
-        @media screen and (max-width: 490px) {
+        @media screen and (max-width: 630px) {
           left: 35%;
         }
 
-        @media screen and (max-width: 450px) {
+        @media screen and (max-width: 550px) {
           left: 34%;
         }
 
+        @media screen and (max-width: 490px) {
+          left: 31%;
+        }
+
+        @media screen and (max-width: 450px) {
+          left: 29%;
+        }
+
         @media screen and (max-width: 400px) {
-          left: 32%;
+          left: 28%;
         }
         
         @media screen and (max-width: 365px) {
-          left: 30%;
+          left: 26%;
         }
       }
 
@@ -103,6 +111,7 @@
       ul {
         li {
           margin-bottom: 8px;
+          cursor: pointer;
 
           span {
             text-decoration: none;

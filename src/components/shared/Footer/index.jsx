@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom';
 import { paths } from '../../../constants/paths';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../../elements/UI/Logo';
 import cls from './footer.module.scss';
 
@@ -7,7 +7,7 @@ const Footer = () => {
   const navigate = useNavigate();
 
   const navigateHandler = (path) => {
-    window.scrollTo(window.scrollX, 150);
+    window.scrollTo(window.scrollX, 0);
     navigate(path);
   };
 
