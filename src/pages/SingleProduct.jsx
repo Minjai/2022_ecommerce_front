@@ -33,7 +33,6 @@ const SingleProduct = () => {
         <ProductInfo />
         <ProductDescription list={description} />
         <MainReviews/>
-        <br />
         <Description>1:1 General Consultations</Description>
         <ConsultationList bottom={true} />
       </div>

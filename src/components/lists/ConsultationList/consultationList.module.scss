@@ -424,9 +424,17 @@
         font-size: 14px;
       }
     }
+
+    @media screen and (max-width: 700px) {
+      bottom: 45px;
+    }
   }
 
   .consultation-list {
     margin-bottom: 60px;
+
+    @media screen and (max-width: 700px) {
+      margin-bottom: 70px;
+    }
   }
 }

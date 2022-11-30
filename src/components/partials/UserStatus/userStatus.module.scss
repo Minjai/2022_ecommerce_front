@@ -3,6 +3,11 @@
 .user {
   margin-top: 50px;
 
+  @media screen and (max-width: 850px) {
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+
   &-board {
     h3 {
       margin: 0;
@@ -10,8 +15,12 @@
       color: $app-dark-color;
       font-weight: 600;
 
-      @media screen  and (max-width: 1400px){
+      @media screen and (max-width: 1400px) {
         font-size: 22px;
+      }
+
+      @media screen and (max-width: 850px) {
+        color: $app-main-color;
       }
     }
 
@@ -57,16 +66,34 @@
         }
       }
 
-      @media screen  and (max-width: 1400px){
+      @media screen and (max-width: 1400px) {
         height: 200px;
 
-        div{
-          b{
+        div {
+          b {
             font-size: 33px;
           }
 
-          span{
+          span {
             font-size: 16px;
+          }
+        }
+      }
+
+      @media screen and (max-width: 850px) {
+        margin-top: 15px;
+      }
+
+      @media screen and (max-width: 800px) {
+        height: 117px;
+
+        div {
+          b {
+            font-size: 27px;
+          }
+
+          span {
+            font-size: 17px;
           }
         }
       }
@@ -76,13 +103,22 @@
   &-status {
     margin: 80px 0;
 
+    @media screen and (max-width: 1400px) {
+      margin: 50px 0;
+      font-size: 23px;
+    }
+
+    @media screen and (max-width: 850px) {
+      margin: 30px 0 40px 0;
+    }
+
     h3 {
       margin: 0;
       font-size: 28px;
       color: $app-dark-color;
       font-weight: 600;
 
-      @media screen  and (max-width: 1400px){
+      @media screen and (max-width: 1400px) {
         font-size: 23px;
       }
     }
@@ -94,7 +130,7 @@
       position: relative;
       display: flex;
 
-      &__month{
+      &__month {
         right: 0;
         top: -40px;
         position: absolute;
@@ -102,7 +138,7 @@
         font-weight: 600;
         font-size: 15px;
 
-        @media screen  and (max-width: 1400px){
+        @media screen and (max-width: 1400px) {
           font-size: 12px;
         }
       }
@@ -134,19 +170,47 @@
           color: $app-gray-color;
         }
 
-        @media screen  and (max-width: 1400px){
-          div{
-            span{
+        @media screen and (max-width: 1400px) {
+          div {
+            span {
               font-size: 23px;
             }
 
-            p{
+            p {
               font-size: 12px;
             }
           }
 
-          svg{
+          svg {
             font-size: 17px;
+            margin-left: 10px;
+          }
+        }
+
+        @media screen and (max-width: 600px) {
+          div {
+            span {
+              font-size: 27px;
+            }
+          }
+
+          svg {
+            margin: 0 10px;
+            font-size: 15px;
+            width: 20px;
+          }
+        }
+
+        @media screen and (max-width: 500px) {
+          svg {
+            width: 25px;
+          }
+        }
+
+        @media screen and (max-width: 460px) {
+          svg {
+            margin: 0;
+            width: 20px;
           }
         }
       }
@@ -168,19 +232,74 @@
           display: flex;
           justify-content: space-between;
 
-          span{
+          span {
             font-weight: 700;
           }
         }
-        
-        @media screen  and (max-width: 1400px){
-          p{
+
+        @media screen and (max-width: 1400px) {
+          p {
             font-size: 12px;
 
-            span{
+            span {
               font-size: 13px;
             }
           }
+        }
+
+        @media screen and (max-width: 1050px) {
+          margin-left: 20px;
+        }
+
+        @media screen and (max-width: 1000px) {
+          p {
+            padding-left: 15px;
+          }
+        }
+
+        @media screen and (max-width: 850px) {
+          width: 13%;
+        }
+
+        @media screen and (max-width: 800px) {
+          width: 26%;
+          border: none;
+          position: absolute;
+          left: 0;
+          bottom: -50px;
+          margin: 0;
+          flex-direction: row;
+          justify-content: flex-start;
+
+          P {
+            padding: 0;
+            margin-right: 25px;
+
+            span {
+              margin-left: 15px;
+            }
+          }
+        }
+      }
+
+      @media screen and (max-width: 800px) {
+        justify-content: space-between;
+        margin-top: 15px;
+        padding-top: 15px;
+        margin-bottom: 70px;
+      }
+
+      @media screen and (max-width: 460px) {
+        div:nth-child(2) {
+          width: 80px;
+        }
+
+        div:nth-child(3) {
+          width: 100px;
+        }
+
+        div:nth-child(4) {
+          width: 100px;
         }
       }
     }

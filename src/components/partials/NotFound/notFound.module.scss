@@ -8,6 +8,15 @@
   justify-content: center;
   flex-direction: column;
 
+  @media screen and (max-width: 1400px){
+    height: 300px;
+  }
+
+  @media screen and (max-width: 700px){
+    height: 250px;
+  }
+
+
   &__header{
     display: flex;
     align-items: center;
@@ -25,6 +34,34 @@
       font-weight: 600;
       margin: 0;
     }
+
+    @media screen and (max-width: 1400px){
+      p,
+      h3{
+        font-size: 40px;
+      }
+    }
+
+    @media screen and (max-width: 1000px){
+      p,
+      h3{
+        font-size: 30px;
+      }
+    }
+
+    @media screen and (max-width: 700px){
+      p,
+      h3{
+        font-size: 25px;
+      }
+    }
+
+    @media screen and (max-width: 450px){
+      p,
+      h3{
+        font-size: 20px;
+      }
+    }
   }
 
   &__footer{
@@ -40,6 +77,26 @@
       padding: 10px 50px;
       font-size: 20px;
       background: $app-main-color;
+    }
+
+    @media screen and (max-width: 1400px){
+      button{
+        padding: 7px 35px;
+        font-size: 15px;
+      }
+    }
+
+    @media screen and (max-width: 1000px){
+      button{
+        font-size: 13px;
+      }
+    }
+
+    @media screen and (max-width: 450px){
+      button{
+        padding: 5px 35px;
+        font-size: 12px;
+      }
     }
   }
 }

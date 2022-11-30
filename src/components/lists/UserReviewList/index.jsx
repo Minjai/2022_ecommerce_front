@@ -65,7 +65,7 @@ const UserReviewList = () => {
             <p>01/04/2022</p>
           </div>
         </div>
-        <div className={cls['review__body__child']}>
+        <div id={cls['active']} className={cls['review__body__child']}>
           <div>
             <span>1</span>
             <p>
