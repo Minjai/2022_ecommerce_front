@@ -76,7 +76,7 @@ const ReviewForm = () => {
         </div>
       </div>
       <div className={cls['review-button']}>
-        <button>Cancel</button>
+        <button>{window.innerWidth <= 500 ? 'Go Back' : 'Cancel'}</button>
         <button onClick={(handleReviewModal)} className={cls['active']}>Post</button>
       </div>
     </div>

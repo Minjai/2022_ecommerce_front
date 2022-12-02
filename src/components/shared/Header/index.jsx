@@ -1,24 +1,36 @@
 import {
   currencyLink,
+  headerLocalMidLinks,
   headerLowerLinks,
-  headerMidLinks,
+  headerPrivateMidLinks,
 } from '../../../constants/header';
 import { setContent, setModal } from '../../../store/slices/modal';
 import { modalPaths, paths } from '../../../constants/paths';
+import { setAuth } from '../../../store/slices/user/user';
+import { useDispatch, useSelector } from 'react-redux';
 import SearchInput from '../../elements/SearchInput';
 import RouterLink from '../../elements/RouterLink';
 import { BsChevronDown } from 'react-icons/bs';
-import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../../elements/UI/Logo';
 import cls from './header.module.scss';
 
 const Header = () => {
+  const { isAuth } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const alarmHandler = () => {
     dispatch(setContent(modalPaths.ALARM));
     dispatch(setModal(true));
   };
+
+  const logOutHandler = () => {
+    dispatch(setAuth(false))
+    localStorage.removeItem('refreshToken')
+    localStorage.removeItem('accessToken')
+    navigate(paths.HOME)
+  }
 
   return (
     <header>
@@ -30,15 +42,27 @@ const Header = () => {
         <SearchInput />
         <div className={cls['header-links']}>
           <ul>
-            {headerMidLinks.map(({ id, to, text }) => (
-              <li key={id}>
-                {text === 'Alarm' ? (
-                  <span onClick={alarmHandler}>{text}</span>
-                ) : (
-                  <RouterLink to={to}>{text}</RouterLink>
-                )}
-              </li>
-            ))}
+            {isAuth
+              ? headerPrivateMidLinks.map(({ id, to, text }) => (
+                  <li key={id}>
+                    {text === 'Alarm' ? (
+                      <span onClick={alarmHandler}>{text}</span>
+                    ) : text === 'Log out' ? (
+                      <span onClick={logOutHandler}>{text}</span>
+                    ) : (
+                      <RouterLink to={to}>{text}</RouterLink>
+                    )}
+                  </li>
+                ))
+              : headerLocalMidLinks.map(({ id, to, text }) => (
+                  <li key={id}>
+                    {text === 'Alarm' ? (
+                      <span onClick={alarmHandler}>{text}</span>
+                    ) : (
+                      <RouterLink to={to}>{text}</RouterLink>
+                    )}
+                  </li>
+                ))}
           </ul>
         </div>
       </div>
@@ -57,7 +81,7 @@ const Header = () => {
                       cls[
                         to === paths.CATEGORY
                           ? 'category-list'
-                          : to === `${paths.CUSTOMER_HELP}/`
+                          : to === `${paths.CUSTOMER_HELP}/${paths.NEWS}`
                           ? 'customer-list'
                           : ''
                       ]

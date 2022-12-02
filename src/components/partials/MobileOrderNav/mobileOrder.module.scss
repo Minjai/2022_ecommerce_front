@@ -1,0 +1,334 @@
+@import '/src/scss/variables.scss';
+
+%border-bottom {
+  content: '';
+  position: absolute;
+  left: -5.5%;
+  bottom: -1px;
+  width: 111%;
+  height: 1px;
+  border-bottom: 1px solid #80808057;
+
+  @media screen and (max-width: 700px) {
+    width: 105.3%;
+    left: -2.6%;
+  }
+}
+
+.order {
+  margin-top: 25px;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -5.5%;
+    top: -1px;
+    width: 111%;
+    height: 1px;
+    border-top: 1px solid #80808057;
+
+    @media screen and (max-width: 700px) {
+      width: 105.3%;
+      left: -2.6%;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: -5.5%;
+    bottom: -1px;
+    width: 111%;
+    height: 1px;
+    border-top: 1px solid #80808057;
+
+    @media screen and (max-width: 700px) {
+      width: 105.3%;
+      left: -2.6%;
+    }
+  }
+
+  &-wrapper {
+    position: absolute;
+    left: -5.5%;
+    top: 0;
+    width: 111%;
+    height: 100%;
+    background: $app-light-gray-color;
+
+    @media screen and (max-width: 700px) {
+      width: 105.3%;
+      left: -2.6%;
+    }
+  }
+
+  &-header {
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+
+    &::before {
+      @extend %border-bottom;
+    }
+
+    span {
+      font-size: 19px;
+      display: flex;
+      align-items: center;
+      color: $app-dark-color;
+      font-weight: 600;
+
+      svg {
+        margin-left: 15px;
+        color: $app-gray-color;
+      }
+    }
+  }
+
+  &-body {
+    position: relative;
+    display: none;
+
+    &-list {
+      padding-bottom: 20px;
+      position: relative;
+
+      &::before {
+        @extend %border-bottom;
+      }
+
+      &__child {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 25px;
+
+        img {
+          width: 16%;
+          height: 90px;
+        }
+
+        div {
+          width: 82%;
+          display: flex;
+          justify-content: space-between;
+
+          h5,
+          p {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 500;
+            color: $app-dark-color;
+          }
+
+          p {
+            width: 450px;
+            height: 22px;
+            overflow: hidden;
+          }
+          
+          b {
+            font-weight: 400;
+            color: $app-gray-color;
+          }
+        }
+
+        @media screen and (max-width: 750px) {
+          img{
+            width: 15%;
+          }
+
+          div{
+            width: 83%;
+
+            p{
+              width: 350px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 650px) {
+          img{
+            width: 19%;
+          }
+
+          div{
+            width: 78%;
+          }
+        }
+
+        @media screen and (max-width: 600px) {
+          img{
+            width: 17%;
+            height: 66px;
+          }
+
+          div{
+            width: 80%;
+
+            p{
+              width: 250px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 500px) {
+          img{
+            width: 20%;
+          }
+
+          div{
+            width: 77%;
+
+            p{
+              width: 150px;
+            }
+          }
+        }
+
+        @media screen and (max-width: 450px) {
+          img{
+            width: 22%;
+          }
+
+          div{
+            width: 75%;
+          }
+        }
+      }
+    }
+
+    &-points {
+      margin-top: 15px;
+      position: relative;
+      padding-bottom: 25px;
+
+      &::before {
+        @extend %border-bottom;
+      }
+
+      h4 {
+        font-size: 20px;
+        color: $app-dark-color;
+        margin: 0;
+      }
+
+      div {
+        margin-top: 20px;
+        width: 50%;
+        height: 54px;
+        position: relative;
+        border: 1px solid rgba(128, 128, 128, 0.3);
+        border-radius: 5px;
+        background: #fff;
+        display: flex;
+        justify-content: space-between;
+
+        span {
+          position: absolute;
+          right: 0;
+          top: -23px;
+          color: $app-main-color;
+          font-size: 14px;
+          font-weight: 600;
+        }
+
+        input {
+          width: 75%;
+          border-radius: 5px;
+          border: none;
+          outline: none;
+          height: 100%;
+          padding: 0 15px;
+        }
+
+        button {
+          height: 100%;
+          width: 25%;
+          cursor: pointer;
+          outline: none;
+          border: none;
+          color: #fff;
+          border-radius: 5px;
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+          background: rgba(128, 128, 128, 0.5);
+        }
+
+        @media screen and (max-width: 850px) {
+          width: 70%;
+        }
+
+        @media screen and (max-width: 600px) {
+          width: 80%;
+          height: 46px;
+        }
+
+        @media screen and (max-width: 500px) {
+          width: 100%;
+          height: 46px;
+        }
+
+        @media screen and (max-width: 450px) {
+          input{
+            width: 70%;
+          }
+
+          button{
+            width: 30%;
+          }
+        }
+      }
+    }
+
+    &-subtotal {
+      position: relative;
+      padding: 20px 0;
+
+      &::before {
+        @extend %border-bottom;
+      }
+
+      div {
+        padding: 5px 0;
+        display: flex;
+        justify-content: space-between;
+
+        span {
+          font-size: 14px;
+          font-weight: 600;
+        }
+      }
+    }
+
+    &-total {
+      padding: 20px 0;
+      display: flex;
+      justify-content: space-between;
+
+      span {
+        font-weight: 600;
+        font-size: 19px;
+      }
+    }
+  }
+}
+
+#active {
+  .order-header {
+    span {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .order-body {
+    display: block;
+  }
+}

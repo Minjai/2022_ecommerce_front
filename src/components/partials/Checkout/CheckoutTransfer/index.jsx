@@ -3,6 +3,7 @@ import CheckoutButtons from '../../../elements/UI/CheckoutButtons';
 import { paths } from '../../../../constants/paths';
 import { IoCheckmarkSharp } from 'react-icons/io5';
 import cls from './checkoutTransfer.module.scss';
+import MobileOrderNav from '../../MobileOrderNav';
 
 const CheckoutTransfer = () => {
   const { backBtnHandler, nextBtnhandler } = useCheckoutButtons(
@@ -17,7 +18,10 @@ const CheckoutTransfer = () => {
           <IoCheckmarkSharp />
         </span>
       </h2>
-      <p>Your email test@gmail.com 으로 주문 내용이 발송되었습니다.</p>
+      <p className={cls['paragraph']}>
+        Your email test@gmail.com 으로 주문 내용이 발송되었습니다.
+      </p>
+      {window.innerWidth < 950 && <MobileOrderNav/>}
       <div className={cls['transfer__body']}>
         <h3>Payment Information</h3>
         <p>Account Name: test</p>

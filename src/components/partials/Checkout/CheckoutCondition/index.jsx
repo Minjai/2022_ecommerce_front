@@ -46,7 +46,7 @@ const CheckoutCondition = () => {
                 name="feedback"
               ></textarea>
             )}
-            <b>* This field is required</b>
+            <b className={cls[!state.drug && 'appear']}>* This field is required</b>
           </div>
           <div className={cls['condition__field']}>
             <p>
@@ -117,21 +117,21 @@ const CheckoutCondition = () => {
                   Female
                 </span>
               </label>
-              <b>* This field is required</b>
+              <b className={cls['appear']}>* This field is required</b>
             </div>
             <div id={cls['block']} className={cls['condition__field']}>
               <p>
                 Date of Birth: <sup>*</sup>
               </p>
-              <input type="number" placeholder="DD/MM/YYYY" />
-              <b>* This field is required</b>
+              <input type="text" placeholder="DD/MM/YYYY" />
+              <b className={cls['appear']}>* This field is required</b>
             </div>
           </div>
           <div id={cls['block']} className={cls['condition__field']}>
             <p>
-              Do you smoke: <sup>*</sup>
+              Do you smoke:
             </p>
-            <label>
+            <label className={cls['span-margin']}>
               <span
                 onClick={() => setState((prev) => ({ ...prev, smoke: 'No' }))}
                 className={cls[state.smoke === 'No' ? 'active' : '']}
@@ -148,7 +148,7 @@ const CheckoutCondition = () => {
           </div>
           <div id={cls['block']} className={cls['condition__field']}>
             <p>
-              Do you drink: <sup>*</sup>
+              Do you drink:
             </p>
             <label>
               <span

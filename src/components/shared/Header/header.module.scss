@@ -3,7 +3,7 @@
 %list-none {
   pointer-events: none;
   transition: 0.3s;
-  transition-delay: .3s;
+  transition-delay: 0.3s;
   opacity: 0;
   transform: translateY(10px);
 }
@@ -25,25 +25,21 @@
   a {
     text-decoration: none;
     color: $app-main-color;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 600;
 
-    &:hover{
+    &:hover {
       text-decoration: none;
       color: $app-main-color;
-    }
-
-    @media screen and (max-width: 1400px) {
-      font-size: 13px;
     }
   }
 }
 
 .header-currency {
-  top: 0px;
+  top: -4px;
   right: 0;
-  height: 30px;
-  width: 95px;
+  height: 29px;
+  width: 89px;
   position: absolute;
   display: flex;
   align-items: center;
@@ -57,19 +53,19 @@
     justify-content: space-between;
     color: $app-dark-color;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 13px;
     cursor: pointer;
 
     svg {
       color: $app-dark-color;
       margin-left: 4px;
-      font-size: 13px;
+      font-size: 12px;
     }
   }
 
   div {
     position: absolute;
-    width: 130%;
+    width: 120%;
     top: 30px;
     left: 0%;
     padding: 6px 0;
@@ -80,48 +76,24 @@
 
     ul {
       margin: 0;
-      padding: 0;
+      padding: 0 0 0 15px;
       list-style: none;
       font-weight: 500;
       color: $app-gray-color;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       flex-direction: column;
 
       li {
         cursor: pointer;
-        font-size: 15px;
-        margin: 8px 0;
+        font-size: 13px;
+        margin: 4px 0;
       }
     }
   }
 
   &:hover div {
     @extend %list-active;
-  }
-
-  @media screen and (max-width: 1400px) {
-    width: 89px;
-    height: 29px;
-    top: 0px;
-
-    span {
-      font-size: 13px;
-
-      svg {
-        font-size: 12px;
-      }
-    }
-
-    div {
-      top: 32px;
-
-      ul {
-        li {
-          font-size: 13px;
-        }
-      }
-    }
   }
 }
 
@@ -131,12 +103,8 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  padding-top: 35px;
+  padding-top: 40px;
   margin: 0 auto;
-
-  @media screen and (max-width: 1400px) {
-    padding-top: 40px;
-  }
 
   @media screen and (max-width: 1300px) {
     width: 90%;
@@ -157,40 +125,32 @@
     li {
       margin-left: 20px;
 
-      span{
+      span {
         color: $app-dark-color;
         font-weight: 600;
-        font-size: 18px;
+        font-size: 13px;
         cursor: pointer;
-
-        @media screen and (max-width: 1400px) {
-          font-size: 13px;
-        }
       }
 
       a {
         text-decoration: none;
         color: $app-dark-color;
         font-weight: 600;
-        font-size: 18px;
-
-        @media screen and (max-width: 1400px) {
-          font-size: 13px;
-        }
+        font-size: 13px;
       }
     }
   }
 }
 
 .header-lower {
-  margin-top: 30px;
+  margin-top: 45px;
   padding-bottom: 25px;
   padding-top: 25px;
   border-bottom: 1px solid #b9b9b9c5;
   border-top: 1px solid #b9b9b9c5;
   position: relative;
-  
-  >div{
+
+  > div {
     width: 1200px;
     position: relative;
     margin: 0 auto;
@@ -199,62 +159,54 @@
       width: 90%;
     }
 
-    >ul {
+    > ul {
       list-style: none;
       margin: 0 auto;
       padding: 0;
       display: flex;
       justify-content: center;
-  
+
       li {
         margin: 0 13px;
         position: relative;
-  
+
         a {
           color: $app-dark-color;
           font-weight: 600;
-          font-size: 23px;
+          font-size: 15px;
           text-decoration: none;
           display: flex;
           align-items: center;
-  
+
           svg {
             color: $app-dark-color;
             margin-left: 10px;
-            font-size: 18px;
-          }
-  
-          @media screen and (max-width: 1400px) {
-            font-size: 15px;
-  
-            svg {
-              font-size: 14px;
-            }
+            font-size: 14px;
           }
         }
-  
+
         &:hover div {
           @extend %list-active;
         }
-  
+
         div {
           position: absolute;
           left: 0;
           top: 120%;
           background: #fff;
-          padding: 25px 0;
+          padding: 0;
           box-shadow: 0px 0px 2px 2px #0000001c;
           z-index: 2;
           @extend %list-none;
-  
+
           ul {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin: 0 auto;
-            padding: 0;
+            padding: 15px 0;
             width: 65%;
-  
+
             li {
               width: 100%;
               display: flex;
@@ -263,58 +215,32 @@
               color: $app-gray-color;
               cursor: pointer;
               font-weight: 500;
-              font-size: 16px;
+              font-size: 13px;
               margin: 10px 0;
-  
+
               svg {
                 transform: rotate(-90deg);
-                font-size: 15px;
+                font-size: 12px;
                 font-weight: 500;
               }
             }
           }
-  
-          @media screen and (max-width: 1400px) {
-            padding: 15px 0;
-  
-            ul {
-              li {
-                font-size: 14px;
-  
-                svg {
-                  font-size: 12px;
-                }
-              }
-            }
-          }
         }
-  
+
         .customer-list {
-          width: 100%;
-  
-          @media screen and (max-width: 1400px) {
-            width: 140%;
-          }
+          width: 210px;
         }
-  
+
         .category-list {
-          width: 270px;
-  
-          @media screen and (max-width: 1400px) {
-            width: 210px;
-          }
+          width: 210px;
         }
       }
     }
   }
 
-  @media screen and (max-width: 1400px) {
-    margin-top: 45px;
-  }
-
   @media screen and (max-width: 1150px) {
-    >div{
-      >ul {
+    > div {
+      > ul {
         justify-content: flex-start;
       }
     }
@@ -323,9 +249,9 @@
   @media screen and (max-width: 950px) {
     margin-top: 40px;
 
-    >div{
-      ul{
-        li{
+    > div {
+      ul {
+        li {
           margin: 3px 10px;
         }
       }

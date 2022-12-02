@@ -54,6 +54,12 @@ const data = [
     amount: 26,
     image: 'https://www.pngall.com/wp-content/uploads/11/Apple-PNG-Images.png',
   },
+  {
+    id: 9,
+    category: 'Shoes',
+    amount: 17,
+    image: 'https://www.pngall.com/wp-content/uploads/11/Apple-PNG-Images.png',
+  },
 ];
 
 const products = [
@@ -172,7 +178,7 @@ const Best = () => {
   return (
     <PageWrapper>
       <div className="container">
-        <PageTitle>Best</PageTitle>
+        <PageTitle>Best Sellers</PageTitle>
         <CategoryCarousel data={data} />
         <CategoryButtons data={categories} />
         <PaginatedList data={products} />

@@ -3,8 +3,14 @@
 .checkout-price {
   width: 48%;
 
+  @media screen and (max-width: 950px) {
+    display: none;
+  }
+
   &__list {
     padding-bottom: 20px;
+    margin-top: 40px;
+    padding-bottom: 10px;
   }
 
   #scrollable{
@@ -18,29 +24,34 @@
     height: 100px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
 
     img {
-      width: 20%;
-      height: 100%;
+      width: 97px;
+      height: 84px;
       object-fit: cover;
+      margin-right: 10px;
     }
 
     div {
-      padding: 12px 0;
+      padding: 6px 0;
       width: 77%;
 
       p {
         margin: 0;
         color: $app-dark-color;
         font-weight: 600;
-        font-size: 18px;
+        overflow: hidden;
+        width: 100%;
+          font-size: 16px;
+          height: 23px;
       }
 
       span {
         color: $app-gray-color;
         font-weight: 500;
-        margin: 5px 0;
+        margin: 3px 0 0 0;
+        font-size: 16px;
         display: block;
       }
     }
@@ -49,7 +60,7 @@
   &__total {
     div {
       border-top: 1px solid rgba(128, 128, 128, 0.3);
-      padding: 15px 0;
+      padding: 10px 0;
 
       p {
         width: 77%;
@@ -59,17 +70,17 @@
         font-weight: 600;
         margin: 0;
         margin-left: auto;
-        font-size: 18px;
+        font-size: 16px;
       }
     }
 
     div:nth-child(1) {
       p {
-        font-size: 18px;
+        font-size: 16px;
       }
 
       p:nth-child(1) {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
       }
     }
 
@@ -78,7 +89,7 @@
       padding-top: 20px;
       
       p {
-        font-size: 21px;
+        font-size: 20px;
         font-weight: 700;
       }
 
@@ -86,7 +97,7 @@
         position: absolute;
         right: 0;
         bottom: -25px;
-        font-size: 21px;
+        font-size: 20px;
         color: #9A9A9A;
 
         &::before{

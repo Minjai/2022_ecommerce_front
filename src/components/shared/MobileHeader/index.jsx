@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import cls from './mobileHeader.module.scss';
 import { TfiSearch } from 'react-icons/tfi';
 import { VscBell } from 'react-icons/vsc';
-import Logo from '../../elements/UI/Logo';
 import { useDispatch } from 'react-redux';
+import Logo from '../../elements/UI/Logo';
 
 const MobileHeader = () => {
   const navigate = useNavigate();

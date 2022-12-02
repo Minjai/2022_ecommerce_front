@@ -29,7 +29,7 @@ const description = [
 const SingleProduct = () => {
   return (
     <PageWrapper>
-      <div className="container">
+      <div className="container w-966">
         <ProductInfo />
         <ProductDescription list={description} />
         <MainReviews/>

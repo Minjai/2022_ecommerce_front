@@ -7,7 +7,7 @@
   overflow: hidden;
 
   &__header {
-    height: 306px !important;
+    height: 230px !important;
     background: $app-light-gray-color;
     position: relative;
 
@@ -23,30 +23,18 @@
       top: 0;
       left: 0;
       color: white;
-      width: 45px;
+      width: 36px;
       text-align: center;
-      padding: 7px 0;
+      padding-top: 5px;
+      height: 51px;
       pointer-events: none;
       padding-bottom: 11px;
-      font-size: 14px;
+      font-size: 12px;
       clip-path: polygon(100% 0, 100% 100%, 50% 90%, 0 100%, 0 0);
 
       p {
         margin: 0;
-        margin-top: 3px;
-        font-size: 20px;
         font-weight: 600;
-      }
-
-      @media screen and (max-width: 1600px) {
-        width: 35px;
-        font-size: 10px;
-        padding: 3px 0 6px 0;
-
-        P{
-          font-size: 15px;
-          margin: 0;
-        }
       }
 
       @media screen and (max-width: 600px) {
@@ -56,15 +44,11 @@
         top: -1px;
         padding: 3px 0 6px 0;
 
-        P{
+        P {
           font-size: 15px;
           line-height: 16px;
         }
       }
-    }
-
-    @media screen and (max-width: 1400px) {
-      height: 230px !important;
     }
   }
 
@@ -73,22 +57,17 @@
 
     > span {
       color: $app-gray-color;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 500;
     }
 
     p {
       margin: 10px 0;
-      font-size: 18px;
-      height: 48px;
+      font-size: 14px;
+      height: 44px;
       overflow: hidden;
       color: $app-dark-color;
       font-weight: 600;
-
-      @media screen and (max-width: 600px) {
-        font-size: 14px;
-        height: 44px;
-      }
     }
 
     &__price {
@@ -99,7 +78,7 @@
 
       span {
         color: $app-main-color;
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 600;
         display: flex;
         align-items: center;
@@ -112,10 +91,12 @@
         cursor: pointer;
         display: flex;
         align-items: center;
+        justify-content: center;
         color: #fff;
-        padding: 10px 13px;
+        width: 71px;
+        height: 30px;
         border-radius: 30px;
-        font-size: 16px;
+        font-size: 12px;
 
         svg {
           font-size: 20px;
@@ -134,11 +115,11 @@
       @media screen and (max-width: 600px) {
         margin-top: 15px;
 
-        button{
+        button {
           font-size: 12px;
           padding: 7px 10px;
 
-          svg{
+          svg {
             font-size: 15px;
           }
         }

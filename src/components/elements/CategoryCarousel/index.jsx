@@ -19,20 +19,23 @@ const CategoryCarousel = ({ data }) => {
           slidesPerView: 3.6,
           spaceBetween: 10,
         },
-        600: {
-          spaceBetween: 20,
+        500: {
           slidesPerView: 4,
+          spaceBetween: 10,
+        },
+        700: {
+          slidesPerView: 5,
         },
         900: {
           spaceBetween: 20,
-          slidesPerView: 5,
+          slidesPerView: 6,
         },
         1100: {
           spaceBetween: 30,
-          slidesPerView: 6,
+          slidesPerView: 7,
         },
         1300: {
-          slidesPerView: 7,
+          slidesPerView: 8.5,
           spaceBetween: 30,
         },
       }}

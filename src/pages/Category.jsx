@@ -54,6 +54,12 @@ const data = [
     amount: 26,
     image: '',
   },
+  {
+    id: 9,
+    category: 'Shoes',
+    amount: 17,
+    image: '',
+  },
 ];
 
 const products = [

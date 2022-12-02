@@ -1,7 +1,7 @@
 @import '../../../scss/variables.scss';
 
 .reviews {
-  margin-top: 70px;
+  margin-top: 20px;
   position: relative;
 
   &__header {
@@ -27,10 +27,6 @@
       left: 0;
       top: 0px;
     }
-  }
-
-  @media screen and (max-width: 1400px) {
-    margin-top:20px;
   }
 
   @media screen and (max-width: 700px) {

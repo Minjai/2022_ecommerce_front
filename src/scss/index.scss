@@ -53,6 +53,55 @@ body {
   }
 }
 
+.w-950{
+  width: 966px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 1085px) {
+    width: 90%;
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 95%;
+  }
+}
+
+.w-966{
+  width: 966px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 1085px) {
+    width: 90%;
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 95%;
+  }
+}
+
+.my-page{
+  width: 972px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 1100px) {
+    width: 90%;
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 95%;
+  }
+}
+
+.customer{
+  width: 808px;
+  margin: 0 auto;
+  
+  @media screen and (max-width: 900px) {
+    width: 100%;
+  }
+
+}
+
 .flex {
   display: flex;
   justify-content: space-between;
@@ -61,6 +110,10 @@ body {
 
 .w-50 {
   width: 48%;
+  
+  @media screen and (max-width: 950px) {
+    width: 100%;
+  }
 }
 
 .user-width {
@@ -73,6 +126,12 @@ body {
   @media screen and (max-width: 850px) {
     width: 100%;
   }
+}
+
+.user-page-title{
+  margin: 0;
+  font-size: 27px;
+  color: $app-dark-color;
 }
 
 .rs-calendar-table-cell-content {

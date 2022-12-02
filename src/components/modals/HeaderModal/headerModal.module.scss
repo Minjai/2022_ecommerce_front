@@ -79,6 +79,12 @@
           width: 1px;
           background: $app-main-color;
         }
+
+        h3{
+          color: $app-main-color;
+          font-size: 15px;
+          margin: 0;
+        }
       }
 
       &__currency {

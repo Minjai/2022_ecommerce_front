@@ -10,12 +10,8 @@
   &__header {
     h3 {
       color: $app-dark-color;
-      font-size: 23px;
+      font-size: 22px;
       margin: 0;
-
-      @media screen and (max-width: 1400px) {
-        font-size: 22px;
-      }
 
       @media screen and (max-width: 600px) {
         font-size: 21px;
@@ -42,8 +38,8 @@
           font-weight: 600;
           font-size: 17px;
           border-radius: 5px;
-          width: 195px;
-          height: 45px;
+          height: 34px;
+          width: 142px;
           position: relative;
           margin-right: 25px;
 
@@ -52,8 +48,8 @@
             margin: 0;
             padding: 0 20px;
             width: 100%;
-            height: 45px;
-            font-size: 16px;
+            height: 32px;
+            font-size: 12px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -64,7 +60,7 @@
             position: absolute;
             list-style: none;
             z-index: 2;
-            top: 45px;
+            top: 32px;
             left: 0;
             padding: 5px 0;
             margin: 0;
@@ -79,7 +75,7 @@
             li {
               padding: 5px 15px;
               cursor: pointer;
-              font-size: 15px;
+              font-size: 12px;
               font-weight: 600;
               color: $app-dark-color;
             }
@@ -105,40 +101,15 @@
         button {
           padding: 0 25px;
           border-radius: 30px;
-          height: 45px;
+          width: 101px;
+          height: 34px;
+          font-size: 12px;
           background: $app-main-color;
           border: none;
           outline: none;
-          font-size: 16px;
           color: #fff;
           font-weight: 600;
           cursor: pointer;
-        }
-
-        @media screen and (max-width: 1400px) {
-          span {
-            height: 34px;
-            width: 142px;
-
-            p {
-              height: 32px;
-              font-size: 12px;
-            }
-
-            ul {
-              top: 32px;
-
-              li {
-                font-size: 12px;
-              }
-            }
-          }
-
-          button {
-            width: 101px;
-            height: 34px;
-            font-size: 12px;
-          }
         }
 
         @media screen and (max-width: 600px) {
@@ -167,21 +138,21 @@
           width: 100%;
           justify-content: space-between;
 
-          span{
+          span {
             width: 68%;
           }
 
-          button{
+          button {
             width: 30%;
           }
         }
 
         @media screen and (max-width: 410px) {
-          span{
+          span {
             width: 64%;
           }
 
-          button{
+          button {
             width: 32%;
           }
         }
@@ -190,12 +161,8 @@
       > p {
         color: $app-main-color;
         font-weight: 600;
-        font-size: 18px;
+        font-size: 16px;
         margin: 0;
-
-        @media screen and (max-width: 1400px) {
-          font-size: 16px;
-        }
 
         @media screen and (max-width: 600px) {
           font-size: 17px;
@@ -219,15 +186,11 @@
     }
 
     &__child {
-      height: 100px;
+      height: 84px;
       padding: 10px 15px;
       display: flex;
       justify-content: space-between;
       border-bottom: 1px solid rgba(128, 128, 128, 0.3);
-
-      @media screen and (max-width: 1400px) {
-        height: 84px;
-      }
 
       > div {
         width: 45%;
@@ -246,7 +209,7 @@
         }
 
         img {
-          width: 120px;
+          width: 74px;
           height: 100%;
           margin-right: 20px;
         }
@@ -257,46 +220,22 @@
 
           svg {
             color: $app-gray-color;
-            font-size: 30px;
+            font-size: 23px;
           }
 
           p {
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 500;
             color: $app-dark-color;
-            width: 350px;
+            width: 250px;
             height: 22px;
             overflow: hidden;
             margin: 0 0 0 15px;
           }
         }
 
-        @media screen and (max-width: 1400px) {
-          span {
-            font-size: 14px;
-          }
-
-          img {
-            width: 74px;
-          }
-
-          > div {
-            svg {
-              font-size: 23px;
-            }
-
-            p {
-              font-size: 14px;
-            }
-          }
-        }
-
-        @media screen and (max-width: 1200px) {
-          div {
-            p {
-              width: 250px;
-            }
-          }
+        span {
+          font-size: 14px;
         }
 
         @media screen and (max-width: 1050px) {
@@ -451,20 +390,13 @@
           margin: 0 0 0 100px;
           font-weight: 500;
           color: $app-dark-color;
-          font-size: 18px;
+          font-size: 14px;
         }
 
         span {
           color: $app-main-color;
           font-weight: 600;
-          font-size: 18px;
-        }
-
-        @media screen and (max-width: 1400px) {
-          span,
-          p {
-            font-size: 14px;
-          }
+          font-size: 14px;
         }
 
         @media screen and (max-width: 700px) {
@@ -523,7 +455,7 @@
 
         @media screen and (max-width: 500px) {
           margin-right: 12px;
-          
+
           > div {
             left: 30px;
 
@@ -535,7 +467,7 @@
 
         @media screen and (max-width: 425px) {
           margin-right: 10px;
-          
+
           > div {
             left: 25px;
 

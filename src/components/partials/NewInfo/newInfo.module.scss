@@ -1,98 +1,78 @@
 @import '/src/scss/variables.scss';
 
-.new{
-  &__title{
-    margin-top: 40px;
+.new {
+  &__title {
+    margin-top: 30px;
 
-    span{
+    span {
       display: block;
       color: $app-dark-color;
       margin-bottom: 10px;
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 600;
-    }
-
-    @media screen and (max-width: 1400px) {
-      margin-top: 30px;
-
-      span{
-        font-size: 16px;
-      }
     }
 
     @media screen and (max-width: 500px) {
       margin-top: 20px;
 
-      & span:nth-child(1){
+      & span:nth-child(1) {
         margin-bottom: 5px;
         font-size: 21px;
       }
 
-      & span:nth-child(2){
+      & span:nth-child(2) {
         font-size: 14px;
       }
     }
   }
 
-  &__body{
-    margin-top: 40px;
+  &__body {
+    margin-top: 20px;
 
-    p{
+    p {
       margin: 0;
-      font-size: 18px;
+      font-size: 14px;
       line-height: 1.7;
       font-weight: 500;
       color: $app-dark-color;
     }
 
-    img{
+    img {
       margin-top: 25px;
       width: 100%;
-      height: 700px;
+      height: 512px;
       object-fit: cover;
     }
 
-    @media screen and (max-width: 1400px) {
-      margin-top: 20px;
-
-      img{
-        height: 512px;
-      }
-
-      p{
-        font-size: 14px;
-      }
-    }
-
     @media screen and (max-width: 1000px) {
-      img{
+      img {
         height: 400px;
       }
     }
 
     @media screen and (max-width: 700px) {
-      img{
+      img {
         height: 300px;
       }
     }
 
     @media screen and (max-width: 500px) {
-      img{
+      img {
         height: 212px;
       }
     }
   }
 
-  &__footer{
+  &__footer {
     text-align: center;
 
-    button{
+    button {
       margin-top: 40px;
       border-radius: 30px;
-      width: 260px;
-      height: 60px;
+      width: 226px;
+      height: 48px;
+      font-size: 17px;
       color: #fff;
-      font-size: 19px;
       cursor: pointer;
       border: none;
       font-weight: 600;
@@ -100,16 +80,8 @@
       background: $app-main-color;
     }
 
-    @media screen and (max-width: 1400px) {
-      button{
-        width: 226px;
-        height: 48px;
-        font-size: 17px;
-      }
-    }
-
     @media screen and (max-width: 500px) {
-      button{
+      button {
         width: 180px;
         height: 46px;
         font-size: 14px;

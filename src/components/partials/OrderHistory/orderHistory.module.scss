@@ -12,19 +12,11 @@
     margin: 0;
     display: flex;
     justify-content: space-between;
-    font-size: 23px;
+    font-size: 22px;
 
     span {
       color: $app-main-color;
-      font-size: 20px;
-    }
-
-    @media screen and (max-width: 1400px) {
-      font-size: 22px;
-      
-      span{
-        font-size: 16px;
-      }
+      font-size: 16px;
     }
   }
 
@@ -42,8 +34,8 @@
       font-weight: 600;
       font-size: 17px;
       border-radius: 5px;
-      width: 195px;
-      height: 45px;
+      height: 34px;
+      width: 142px;
       position: relative;
       margin-right: 25px;
 
@@ -52,8 +44,8 @@
         margin: 0;
         padding: 0 20px;
         width: 100%;
-        height: 45px;
-        font-size: 16px;
+        font-size: 12px;
+        height: 31px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -63,7 +55,7 @@
         width: 100%;
         position: absolute;
         list-style: none;
-        top: 45px;
+        top: 33px;
         left: 0;
         padding: 5px 0;
         margin: 0;
@@ -78,27 +70,9 @@
         li {
           padding: 5px 15px;
           cursor: pointer;
-          font-size: 15px;
+          font-size: 12px;
           font-weight: 600;
           color: $app-dark-color;
-        }
-      }
-
-      @media screen and (max-width: 1400px) {
-        height: 34px;
-        width: 142px;
-
-        p{
-          font-size: 12px;
-          height: 31px;
-        }
-
-        ul{
-          top: 33px;
-
-          li{
-            font-size: 12px;
-          }
         }
       }
 
@@ -106,7 +80,7 @@
         width: 135px;
         margin-right: 15px;
 
-        p{
+        p {
           padding: 0 10px;
         }
       }
@@ -129,37 +103,33 @@
     > button {
       padding: 0 25px;
       border-radius: 30px;
-      height: 45px;
+      width: 100px;
+      height: 34px;
+      font-size: 12px;
       background: $app-main-color;
       border: none;
       outline: none;
-      font-size: 16px;
       color: #fff;
       font-weight: 600;
       cursor: pointer;
 
-      @media screen and (max-width: 1400px) {
-        width: 100px;
-        height: 34px;
-        font-size: 12px;
-      }
-
       @media screen and (max-width: 550px) {
         display: none;
-      } 
+      }
     }
 
     .picker {
       margin-right: 25px;
-      height: 45px;
+      height: 34px;
 
       > div {
         height: 100%;
         display: flex;
         align-items: center;
+        top: 6 !important;
 
         svg {
-          top: 10px !important;
+          top: 6px !important;
         }
 
         span {
@@ -170,21 +140,11 @@
         box-shadow: none !important;
       }
 
-      @media screen and (max-width: 1400px) {
-        height: 34px;
-
-        >div{
-          svg{
-            top: 6px !important;
-          }
-        }
-      }
-
       @media screen and (max-width: 550px) {
         margin-right: 0;
 
-        >div{
-          svg{
+        > div {
+          svg {
             top: 5px !important;
           }
         }

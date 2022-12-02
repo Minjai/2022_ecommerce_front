@@ -30,14 +30,12 @@
           font-weight: 600;
         }
 
-        @media screen and (max-width: 1400px) {
-          p:nth-child(1) {
-            font-size: 14px;
-          }
+        p:nth-child(1) {
+          font-size: 14px;
+        }
 
-          p:nth-child(2) {
-            font-size: 12px;
-          }
+        p:nth-child(2) {
+          font-size: 12px;
         }
       }
 
@@ -75,11 +73,7 @@
         width: 100%;
         color: $app-dark-color;
         margin: 0 0 30px 0;
-        font-size: 22px;
-
-        @media screen and (max-width: 1400px) {
-          font-size: 18px;
-        }
+        font-size: 18px;
       }
 
       .active {
@@ -87,13 +81,13 @@
       }
 
       &__content {
-        margin-top: 35px;
+        margin-top: 25px;
         display: flex;
         flex-wrap: wrap;
 
         img {
-          width: 23%;
-          height: 190px;
+          width: 20%;
+          height: 127px;
           margin-right: 3%;
         }
 
@@ -103,7 +97,7 @@
           p {
             margin: 0;
             color: $app-dark-color;
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 600;
             height: 22px;
             width: 100%;
@@ -115,10 +109,13 @@
             font-weight: 600;
             display: block;
             margin: 5px 0;
-            font-size: 17px;
+            font-size: 14px;
           }
 
           button {
+            font-size: 12px;
+            height: 38px;
+            width: 134px;
             margin-top: 20px;
             border: 1px solid rgba(128, 128, 128, 0.3);
             outline: none;
@@ -131,28 +128,6 @@
           }
         }
 
-        @media screen and (max-width: 1400px) {
-          margin-top: 25px;
-
-          img {
-            width: 20%;
-            height: 127px;
-          }
-
-          div {
-            span,
-            p {
-              font-size: 14px;
-            }
-
-            button {
-              font-size: 12px;
-              height: 38px;
-              width: 134px;
-            }
-          }
-        }
-        
         @media screen and (max-width: 500px){
           div {
             span{
@@ -175,8 +150,8 @@
 
       &__buttons {
         position: absolute;
-        right: 30px;
-        bottom: 30px;
+        bottom: 20px;
+        right: 20px;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
@@ -189,8 +164,9 @@
           cursor: pointer;
           outline: none;
           border-radius: 30px;
-          height: 50px;
-          width: 200px;
+          font-size: 12px;
+          width: 192px;
+          height: 40px;
           background: none;
           margin-top: 15px;
         }
@@ -211,22 +187,7 @@
           margin: 10px 0 0 0;
           color: $app-main-color;
           font-weight: 600;
-          font-size: 16px;
-        }
-
-        @media screen and (max-width: 1400px) {
-          bottom: 20px;
-          right: 20px;
-
-          button {
-            font-size: 12px;
-            width: 192px;
-            height: 40px;
-          }
-
-          p {
-            font-size: 12px;
-          }
+          font-size: 12px;
         }
       }
 
@@ -275,7 +236,7 @@
         &__content{
           img{
             width: 113px;
-            height: 113px;
+            height: 103px;
           }
 
           div{

@@ -5,6 +5,7 @@ import * as yup from 'yup';
 
 const schema = yup.object().shape({
   userName: yup.string().required(),
+  email: yup.string().email().required(),
 });
 
 const EditForm = () => {
@@ -25,17 +26,18 @@ const EditForm = () => {
         <form onSubmit={handleSubmit(handler)}>
           {window.innerWidth < 600 && <span>Email</span>}
           <input
-            className={cls['noClick']}
-            type="text"
+            type="email"
+            {...register('email')}
             placeholder={window.innerWidth > 600 ? 'User email' : ''}
           />
+          <p>{errors?.email?.message}</p>
           {window.innerWidth < 600 && <span>User name</span>}
           <input
             type="text"
             {...register('userName')}
             placeholder={window.innerWidth > 600 ? 'User name' : ''}
           />
-          {errors.userName && <p>{errors.userName.message}</p>}
+          <p>{errors?.userName?.message}</p>
           <button type="submit">Save</button>
         </form>
       </div>

@@ -19,7 +19,7 @@
   width: 100%;
 
   &__image {
-    height: 155px;
+    height: 101px;
     border-radius: 50%;
     background: $app-light-gray-color;
     display: flex;
@@ -27,7 +27,7 @@
     align-items: center;
 
     img {
-      width: 65px;
+      width: 40px;
     }
 
     @media screen and (max-width: 700px) {

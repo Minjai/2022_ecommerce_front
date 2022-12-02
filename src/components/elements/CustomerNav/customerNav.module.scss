@@ -4,11 +4,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 80px;
+  margin-top: 40px;
 
   span {
-    width: 32%;
-    height: 70px;
+    width: 260px;
+    height: 40px;
     border-radius: 35px;
     border: 2px solid rgba(128, 128, 128, 0.3);
     overflow: hidden;
@@ -23,36 +23,19 @@
       font-weight: 600;
       text-align: center;
       color: $app-dark-color;
-      font-size: 18px;
+      font-size: 12px;
     }
   }
 
-  @media screen and (max-width: 1450px){
-    margin-top: 50px;
-
+  @media screen and (max-width: 900px) {
     span{
-      height: 55px;
-
-      a{
-        font-size: 15px;
-      }
+      width: 32%;
+      height: 42px;
     }
   }
 
-  @media screen and (max-width: 1250px){
-    margin-top: 50px;
-
-    span{
-      height: 45px;
-
-      a{
-        font-size: 12px;
-      }
-    }
-  }
-
-  @media screen and (max-width: 700px){
-    span{
+  @media screen and (max-width: 700px) {
+    span {
       border: 1px solid #8080804d;
     }
 
@@ -62,7 +45,7 @@
 
 .customerLink {
   border: none !important;
-  
+
   a {
     background-color: $app-main-color !important;
     color: #fff !important;

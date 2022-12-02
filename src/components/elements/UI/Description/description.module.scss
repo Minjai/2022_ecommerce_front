@@ -1,19 +1,11 @@
 @import '../../../../scss/variables.scss';
 
 .description {
-  font-size: 35px;
+  font-size: 20px;
   color: $app-dark-color;
   margin: 0;
 
-  @media screen and (max-width: 1400px) {
-    font-size: 25px;
-  }
-
   @media screen and (max-width: 600px) {
     font-size: 22px;
-  }
-
-  @media screen and (max-width: 400px) {
-    font-size: 21px;
   }
 }

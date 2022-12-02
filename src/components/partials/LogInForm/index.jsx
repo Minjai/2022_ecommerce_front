@@ -1,3 +1,5 @@
+import { setAuth } from '../../../store/slices/user/user';
+import { axiosInstance } from '../../../constants/axios';
 import { yupResolver } from '@hookform/resolvers/yup';
 import FormInput from '../../elements/FormInput';
 import Button from '../../elements/UI/FormButton';
@@ -5,9 +7,8 @@ import { paths } from '../../../constants/paths';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import cls from './loginForm.module.scss';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
-import axios from 'axios';
-import { axiosInstance } from '../../../constants/axios';
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -20,20 +21,38 @@ const LoginForm = () => {
     formState: { errors },
     register,
     reset,
+    setError,
   } = useForm({
     resolver: yupResolver(schema),
     mode: 'all',
   });
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleFormSubmit = async (e) => {
-    const response = await axiosInstance.post('token',{
-      username: e.email,
-      password: e.password,
-    }) 
+    try {
+      const response = await axiosInstance.post('token/', {
+        username: e.email,
+        password: e.password,
+      });
 
-    console.log(response);
+      const { refresh, access } = response.data;
+
+      localStorage.setItem('refreshToken', refresh);
+      localStorage.setItem('accessToken', access);
+
+      dispatch(setAuth(true));
+      navigate(paths.HOME);
+      reset()
+    } catch (error) {
+      if (error.response.data.detail) {
+        setError('email', {
+          type: 'validate',
+          message: error.response.data.detail,
+        });
+      }
+    }
   };
 
   return (

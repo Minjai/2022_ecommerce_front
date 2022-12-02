@@ -14,14 +14,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 22px;
+      font-size: 15px;
       color: $app-dark-color;
       cursor: pointer;
       font-weight: 600;
 
       svg {
         color: $app-gray-color;
-        font-size: 23px;
+        font-size: 17px;
       }
     }
 
@@ -32,26 +32,10 @@
 
       li {
         width: 90%;
-        font-size: 19px;
+        font-size: 14px;
         color: $app-gray-color;
         font-weight: 500;
         line-height: 1.5;
-      }
-    }
-
-    @media screen and (max-width: 1400px) {
-      span{
-        font-size: 15px;
-
-        svg{
-          font-size: 17px;
-        }
-      }
-
-      ul{
-        li{
-          font-size: 14px;
-        }
       }
     }
   }

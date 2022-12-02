@@ -10,7 +10,6 @@ export const paths = {
   BEST: 'best',
   CUSTOMER_HELP: 'customer-help',
   REVIEW: 'review',
-  CONTACT: 'contact-us',
   NEWS: 'news',
   FAQ: 'faq',
   CONSULTATION: 'consultation',

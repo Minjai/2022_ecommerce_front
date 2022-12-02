@@ -23,7 +23,6 @@ import UserPage from '../pages/user/UserPage';
 import Faq from '../pages/customer-help/Faq';
 import SingleNew from '../pages/SingleNew';
 import Category from '../pages/Category';
-import Contacts from '../pages/Contacts';
 import Redirect from '../pages/Redirect';
 import AboutUs from '../pages/AboutUs';
 import Reviews from '../pages/Reviews';
@@ -33,7 +32,7 @@ import Home from '../pages/Home';
 import Cart from '../pages/Cart';
 import { paths } from './paths';
 
-export const appRoutes = [
+export const localRoutes = [
   {
     id: 1,
     index: true,
@@ -107,11 +106,6 @@ export const appRoutes = [
     element: <AboutUs />,
   },
   {
-    id: 12,
-    path: paths.CONTACT,
-    element: <Contacts />,
-  },
-  {
     id: 13,
     path: paths.CUSTOMER_POST,
     element: <CustomerPost />,
@@ -158,8 +152,120 @@ export const appRoutes = [
     path: paths.CONSULTATION_INFO,
     element: <SingleConsultation />,
   },
+];
+
+export const privateRoutes = [
   {
-    id: 18,
+    id: 1,
+    index: true,
+    element: <Home />,
+  },
+  {
+    id: 2,
+    path: paths.REDIRECT,
+    element: <Redirect />,
+  },
+  {
+    id: 3,
+    path: paths.CART,
+    element: <Cart />,
+  },
+  {
+    id: 4,
+    path: paths.ORDERS,
+    element: <Order />,
+  },
+  {
+    id: 5,
+    path: paths.CATEGORY,
+    element: <Category />,
+  },
+  {
+    id: 6,
+    path: paths.BEST,
+    element: <Best />,
+  },
+  {
+    id: 7,
+    path: `${paths.CUSTOMER_HELP}/*`,
+    element: <CustomerHelp />,
+    routes: [
+      {
+        id: paths.NEWS,
+        path: paths.NEWS,
+        element: <News />,
+      },
+      {
+        id: paths.FAQ,
+        path: paths.FAQ,
+        element: <Faq />,
+      },
+      {
+        id: paths.CONSULTATION,
+        path: paths.CONSULTATION,
+        element: <Consultation />,
+      },
+    ],
+  },
+  {
+    id: 8,
+    path: paths.REVIEW,
+    element: <Reviews />,
+  },
+  {
+    id: 9,
+    path: paths.ABOUT,
+    element: <AboutUs />,
+  },
+  {
+    id: 11,
+    path: paths.CUSTOMER_POST,
+    element: <CustomerPost />,
+  },
+  {
+    id: 12,
+    path: paths.PRODUCT,
+    element: <SingleProduct />,
+  },
+  {
+    id: 13,
+    path: `${paths.CHECK_OUT}/*`,
+    element: <Checkout />,
+    routes: [
+      {
+        id: paths.CHECK_OUT_ONE,
+        path: paths.CHECK_OUT_ONE,
+        element: <CheckoutOne />,
+      },
+      {
+        id: paths.CHECK_OUT_SECOND,
+        path: paths.CHECK_OUT_SECOND,
+        element: <CheckoutSecond />,
+      },
+      {
+        id: paths.CHECK_OUT_THIRD,
+        path: paths.CHECK_OUT_THIRD,
+        element: <CheckoutThird />,
+      },
+      {
+        id: paths.CHECK_OUT_FOURTH,
+        path: paths.CHECK_OUT_FOURTH,
+        element: <CheckoutFourth />,
+      },
+    ],
+  },
+  {
+    id: 14,
+    path: paths.SINGLE_NEW,
+    element: <SingleNew />,
+  },
+  {
+    id: 15,
+    path: paths.CONSULTATION_INFO,
+    element: <SingleConsultation />,
+  },
+  {
+    id: 16,
     path: `${paths.MY_PAGE}/*`,
     element: <UserPage />,
     routes: [
@@ -205,4 +311,4 @@ export const appRoutes = [
       },
     ],
   },
-];
+]

@@ -9,14 +9,12 @@ const UserPage = () => {
   const params = useParams();
   return (
     <PageWrapper>
-      <div className="container">
-        <div className="flex">
-          <UserNav param={params} />
-          {window.innerWidth < 850 && <PageTitle>My Page</PageTitle>}
-          <Outlet />
-          {window.innerWidth < 850 && <MobileUserNav param={params}/>}
-          <ContactUs />
-        </div>
+      <div className="container flex my-page">
+        <UserNav param={params} />
+        {window.innerWidth < 850 && <h3 className='user-page-title'>My Page</h3>}
+        <Outlet />
+        {window.innerWidth < 850 && <MobileUserNav param={params} />}
+        <ContactUs />
       </div>
     </PageWrapper>
   );

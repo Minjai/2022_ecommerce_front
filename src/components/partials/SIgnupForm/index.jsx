@@ -1,13 +1,12 @@
+import { axiosInstance } from '../../../constants/axios';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '../../elements/UI/FormButton';
 import FormInput from '../../elements/FormInput';
 import { paths } from '../../../constants/paths';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 import cls from './signupForm.module.scss';
+import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import axios from 'axios';
-import { axiosInstance } from '../../../constants/axios';
 
 const schema = yup.object().shape({
   userName: yup.string().required(),
@@ -22,21 +21,33 @@ const SignupForm = () => {
     formState: { errors },
     register,
     reset,
+    setError,
   } = useForm({
     resolver: yupResolver(schema),
     mode: 'all',
   });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleFormSubmit = async (e) => {
-    const response = await axiosInstance.post('accounts/users',{
-      username: e.userName,
-      email: e.email,
-      password: e.password
-    }) 
+    try {
+      const response = await axiosInstance.post('accounts/users/', {
+        username: e.userName,
+        email: e.email,
+        password: e.password,
+      });
 
-    console.log(response);
+      reset()
+
+      navigate(`/${paths.LOGIN}`);
+    } catch (error) {
+      if (error.response.data.username) {
+        setError('userName', {
+          type: 'validate',
+          message: error.response.data.username
+        });
+      }
+    }
   };
 
   return (
@@ -70,7 +81,8 @@ const SignupForm = () => {
         <Button type="submit">Sign Up</Button>
       </form>
       <span className={cls['signup__confirm']}>
-        Already have an account? <b onClick={() => navigate(`/${paths.LOGIN}`)}>Log In</b>
+        Already have an account?{' '}
+        <b onClick={() => navigate(`/${paths.LOGIN}`)}>Log In</b>
       </span>
     </div>
   );

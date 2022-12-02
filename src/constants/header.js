@@ -20,7 +20,7 @@ export const currencyLink = [
   },
 ];
 
-export const headerMidLinks = [
+export const headerLocalMidLinks = [
   {
     id: 1,
     to: paths.LOGIN,
@@ -30,6 +30,27 @@ export const headerMidLinks = [
     id: 2,
     to: paths.SIGNUP,
     text: 'Sign Up',
+  },
+  {
+    id: 3,
+    text: 'Alarm',
+  },
+  {
+    id: 4,
+    to: paths.CART,
+    text: 'Cart',
+  },
+];
+
+export const headerPrivateMidLinks = [
+  {
+    id: 1,
+    text: 'Log out',
+  },
+  {
+    id: 2,
+    to: `${paths.MY_PAGE}/${paths.USER_PROFILE}`,
+    text: 'My Page',
   },
   {
     id: 3,
@@ -115,11 +136,6 @@ export const headerLowerLinks = [
     id: 6,
     to: paths.ABOUT,
     text: 'About Us',
-  },
-  {
-    id: 7,
-    to: paths.CONTACT,
-    text: 'Contact Us',
   },
 ];
 

@@ -15,13 +15,9 @@
 
     p {
       margin: 0;
-      font-size: 28px;
+      font-size: 22px;
       font-weight: 600;
       color: $app-dark-color;
-
-      @media screen and (max-width: 1400px) {
-        font-size: 22px;
-      }
     }
 
     @media screen and (max-width: 500px) {
@@ -30,25 +26,16 @@
   }
 
   &__description {
-    margin: 30px 0;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    font-size: 12px;
     line-height: 1.5;
     color: $app-dark-color;
     font-weight: 500;
-    font-size: 17px;
-
-    @media screen and (max-width: 1400px) {
-      margin-top: 0px;
-      margin-bottom: 20px;
-      font-size: 12px;
-    }
   }
 
   &__body {
-    margin-top: 60px;
-
-    @media screen and (max-width: 1400px) {
-      margin-top: 30px;
-    }
+    margin-top: 30px;
 
     @media screen and (max-width: 500px) {
       margin-top: 10px;
@@ -69,19 +56,19 @@
         margin-bottom: 20px;
 
         > span {
-          margin-top: 15px;
-          font-size: 16px;
+          font-size: 14px;
           font-weight: 600;
+          margin-top: 15px;
         }
 
         .costumer-input {
           border: 2px solid rgba(128, 128, 128, 0.3);
-          height: 50px;
+          height: 46px;
+          font-size: 14px;
           outline: none;
           padding: 0 15px;
           border-radius: 5px;
           width: 77%;
-          font-size: 17px;
           color: $app-gray-color;
         }
 
@@ -102,6 +89,7 @@
 
             span {
               font-weight: 500;
+              font-size: 14px;
             }
 
             svg {
@@ -139,9 +127,9 @@
         }
 
         textarea {
-          height: 400px;
+          height: 328px;
           width: 77%;
-          font-size: 17px;
+          font-size: 14px;
           border-radius: 5px;
           padding: 15px;
           color: $app-gray-color;
@@ -195,23 +183,6 @@
           height: 0;
         }
 
-        @media screen and (max-width: 1400px) {
-          span {
-            font-size: 14px;
-          }
-
-          .costumer-input {
-            height: 46px;
-            font-size: 14px;
-          }
-
-          textarea {
-            height: 328px;
-            width: 77%;
-            font-size: 14px;
-          }
-        }
-
         @media screen and (max-width: 500px) {
           flex-wrap: wrap;
           margin-bottom: 0;
@@ -240,10 +211,8 @@
       .costumer-label {
         justify-content: flex-start;
 
-        @media screen and (max-width: 1400px) {
-          span {
-            margin-right: 32px;
-          }
+        span {
+          margin-right: 32px;
         }
 
         @media screen and (max-width: 630px) {
@@ -281,8 +250,9 @@
       text-align: center;
 
       button {
-        width: 220px;
-        height: 45px;
+        height: 40px;
+        width: 192px;
+        font-size: 14px;
         border-radius: 30px;
         border: 1px solid #8080804d;
         outline: none;
@@ -291,13 +261,6 @@
         margin: 0 10px;
         font-weight: 500;
         background: none;
-        font-size: 16px;
-
-        @media screen and (max-width: 1400px) {
-          height: 40px;
-          width: 192px;
-          font-size: 14px;
-        }
 
         @media screen and (max-width: 500px) {
           width: 100%;
@@ -310,7 +273,7 @@
         display: flex;
         flex-direction: column;
 
-        button:nth-child(1){
+        button:nth-child(1) {
           order: 1;
         }
       }

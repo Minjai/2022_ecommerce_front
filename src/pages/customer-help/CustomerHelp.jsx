@@ -7,9 +7,11 @@ const CustomerHelp = () => {
   return (
     <PageWrapper>
       <div className="container">
-        <PageTitle>Customer Help</PageTitle>
-        <CustomerNav/>
-        <Outlet />
+        <div className="customer">
+          <PageTitle>Customer Help</PageTitle>
+          <CustomerNav />
+          <Outlet />
+        </div>
       </div>
     </PageWrapper>
   );

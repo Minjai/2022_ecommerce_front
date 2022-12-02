@@ -1,7 +1,7 @@
 @import '../../../scss/variables.scss';
 
 .pagination {
-  margin-top: 50px;
+  margin-top: 30px;
   display: flex;
   justify-content: center;
 
@@ -10,10 +10,10 @@
 
     span {
       cursor: pointer;
-      font-size: 20px;
       color: $app-gray-color;
       font-weight: 600;
-      margin: 0 15px;
+      font-size: 14px;
+      margin: 0 10px;
     }
 
     p {
@@ -23,17 +23,6 @@
 
     &_active {
       color: $app-main-color !important;
-    }
-  }
-
-  @media screen and (max-width: 1400px) {
-    margin-top: 30px;
-
-    &__list{
-      span{
-        font-size: 14px;
-        margin: 0 10px;
-      }
     }
   }
 

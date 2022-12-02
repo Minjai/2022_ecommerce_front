@@ -1,7 +1,7 @@
 @import '../../../scss/variables.scss';
 
 .recommend {
-  margin-top: 70px;
+  margin-top: 0px;
 
   &__header {
     display: flex;
@@ -17,10 +17,6 @@
         font-size: 15px;
       }
     }
-  }
-
-  @media screen and (max-width: 1400px) {
-    margin-top: 20px;
   }
 
   @media screen and (max-width: 700px) {

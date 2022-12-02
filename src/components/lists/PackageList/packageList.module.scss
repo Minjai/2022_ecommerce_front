@@ -5,7 +5,7 @@
   margin-top: 30px;
 
   &__header {
-    height: 50px;
+    height: 46px;
     background: $app-light-gray-color;
     border: 1px solid rgba(128, 128, 128, 0.3);
     display: flex;
@@ -15,15 +15,7 @@
     span {
       color: $app-dark-color;
       font-weight: 500;
-      font-size: 20px;
-    }
-
-    @media screen and (max-width: 1400px) {
-      height: 46px;
-
-      span {
-        font-size: 15px;
-      }
+      font-size: 15px;
     }
   }
 
@@ -44,7 +36,7 @@
 
       & div:first-child {
         width: 40%;
-        padding-right: 50px;
+        padding-right: 42px;
 
         span {
           border-radius: 50%;
@@ -58,10 +50,10 @@
           &::before {
             content: '';
             position: absolute;
-            width: 60%;
-            height: 60%;
+            width: 11px;
+            height: 11px;
             left: 20%;
-            top: 20%;
+            top: 22%;
             background: $app-main-color;
             border-radius: 50%;
           }
@@ -70,11 +62,6 @@
         p {
           margin: 0;
           color: $app-dark-color;
-          font-weight: 500;
-          font-size: 20px;
-        }
-
-        @media screen and (max-width: 1400px) {
           p {
             font-size: 14px;
             font-weight: 600;
@@ -87,30 +74,19 @@
 
         p {
           color: #a6a6a6;
-          font-size: 17px;
+          font-size: 14px;
           margin: 0;
           font-weight: 600;
         }
 
         svg {
           color: $app-dark-color;
-          font-size: 20px;
+          font-size: 16px;
         }
 
         b {
           color: $app-main-color;
-          font-size: 17px;
-        }
-
-        @media screen and (max-width: 1400px) {
-          b,
-          p {
-            font-size: 14px;
-          }
-
-          svg {
-            font-size: 16px;
-          }
+          font-size: 14px;
         }
       }
 

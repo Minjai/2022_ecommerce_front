@@ -16,6 +16,7 @@ import { useState } from 'react';
 
 const HeaderModal = () => {
   const { isActive } = useSelector((state) => state.burger);
+  const { isAuth } = useSelector((state) => state.user);
   const [isCurrency, setCurrencty] = useState(false);
   const [isCategory, setCategory] = useState(false);
   const [isCustomer, setCustomer] = useState(false);
@@ -47,12 +48,18 @@ const HeaderModal = () => {
           <div className={cls['modal-wrapper__mid']}>
             <div className={cls['modal-wrapper__container']}>
               <div className={cls['modal-wrapper__mid__links']}>
-                <span onClick={() => navigateHandler(`/${paths.LOGIN}`)}>
-                  Log in
-                </span>
-                <span onClick={() => navigateHandler(`/${paths.SIGNUP}`)}>
-                  Sign up
-                </span>
+                {isAuth ? (
+                  <h3>Hello User Name</h3>
+                ) : (
+                  <>
+                    <span onClick={() => navigateHandler(`/${paths.LOGIN}`)}>
+                      Log in
+                    </span>
+                    <span onClick={() => navigateHandler(`/${paths.SIGNUP}`)}>
+                      Sign up
+                    </span>
+                  </>
+                )}
               </div>
               <div
                 id={cls[isCurrency ? 'active' : '']}
@@ -154,11 +161,6 @@ const HeaderModal = () => {
                     <p onClick={closeModalHandler}>About Us</p>
                   </RouterLink>
                 </div>
-                <div onClick={closeModalHandler}>
-                  <RouterLink to={`/${paths.CONTACT}`}>
-                    <p onClick={closeModalHandler}>Contact Us</p>
-                  </RouterLink>
-                </div>
               </div>
             </div>
           </div>
@@ -180,7 +182,7 @@ const HeaderModal = () => {
               >
                 1:1 General Consultation
               </button>
-              <button className={cls['full']}>Log out</button>
+              {isAuth && <button className={cls['full']}>Log out</button>}
             </div>
           </div>
         </div>

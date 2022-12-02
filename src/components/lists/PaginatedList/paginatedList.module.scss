@@ -1,5 +1,5 @@
 .paginated-list {
-  margin-top: 50px;
+  margin-top: 40px;
 
   &__body {
     display: flex;
@@ -10,10 +10,6 @@
   &__child {
     width: 24%;
     margin-bottom: 30px;
-  }
-
-  @media screen and (max-width: 1400px) {
-    margin-top: 15px;
   }
 
   @media screen and (max-width: 1150px) {

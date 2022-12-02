@@ -1,7 +1,7 @@
 @import '../../../scss/variables.scss';
 
 .news-list{
-  margin-top: 50px;
+  margin-top: 40px;
 
   &__body{
     border-top: 1px solid rgba(128, 128, 128, 0.3);
@@ -9,13 +9,14 @@
 
   &__child{
     border-bottom: 1px solid rgba(128, 128, 128, 0.3);
-    padding: 20px 0;
+    padding: 15px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: $app-dark-color;
     cursor: pointer;
     font-weight: 500;
+    font-size: 12px;
 
     p{
       margin: 0;

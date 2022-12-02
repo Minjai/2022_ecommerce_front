@@ -10,6 +10,7 @@
   align-items: center;
   border-radius: 5px;
   border: 2px solid $app-main-color;
+  margin-left: 60px;
 
   input {
     width: 93%;
@@ -19,18 +20,10 @@
     outline: none;
 
     &::placeholder {
-      font-size: 16px;
+      font-size: 13px;
       color: $app-dark-color;
       font-weight: 500;
       opacity: 0.5;
-    }
-
-    @media screen and (max-width: 1400px) {
-      font-size: 13px;
-
-      &::placeholder {
-        font-size: 13px;
-      }
     }
   }
 
@@ -42,17 +35,10 @@
 
     svg {
       font-weight: 500;
-      font-size: 22px;
+      font-size: 18px;
       color: $app-dark-color;
-
-      @media screen and (max-width: 1400px) {
-        font-size: 18px;
-      }
+      margin-top: 5px;
     }
-  }
-
-  @media screen and (max-width: 1400px) {
-    width: 50%;
   }
 
   @media screen and (max-width: 1150px) {
@@ -60,12 +46,14 @@
   }
 
   @media screen and (max-width: 1050px) {
+    margin-left: 20px;
     width: 40%;
   }
 
   @media screen and (max-width: 950px) {
     margin-top: 30px;
     width: 100%;
+    margin-left: 0;
     order: 3;
 
     input {

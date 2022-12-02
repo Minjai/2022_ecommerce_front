@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 const Checkout = () => {
   return (
     <PageWrapper>
-      <div className="container flex">
+      <div className="container flex w-966">
         <Outlet/>
         <CheckoutPrice/>
       </div>
