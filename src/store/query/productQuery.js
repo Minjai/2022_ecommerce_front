@@ -4,7 +4,7 @@ export const productQuery = createApi({
   reducerPath: 'productQuery',
   tagTypes: ['PRODUCT_TAG'],
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://167.172.39.139/api/v1/',
+    baseUrl: process.env.REACT_APP_BASE_URL,
   }),
   endpoints: (builder) => ({
     getProducts: builder.query({

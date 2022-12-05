@@ -4,7 +4,7 @@ export const orderQuery = createApi({
   reducerPath: 'orderQuery',
   tagTypes: ['ORDER_TAG'],
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://167.172.39.139/api/v1/',
+    baseUrl: process.env.REACT_APP_BASE_URL,
   }),
   endpoints: (builder) => ({
     getOrders: builder.query({
