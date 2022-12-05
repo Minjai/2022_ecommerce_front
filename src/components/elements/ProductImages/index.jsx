@@ -1,11 +1,13 @@
 import cls from './productImages.module.scss';
-import { useEffect , useState} from 'react';
+import { useEffect, useState } from 'react';
 
 const ProductImages = ({ images }) => {
   const [currentImage, setCurrentImage] = useState('');
 
   useEffect(() => {
-    setCurrentImage(() => images[0].image);
+    setCurrentImage(
+      () => images?.find((item) => item.is_feature === true).image
+    );
   }, [images]);
 
   return (
@@ -16,7 +18,7 @@ const ProductImages = ({ images }) => {
         alt="current-pic"
       />
       <div>
-        {images.map(({ id, image }) => (
+        {images?.map(({ id, image }) => (
           <img
             className={cls[image === currentImage ? 'active' : '']}
             onClick={() => setCurrentImage(image)}

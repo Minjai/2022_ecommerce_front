@@ -1,69 +1,47 @@
+import EmptyText from '../../../elements/UI/EmptyText';
 import cls from './checkoutPrice.module.scss';
-
-const data = [
-  {
-    id: 1,
-    title: 'Lorem ipsum dolor sit amet consectetur adipisicing.',
-    price: '$ 15.45',
-    subPrice: '100 ea',
-    image:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Shaqi_jrvej.jpg/1200px-Shaqi_jrvej.jpg',
-  },
-  {
-    id: 2,
-    title: 'Lorem ipsum dolor sit amet consectetur adipisicing.',
-    price: '$ 45.45',
-    subPrice: '100 ea',
-    image:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Shaqi_jrvej.jpg/1200px-Shaqi_jrvej.jpg',
-  },
-  {
-    id: 3,
-    title: 'Lorem ipsum dolor sit amet consectetur adipisicing.',
-    price: '$ 76.45',
-    subPrice: '100 ea',
-    image:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Shaqi_jrvej.jpg/1200px-Shaqi_jrvej.jpg',
-  },
-];
+import { useSelector } from 'react-redux';
+import { mathSubTotal, mathTotal } from '../../../../utils/mathTotal';
 
 const CheckoutPrice = () => {
+  const { carts } = useSelector(state => state.cart)
+
   return (
     <div className={cls['checkout-price']}>
       <div
-        id={cls[data.length > 4 ? 'scrollable' : '']}
+        id={cls[carts.length > 4 ? 'scrollable' : '']}
         className={cls['checkout-price__list']}
       >
-        {data.map(({ id, image, title, price, subPrice }) => (
+        {carts.length > 0 ? carts.map(({ id, images, product_name, prices, subPrice }) => (
           <div key={id} className={cls['checkout-price__child']}>
-            <img src={image} alt="product-pic" />
+            <img src={images?.find(item => item.is_feature === true).image} alt="product-pic" />
             <div>
-              <p>{title}</p>
-              <span>{subPrice}</span>
-              <p>{price}</p>
+              <p>{product_name}</p>
+              <span>100ea</span>
+              <p>${prices?.length && prices[0]?.selling_price}</p>
             </div>
           </div>
-        ))}
+        )) : <EmptyText text={'checkout'}/>}
       </div>
       <div className={cls['checkout-price__total']}>
         <div>
           <p>
-            Sub total: <span>$ 15.53</span>
+            Sub total: <span>${mathSubTotal(carts)}</span>
           </p>
           <p>
-            Shipping Free: <span>$ 1.56</span>
+            Shipping Free: <span>$ 1</span>
           </p>
         </div>
         <div className={cls['discount']}>
           <p>
-            Discount: <span>- $ 1.56</span>
+            Discount: <span>- $ 1.5</span>
           </p>
         </div>
         <div className={cls['total']}>
           <p>
-            Total: <span>$ 16.45</span>
+            Total: <span>${mathTotal(carts, '1', '1.5')}</span>
           </p>
-          <b>$ 16.45</b>
+          <b>${mathTotal(carts, '1', '1.5')}</b>
         </div>
       </div>
     </div>

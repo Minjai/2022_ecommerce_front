@@ -6,7 +6,7 @@ const PaginatedList = ({ data }) => {
   return (
     <div className={cls['paginated-list']}>
       <div className={cls['paginated-list__body']}>
-        {data.map((item) => (
+        {data?.map((item) => (
           <div key={item.id} className={cls['paginated-list__child']}>
             <ProductItem item={item} />
           </div>

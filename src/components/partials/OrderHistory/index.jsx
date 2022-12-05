@@ -1,3 +1,4 @@
+import { useGetOrderItemsQuery } from '../../../store/query/orderQuery';
 import Pagination from '../../elements/Pagination';
 import { AiOutlineDown } from 'react-icons/ai';
 import OrderList from '../../lists/OrderList';
@@ -9,6 +10,10 @@ import 'rsuite/dist/rsuite.css';
 const OrderHistory = () => {
   const [select, setSelect] = useState('select range');
   const [isRange, setRange] = useState(false);
+
+  const { data , error} = useGetOrderItemsQuery()
+
+  console.log(error);
 
   const handleRange = (str) => {
     setSelect(str);

@@ -1,9 +1,12 @@
 import ProductDescription from '../components/partials/ProductDescription';
+import { useGetSingleProductQuery } from '../store/query/productQuery';
 import ConsultationList from '../components/lists/ConsultationList';
 import Description from '../components/elements/UI/Description';
 import ProductInfo from '../components/partials/ProductInfo';
 import MainReviews from '../components/partials/MainReviews';
 import PageWrapper from '../components/layouts/PageWrapper';
+import Loader from '../components/elements/UI/Loader';
+import { useParams } from 'react-router-dom';
 
 const description = [
   {
@@ -27,12 +30,21 @@ const description = [
 ];
 
 const SingleProduct = () => {
+  const { id } = useParams();
+  const { data, isLoading } = useGetSingleProductQuery({ id });
+
   return (
     <PageWrapper>
       <div className="container w-966">
-        <ProductInfo />
-        <ProductDescription list={description} />
-        <MainReviews/>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            <ProductInfo data={data} />
+            <ProductDescription list={description} />
+          </>
+        )}
+        <MainReviews />
         <Description>1:1 General Consultations</Description>
         <ConsultationList bottom={true} />
       </div>

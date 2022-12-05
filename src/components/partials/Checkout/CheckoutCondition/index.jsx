@@ -8,11 +8,17 @@ import { useState } from 'react';
 const CheckoutCondition = () => {
   const [state, setState] = useState({
     medication: '',
+    medicationMessage: '',
     drug: '',
+    drugMessage: '',
     treatments: '',
+    treatmentsMessage: '',
     gender: '',
     smoke: '',
     drink: '',
+    physicianName: '',
+    physicianNumber: '',
+    file: '',
   });
 
   const { backBtnHandler, nextBtnhandler } = useCheckoutButtons(
@@ -44,9 +50,18 @@ const CheckoutCondition = () => {
               <textarea
                 placeholder="This field is required"
                 name="feedback"
+                onChange={(e) =>
+                  setState((prev) => ({
+                    ...prev,
+                    medicationMessage: e.target.value,
+                  }))
+                }
+                value={state.medicationMessage}
               ></textarea>
             )}
-            <b className={cls[!state.drug && 'appear']}>* This field is required</b>
+            <b className={cls[!state.drug && 'appear']}>
+              * This field is required
+            </b>
           </div>
           <div className={cls['condition__field']}>
             <p>
@@ -67,6 +82,10 @@ const CheckoutCondition = () => {
               <textarea
                 placeholder="This field is required"
                 name="feedback"
+                onChange={(e) =>
+                  setState((prev) => ({ ...prev, drugMessage: e.target.value }))
+                }
+                value={state.drugMessage}
               ></textarea>
             )}
             <b>* This field is required</b>
@@ -90,6 +109,13 @@ const CheckoutCondition = () => {
               <textarea
                 placeholder="This field is required"
                 name="feedback"
+                onChange={(e) =>
+                  setState((prev) => ({
+                    ...prev,
+                    treatmentsMessage: e.target.value,
+                  }))
+                }
+                value={state.treatmentsMessage}
               ></textarea>
             )}
             <b>* This field is required</b>
@@ -128,9 +154,7 @@ const CheckoutCondition = () => {
             </div>
           </div>
           <div id={cls['block']} className={cls['condition__field']}>
-            <p>
-              Do you smoke:
-            </p>
+            <p>Do you smoke:</p>
             <label className={cls['span-margin']}>
               <span
                 onClick={() => setState((prev) => ({ ...prev, smoke: 'No' }))}
@@ -147,9 +171,7 @@ const CheckoutCondition = () => {
             </label>
           </div>
           <div id={cls['block']} className={cls['condition__field']}>
-            <p>
-              Do you drink:
-            </p>
+            <p>Do you drink:</p>
             <label>
               <span
                 onClick={() => setState((prev) => ({ ...prev, drink: 'No' }))}
@@ -169,15 +191,36 @@ const CheckoutCondition = () => {
         <div className={cls['condition-footer']}>
           <p>Medical history added to your order (optional)</p>
           <div className="flex">
-            <input type="text" placeholder="Primary Physician’s Name" />
-            <input type="text" placeholder="Physician’s Phone Number" />
+            <input
+              type="text"
+              onChange={(e) =>
+                setState((prev) => ({ ...prev, physicianName: e.target.value }))
+              }
+              value={state.physicianName}
+              placeholder="Primary Physician’s Name"
+            />
+            <input
+              type="text"
+              onChange={(e) =>
+                setState((prev) => ({
+                  ...prev,
+                  physicianNumber: e.target.value,
+                }))
+              }
+              value={state.physicianNumber}
+              placeholder="Physician’s Phone Number"
+            />
           </div>
           <p>Please upload your prescription here (optional)</p>
           <label className={cls['input-file']}>
-            <input type="file" name="file" />
+            <input
+              onChange={(e) => setState((prev) => ({ ...prev, file: e.target.files[0] }))}
+              type="file"
+              name="file"
+            />
             <span className={cls['input-file-btn']}>Select a file</span>
             <span className={cls['input-file-text']}>
-              File is not selected yet
+              {state.file ? state.file.name : 'File is not selected yet'}
             </span>
           </label>
           <span>

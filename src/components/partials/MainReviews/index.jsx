@@ -10,7 +10,7 @@ const MainReviews = () => {
 
   const reviewHandler = () => {
     window.scrollTo(window.scrollX, 0);
-    navigate(paths.REVIEW);
+    navigate(`/${paths.REVIEW}`);
   };
 
   return (

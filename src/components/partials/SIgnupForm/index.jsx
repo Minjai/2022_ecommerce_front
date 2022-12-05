@@ -37,14 +37,13 @@ const SignupForm = () => {
         password: e.password,
       });
 
-      reset()
-
+      reset();
       navigate(`/${paths.LOGIN}`);
     } catch (error) {
-      if (error.response.data.username) {
-        setError('userName', {
+      if (error.response.data.email) {
+        setError('email', {
           type: 'validate',
-          message: error.response.data.username
+          message: error.response.data.email,
         });
       }
     }

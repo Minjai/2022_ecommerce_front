@@ -1,14 +1,26 @@
+import { useCreateOrderItemsMutation } from '../../../../store/query/orderQuery';
 import { useCheckoutButtons } from '../../../../hooks/useCheckoutButtons';
 import CheckoutButtons from '../../../elements/UI/CheckoutButtons';
 import { paths } from '../../../../constants/paths';
 import { IoCheckmarkSharp } from 'react-icons/io5';
-import cls from './checkoutTransfer.module.scss';
 import MobileOrderNav from '../../MobileOrderNav';
+import cls from './checkoutTransfer.module.scss';
+import { useSelector } from 'react-redux';
 
 const CheckoutTransfer = () => {
-  const { backBtnHandler, nextBtnhandler } = useCheckoutButtons(
+  const { backBtnHandler } = useCheckoutButtons(
     `/${paths.CHECK_OUT}/${paths.CHECK_OUT_FOURTH}`
   );
+
+  const { carts } = useSelector(state => state.cart)
+
+  const [createOrderItems, { data, error }] = useCreateOrderItemsMutation()
+
+  console.log(error);
+
+  const createOrderItemsHandler = async () => {
+    await createOrderItems({ product: carts, quantity: carts.length, order: 'in_progress' })
+  }
 
   return (
     <div className={cls['transfer']}>
@@ -45,7 +57,7 @@ const CheckoutTransfer = () => {
           “Order History” page after deposit.
         </p>
       </div>
-      <CheckoutButtons next={nextBtnhandler} prev={backBtnHandler} />
+      <CheckoutButtons next={createOrderItemsHandler} prev={backBtnHandler} />
     </div>
   );
 };

@@ -139,6 +139,20 @@
         font-size: 13px;
       }
     }
+
+    b{
+      background: $app-main-color;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      font-size: 9px;
+      margin-left: 3px;
+      margin-top: 3px;
+    }
   }
 }
 
@@ -183,6 +197,10 @@
             margin-left: 10px;
             font-size: 14px;
           }
+        }
+
+        .active{
+          color: $app-main-color !important;
         }
 
         &:hover div {
@@ -233,6 +251,12 @@
 
         .category-list {
           width: 210px;
+        }
+      }
+
+      .active{
+        a{
+          color: $app-main-color;
         }
       }
     }

@@ -2,14 +2,17 @@ import ModalWrapper from '../modals/ModalWrapper';
 import MobileHeader from '../shared/MobileHeader';
 import HeaderModal from '../modals/HeaderModal';
 import { Outlet } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../shared/Footer';
 import Header from '../shared/Header';
 import { useEffect } from 'react';
+import { initCart } from '../../store/slices/cart';
 
 const AppLayout = () => {
   const { isActive: isModal } = useSelector((state) => state.modal);
   const { isActive } = useSelector((state) => state.burger);
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (isActive || isModal) {
@@ -19,6 +22,14 @@ const AppLayout = () => {
       window.document.body.style.overflowX = 'hidden';
     }
   }, [isActive, isModal]);
+
+  useEffect(() => {
+    if(localStorage.getItem('shop-cart')){
+      dispatch(initCart(JSON.parse(localStorage.getItem('shop-cart'))))
+    }else{
+      localStorage.setItem('shop-cart', JSON.stringify([]))
+    }
+  }, [dispatch])
 
   return (
     <>

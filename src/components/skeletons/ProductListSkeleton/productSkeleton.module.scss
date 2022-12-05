@@ -5,8 +5,9 @@
   display: flex;
   justify-content: space-between;
   position: relative;
-  height: 420px;
+  height: 390px;
   overflow: hidden;
+  margin-top: 30px;
 
   @media screen and (max-width: 1150px) {
     div:last-child{

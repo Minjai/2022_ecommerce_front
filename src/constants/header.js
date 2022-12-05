@@ -116,14 +116,17 @@ export const headerLowerLinks = [
       {
         id: 1,
         text: 'News',
+        to: `/${paths.CUSTOMER_HELP}/${paths.NEWS}`
       },
       {
         id: 2,
-        text: '1:1 General',
+        text: 'FAQ',
+        to: `/${paths.CUSTOMER_HELP}/${paths.FAQ}`
       },
       {
         id: 3,
         text: '1:1 General Consulation',
+        to: `/${paths.CUSTOMER_HELP}/${paths.CONSULTATION}`
       },
     ],
   },

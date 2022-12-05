@@ -1,31 +1,12 @@
 import ProductImages from '../../elements/ProductImages';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCart } from '../../../store/slices/cart';
 import PackageList from '../../lists/PackageList';
+import { paths } from '../../../constants/paths';
 import { FiChevronDown } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 import cls from './productInfo.module.scss';
 import { useState } from 'react';
-
-const images = [
-  {
-    id: 1,
-    image:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Shaqi_jrvej.jpg/1200px-Shaqi_jrvej.jpg',
-  },
-  {
-    id: 2,
-    image:
-      'http://cdn.playbuzz.com/cdn/925704be-9b8e-4dfc-852e-f24d720cb9c5/bcf39e88-5731-43bb-9d4b-e5b3b2b1fdf2.jpg',
-  },
-  {
-    id: 3,
-    image:
-      'https://static7.depositphotos.com/1004998/737/i/950/depositphotos_7371112-stock-photo-beautiful-nature.jpg',
-  },
-  {
-    id: 4,
-    image:
-      'https://st4.depositphotos.com/1105977/30872/i/1600/depositphotos_308727128-stock-photo-plitvice-lakes-national-park-with.jpg',
-  },
-];
 
 const list = [
   {
@@ -51,7 +32,8 @@ const list = [
   },
 ];
 
-const ProductInfo = () => {
+const ProductInfo = ({ data }) => {
+  const { carts } = useSelector((state) => state.cart);
   const [active, setActive] = useState(false);
   const [method, setMethod] = useState('');
 
@@ -60,13 +42,34 @@ const ProductInfo = () => {
     setActive(false);
   };
 
+  const { status, prices, id, product_name } = data;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const isInCart = (id) => {
+    return carts?.find((item) => item.id === id);
+  };
+
+  const cartNavigate = () => {
+    navigate(`/${paths.CART}`);
+    window.scrollTo(window.scrollX, 0);
+  };
+
+  const addCartHandler = () => {
+    dispatch(addCart(data));
+    const cart = JSON.parse(localStorage.getItem("shop-cart"));
+    localStorage.setItem('shop-cart',  JSON.stringify([...cart, data]))
+  };
+
   return (
     <div className={cls['product']}>
-      <ProductImages images={images} />
+      <ProductImages images={data?.images} />
       <div className={cls['product-info']}>
-        <h4>Test Test Test Test</h4>
+        <h4>{product_name}</h4>
         <p>
-          $ 20.50 (USD) <b>*Out of Stock</b>
+          $ {prices[0]?.selling_price} (USD){' '}
+          {status === 'Out Of Stock' && <b>*{status}</b>}
         </p>
         <span>Manufactured By TEST</span>
         <span>Contains TEST</span>
@@ -88,9 +91,14 @@ const ProductInfo = () => {
               </ul>
             </div>
           </div>
-          <button className={cls['cart-btn']}>Add to Cart</button>
+          <button
+            className={cls['cart-btn']}
+            onClick={isInCart(id) ? cartNavigate : addCartHandler}
+          >
+            {isInCart(id) ? 'Cart' : 'Add to Cart'}
+          </button>
           <button>Purchase now</button>
-          <h5>*This product is out of stock</h5>
+          {status === 'Out Of Stock' && <h5>*This product is out of stock</h5>}
         </div>
       </div>
     </div>

@@ -14,6 +14,7 @@ export const paths = {
   FAQ: 'faq',
   CONSULTATION: 'consultation',
   CUSTOMER_POST: 'costumer-post',
+  SINGLE_PRODUCT: 'product',
   PRODUCT: 'product/:id',
   CHECK_OUT: 'checkout',
   CHECK_OUT_ONE: 'first',

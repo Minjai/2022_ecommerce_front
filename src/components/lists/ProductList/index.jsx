@@ -30,7 +30,7 @@ const ProductList = ({ products }) => {
           },
         }}
       >
-        {products.map((item) => (
+        {products?.map((item) => (
           <SwiperSlide key={item.id}>
             <ProductItem item={item} />
           </SwiperSlide>

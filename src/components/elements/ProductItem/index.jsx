@@ -1,33 +1,63 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { addCart } from '../../../store/slices/cart';
+import { paths } from '../../../constants/paths';
 import { GiShoppingCart } from 'react-icons/gi';
+import { useNavigate } from 'react-router-dom';
 import cls from './productItem.module.scss';
 import Rating from '../UI/Rating';
 
 const ProductItem = ({ item }) => {
-  const { title, image, price, rating, category, top } = item;
-  
+  const { product_name, images, prices, rating, category, top, id } =
+    item;
+
+  const { carts } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const isInCart = (id) => {
+    return carts?.find((item) => item.id === id);
+  };
+
+  const cartNavigate = (e) => {
+    e.stopPropagation()
+
+    navigate(`/${paths.CART}`);
+    window.scrollTo(window.scrollX, 0);
+  };
+
+  const addCartHandler = (e) => {
+    e.stopPropagation()
+
+    dispatch(addCart(item));
+    const cart = JSON.parse(localStorage.getItem("shop-cart"));
+    localStorage.setItem('shop-cart',  JSON.stringify([...cart, item]))
+  };
+
+  const productNavigate = (e) => {
+    navigate(`/${paths.SINGLE_PRODUCT}/${id}`);
+    window.scrollTo(window.scrollX, 0);
+  }
+
   return (
-    <div className={cls['product-item']}>
+    <div onClick={productNavigate} className={cls['product-item']}>
       <div className={cls['product-item__header']}>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Shaqi_jrvej.jpg/1200px-Shaqi_jrvej.jpg"
-          alt="product-pic"
-        />
+        <img src={images?.find(item => item.is_feature === true).image} alt="product-pic" />
         {top && (
           <span>
             No. <p>{top}</p>{' '}
           </span>
-        )}  
+        )}
       </div>
       <div className={cls['product-item__body']}>
         <span>{category}</span>
-        <p>{title}</p>
+        <p>{product_name}</p>
         <Rating productRating={rating} />
         <div className={cls['product-item__body__price']}>
           <span>
-            ${price} {'(USD)'}
+            ${prices?.length && prices[0]?.selling_price} {'(USD)'}
           </span>
-          <button>
-            <GiShoppingCart /> Add
+          <button onClick={isInCart(id) ? cartNavigate : addCartHandler}>
+            <GiShoppingCart /> {isInCart(id) ? 'Cart' : 'Add'}
           </button>
         </div>
       </div>

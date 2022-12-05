@@ -33,7 +33,7 @@ const LoginForm = () => {
   const handleFormSubmit = async (e) => {
     try {
       const response = await axiosInstance.post('token/', {
-        username: e.email,
+        email: e.email,
         password: e.password,
       });
 

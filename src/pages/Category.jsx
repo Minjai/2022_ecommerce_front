@@ -1,11 +1,13 @@
 import CategoryCarousel from '../components/elements/CategoryCarousel';
+import { useGetCategoriesQuery } from '../store/query/categoryQuery';
 import CategoryButtons from '../components/elements/CategoryButtons';
+import { useGetProductsQuery } from '../store/query/productQuery';
 import PaginatedList from '../components/lists/PaginatedList';
+import MainReviews from '../components/partials/MainReviews';
 import PageTitle from '../components/elements/UI/PageTitle';
 import PageWrapper from '../components/layouts/PageWrapper';
-import MainReviews from '../components/partials/MainReviews';
 
-const data = [
+const dataCar = [
   {
     id: 1,
     category: 'Shoes',
@@ -62,65 +64,6 @@ const data = [
   },
 ];
 
-const products = [
-  {
-    id: 1,
-    title: 'product-title',
-    price: 20,
-    rating: 4,
-    category: 'shoes',
-  },
-  {
-    id: 2,
-    title: 'product-title',
-    price: 26,
-    rating: 1,
-    category: 'clothes',
-  },
-  {
-    id: 3,
-    title: 'product-title',
-    price: 75,
-    rating: 3,
-    category: 'hats',
-  },
-  {
-    id: 4,
-    title: 'product-title product-title product-title product-title',
-    price: 16,
-    rating: 1,
-    category: 'react',
-  },
-  {
-    id: 5,
-    title: 'product-title product-title product-title product-title',
-    price: 375,
-    rating: 1,
-    category: 'react',
-  },
-  {
-    id: 6,
-    title: 'product-title product-title product-title product-title',
-    price: 16,
-    rating: 2,
-    category: 'react',
-  },
-  {
-    id: 7,
-    title: 'product-title product-title product-title product-title',
-    price: 687,
-    rating: 3,
-    category: 'react',
-  },
-  {
-    id: 8,
-    title: 'product-title product-title product-title product-title',
-    price: 36,
-    rating: 5,
-    category: 'react',
-  },
-];
-
 const categories = [
   {
     id: 1,
@@ -170,13 +113,16 @@ const categories = [
 ];
 
 const Category = () => {
+  const { data } = useGetCategoriesQuery()
+  const { data: productData } = useGetProductsQuery();
+
   return (
     <PageWrapper>
       <div className="container">
         <PageTitle>Category</PageTitle>
-        <CategoryCarousel data={data} />
+        <CategoryCarousel data={dataCar} />
         <CategoryButtons data={categories} />
-        <PaginatedList data={products} />
+        <PaginatedList data={productData?.results} />
         {window.innerWidth < 700 && <MainReviews />}
       </div>
     </PageWrapper>

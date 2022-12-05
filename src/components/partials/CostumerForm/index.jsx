@@ -48,7 +48,6 @@ const CostumerForm = () => {
   };
 
   const costumerFormHandler = (data) => {
-    console.log(data);
     reset();
   };
 

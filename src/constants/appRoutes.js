@@ -117,38 +117,11 @@ export const localRoutes = [
   },
   {
     id: 15,
-    path: `${paths.CHECK_OUT}/*`,
-    element: <Checkout />,
-    routes: [
-      {
-        id: paths.CHECK_OUT_ONE,
-        path: paths.CHECK_OUT_ONE,
-        element: <CheckoutOne />,
-      },
-      {
-        id: paths.CHECK_OUT_SECOND,
-        path: paths.CHECK_OUT_SECOND,
-        element: <CheckoutSecond />,
-      },
-      {
-        id: paths.CHECK_OUT_THIRD,
-        path: paths.CHECK_OUT_THIRD,
-        element: <CheckoutThird />,
-      },
-      {
-        id: paths.CHECK_OUT_FOURTH,
-        path: paths.CHECK_OUT_FOURTH,
-        element: <CheckoutFourth />,
-      },
-    ],
-  },
-  {
-    id: 16,
     path: paths.SINGLE_NEW,
     element: <SingleNew />,
   },
   {
-    id: 17,
+    id: 16,
     path: paths.CONSULTATION_INFO,
     element: <SingleConsultation />,
   },

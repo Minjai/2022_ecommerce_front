@@ -17,8 +17,9 @@ import cls from './header.module.scss';
 
 const Header = () => {
   const { isAuth } = useSelector((state) => state.user);
+  const { carts } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const alarmHandler = () => {
     dispatch(setContent(modalPaths.ALARM));
@@ -26,11 +27,11 @@ const Header = () => {
   };
 
   const logOutHandler = () => {
-    dispatch(setAuth(false))
-    localStorage.removeItem('refreshToken')
-    localStorage.removeItem('accessToken')
-    navigate(paths.HOME)
-  }
+    dispatch(setAuth(false));
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('accessToken');
+    navigate(paths.HOME);
+  };
 
   return (
     <header>
@@ -63,6 +64,7 @@ const Header = () => {
                     )}
                   </li>
                 ))}
+            {carts.length > 0 && <b>{carts.length}</b>}
           </ul>
         </div>
       </div>
@@ -89,7 +91,7 @@ const Header = () => {
                   >
                     <ul>
                       {list.map((item) => (
-                        <li key={item.id}>
+                        <li onClick={() => navigate(item.to)} key={item.id}>
                           {item.text} {item.icon}
                         </li>
                       ))}

@@ -1,6 +1,8 @@
 import cls from './pagination.module.scss';
 
 const Pagination = ({ pages }) => {
+  
+
   return (
     <div className={cls['pagination']}>
       <div className={cls['pagination__list']}>

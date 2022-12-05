@@ -40,7 +40,7 @@ const CategoryCarousel = ({ data }) => {
         },
       }}
     >
-      {data.map((item) => (
+      {data?.map((item) => (
         <SwiperSlide key={item.id}>
           <div className={cls['category-child']}>
             <div className={cls['category-child__image']}>
