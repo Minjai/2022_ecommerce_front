@@ -9,7 +9,6 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.0",
-    "env-cmd": "^10.1.0",
     "node-sass": "^7.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -24,8 +23,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "env-cmd -f .env react-scripts start",
-    "build:production": "env-cmd -f .env react-scripts build",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
