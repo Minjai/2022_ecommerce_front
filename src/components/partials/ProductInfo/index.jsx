@@ -69,7 +69,7 @@ const ProductInfo = ({ data }) => {
         <h4>{product_name}</h4>
         <p>
           $ {prices[0]?.selling_price} (USD){' '}
-          {status === 'Out Of Stock' && <b>*{status}</b>}
+          {status === 'out_of_stock' && <b>*{status}</b>}
         </p>
         <span>Manufactured By TEST</span>
         <span>Contains TEST</span>
@@ -98,7 +98,7 @@ const ProductInfo = ({ data }) => {
             {isInCart(id) ? 'Cart' : 'Add to Cart'}
           </button>
           <button>Purchase now</button>
-          {status === 'Out Of Stock' && <h5>*This product is out of stock</h5>}
+          {status === 'out_of_stock' && <h5>*This product is out of stock</h5>}
         </div>
       </div>
     </div>

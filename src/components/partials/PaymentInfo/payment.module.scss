@@ -1,0 +1,164 @@
+@import '/src/scss/variables.scss';
+
+.payment {
+  position: relative;
+  width: 95%;
+  height: 600px;
+  background: #fff;
+  padding: 40px 80px 120px 80px;
+
+  @media screen and (max-width: 950px) {
+    padding: 40px 40px 120px 40px;
+  }
+
+  @media screen and (max-width: 750px) {
+    padding: 40px 20px 120px 20px;
+  }
+
+  @media screen and (max-width: 650px) {
+    padding: 40px 20px 120px 20px;
+  }
+  
+  @media screen and (max-width: 450px) {
+    padding: 40px 0px 120px 0px;
+  }
+
+  &-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    position: relative;
+    flex-wrap: wrap;
+  }
+
+  &-info {
+    width: 40%;
+    h2 {
+      color: $app-dark-color;
+      font-size: 24px;
+      margin: 0;
+    }
+
+    &__body {
+      margin-top: 10px;
+      color: $app-dark-color;
+
+      h3 {
+        margin: 0;
+        font-size: 20px;
+      }
+
+      p {
+        font-size: 14px;
+        font-weight: 500;
+        margin: 10px 0;
+      }
+    }
+
+    &__footer {
+      margin-top: 30px;
+
+      p {
+        font-size: 14px;
+        font-weight: 500;
+        margin: 20px 0;
+
+        .input-file {
+          margin-top: 15px;
+          position: relative;
+          display: inline-block;
+          align-self: center;
+
+          &-btn {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            outline: none;
+            text-decoration: none;
+            font-size: 14px;
+            vertical-align: middle;
+            color: $app-gray-color;
+            text-align: center;
+            border-radius: 4px;
+            background-color: $app-light-gray-color;
+            line-height: 22px;
+            height: 40px;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            border: none;
+            margin: 0;
+            transition: background-color 0.2s;
+          }
+
+          &-text {
+            padding: 0 10px;
+            line-height: 40px;
+            display: inline-block;
+            font-size: 14px;
+            color: #b1b1b1;
+          }
+        }
+
+        .input-file input[type='file'] {
+          position: absolute;
+          z-index: -1;
+          opacity: 0;
+          display: block;
+          width: 0;
+          height: 0;
+        }
+      }
+
+      .active {
+        color: $app-main-color;
+      }
+    }
+  }
+
+  &-buttons {
+    position: absolute;
+    right: 80px;
+    bottom: 60px;
+
+    button {
+      border: 1px solid rgba(128, 128, 128, 0.5);
+      width: 182px;
+      height: 42px;
+      border-radius: 30px;
+      font-size: 15px;
+      margin-left: 20px;
+      background: #fff;
+    }
+
+    .active {
+      border: none;
+      color: #fff;
+      background: $app-main-color;
+    }
+
+    @media screen and (max-width: 950px) {
+      width: 100%;
+      right: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    @media screen and (max-width: 650px) {
+      bottom: 40px;
+
+      button{
+        width: 95%;
+        margin-left: 0;
+      }
+
+      button:nth-child(1){
+        display: none;
+      }
+    }
+  }
+}

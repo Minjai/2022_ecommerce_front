@@ -31,6 +31,7 @@ import Best from '../pages/Best';
 import Home from '../pages/Home';
 import Cart from '../pages/Cart';
 import { paths } from './paths';
+import Search from '../pages/Search';
 
 export const localRoutes = [
   {
@@ -124,6 +125,11 @@ export const localRoutes = [
     id: 16,
     path: paths.CONSULTATION_INFO,
     element: <SingleConsultation />,
+  },
+  {
+    id: 17,
+    path: paths.SEARCH,
+    element: <Search />,
   },
 ];
 
@@ -283,5 +289,10 @@ export const privateRoutes = [
         element: <WriteReview />,
       },
     ],
+  },
+  {
+    id: 17,
+    path: paths.SEARCH,
+    element: <Search />,
   },
 ]

@@ -6,6 +6,11 @@ import cls from './contactUs.module.scss';
 const ContactUs = () => {
   const navigate = useNavigate();
 
+  const navigateHandler = () => {
+    window.scrollTo(window.scrollX, 0);
+    navigate(`/${paths.CUSTOMER_HELP}/${paths.CONSULTATION}`)
+  }
+
   return (
     <div className={cls['contact-us']}>
       <div className={cls['contact-us__body']}>
@@ -18,9 +23,7 @@ const ContactUs = () => {
         </div>
         <div className={cls['contact-us__body__button']}>
           <button
-            onClick={() =>
-              navigate(`/${paths.CUSTOMER_HELP}/${paths.CONSULTATION}`)
-            }
+            onClick={navigateHandler}
           >
             <HiArrowRight />
           </button>

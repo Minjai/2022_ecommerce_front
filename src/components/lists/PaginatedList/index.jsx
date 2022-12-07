@@ -2,7 +2,7 @@ import ProductItem from '../../elements/ProductItem';
 import Pagination from '../../elements/Pagination';
 import cls from './paginatedList.module.scss';
 
-const PaginatedList = ({ data }) => {
+const PaginatedList = ({ data, count, limit }) => {
   return (
     <div className={cls['paginated-list']}>
       <div className={cls['paginated-list__body']}>
@@ -12,9 +12,11 @@ const PaginatedList = ({ data }) => {
           </div>
         ))}
       </div>
-      <div className={cls['painated-list__footer']}>
-        <Pagination />
-      </div>
+      {count > limit && (
+        <div className={cls['painated-list__footer']}>
+          <Pagination />
+        </div>
+      )}
     </div>
   );
 };

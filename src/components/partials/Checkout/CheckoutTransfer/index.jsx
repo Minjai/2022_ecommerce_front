@@ -1,26 +1,70 @@
-import { useCreateOrderItemsMutation } from '../../../../store/query/orderQuery';
 import { useCheckoutButtons } from '../../../../hooks/useCheckoutButtons';
 import CheckoutButtons from '../../../elements/UI/CheckoutButtons';
+import { axiosInstance } from '../../../../constants/axios';
+import { setAlert, setAlertContent } from '../../../../store/slices/alert';
 import { paths } from '../../../../constants/paths';
 import { IoCheckmarkSharp } from 'react-icons/io5';
 import MobileOrderNav from '../../MobileOrderNav';
 import cls from './checkoutTransfer.module.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const CheckoutTransfer = () => {
   const { backBtnHandler } = useCheckoutButtons(
     `/${paths.CHECK_OUT}/${paths.CHECK_OUT_FOURTH}`
   );
 
-  const { carts } = useSelector(state => state.cart)
+  const dispatch = useDispatch()
 
-  const [createOrderItems, { data, error }] = useCreateOrderItemsMutation()
+  const createOrderItems = async (data, id) => {
+    try {
+      const response = await axiosInstance.post(
+        'orders/order_items/',
+        {
+          product: id,
+          quantity: JSON.parse(localStorage.getItem('shop-cart')).length,
+          order: data.id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  console.log(error);
+  const createOrder = async () => {
+    try {
+      const response = await axiosInstance.post(
+        'orders/orders/',
+        {
+          status: 'in_process',
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        }
+      );
 
-  const createOrderItemsHandler = async () => {
-    await createOrderItems({ product: carts, quantity: carts.length, order: 'in_progress' })
-  }
+      if (JSON.parse(localStorage.getItem('shop-cart')).length === 1) {
+        createOrderItems(
+          response.data,
+          JSON.parse(localStorage.getItem('shop-cart'))[0].id
+        );
+      } else {
+        const carts = JSON.parse(localStorage.getItem('shop-cart'));
+        carts.forEach((item) => createOrderItems(response.data, item.id));
+      }
+
+      dispatch(setAlert(true))
+      dispatch(setAlertContent('Your order has been added !'))
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className={cls['transfer']}>
@@ -33,7 +77,7 @@ const CheckoutTransfer = () => {
       <p className={cls['paragraph']}>
         Your email test@gmail.com 으로 주문 내용이 발송되었습니다.
       </p>
-      {window.innerWidth < 950 && <MobileOrderNav/>}
+      {window.innerWidth < 950 && <MobileOrderNav />}
       <div className={cls['transfer__body']}>
         <h3>Payment Information</h3>
         <p>Account Name: test</p>
@@ -57,7 +101,7 @@ const CheckoutTransfer = () => {
           “Order History” page after deposit.
         </p>
       </div>
-      <CheckoutButtons next={createOrderItemsHandler} prev={backBtnHandler} />
+      <CheckoutButtons next={createOrder} prev={backBtnHandler} />
     </div>
   );
 };
