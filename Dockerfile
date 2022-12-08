@@ -1,22 +1,24 @@
 # Install dependencies only when needed
-FROM node:16.18.1 AS deps
+FROM node:16-alpine AS deps
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json ./
 RUN yarn install
 
 # Rebuild the source code only when needed
-FROM node:16.18.1 AS builder
+FROM node:16-alpine AS builder
 WORKDIR /app
+
+ENV NODE_OPTIONS=--max-old-space-size=8192
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 RUN yarn build
 
 # Production image, copy all the files and run next
-FROM node:16.18.1 AS runner
+FROM node:16-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV production
-
 
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/src ./src
