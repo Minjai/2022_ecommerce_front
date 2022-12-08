@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { initCart } from '../../store/slices/cart';
-import ModalWrapper from '../modals/ModalWrapper';
 import MobileHeader from '../shared/MobileHeader';
-import HeaderModal from '../modals/HeaderModal';
+import { lazy, Suspense, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import Footer from '../shared/Footer';
 import Header from '../shared/Header';
-import { useEffect } from 'react';
-import Alert from '../modals/Alert';
+
+const ModalWrapper = lazy(() => import('../modals/ModalWrapper'));
+const HeaderModal = lazy(() => import('../modals/HeaderModal'));
+const Footer = lazy(() => import('../shared/Footer'));
+const Alert = lazy(() => import('../modals/Alert'));
 
 const AppLayout = () => {
   const { isActive: isModal } = useSelector((state) => state.modal);
@@ -37,11 +38,13 @@ const AppLayout = () => {
       {window.innerWidth > 830 && <Header />}
       {window.innerWidth < 830 && <MobileHeader />}
       <Outlet />
-      <Footer />
 
-      <Alert />
-      <HeaderModal />
-      <ModalWrapper />
+      <Suspense>
+        <Footer />
+        <Alert />
+        <HeaderModal />
+        <ModalWrapper />
+      </Suspense>
     </>
   );
 };

@@ -6,6 +6,7 @@ import PaginatedList from '../components/lists/PaginatedList';
 import MainReviews from '../components/partials/MainReviews';
 import PageTitle from '../components/elements/UI/PageTitle';
 import PageWrapper from '../components/layouts/PageWrapper';
+import { useState } from 'react';
 
 const dataCar = [
   {
@@ -113,8 +114,23 @@ const categories = [
 ];
 
 const Category = () => {
-  const { data } = useGetCategoriesQuery()
+  const { data } = useGetCategoriesQuery();
   const { data: productData } = useGetProductsQuery();
+
+  const [page, setPage] = useState(1);
+  const [pageStart, setPageStart] = useState(0);
+  const [pageEnd, setPageEnd] = useState(3);
+
+  const options = {
+    limit: 6,
+    pageCount: 26,
+    page,
+    setPage,
+    pageStart,
+    setPageStart,
+    pageEnd,
+    setPageEnd,
+  };
 
   return (
     <PageWrapper>
@@ -122,7 +138,7 @@ const Category = () => {
         <PageTitle>Category</PageTitle>
         <CategoryCarousel data={dataCar} />
         <CategoryButtons data={categories} />
-        <PaginatedList data={productData?.results} />
+        <PaginatedList options={options} data={productData?.results} />
         {window.innerWidth < 700 && <MainReviews />}
       </div>
     </PageWrapper>

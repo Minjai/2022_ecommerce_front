@@ -17,7 +17,7 @@ const App = () => {
           });
           const { access } = response.data;
           try {
-            const res = await axiosInstance.post('token/verify/', {
+            await axiosInstance.post('token/verify/', {
               token: access,
             });
             localStorage.setItem('accessToken', access);
