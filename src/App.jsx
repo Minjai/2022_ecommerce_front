@@ -15,18 +15,23 @@ const App = () => {
           const response = await axiosInstance.post('token/refresh/', {
             refresh: localStorage.getItem('refreshToken'),
           });
-  
           const { access } = response.data;
-  
-          localStorage.setItem('accessToken', access);
-          dispatch(setAuth(true));
+          try {
+            await axiosInstance.post('token/verify/', {
+              token: access,
+            });
+            localStorage.setItem('accessToken', access);
+            dispatch(setAuth(true));
+          } catch (error) {
+            dispatch(setAuth(false));
+          }
         } catch (error) {
           dispatch(setAuth(false));
         }
       }
-    }
-    
-    authRefresh()
+    };
+
+    authRefresh();
   }, [dispatch]);
 
   return <PrivateRouter />;

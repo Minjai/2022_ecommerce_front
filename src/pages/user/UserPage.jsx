@@ -1,5 +1,4 @@
 import MobileUserNav from '../../components/partials/MobileUserNav';
-import PageTitle from '../../components/elements/UI/PageTitle';
 import PageWrapper from '../../components/layouts/PageWrapper';
 import ContactUs from '../../components/partials/ContactUs';
 import UserNav from '../../components/partials/UserNav';

@@ -7,6 +7,7 @@ export const paths = {
   CART: 'cart',
   ORDERS: 'orders',
   CATEGORY: 'category',
+  SEARCH: 'search',
   BEST: 'best',
   CUSTOMER_HELP: 'customer-help',
   REVIEW: 'review',
@@ -39,5 +40,6 @@ export const modalPaths = {
   REVIEW: 'review',
   ORDER: 'order',
   SEARCH: 'search',
-  ALARM: 'alarm'
+  ALARM: 'alarm',
+  PAYMENT: 'payment'
 }

@@ -6,6 +6,7 @@ import { modalPaths } from '../../../constants/paths.js';
 import { useSelector } from 'react-redux';
 import cls from './modal.module.scss';
 import { useEffect } from 'react';
+import PaymentInfo from '../../partials/PaymentInfo/index.jsx';
 
 const ModalWrapper = () => {
   const { isActive, content } = useSelector((state) => state.modal);
@@ -41,7 +42,9 @@ const ModalWrapper = () => {
         </CustomContent>
       ) : content === modalPaths.SEARCH ? (
         <MobileSearch/>
-      ) : <AlarmContent/>}
+      ) : content === modalPaths.ALARM ? (
+        <AlarmContent/>
+      ) : <PaymentInfo/>}
     </div>
   );
 };

@@ -1,0 +1,30 @@
+@import '/src/scss/variables.scss';
+
+.alert{
+  position: fixed;
+  top: 60px;
+  right: 50px;
+  background: #fff;
+  z-index: 5;
+  max-width: 200px;
+  padding: 10px;
+  opacity: 0;
+  transform: scale(.9);
+  transition: .3s;
+  border: 1px solid $app-main-color;
+  border-radius: 5px;
+  pointer-events: none;
+
+  h4{
+    font-size: 15px;
+    color: $app-main-color;
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+#active{
+  top: 50px;
+  opacity: 1;
+  transform: scale(1);
+}
