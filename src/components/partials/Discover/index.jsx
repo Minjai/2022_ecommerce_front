@@ -5,7 +5,10 @@ const Discover = () => {
     <div className={cls['discover']}>
       <div className={cls['discover__child']}>
         <h4>Tittle</h4>
-        <img src="https://www.pngall.com/wp-content/uploads/11/Apple-PNG-Images.png" alt="" />
+        <img
+          src="https://www.pngall.com/wp-content/uploads/11/Apple-PNG-Images.png"
+          alt="discover-pic"
+        />
         <p>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum
           pariatur nesciunt iusto quis adipisci nam!
@@ -14,7 +17,10 @@ const Discover = () => {
       </div>
       <div id={cls['active']} className={cls['discover__child']}>
         <h4>Tittle</h4>
-        <img src="https://www.pngall.com/wp-content/uploads/11/Apple-PNG-Images.png" alt="" />
+        <img
+          src="https://www.pngall.com/wp-content/uploads/11/Apple-PNG-Images.png"
+          alt="discover-pic"
+        />
         <p>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum
           pariatur nesciunt iusto quis adipisci nam!
