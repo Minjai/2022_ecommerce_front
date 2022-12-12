@@ -53,8 +53,8 @@ const SingleProduct = () => {
         <Description>1:1 General Consultations</Description>
         {isLoad ? (
           <Loader />
-        ) : generalData.results.length !== 0 ? (
-          <ConsultationList data={generalData.results} bottom={true} />
+        ) : generalData?.results.length !== 0 ? (
+          <ConsultationList data={generalData?.results} bottom={true} />
         ) : (
           <EmptyText text={'general consultation'} />
         )}

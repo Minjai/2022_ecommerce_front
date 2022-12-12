@@ -9,7 +9,7 @@ const FaqList = ({ data }) => {
   return (
     <div className={cls['faq-list']}>
       <div className={cls['faq-list__body']}>
-        {data.results.map(({ id, question_title, answer }) => (
+        {data?.results.map(({ id, question_title, answer }) => (
           <div
             id={cls[active === question_title ? 'active' : 'none']}
             key={id}
