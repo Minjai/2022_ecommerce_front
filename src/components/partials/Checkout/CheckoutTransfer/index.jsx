@@ -1,7 +1,7 @@
+import { setAlert, setAlertContent } from '../../../../store/slices/alert';
 import { useCheckoutButtons } from '../../../../hooks/useCheckoutButtons';
 import CheckoutButtons from '../../../elements/UI/CheckoutButtons';
 import { axiosInstance } from '../../../../constants/axios';
-import { setAlert, setAlertContent } from '../../../../store/slices/alert';
 import { paths } from '../../../../constants/paths';
 import { IoCheckmarkSharp } from 'react-icons/io5';
 import MobileOrderNav from '../../MobileOrderNav';
@@ -40,7 +40,7 @@ const CheckoutTransfer = () => {
       const response = await axiosInstance.post(
         'orders/orders/',
         {
-          status: 'in_process',
+          status: 'awaiting_payment',
         },
         {
           headers: {
@@ -62,7 +62,7 @@ const CheckoutTransfer = () => {
       dispatch(setAlert(true))
       dispatch(setAlertContent('Your order has been added !'))
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
     }
   };
 

@@ -49,7 +49,7 @@ const ProductItem = ({ item }) => {
         )}
       </div>
       <div className={cls['product-item__body']}>
-        <span>{category}</span>
+        <span>{category.title}</span>
         <p>{product_name}</p>
         <Rating productRating={rating} />
         <div className={cls['product-item__body__price']}>

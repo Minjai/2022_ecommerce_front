@@ -4,6 +4,7 @@ import { paths } from '../../../../constants/paths';
 import cls from './checkoutContact.module.scss';
 import { AiOutlineDown } from 'react-icons/ai';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const CheckoutContact = () => {
   const [country, setCountry] = useState('Select country');
@@ -29,13 +30,15 @@ const CheckoutContact = () => {
     `/${paths.CHECK_OUT}/${paths.CHECK_OUT_THIRD}`
   );
 
+  const { userInfo } = useSelector((state) => state.user);
+
   return (
     <div className={cls['contact']}>
       <h3>Contact Infomation</h3>
 
       <div className={cls['contact__header']}>
-        <p>User Name: Test test</p>
-        <p>Email: email@gmail.com</p>
+        <p>User Name: {userInfo.username}</p>
+        <p>Email: {userInfo.email}</p>
       </div>
       <div className={cls['contact__body']}>
         <h3>Delivery Address</h3>

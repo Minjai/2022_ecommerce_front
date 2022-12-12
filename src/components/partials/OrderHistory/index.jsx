@@ -6,6 +6,7 @@ import OrderList from '../../lists/OrderList';
 import Loader from '../../elements/UI/Loader';
 import cls from './orderHistory.module.scss';
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { DateRangePicker } from 'rsuite';
 import 'rsuite/dist/rsuite.css';
 
@@ -16,9 +17,12 @@ const OrderHistory = () => {
   const [load, setLoad] = useState(0);
   const [count, setCount] = useState(0);
 
+  const { userInfo } = useSelector(state => state.user)
+
   const { data, isLoading } = useGetOrdersQuery(
     {
       token: localStorage.getItem('accessToken'),
+      userId: userInfo.id
     },
     {
       refetchOnMountOrArgChange: true,

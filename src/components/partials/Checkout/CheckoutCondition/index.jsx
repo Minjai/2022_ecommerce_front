@@ -1,5 +1,6 @@
 import { useCheckoutButtons } from '../../../../hooks/useCheckoutButtons';
 import CheckoutButtons from '../../../elements/UI/CheckoutButtons';
+import { axiosInstance } from '../../../../constants/axios';
 import { paths } from '../../../../constants/paths';
 import { IoCheckmarkSharp } from 'react-icons/io5';
 import cls from './checkoutCondition.module.scss';
@@ -7,23 +8,55 @@ import { useState } from 'react';
 
 const CheckoutCondition = () => {
   const [state, setState] = useState({
-    medication: '',
+    medication: false,
     medicationMessage: '',
-    drug: '',
+    drug: false,
     drugMessage: '',
-    treatments: '',
+    treatments: false,
     treatmentsMessage: '',
     gender: '',
     smoke: '',
     drink: '',
     physicianName: '',
     physicianNumber: '',
+    dateOfBirth: '',
     file: '',
   });
 
   const { backBtnHandler, nextBtnhandler } = useCheckoutButtons(
     `/${paths.CHECK_OUT}/${paths.CHECK_OUT_SECOND}`
   );
+
+  const conditionHandler = async () => {
+    try {
+      const response = await axiosInstance.post('orders/medical_conditions/', {
+        drug_allergies: state.drug ? 'None' : state.drugMessage,
+        current_medications: state.medication
+          ? 'None'
+          : state.medicationMessage,
+        current_treatments: state.treatments
+          ? 'None'
+          : state.treatmentsMessage,
+        gender: state.gender,
+        date_of_birth: state.dateOfBirth,
+        drink: state.drink,
+        smoke: state.smoke,
+        primary_name: state.physicianName,
+        primary_phone_number: state.physicianNumber,
+        prescription: state.file
+      }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        }
+      });
+
+      console.log(response);
+    } catch (error) {
+      console.log(error.response);
+    }
+
+    nextBtnhandler();
+  };
 
   return (
     <div className={cls['condition']}>
@@ -149,7 +182,14 @@ const CheckoutCondition = () => {
               <p>
                 Date of Birth: <sup>*</sup>
               </p>
-              <input type="text" placeholder="DD/MM/YYYY" />
+              <input
+                value={state.dateOfBirth}
+                onChange={(e) =>
+                  setState((prev) => ({ ...prev, dateOfBirth: e.target.value }))
+                }
+                type="text"
+                placeholder="YYYY-MM-DD"
+              />
               <b className={cls['appear']}>* This field is required</b>
             </div>
           </div>
@@ -214,7 +254,9 @@ const CheckoutCondition = () => {
           <p>Please upload your prescription here (optional)</p>
           <label className={cls['input-file']}>
             <input
-              onChange={(e) => setState((prev) => ({ ...prev, file: e.target.files[0] }))}
+              onChange={(e) =>
+                setState((prev) => ({ ...prev, file: e.target.files[0] }))
+              }
               type="file"
               name="file"
             />
@@ -233,7 +275,7 @@ const CheckoutCondition = () => {
             personal use and is strictly not meant for a re-sale.
           </span>
           <span>By pressing ‘Next’, I agree to the above statements.</span>
-          <CheckoutButtons prev={backBtnHandler} next={nextBtnhandler} />
+          <CheckoutButtons prev={backBtnHandler} next={conditionHandler} />
         </div>
       </div>
     </div>

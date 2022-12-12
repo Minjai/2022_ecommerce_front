@@ -1,9 +1,12 @@
 import { AiOutlineDown, AiOutlineLock } from 'react-icons/ai';
+import { dateParser } from '../../../utils/dateParser';
 import Pagination from '../../elements/Pagination';
+import { useNavigate } from 'react-router-dom';
 import cls from './questionsList.module.scss';
 import { useState } from 'react';
+import { paths } from '../../../constants/paths';
 
-const QuestionsList = () => {
+const QuestionsList = ({ data }) => {
   const [select, setSelect] = useState('select range');
   const [isRange, setRange] = useState(false);
 
@@ -11,6 +14,13 @@ const QuestionsList = () => {
     setSelect(str);
     setRange(false);
   };
+
+  const navigate = useNavigate();
+
+  const navigatePostHandler = () => {
+    window.scrollTo(window.scrollX, 0);
+    navigate(`/${paths.CUSTOMER_POST}`)
+  }
 
   return (
     <div className={cls['question']}>
@@ -35,45 +45,41 @@ const QuestionsList = () => {
                 <li onClick={() => handleRange('All order')}>All order</li>
               </ul>
             </span>
-            <button>Ask New</button>
+            <button onClick={navigatePostHandler}>
+              Ask New
+            </button>
           </div>
-          <p>2 Questions</p>
+          <p>{data.results.length} Questions</p>
         </div>
       </div>
       <div className={cls['question__body']}>
-        <div className={cls['question__body__child']}>
-          <div>
-            <span>1</span>
-            <img
-              src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/Zugpsitze_mountain.jpg?crop=0%2C176%2C3008%2C1654&wid=4000&hei=2200&scl=0.752"
-              alt="question-list"
-            />
-            <div>
-              <AiOutlineLock />
-              <p>
-                I have question Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Ullam, asperiores.
-              </p>
-            </div>
-          </div>
-          <div>
-            <span>2 replies</span>
-            <p>01/04/2022</p>
-          </div>
-        </div>
-        <div id={cls['active']} className={cls['question__body__child']}>
-          <div>
-            <span>1</span>
-            <div>
-              <AiOutlineLock />
-              <p>I have question</p>
-            </div>
-          </div>
-          <div>
-            <span>2 replies</span>
-            <p>01/04/2022</p>
-          </div>
-        </div>
+        {data.results.map(
+          ({ product, detail, children, created_at }, index) => {
+            return (
+              <div
+                id={cls[product.images.length > 0 ? '' : 'active']}
+                key={created_at}
+                className={cls['question__body__child']}
+              >
+                <div>
+                  <span>{index}</span>
+                  <img
+                    src={product.images.find((item) => item.is_feature).image}
+                    alt="question-list"
+                  />
+                  <div>
+                    <AiOutlineLock />
+                    <p>{detail}</p>
+                  </div>
+                </div>
+                <div>
+                  <span>{children.length} replies</span>
+                  <p>{dateParser(created_at)}</p>
+                </div>
+              </div>
+            );
+          }
+        )}
       </div>
       <Pagination />
     </div>

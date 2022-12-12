@@ -1,7 +1,9 @@
+import { useGetCategoriesQuery } from '../../../store/query/categoryQuery';
 import CategorySkeleton from '../../skeletons/CategorySkeleton';
 import CategoryCarousel from '../../elements/CategoryCarousel';
 import Description from '../../elements/UI/Description';
 import './featuredCategory.scss';
+import { paths } from '../../../constants/paths';
 
 const data = [
   {
@@ -61,11 +63,16 @@ const data = [
 ];
 
 const FeaturedCategory = () => {
+  const { data, isLoading } = useGetCategoriesQuery();
+
   return (
     <div className="featured-category">
       <Description>Featured Categories</Description>
-      <CategoryCarousel data={data} />
-      {/* <CategorySkeleton /> */}
+      {isLoading ? (
+        <CategorySkeleton />
+      ) : (
+        <CategoryCarousel pickedCategories={[]} path={`/${paths.CATEGORY}`} data={data} />
+      )}
     </div>
   );
 };

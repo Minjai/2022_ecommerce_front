@@ -2,6 +2,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import cls from './changeForm.module.scss';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
+import { axiosInstance } from '../../../constants/axios';
+import { useSelector } from 'react-redux';
 
 const schema = yup.object().shape({
   oldPassword: yup.string().min(5).max(15).required(),
@@ -19,9 +21,25 @@ const ChangeForm = () => {
     handleSubmit,
   } = useForm({
     resolver: yupResolver(schema),
+    mode: 'all'
   });
 
-  const handler = (state) => {};
+  const { userInfo } = useSelector((state) => state.user);
+
+  const handler = async (state) => {
+    console.log(state);
+
+    try {
+      const response = await axiosInstance.post(`accounts/profiles/${userInfo.id}/change_password/`, {
+        old_password: state.oldPassword,
+        new_password: state.newPassword
+      })
+
+      console.log(response);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
 
   return (
     <div className={cls['change']}>

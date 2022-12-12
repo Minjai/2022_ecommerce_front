@@ -1,23 +1,54 @@
+import { useGetUserConsultationsQuery } from '../../../store/query/consultationQuery';
+import { useGetReviewsQuery } from '../../../store/query/reviewQuery';
+import { useGetOrdersQuery } from '../../../store/query/orderQuery';
+import { paths } from '../../../constants/paths';
 import { AiOutlineRight } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { paths } from '../../../constants/paths';
 import cls from './userStatus.module.scss';
+import { useSelector } from 'react-redux';
 
 const UserStatus = () => {
   const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.user);
 
   const newPageHandler = (path) => {
     window.scrollTo(window.scrollX, 0);
     navigate(path);
   };
 
+  const { data } = useGetOrdersQuery(
+    {
+      token: localStorage.getItem('accessToken'),
+      userId: userInfo.id,
+    },
+    {
+      refetchOnMountOrArgChange: true,
+    }
+  );
+
+  const { data: reviewData } = useGetReviewsQuery(
+    { userId: userInfo.id },
+    {
+      refetchOnMountOrArgChange: true,
+    }
+  );
+
+  const { data: questionData } = useGetUserConsultationsQuery({
+    token: localStorage.getItem('accessToken'),
+    userId: userInfo.id,
+  });
+
   return (
     <div className={cls['user']}>
       <div className={cls['user-board']}>
-        <h3>Hello React</h3>
+        <h3>Hello {userInfo.username}</h3>
         <div className={cls['user-board__body']}>
-          <div>
-            <b>1</b>
+          <div
+            onClick={() =>
+              newPageHandler(`/${paths.MY_PAGE}/${paths.ORDER_HISTORY}`)
+            }
+          >
+            <b>{data?.results.length}</b>
             <span>orders</span>
           </div>
           <div>
@@ -78,12 +109,20 @@ const UserStatus = () => {
       </div>
       <div className={cls['user-board']}>
         <div className={cls['user-board__body']}>
-          <div onClick={() => newPageHandler(`/${paths.MY_PAGE}/${paths.USER_REVIEWS}`)}>
-            <b>2</b>
+          <div
+            onClick={() =>
+              newPageHandler(`/${paths.MY_PAGE}/${paths.USER_REVIEWS}`)
+            }
+          >
+            <b>{reviewData?.results.length}</b>
             <span>reviews</span>
           </div>
-          <div onClick={() => newPageHandler(`/${paths.MY_PAGE}/${paths.QUESTIONS}`)}>
-            <b>3</b>
+          <div
+            onClick={() =>
+              newPageHandler(`/${paths.MY_PAGE}/${paths.QUESTIONS}`)
+            }
+          >
+            <b>{questionData?.results.length}</b>
             <span>questions</span>
           </div>
         </div>

@@ -1,10 +1,19 @@
 import { useDeleteOrderMutation } from '../../../store/query/orderQuery';
 import { setContent, setModal } from '../../../store/slices/modal';
 import { setSingleOrder } from '../../../store/slices/order';
+import { dateParser } from '../../../utils/dateParser';
 import { modalPaths } from '../../../constants/paths';
 import EmptyText from '../../elements/UI/EmptyText';
 import cls from './orderList.module.scss';
 import { useDispatch } from 'react-redux';
+
+const orderStatus = {
+  AWAITING_PAYMENT: 'awaiting_payment',
+  CONFIRMING_PAYMENT: 'confirming_payment',
+  PREPARING_FOR_DELIVERY: 'preparing_for_delivery',
+  SHIPPED: 'shipped',
+  DELIVIRED: 'delivered',
+};
 
 const OrderList = ({ data }) => {
   const dispatch = useDispatch();
@@ -20,18 +29,6 @@ const OrderList = ({ data }) => {
     dispatch(setSingleOrder(data));
   };
 
-  const orderDateParser = (date) => {
-    const newDate = new Date(date);
-
-    const month = newDate.getMonth();
-    const day = newDate.getDate();
-    const year = newDate.getFullYear();
-
-    return `${day < 10 ? `0${day}` : day}/${
-      month + 1 < 10 ? `0${month + 1}` : month + 1
-    }/${year}`;
-  };
-
   const [deleteOrder] = useDeleteOrderMutation();
 
   return (
@@ -43,7 +40,7 @@ const OrderList = ({ data }) => {
               <div>
                 <span>
                   <p>Order Date</p>
-                  <p>{orderDateParser(elem.created_at)}</p>
+                  <p>{dateParser(elem.created_at)}</p>
                 </span>
                 <span>
                   <p>Total</p>
@@ -56,14 +53,24 @@ const OrderList = ({ data }) => {
               </span>
             </div>
             <div className={cls['order__child__body']}>
-              <h4 className="active">
-                {elem.status === 'in_process'
+              <h4
+                className={
+                  cls[
+                    elem.status === orderStatus.CONFIRMING_PAYMENT
+                      ? 'active'
+                      : ''
+                  ]
+                }
+              >
+                {elem.status === orderStatus.AWAITING_PAYMENT
                   ? 'Awaiting Payment'
-                  : elem.status === 'closed'
+                  : elem.status === orderStatus.CONFIRMING_PAYMENT
+                  ? 'Please re-submit your payment'
+                  : elem.status === orderStatus.DELIVIRED
+                  ? 'Delivired'
+                  : elem.status === orderStatus.SHIPPED
                   ? 'Shipped'
-                  : elem.status === 'sent'
-                  ? 'Delivered'
-                  : 'Please re-submit your payment'}
+                  : ''}
               </h4>
               {elem.order_items?.length > 0 ? (
                 elem.order_items?.map((item) => (
@@ -94,28 +101,41 @@ const OrderList = ({ data }) => {
               )}
               <div className={cls['order__child__body__buttons']}>
                 <button
-                  onClick={() =>
-                    deleteOrder({
-                      id: elem.id,
-                      token: localStorage.getItem('accessToken'),
-                    })
-                  }
+                  onClick={() => {
+                    elem.status === orderStatus.AWAITING_PAYMENT ||
+                    elem.status === orderStatus.CONFIRMING_PAYMENT
+                      ? deleteOrder({
+                          id: elem.id,
+                          token: localStorage.getItem('accessToken'),
+                        })
+                      : orderModalHandler();
+                  }}
                 >
-                  Cancel Order
+                  {elem.status === orderStatus.AWAITING_PAYMENT ||
+                  elem.status === orderStatus.CONFIRMING_PAYMENT
+                    ? 'Cancel Order'
+                    : 'View Tracking'}
                 </button>
                 <button
+                  id={
+                    cls[
+                      elem.status === orderStatus.SHIPPED ||
+                      elem.status === orderStatus.DELIVIRED
+                        ? 'invalid'
+                        : ''
+                    ]
+                  }
                   onClick={() => orderPaymentHandler(elem)}
                   className={cls['active']}
                 >
                   Make a Payment
                 </button>
                 <p>
-                  {elem.status === 'sent'
-                    ? '*Payment upload complete'
-                    : elem.status === 'closed'
-                    ? '*Payment upload complete'
-                    : elem.status === 'in_process'
+                  {elem.status === orderStatus.AWAITING_PAYMENT
                     ? '*Please upload either bank receipt or screenshot'
+                    : elem.status === orderStatus.SHIPPED ||
+                      elem.status === orderStatus.DELIVIRED
+                    ? '*Payment upload complete'
                     : ''}
                 </p>
               </div>

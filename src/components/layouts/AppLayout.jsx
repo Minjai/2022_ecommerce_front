@@ -4,6 +4,8 @@ import MobileHeader from '../shared/MobileHeader';
 import { lazy, Suspense, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from '../shared/Header';
+import { axiosInstance } from '../../constants/axios';
+import { setUserInfo } from '../../store/slices/user/user';
 
 const ModalWrapper = lazy(() => import('../modals/ModalWrapper'));
 const HeaderModal = lazy(() => import('../modals/HeaderModal'));
@@ -13,6 +15,7 @@ const Alert = lazy(() => import('../modals/Alert'));
 const AppLayout = () => {
   const { isActive: isModal } = useSelector((state) => state.modal);
   const { isActive } = useSelector((state) => state.burger);
+  const { isAuth } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
@@ -32,6 +35,26 @@ const AppLayout = () => {
       localStorage.setItem('shop-cart', JSON.stringify([]));
     }
   }, [dispatch]);
+
+  useEffect(() => {
+    const request = async () => {
+      try {
+        const response = await axiosInstance.get(
+          'accounts/profiles/get_userinfo/' ,{
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            },
+          }
+        );
+        
+        dispatch(setUserInfo(response.data))
+      } catch (error) {
+        console.log(error.response);
+      } 
+    };
+
+    request()
+  }, [isAuth]);
 
   return (
     <>

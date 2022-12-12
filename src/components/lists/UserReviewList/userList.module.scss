@@ -98,20 +98,6 @@
           }
         }
 
-        button {
-          padding: 0 25px;
-          border-radius: 30px;
-          width: 111px;
-          height: 34px;
-          font-size: 12px;
-          background: $app-main-color;
-          border: none;
-          outline: none;
-          color: #fff;
-          font-weight: 600;
-          cursor: pointer;
-        }
-
         @media screen and (max-width: 600px) {
           span {
             height: 45px;
@@ -126,12 +112,6 @@
               top: 44px;
             }
           }
-
-          button {
-            width: 126px;
-            height: 45px;
-            font-size: 14px;
-          }
         }
 
         @media screen and (max-width: 450px) {
@@ -141,19 +121,11 @@
           span {
             width: 65%;
           }
-
-          button {
-            width: 32%;
-          }
         }
 
         @media screen and (max-width: 410px) {
           span {
             width: 62%;
-          }
-
-          button {
-            width: 35%;
           }
         }
       }

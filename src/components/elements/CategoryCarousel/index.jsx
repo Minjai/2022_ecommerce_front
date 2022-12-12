@@ -1,9 +1,25 @@
+import { setCategoryData, setPickedCategories } from '../../../store/slices/category';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import cls from './categoryCarousel.module.scss';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Navigation } from 'swiper';
 import 'swiper/css/navigation';
 
-const CategoryCarousel = ({ data }) => {
+const CategoryCarousel = ({ data, path, pickedCategories, hasFeatures = false }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const categoryHandler = (item) => {
+    window.scrollTo(window.scrollX, 0);
+    dispatch(setCategoryData(item));
+    navigate(path);
+  };
+
+  const pickCategoryHandler = (title) => {
+    dispatch(setPickedCategories({title, isActive: true}))
+  }
+
   return (
     <Swiper
       spaceBetween={50}
@@ -42,13 +58,16 @@ const CategoryCarousel = ({ data }) => {
     >
       {data?.map((item) => (
         <SwiperSlide key={item.id}>
-          <div className={cls['category-child']}>
+          <div
+            onClick={() => hasFeatures ? pickCategoryHandler(item.title) : categoryHandler(item)}
+            className={cls['category-child']}
+          >
             <div className={cls['category-child__image']}>
               <img src={item.image} alt="category-pic" />
             </div>
             <div className={cls['category-child__body']}>
-              <p>{item.category}</p>
-              <span>{item.amount} items</span>
+              <p>{item.title}</p>
+              <span>{item.children?.length} items</span>
             </div>
           </div>
         </SwiperSlide>

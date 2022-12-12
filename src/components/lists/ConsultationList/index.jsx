@@ -1,46 +1,13 @@
 import { setContent, setModal } from '../../../store/slices/modal';
 import { modalPaths, paths } from '../../../constants/paths';
+import { dateParser } from '../../../utils/dateParser';
 import Pagination from '../../elements/Pagination';
 import cls from './consultationList.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { CiLock } from 'react-icons/ci';
 
-const data = [
-  {
-    id: 1,
-    order: 1,
-    image:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNnXwJX2qgdJZ-ug1YCaG56LXPjmN_gJGBkDB8JGcK7w&s',
-    question: 'lorem ipsum dolar',
-    user: 'react',
-    date: '01/01/2020',
-    answers: [1, 2],
-    access: true,
-  },
-  {
-    id: 2,
-    order: 100,
-    question: 'lorem ipsum dolar',
-    user: 'react',
-    date: '01/01/2020',
-    answers: [1, 2],
-    access: false,
-  },
-  {
-    id: 3,
-    order: 2000,
-    image:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNnXwJX2qgdJZ-ug1YCaG56LXPjmN_gJGBkDB8JGcK7w&s',
-    question: 'lorem ipsum dolar',
-    user: 'react',
-    date: '01/01/2020',
-    answers: [1, 2],
-    access: false,
-  },
-];
-
-const ConsultationList = ({ bottom }) => {
+const ConsultationList = ({ bottom = false, data }) => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -52,8 +19,8 @@ const ConsultationList = ({ bottom }) => {
 
   const createPostHandler = (path) => {
     window.scrollTo(window.scrollX, 0);
-    navigate(path)
-  }
+    navigate(path);
+  };
 
   return (
     <div id={cls[bottom ? 'active' : '']} className={cls['consultation']}>
@@ -63,32 +30,54 @@ const ConsultationList = ({ bottom }) => {
         </button>
       </div>
       <div className={cls['consultation-list']}>
-        {data.map(
-          ({ id, date, image, order, question, user, answers, access }) => (
+        {data?.map(
+          ({
+            created_at,
+            detail,
+            product,
+            user,
+            children,
+            access,
+          }, index) => (
             <div
-              id={cls[!image ? 'active' : '']}
+              id={
+                cls[
+                  !product.images.find((item) => item.is_feature === true).image
+                    ? 'active'
+                    : ''
+                ]
+              }
               className={cls['consultation-list__child']}
-              key={id}
+              key={created_at}
             >
               <div className={cls['consultation-list__child__left']}>
-                <span>{order}</span>
-                {image && <img src={image} alt="consutation-pic" />}
+                <span>{index + 1}</span>
+                {product.images.find((item) => item.is_feature === true)
+                  .image && (
+                  <img
+                    src={
+                      product.images.find((item) => item.is_feature === true)
+                        .image
+                    }
+                    alt="consutation-pic"
+                  />
+                )}
                 <p>
-                  <CiLock /> {question} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui, iure!
+                  <CiLock /> <b>{detail}</b>
                 </p>
               </div>
               <div className={cls['consultation-list__child__right']}>
                 <span
                   onClick={
                     access
-                      ? () => navigate(`/${paths.CONSULTATION}/${id}`)
+                      ? () => navigate(`/${paths.CONSULTATION}/${product.id}`)
                       : modalHandler
                   }
                 >
-                  {answers.length} replies
+                  {children.length} replies
                 </span>
-                <p>{user}</p>
-                <p>{date}</p>
+                <p>{user.username}</p>
+                <p>{dateParser(created_at)}</p>
               </div>
             </div>
           )

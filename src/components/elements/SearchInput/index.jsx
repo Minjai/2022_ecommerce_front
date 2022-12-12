@@ -15,6 +15,7 @@ const SearchInput = () => {
   const searchHandler = async () => {
     dispatch(getSearchApi({ str: search }))
     navigate(`/${paths.SEARCH}`)
+    setSearch('')
   }
 
   return (

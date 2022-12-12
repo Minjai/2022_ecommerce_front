@@ -1,14 +1,37 @@
+import { axiosInstance } from '../../../constants/axios';
 import CloseButton from '../../elements/UI/CloseButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { setModal } from '../../../store/slices/modal';
 import CheckoutPrice from '../Checkout/CheckoutPrice';
 import MobileOrderNav from '../MobileOrderNav';
-import { useSelector } from 'react-redux';
 import cls from './payment.module.scss';
 import { useState } from 'react';
 
 const PaymentInfo = () => {
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(null);
 
   const { data } = useSelector((state) => state.order);
+  const dispatch = useDispatch()
+
+  const postPaymentHandler = async  () => {
+    console.log(file);
+
+    if(file){
+        try {
+        const response = await axiosInstance.post('orders/orders/',  {
+          "payment_order_photo": file
+        }, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          }
+        })
+    
+        console.log(response);
+      } catch (error) {
+        console.log(error.response);
+      }
+    }
+  }
 
   return (
     <div className={cls['payment']}>
@@ -54,8 +77,8 @@ const PaymentInfo = () => {
         <CheckoutPrice data={data.order_items} />
       </div>
       <div className={cls['payment-buttons']}>
-        <button>Cancel</button>
-        <button className={cls['active']}>Upload</button>
+        <button onClick={() => dispatch(setModal(false))}>Cancel</button>
+        <button onClick={postPaymentHandler} className={cls['active']}>Upload</button>
       </div>
     </div>
   );

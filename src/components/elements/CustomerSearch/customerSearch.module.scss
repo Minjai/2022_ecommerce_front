@@ -1,6 +1,6 @@
 @import '../../../scss/variables.scss';
 
-.news-input {
+.customer-input {
   margin-top: 30px;
   display: flex;
 
@@ -16,7 +16,7 @@
     input {
       position: absolute;
       top: 0;
-      width: 88%;
+      width: 85%;
       height: 100%;
       border: none;
       outline: none;
@@ -28,20 +28,12 @@
       }
     }
 
-    button {
+    svg {
+      color: $app-dark-color;
+      font-size: 16px;
       position: absolute;
       right: 15px;
-      top: 2px;
-      width: 4%;
-      height: 100%;
-      border: none;
-      cursor: auto;
-      background: none;
-
-      svg {
-        color: $app-dark-color;
-        font-size: 16px;
-      }
+      top: 9px;
     }
 
     @media screen and (max-width: 1250px) {

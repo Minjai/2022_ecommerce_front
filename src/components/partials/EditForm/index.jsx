@@ -1,10 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import cls from './editForm.module.scss';
 import * as yup from 'yup';
+import { axiosInstance } from '../../../constants/axios';
+import { setUserInfo } from '../../../store/slices/user/user';
+import { setAlert, setAlertContent } from '../../../store/slices/alert';
 
 const schema = yup.object().shape({
-  userName: yup.string().required(),
+  username: yup.string().required(),
   email: yup.string().email().required(),
 });
 
@@ -13,11 +17,30 @@ const EditForm = () => {
     register,
     formState: { errors },
     handleSubmit,
+    reset
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const handler = (state) => {};
+  const { userInfo } = useSelector((state) => state.user);
+  const dispatch = useDispatch()
+
+  const handler = async (state) => {
+    try {
+      const response = await axiosInstance.patch(
+        `/accounts/profiles/${userInfo.id}/`,
+        state
+      );
+
+      dispatch(setAlert(true))
+      dispatch(setAlertContent('Your profile has been edited !'))
+      dispatch(setUserInfo(response.data))
+      reset()
+      console.log(response);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
 
   return (
     <div className={cls['edit']}>
@@ -34,10 +57,10 @@ const EditForm = () => {
           {window.innerWidth < 600 && <span>User name</span>}
           <input
             type="text"
-            {...register('userName')}
+            {...register('username')}
             placeholder={window.innerWidth > 600 ? 'User name' : ''}
           />
-          <p>{errors?.userName?.message}</p>
+          <p>{errors?.username?.message}</p>
           <button type="submit">Save</button>
         </form>
       </div>
