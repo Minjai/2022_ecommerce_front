@@ -8,34 +8,10 @@ import { useNavigate } from 'react-router-dom';
 import cls from './productInfo.module.scss';
 import { useState } from 'react';
 
-const list = [
-  {
-    id: 1,
-    isPicked: false,
-    value: '10ea',
-    previousPrice: '14.50',
-    currentPrice: '20.50',
-  },
-  {
-    id: 2,
-    isPicked: true,
-    value: '10ea',
-    previousPrice: '14.50',
-    currentPrice: '20.50',
-  },
-  {
-    id: 3,
-    isPicked: false,
-    value: '10ea',
-    previousPrice: '14.50',
-    currentPrice: '20.50',
-  },
-];
-
 const ProductInfo = ({ data }) => {
   const { carts } = useSelector((state) => state.cart);
   const [active, setActive] = useState(false);
-  const [method, setMethod] = useState('');
+  const [method, setMethod] = useState('Shipping method');
 
   const methodHandler = (str) => {
     setMethod(str);
@@ -58,8 +34,8 @@ const ProductInfo = ({ data }) => {
 
   const addCartHandler = () => {
     dispatch(addCart(data));
-    const cart = JSON.parse(localStorage.getItem("shop-cart"));
-    localStorage.setItem('shop-cart',  JSON.stringify([...cart, data]))
+    const cart = JSON.parse(localStorage.getItem('shop-cart'));
+    localStorage.setItem('shop-cart', JSON.stringify([...cart, data]));
   };
 
   return (
@@ -73,7 +49,7 @@ const ProductInfo = ({ data }) => {
         </p>
         <span>Manufactured By TEST</span>
         <span>Contains TEST</span>
-        <PackageList list={list} />
+        <PackageList list={prices} />
         <div className={cls['product-info__footer']}>
           <div>
             <h4>Shipping Method</h4>
@@ -82,12 +58,16 @@ const ProductInfo = ({ data }) => {
               className={cls['product-info__footer__list']}
             >
               <span onClick={() => setActive((prev) => !prev)}>
-                <p>Free (7 - 14 Business Days)</p>
+                <p>{method}</p>
                 <FiChevronDown />
               </span>
               <ul>
-                <li onClick={() => methodHandler('react')}>React</li>
-                <li onClick={() => methodHandler('react')}>React</li>
+                {data.shipping_method.length > 0 &&
+                  data.shipping_method.map(({ title, id }) => (
+                    <li key={id} onClick={() => methodHandler(title)}>
+                      {title}
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>

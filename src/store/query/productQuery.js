@@ -16,7 +16,32 @@ export const productQuery = createApi({
       query: ({ id }) => `products/products/${id}`,
       providesTags: () => ['PRODUCT_TAG'],
     }),
+    getSingleCategoryProducts: builder.query({
+      query: ({ id }) =>
+        `products/products/?category=${id}`,
+      providesTags: () => ['PRODUCT_TAG'],
+    }),
+    getCategoryProducts: builder.query({
+      query: ({ id, page, offset }) =>
+        `products/products/?category=${id}&limit=2${
+          page > 1 ? `&offset=${offset}` : ''
+        }`,
+      providesTags: () => ['PRODUCT_TAG'],
+    }),
+    getBestProducts: builder.query({
+      query: ({ id, page, offset }) =>
+        `products/products/?category=${id}&limit=2${
+          page > 1 ? `&offset=${offset}` : ''
+        }`,
+      providesTags: () => ['PRODUCT_TAG'],
+    }),
   }),
 });
 
-export const { useGetProductsQuery, useGetSingleProductQuery } = productQuery;
+export const {
+  useGetProductsQuery,
+  useGetSingleProductQuery,
+  useGetSingleCategoryProductsQuery,
+  useGetBestProductsQuery,
+  useGetCategoryProductsQuery
+} = productQuery;

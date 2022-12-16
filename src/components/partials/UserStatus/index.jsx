@@ -6,6 +6,7 @@ import { AiOutlineRight } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import cls from './userStatus.module.scss';
 import { useSelector } from 'react-redux';
+import { orderTable } from '../../../utils/userOrderTable';
 
 const UserStatus = () => {
   const navigate = useNavigate();
@@ -38,6 +39,8 @@ const UserStatus = () => {
     userId: userInfo.id,
   });
 
+  const userOrderStatus = orderTable(data)
+
   return (
     <div className={cls['user']}>
       <div className={cls['user-board']}>
@@ -65,41 +68,41 @@ const UserStatus = () => {
           </div>
           <div className={cls['user-status__body__child']}>
             <div>
-              <span>1</span>
+              <span id={cls[userOrderStatus.awaiting_payment > 0 && 'active']}>{userOrderStatus.awaiting_payment}</span>
               <p>awaiting payment</p>
             </div>
             <AiOutlineRight />
           </div>
           <div className={cls['user-status__body__child']}>
             <div>
-              <span>0</span>
+              <span id={cls[userOrderStatus.confirming_payment > 0 && 'active']}>{userOrderStatus.confirming_payment}</span>
               <p>confirming payment</p>
             </div>
             <AiOutlineRight />
           </div>
           <div className={cls['user-status__body__child']}>
             <div>
-              <span>1</span>
+              <span id={cls[userOrderStatus.preparing_for_delivery > 0 && 'active']}>{userOrderStatus.preparing_for_delivery}</span>
               <p>preparing for delivery</p>
             </div>
             <AiOutlineRight />
           </div>
           <div className={cls['user-status__body__child']}>
             <div>
-              <span>0</span>
+              <span id={cls[userOrderStatus.shipped > 0 && 'active']}>{userOrderStatus.shipped}</span>
               <p>shipped</p>
             </div>
             <AiOutlineRight />
           </div>
           <div className={cls['user-status__body__child']}>
             <div>
-              <span>1</span>
+              <span id={cls[userOrderStatus.delivered > 0 && 'active']}>{userOrderStatus.delivered}</span>
               <p>delivered</p>
             </div>
           </div>
           <div className={cls['user-status__body__lastChild']}>
             <p>
-              orders <span>0</span>
+              orders <span>{data?.results.length}</span>
             </p>
             <p>
               canceled <span>0</span>

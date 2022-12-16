@@ -27,12 +27,12 @@ const Reviews = () => {
         <br />
         {isLoading ? (
           <Loader />
-        ) : data?.results !== 0 ? (
+        ) : data?.results.length !== 0 ? (
           <>
             <Description>Reviews Highlights</Description>
-            <ReviewsCarousel data={data.results} />
+            <ReviewsCarousel data={data?.results} />
             <Description>Reviews Library</Description>
-            <ReviewsList reviews={data.results} />
+            <ReviewsList reviews={data?.results} />
             <Pagination />
           </>
         ) : (

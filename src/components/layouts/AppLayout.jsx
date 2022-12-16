@@ -54,7 +54,7 @@ const AppLayout = () => {
     };
 
     request()
-  }, [isAuth]);
+  }, [isAuth, dispatch]);
 
   return (
     <>

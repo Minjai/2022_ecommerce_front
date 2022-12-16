@@ -21,6 +21,8 @@ const HeaderModal = () => {
   const [isCategory, setCategory] = useState(false);
   const [isCustomer, setCustomer] = useState(false);
 
+  const { userInfo } = useSelector(state => state.user)
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -49,7 +51,7 @@ const HeaderModal = () => {
             <div className={cls['modal-wrapper__container']}>
               <div className={cls['modal-wrapper__mid__links']}>
                 {isAuth ? (
-                  <h3>Hello User Name</h3>
+                  <h3>Hello {userInfo.username}</h3>
                 ) : (
                   <>
                     <span onClick={() => navigateHandler(`/${paths.LOGIN}`)}>

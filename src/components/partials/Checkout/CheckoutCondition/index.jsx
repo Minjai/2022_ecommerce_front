@@ -8,19 +8,15 @@ import { useState } from 'react';
 
 const CheckoutCondition = () => {
   const [state, setState] = useState({
-    medication: false,
-    medicationMessage: '',
-    drug: false,
-    drugMessage: '',
-    treatments: false,
-    treatmentsMessage: '',
+    current_medications: '',
+    drug_allergies: '',
+    current_treatments: '',
     gender: '',
     smoke: '',
     drink: '',
-    physicianName: '',
-    physicianNumber: '',
-    dateOfBirth: '',
-    file: '',
+    primary_name: '',
+    primary_phone_number: '',
+    date_of_birth: '',
   });
 
   const { backBtnHandler, nextBtnhandler } = useCheckoutButtons(
@@ -28,34 +24,35 @@ const CheckoutCondition = () => {
   );
 
   const conditionHandler = async () => {
-    try {
-      const response = await axiosInstance.post('orders/medical_conditions/', {
-        drug_allergies: state.drug ? 'None' : state.drugMessage,
-        current_medications: state.medication
-          ? 'None'
-          : state.medicationMessage,
-        current_treatments: state.treatments
-          ? 'None'
-          : state.treatmentsMessage,
-        gender: state.gender,
-        date_of_birth: state.dateOfBirth,
-        drink: state.drink,
-        smoke: state.smoke,
-        primary_name: state.physicianName,
-        primary_phone_number: state.physicianNumber,
-        prescription: state.file
-      }, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        }
-      });
+    const formData = new FormData();
 
-      console.log(response);
+    formData.append('primary_name', state.primary_name)
+    formData.append('primary_phone_number', state.primary_phone_number)
+    formData.append('drink', state.drink)
+    formData.append('date_of_birth', state.date_of_birth)
+    formData.append('prescription', state.prescription)
+    formData.append('smoke', state.smoke)
+    formData.append('gender', state.gender)
+    formData.append('current_treatments', state.current_treatments)
+    formData.append('current_medications', state.current_medications)
+    formData.append('drug_allergies', state.drug_allergies)
+
+    try {
+      const response = await axiosInstance.post(
+        'orders/medical_conditions/',
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            'Content-type': 'multipart/form-data',
+          },
+        }
+      );
+
+      nextBtnhandler();
     } catch (error) {
       console.log(error.response);
     }
-
-    nextBtnhandler();
   };
 
   return (
@@ -69,9 +66,12 @@ const CheckoutCondition = () => {
               Drug Allegies: <sup>*</sup>
             </p>
             <span
-              className={cls[state.drug ? 'active' : '']}
+              className={cls[state.drug_allergies === 'None' ? 'active' : '']}
               onClick={() =>
-                setState((prev) => ({ ...prev, drug: !prev.drug }))
+                setState((prev) => ({
+                  ...prev,
+                  drug_allergies: state.drug_allergies === 'None' ? '' : 'None',
+                }))
               }
             >
               <b>
@@ -79,17 +79,17 @@ const CheckoutCondition = () => {
               </b>
               None
             </span>
-            {!state.drug && (
+            {state.drug_allergies !== 'None' && (
               <textarea
                 placeholder="This field is required"
                 name="feedback"
                 onChange={(e) =>
                   setState((prev) => ({
                     ...prev,
-                    medicationMessage: e.target.value,
+                    drug_allergies: e.target.value,
                   }))
                 }
-                value={state.medicationMessage}
+                value={state.drug_allergies}
               ></textarea>
             )}
             <b className={cls[!state.drug && 'appear']}>
@@ -101,9 +101,15 @@ const CheckoutCondition = () => {
               Current Medications: <sup>*</sup>
             </p>
             <span
-              className={cls[state.medication ? 'active' : '']}
+              className={
+                cls[state.current_medications === 'None' ? 'active' : '']
+              }
               onClick={() =>
-                setState((prev) => ({ ...prev, medication: !prev.medication }))
+                setState((prev) => ({
+                  ...prev,
+                  current_medications:
+                    state.current_medications === 'None' ? '' : 'None',
+                }))
               }
             >
               <b>
@@ -111,14 +117,17 @@ const CheckoutCondition = () => {
               </b>
               None
             </span>
-            {!state.medication && (
+            {state.current_medications !== 'None' && (
               <textarea
                 placeholder="This field is required"
                 name="feedback"
                 onChange={(e) =>
-                  setState((prev) => ({ ...prev, drugMessage: e.target.value }))
+                  setState((prev) => ({
+                    ...prev,
+                    current_medications: e.target.value,
+                  }))
                 }
-                value={state.drugMessage}
+                value={state.current_medications}
               ></textarea>
             )}
             <b>* This field is required</b>
@@ -128,9 +137,15 @@ const CheckoutCondition = () => {
               Current Treatments: <sup>*</sup>
             </p>
             <span
-              className={cls[state.treatments ? 'active' : '']}
+              className={
+                cls[state.current_treatments === 'None' ? 'active' : '']
+              }
               onClick={() =>
-                setState((prev) => ({ ...prev, treatments: !prev.treatments }))
+                setState((prev) => ({
+                  ...prev,
+                  current_treatments:
+                    state.current_treatments === 'None' ? '' : 'None',
+                }))
               }
             >
               <b>
@@ -138,17 +153,17 @@ const CheckoutCondition = () => {
               </b>
               None
             </span>
-            {!state.treatments && (
+            {state.current_treatments !== 'None' && (
               <textarea
                 placeholder="This field is required"
                 name="feedback"
                 onChange={(e) =>
                   setState((prev) => ({
                     ...prev,
-                    treatmentsMessage: e.target.value,
+                    current_treatments: e.target.value,
                   }))
                 }
-                value={state.treatmentsMessage}
+                value={state.current_treatments}
               ></textarea>
             )}
             <b>* This field is required</b>
@@ -183,9 +198,9 @@ const CheckoutCondition = () => {
                 Date of Birth: <sup>*</sup>
               </p>
               <input
-                value={state.dateOfBirth}
+                value={state.date_of_birth}
                 onChange={(e) =>
-                  setState((prev) => ({ ...prev, dateOfBirth: e.target.value }))
+                  setState((prev) => ({ ...prev, date_of_birth: e.target.value }))
                 }
                 type="text"
                 placeholder="YYYY-MM-DD"
@@ -234,9 +249,9 @@ const CheckoutCondition = () => {
             <input
               type="text"
               onChange={(e) =>
-                setState((prev) => ({ ...prev, physicianName: e.target.value }))
+                setState((prev) => ({ ...prev, primary_name: e.target.value }))
               }
-              value={state.physicianName}
+              value={state.primary_name}
               placeholder="Primary Physician’s Name"
             />
             <input
@@ -244,10 +259,10 @@ const CheckoutCondition = () => {
               onChange={(e) =>
                 setState((prev) => ({
                   ...prev,
-                  physicianNumber: e.target.value,
+                  primary_phone_number: e.target.value,
                 }))
               }
-              value={state.physicianNumber}
+              value={state.primary_phone_number}
               placeholder="Physician’s Phone Number"
             />
           </div>
@@ -255,14 +270,20 @@ const CheckoutCondition = () => {
           <label className={cls['input-file']}>
             <input
               onChange={(e) =>
-                setState((prev) => ({ ...prev, file: e.target.files[0] }))
+                setState((prev) => ({
+                  ...prev,
+                  prescription: e.target.files[0],
+                }))
               }
               type="file"
               name="file"
+              accept="image/png, image/jpeg"
             />
             <span className={cls['input-file-btn']}>Select a file</span>
             <span className={cls['input-file-text']}>
-              {state.file ? state.file.name : 'File is not selected yet'}
+              {state.prescription
+                ? state.prescription.name
+                : 'File is not selected yet'}
             </span>
           </label>
           <span>

@@ -7,7 +7,7 @@ import cls from './productItem.module.scss';
 import Rating from '../UI/Rating';
 
 const ProductItem = ({ item }) => {
-  const { product_name, images, prices, rating, category, top, id } =
+  const { product_name, images, prices, get_review_start, category, top, id } =
     item;
 
   const { carts } = useSelector((state) => state.cart);
@@ -41,7 +41,7 @@ const ProductItem = ({ item }) => {
   return (
     <div onClick={productNavigate} className={cls['product-item']}>
       <div className={cls['product-item__header']}>
-        <img src={images?.find(item => item.is_feature === true).image} alt="product-pic" />
+        <img src={images?.find(item => item.is_feature === true)?.image} alt="product-pic" />
         {top && (
           <span>
             No. <p>{top}</p>{' '}
@@ -51,7 +51,7 @@ const ProductItem = ({ item }) => {
       <div className={cls['product-item__body']}>
         <span>{category.title}</span>
         <p>{product_name}</p>
-        <Rating productRating={rating} />
+        <Rating productRating={get_review_start.star__avg} />
         <div className={cls['product-item__body__price']}>
           <span>
             ${prices?.length && prices[0]?.selling_price} {'(USD)'}

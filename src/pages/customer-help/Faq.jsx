@@ -11,12 +11,32 @@ const Faq = () => {
   const [searchValue, setSearchValue] = useState('');
   const [isSearch, setSearch] = useState(false);
 
+  const [page, setPage] = useState(1)
+  const [pageStart, setPageStart] = useState(0)
+  const [offset, setOffset] = useState(0)
+  const [pageEnd, setPageEnd] = useState(3)
+
   const searchHook = useSearchDebounce(isSearch, searchValue);
   const { data, isLoading } = useGetSearchedFaqsQuery({
-    searchHook
+    searchHook,
+    page,
+    offset
   }, {
     refetchOnMountOrArgChange: true
   });
+
+  const paginationOptions = {
+    limit: 5,
+    pageCount: data?.count,
+    page,
+    offset,
+    setPage,
+    setOffset,
+    pageStart,
+    setPageStart,
+    pageEnd,
+    setPageEnd,
+  };
 
   const searchButtonHandler = () => {
     setSearch((prev) => !prev);
@@ -28,15 +48,13 @@ const Faq = () => {
     searchButtonHandler,
   };
 
-  console.log(data);
-
   return (
     <>
       <NewSearch options={options} placeholder={'faqs'} />
       {isLoading ? (
         <Loader />
       ) : data?.results.length !== 0 ? (
-        <FaqList data={data} />
+        <FaqList options={paginationOptions} data={data} />
       ) : (
         <EmptyText text={'faq'} />
       )}

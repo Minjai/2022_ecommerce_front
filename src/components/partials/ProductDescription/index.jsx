@@ -7,18 +7,18 @@ const ProductDescription = ({ list }) => {
 
   return (
     <div className={cls['description']}>
-      {list.map(({ id, title, content }) => (
+      {list.map(({ id, description }) => (
         <div
           id={cls[active === id ? 'active' : '']}
           key={id}
           className={cls['description__child']}
         >
           <span onClick={() => setActive((prev) => (prev === id ? null : id))}>
-            {title}
+            Description title
             {active === id ? <AiOutlineMinus /> : <AiOutlinePlus />}
           </span>
           <ul>
-            <li>{content}</li>
+            <li>{description}</li>
           </ul>
         </div>
       ))}

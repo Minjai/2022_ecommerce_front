@@ -13,7 +13,7 @@ const Alert = () => {
         dispatch(setAlert(false));
       }, 3000);
     }
-  }, [isAlert]);
+  }, [isAlert, dispatch]);
 
   return (
     <div id={cls[isAlert ? 'active' : '']} className={cls['alert']}>

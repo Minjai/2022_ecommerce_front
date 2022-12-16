@@ -1,35 +1,7 @@
+import { dateParser } from '../../../utils/dateParser';
 import Pagination from '../../elements/Pagination';
 import { useNavigate } from 'react-router-dom';
 import cls from './newsList.module.scss';
-import { dateParser } from '../../../utils/dateParser';
-
-const data = [
-  {
-    id: 1,
-    text: 'Lorem ipsum dolar',
-    date: '10/12/2022',
-  },
-  {
-    id: 2,
-    text: 'Lorem ipsum dolar',
-    date: '10/12/2022',
-  },
-  {
-    id: 3,
-    text: 'Lorem ipsum dolar',
-    date: '10/12/2022',
-  },
-  {
-    id: 4,
-    text: 'Lorem ipsum dolar',
-    date: '10/12/2022',
-  },
-  {
-    id: 5,
-    text: 'Lorem ipsum dolar',
-    date: '10/12/2022',
-  },
-];
 
 const NewsList = ({ data }) => {
   const navigate = useNavigate();

@@ -13,7 +13,10 @@ export const faqQuery = createApi({
       providesTags: () => ['FAQ_TAG'],
     }),
     getSearchedFaqs: builder.query({
-      query: ({ searchHook }) => `FAQ/FAQ/${searchHook ? `?search=${searchHook}` : ''}`,
+      query: ({ searchHook, page, offset }) =>
+        `FAQ/FAQ/?limit=5${page > 1 ? `&offset=${offset}` : ''}${
+          searchHook ? `&search=${searchHook}` : ''
+        }`,
       providesTags: () => ['FAQ_TAG'],
     }),
   }),

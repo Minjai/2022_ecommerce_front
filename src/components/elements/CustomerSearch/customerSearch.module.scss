@@ -28,16 +28,30 @@
       }
     }
 
-    svg {
-      color: $app-dark-color;
-      font-size: 16px;
+    button{
       position: absolute;
-      right: 15px;
-      top: 9px;
+      right: 8px;
+      top: 2px;
+      width: 30px;
+      height: 30px;
+      background: none;
+      outline: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        color: $app-dark-color;
+        font-size: 16px;
+      }
     }
 
     @media screen and (max-width: 1250px) {
       height: 45px;
+
+      button{
+        top: 8px;
+      }
 
       input {
         font-size: 15px;

@@ -8,6 +8,7 @@ import { orderQuery } from '../query/orderQuery';
 import { newsQuery } from '../query/newsQuery';
 import { faqQuery } from '../query/faqQuery';
 import categorySlice from './category';
+import productSlice from './product';
 import userSlice from './user/user';
 import burgerSlice from './burger';
 import searchSlice from './search';
@@ -19,6 +20,7 @@ import cartSlice from './cart';
 
 export const rootSlice = combineReducers({
   category: categorySlice,
+  product: productSlice,
   burger: burgerSlice,
   search: searchSlice,
   order: orderSlice,

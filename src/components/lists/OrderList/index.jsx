@@ -2,18 +2,11 @@ import { useDeleteOrderMutation } from '../../../store/query/orderQuery';
 import { setContent, setModal } from '../../../store/slices/modal';
 import { setSingleOrder } from '../../../store/slices/order';
 import { dateParser } from '../../../utils/dateParser';
+import { orderStatus } from '../../../constants/order';
 import { modalPaths } from '../../../constants/paths';
 import EmptyText from '../../elements/UI/EmptyText';
 import cls from './orderList.module.scss';
 import { useDispatch } from 'react-redux';
-
-const orderStatus = {
-  AWAITING_PAYMENT: 'awaiting_payment',
-  CONFIRMING_PAYMENT: 'confirming_payment',
-  PREPARING_FOR_DELIVERY: 'preparing_for_delivery',
-  SHIPPED: 'shipped',
-  DELIVIRED: 'delivered',
-};
 
 const OrderList = ({ data }) => {
   const dispatch = useDispatch();
@@ -44,7 +37,7 @@ const OrderList = ({ data }) => {
                 </span>
                 <span>
                   <p>Total</p>
-                  <p>${elem.total_cost.USD}</p>
+                  <p>$100</p>
                 </span>
               </div>
               <span>

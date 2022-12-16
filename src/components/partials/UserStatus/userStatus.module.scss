@@ -120,9 +120,13 @@
           text-align: center;
 
           span {
-            color: $app-main-color;
+            color: $app-dark-color;
             font-size: 23px;
             font-weight: 600;
+          }
+
+          #active{
+            color: $app-main-color;
           }
 
           p {

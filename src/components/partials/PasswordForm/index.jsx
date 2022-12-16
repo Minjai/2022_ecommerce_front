@@ -27,15 +27,11 @@ const ChangeForm = () => {
   const { userInfo } = useSelector((state) => state.user);
 
   const handler = async (state) => {
-    console.log(state);
-
     try {
       const response = await axiosInstance.post(`accounts/profiles/${userInfo.id}/change_password/`, {
         old_password: state.oldPassword,
         new_password: state.newPassword
       })
-
-      console.log(response);
     } catch (error) {
       console.log(error.response);
     }

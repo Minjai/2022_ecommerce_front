@@ -1,4 +1,7 @@
-import { setCategoryData, setPickedCategories } from '../../../store/slices/category';
+import {
+  setCategoryData,
+  setPickedCategories,
+} from '../../../store/slices/category';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import cls from './categoryCarousel.module.scss';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +9,11 @@ import { useDispatch } from 'react-redux';
 import { Navigation } from 'swiper';
 import 'swiper/css/navigation';
 
-const CategoryCarousel = ({ data, path, pickedCategories, hasFeatures = false }) => {
+const CategoryCarousel = ({
+  data,
+  path,
+  hasFeatures = false,
+}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -16,9 +23,9 @@ const CategoryCarousel = ({ data, path, pickedCategories, hasFeatures = false })
     navigate(path);
   };
 
-  const pickCategoryHandler = (title) => {
-    dispatch(setPickedCategories({title, isActive: true}))
-  }
+  const pickCategoryHandler = (item) => {
+    dispatch(setPickedCategories({ ...item, isActive: true }));
+  };
 
   return (
     <Swiper
@@ -56,22 +63,47 @@ const CategoryCarousel = ({ data, path, pickedCategories, hasFeatures = false })
         },
       }}
     >
-      {data?.map((item) => (
-        <SwiperSlide key={item.id}>
-          <div
-            onClick={() => hasFeatures ? pickCategoryHandler(item.title) : categoryHandler(item)}
-            className={cls['category-child']}
-          >
-            <div className={cls['category-child__image']}>
-              <img src={item.image} alt="category-pic" />
-            </div>
-            <div className={cls['category-child__body']}>
-              <p>{item.title}</p>
-              <span>{item.children?.length} items</span>
-            </div>
-          </div>
-        </SwiperSlide>
-      ))}
+      {hasFeatures
+        ? data?.map((item) => (
+            <SwiperSlide key={item.id}>
+              <div
+                onClick={() =>
+                  hasFeatures
+                    ? pickCategoryHandler(item)
+                    : categoryHandler(data)
+                }
+                className={cls['category-child']}
+              >
+                <div className={cls['category-child__image']}>
+                  <img src={item.image} alt="category-pic" />
+                </div>
+                <div className={cls['category-child__body']}>
+                  <p>{item.title}</p>
+                  <span>{item.children?.length} items</span>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))
+        : data?.children?.map((item) => (
+            <SwiperSlide key={item.id}>
+              <div
+                onClick={() =>
+                  hasFeatures
+                    ? pickCategoryHandler(item.title)
+                    : categoryHandler(data)
+                }
+                className={cls['category-child']}
+              >
+                <div className={cls['category-child__image']}>
+                  <img src={item.image} alt="category-pic" />
+                </div>
+                <div className={cls['category-child__body']}>
+                  <p>{item.title}</p>
+                  <span>{item.children?.length} items</span>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
     </Swiper>
   );
 };

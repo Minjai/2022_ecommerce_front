@@ -5,7 +5,7 @@ export const useSearchDebounce = (isSearch, value, delay = 300) => {
 
   useEffect(() => {
     setDebounced(value)
-  }, [isSearch, delay])
+  }, [isSearch, delay, value])
 
   return debounced
 }

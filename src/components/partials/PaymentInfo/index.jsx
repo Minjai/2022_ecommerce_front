@@ -11,27 +11,33 @@ const PaymentInfo = () => {
   const [file, setFile] = useState(null);
 
   const { data } = useSelector((state) => state.order);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const postPaymentHandler = async  () => {
-    console.log(file);
+  const postPaymentHandler = async () => {
+    const formData = new FormData();
 
-    if(file){
-        try {
-        const response = await axiosInstance.post('orders/orders/',  {
-          "payment_order_photo": file
-        }, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    formData.append('payment_order_photo', file);
+    formData.append('status', 'confirming_payment');
+
+    if (file) {
+      try {
+        const response = await axiosInstance.patch(
+          `orders/orders/${data.id}/`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+              'Content-type': 'multipart/form-data',
+            },
           }
-        })
-    
-        console.log(response);
+        );
+
+        dispatch(setModal(false))
       } catch (error) {
         console.log(error.response);
       }
     }
-  }
+  };
 
   return (
     <div className={cls['payment']}>
@@ -62,6 +68,7 @@ const PaymentInfo = () => {
               Please upload a payment here.
               <label className={cls['input-file']}>
                 <input
+                  accept="image/png, image/jpeg"
                   onChange={(e) => setFile(e.target.files[0])}
                   type="file"
                   name="file"
@@ -78,7 +85,9 @@ const PaymentInfo = () => {
       </div>
       <div className={cls['payment-buttons']}>
         <button onClick={() => dispatch(setModal(false))}>Cancel</button>
-        <button onClick={postPaymentHandler} className={cls['active']}>Upload</button>
+        <button onClick={postPaymentHandler} className={cls['active']}>
+          Upload
+        </button>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
 import cls from './pagination.module.scss';
+import { useEffect } from 'react';
 
 const Pagination = ({ options = {} }) => {
   const {
@@ -11,6 +11,7 @@ const Pagination = ({ options = {} }) => {
     setPageEnd,
     pageStart,
     setPageStart,
+    setOffset,
   } = options;
 
   const pagesCount = Math.ceil(pageCount / limit);
@@ -21,34 +22,39 @@ const Pagination = ({ options = {} }) => {
   }
 
   const paginateDecrement = (count) => {
-    if (count + 1 > 0 && count + 1 !== 1) {
-      setPage(count + 1);
+    if (count > 0 && count !== 1) {
+      setPage(count);
       setPageStart((prev) => prev - 1);
       setPageEnd((prev) => prev - 1);
-    }else{
-      setPage(count + 1);
+      setOffset(count * limit - limit);
+    } else {
+      setPage(count);
+      setOffset(0);
     }
   };
 
   const paginateIncrement = (count) => {
-    setPage(count + 1);
-    setPageStart((prev) => prev + 1);
-    setPageEnd((prev) => prev + 1);
+    if (page !== pageCount) {
+      setPage(count);
+      setPageStart((prev) => prev + 1);
+      setPageEnd((prev) => prev + 1);
+      setOffset(count * limit - limit);
+    }
   };
 
   const paginateElements = (count) => (
     <span
       onClick={() =>
-        count + 1 === pageEnd
+        count === pageEnd
           ? paginateIncrement(count)
-          : count + 1 === pageStart + 1
+          : count === pageStart + 1
           ? paginateDecrement(count)
-          : setPage(count + 1)
+          : (setOffset(limit * count - limit), setPage(count))
       }
       key={count}
-      className={[cls[page === count + 1 && 'pagination__list_active']]}
+      className={[cls[page === count && 'pagination__list_active']]}
     >
-      {count + 1}
+      {count}
     </span>
   );
 
@@ -65,7 +71,7 @@ const Pagination = ({ options = {} }) => {
         <div className={cls['pagination__list']}>
           {pagesData
             .slice(pageStart, pageEnd)
-            .map((count) => paginateElements(count))}
+            .map((count) => paginateElements(count + 1))}
           {pagesData.length - pageEnd + 1 > 1 && (
             <>
               <p
@@ -79,7 +85,10 @@ const Pagination = ({ options = {} }) => {
                 className={
                   cls[page === pagesData.length && 'pagination__list_active']
                 }
-                onClick={() => setPage(pagesData.length)}
+                onClick={() => (
+                  setPage(pagesData.length),
+                  setOffset(limit * pagesData.length - limit)
+                )}
               >
                 {pagesData.length}
               </span>
@@ -88,14 +97,9 @@ const Pagination = ({ options = {} }) => {
         </div>
       ) : (
         <div className={cls['pagination__list']}>
-          {pagesData.map((count) => paginateElements(count))}
+          {pagesData.map((count) => paginateElements(count + 1))}
         </div>
       )}
-      {/* <span className={cls['pagination__list_active']}>1</span>
-      <span>2</span>
-      <span>3</span>
-      <p>...</p>
-      <span>10</span> */}
     </div>
   );
 };

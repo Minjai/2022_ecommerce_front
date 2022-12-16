@@ -12,9 +12,11 @@ const PaginatedList = ({ data, options }) => {
           </div>
         ))}
       </div>
-      <div className={cls['painated-list__footer']}>
-        <Pagination options={options} />
-      </div>
+      {options?.pageCount > options?.limit && (
+        <div className={cls['painated-list__footer']}>
+          <Pagination options={options} />
+        </div>
+      )}
     </div>
   );
 };

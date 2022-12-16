@@ -13,7 +13,9 @@ const CustomerSearch = ({ placeholder, options = {} }) => {
           type="text"
           placeholder={`Search for ${placeholder}`}
         />
-        <TfiSearch />
+        <button onClick={searchButtonHandler}>
+          <TfiSearch />
+        </button>
       </span>
       <button
         onClick={searchButtonHandler}
