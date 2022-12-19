@@ -43,7 +43,8 @@
         justify-content: space-between;
         align-items: center;
         border-bottom: 1px solid rgba(128, 128, 128, 0.3);
-        padding: 20px 15px;
+        padding: 0 15px;
+        height: 55px;
 
         p {
           margin: 0 20px 0 0;
@@ -51,6 +52,9 @@
           color: $app-dark-color;
           line-height: 1.6;
           font-size: 17px;
+          overflow: hidden;
+          height: 27px;
+          width: 80%;
         }
 
         span {
@@ -59,6 +63,11 @@
           font-size: 17px;
         }
       }
+    }
+
+    #active{
+      overflow-y: scroll;
+      height: 250px;
     }
 
     @media screen and (max-width: 1400px) {

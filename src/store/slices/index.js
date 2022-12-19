@@ -1,7 +1,9 @@
+import { notificationQuery } from '../query/notificationQuery';
 import { consultationQuery } from '../query/consultationQuery';
 import { productSearchQuery } from '../query/productSearch';
 import { categoryQuery } from '../query/categoryQuery';
 import { productQuery } from '../query/productQuery';
+import { pointsQuery } from '../query/pointsQuery';
 import { reviewQuery } from '../query/reviewQuery';
 import { combineReducers } from '@reduxjs/toolkit';
 import { orderQuery } from '../query/orderQuery';
@@ -30,11 +32,13 @@ export const rootSlice = combineReducers({
   user: userSlice,
   cart: cartSlice,
   [categoryQuery.reducerPath]: categoryQuery.reducer,
+  [pointsQuery.reducerPath]: pointsQuery.reducer,
   [consultationQuery.reducerPath]: consultationQuery.reducer,
   [faqQuery.reducerPath]: faqQuery.reducer,
   [newsQuery.reducerPath]: newsQuery.reducer,
   [reviewQuery.reducerPath]: reviewQuery.reducer,
   [productQuery.reducerPath]: productQuery.reducer,
   [productSearchQuery.reducerPath]: productSearchQuery.reducer,
+  [notificationQuery.reducerPath]: notificationQuery.reducer,
   [orderQuery.reducerPath]: orderQuery.reducer,
 });

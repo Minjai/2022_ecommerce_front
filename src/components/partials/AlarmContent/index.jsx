@@ -1,28 +1,39 @@
+import { useGetUserNotificationsQuery } from '../../../store/query/notificationQuery';
+import { dateParser } from '../../../utils/dateParser';
 import CloseButton from '../../elements/UI/CloseButton';
+import EmptyText from '../../elements/UI/EmptyText';
+import Loader from '../../elements/UI/Loader';
+import { useSelector } from 'react-redux';
 import cls from './alarm.module.scss';
 
 const AlarmContent = () => {
+  const { userInfo } = useSelector((state) => state.user);
+
+  const { data, isLoading } = useGetUserNotificationsQuery({
+    userId: userInfo.id,
+  });
+
   return (
     <div className={cls['alarm']}>
-      <CloseButton/>
+      <CloseButton />
       <div className={cls['alarm-wrapper']}>
         <div className={cls['alarm-wrapper__header']}>
           <h3>Alarm</h3>
-          <span>5 New</span>
+          <span>{data?.results ? data?.results.length : 0} New</span>
         </div>
-        <div className={cls['alarm-wrapper__body']}>
-          <div className={cls['alarm-wrapper__body__child']}>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta eum officiis corporis maxime quo dolore, placeat nisi dolores amet assumenda labore velit. A asperiores dignissimos in quasi sapiente magnam consequatur?</p>
-            <span>Today</span>
-          </div>
-          <div className={cls['alarm-wrapper__body__child']}>
-            <p>Lorem ipsum dolor sit amet consectetur.</p>
-            <span>Yesterday</span>
-          </div>
-          <div className={cls['alarm-wrapper__body__child']}>
-            <p>Lorem ipsum dolor sit amet consectetur.</p>
-            <span>16 Sep</span>
-          </div>
+        <div id={cls[data?.results.length > 5 ? 'active' : '']} className={cls['alarm-wrapper__body']}>
+          {isLoading ? (
+            <Loader />
+          ) : data?.results.length > 0 ? (
+            data.results.map(({ id, create_at, extra_info }) => (
+              <div key={id} className={cls['alarm-wrapper__body__child']}>
+                <p>{extra_info}</p>
+                <span>{dateParser(create_at)}</span>
+              </div>
+            ))
+          ) : (
+            <EmptyText />
+          )}
         </div>
       </div>
     </div>

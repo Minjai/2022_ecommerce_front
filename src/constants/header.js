@@ -156,6 +156,6 @@ export const customerHelpLinks = [
   {
     id: 3,
     to: paths.CONSULTATION,
-    text: '1:1 General Constulatation',
+    text: '1:1 General Consultation',
   },
 ];

@@ -31,7 +31,6 @@ const CheckoutTransfer = () => {
         }
       );
     } catch (error) {
-      console.log(error);
     }
   };
 

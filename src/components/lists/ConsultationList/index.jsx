@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { CiLock } from 'react-icons/ci';
 
-const ConsultationList = ({ bottom = false, data }) => {
+const ConsultationList = ({ bottom = false, data, options }) => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -31,14 +31,7 @@ const ConsultationList = ({ bottom = false, data }) => {
       </div>
       <div className={cls['consultation-list']}>
         {data?.map(
-          ({
-            created_at,
-            detail,
-            product,
-            user,
-            children,
-            access,
-          }, index) => (
+          ({ created_at, detail, product, user, children, access }, index) => (
             <div
               id={
                 cls[
@@ -83,7 +76,7 @@ const ConsultationList = ({ bottom = false, data }) => {
           )
         )}
       </div>
-      <Pagination />
+      {options?.pageCount > options?.limit && <Pagination options={options} />}
     </div>
   );
 };

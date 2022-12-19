@@ -9,8 +9,10 @@ export const consultationQuery = createApi({
   }),
   endpoints: (builder) => ({
     getConsultations: builder.query({
-      query: (token) => ({
-        url: 'consultations/consultations/',
+      query: ({ token, page, offset }) => ({
+        url: `consultations/consultations/?limit=5${
+          page > 1 ? `&offset=${offset}` : ''
+        }`,
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -18,8 +20,10 @@ export const consultationQuery = createApi({
       providesTags: () => ['CONSULTATION_TAG'],
     }),
     getUserConsultations: builder.query({
-      query: ({ token, userId }) => ({
-        url: `consultations/consultations/?user=${userId}`,
+      query: ({ token, userId, page, offset }) => ({
+        url: `consultations/consultations/?user=${userId}&limit=4${
+          page > 1 ? `&offset=${offset}` : ''
+        }`,
         headers: {
           Authorization: `Bearer ${token}`,
         },

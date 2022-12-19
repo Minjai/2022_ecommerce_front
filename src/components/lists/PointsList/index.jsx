@@ -1,12 +1,18 @@
+import { dateParser } from '../../../utils/dateParser';
 import Pagination from '../../elements/Pagination';
 import cls from './pointsList.module.scss';
 
-const PointsList = () => {
+const PointsList = ({ data, options, points }) => {
   return (
     <div className={cls['user-width']}>
       <div className={cls['user-width__header']}>
         <h3>Usable Points</h3>
-        <span>3000 points</span>
+        <span>
+          {points?.results
+            ? points?.results.reduce((prev, item) => (prev += item.point), 0)
+            : 0}{' '}
+          points
+        </span>
       </div>
       <div className={cls['user-width__body']}>
         <div className={cls['user-width__body__header']}>
@@ -17,33 +23,19 @@ const PointsList = () => {
           <span>Points</span>
         </div>
         <div className={cls['user-width__body__list']}>
-          <div className={cls['user-width__body__list__child']}>
-            <span>1</span>
-            <div>
-              <span>01/03/2020</span>
-              <p>Test span</p>
+          {data.results.map(({ id, point, created_at }, index) => (
+            <div key={id} className={cls['user-width__body__list__child']}>
+              <span>{index + 1}</span>
+              <div>
+                <span>{dateParser(created_at)}</span>
+                <p>Points description</p>
+              </div>
+              <b>+ {point} points</b>
             </div>
-            <b>+ 2000 points</b>
-          </div>
-          <div className={cls['user-width__body__list__child']}>
-            <span>1</span>
-            <div>
-              <span>01/03/2020</span>
-              <p>Test span</p>
-            </div>
-            <b>+ 2000 points</b>
-          </div>
-          <div className={cls['user-width__body__list__child']}>
-            <span>1</span>
-            <div>
-              <span>01/03/2020</span>
-              <p>Test span</p>
-            </div>
-            <b>+ 2000 points</b>
-          </div>
+          ))}
         </div>
       </div>
-      <Pagination />
+      {options.pageCount > options.limit && <Pagination options={options} />}
     </div>
   );
 };

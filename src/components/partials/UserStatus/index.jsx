@@ -1,12 +1,13 @@
 import { useGetUserConsultationsQuery } from '../../../store/query/consultationQuery';
+import { useGetUserPointsQuery } from '../../../store/query/pointsQuery';
 import { useGetReviewsQuery } from '../../../store/query/reviewQuery';
 import { useGetOrdersQuery } from '../../../store/query/orderQuery';
+import { orderTable } from '../../../utils/userOrderTable';
 import { paths } from '../../../constants/paths';
 import { AiOutlineRight } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import cls from './userStatus.module.scss';
 import { useSelector } from 'react-redux';
-import { orderTable } from '../../../utils/userOrderTable';
 
 const UserStatus = () => {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ const UserStatus = () => {
     window.scrollTo(window.scrollX, 0);
     navigate(path);
   };
+
+  const { data: pointsData } = useGetUserPointsQuery({ userId: userInfo.id });
 
   const { data } = useGetOrdersQuery(
     {
@@ -39,7 +42,7 @@ const UserStatus = () => {
     userId: userInfo.id,
   });
 
-  const userOrderStatus = orderTable(data)
+  const userOrderStatus = orderTable(data);
 
   return (
     <div className={cls['user']}>
@@ -51,11 +54,20 @@ const UserStatus = () => {
               newPageHandler(`/${paths.MY_PAGE}/${paths.ORDER_HISTORY}`)
             }
           >
-            <b>{data?.results.length}</b>
+            <b>{data?.results ? data?.results.length : 0}</b>
             <span>orders</span>
           </div>
-          <div>
-            <b>50</b>
+          <div
+            onClick={() => newPageHandler(`/${paths.MY_PAGE}/${paths.POINTS}`)}
+          >
+            <b>
+              {pointsData?.results
+                ? pointsData?.results.reduce(
+                    (prev, item) => (prev += item.point),
+                    0
+                  )
+                : 0}
+            </b>
             <span>points</span>
           </div>
         </div>
@@ -68,35 +80,49 @@ const UserStatus = () => {
           </div>
           <div className={cls['user-status__body__child']}>
             <div>
-              <span id={cls[userOrderStatus.awaiting_payment > 0 && 'active']}>{userOrderStatus.awaiting_payment}</span>
+              <span id={cls[userOrderStatus.awaiting_payment > 0 && 'active']}>
+                {userOrderStatus.awaiting_payment}
+              </span>
               <p>awaiting payment</p>
             </div>
             <AiOutlineRight />
           </div>
           <div className={cls['user-status__body__child']}>
             <div>
-              <span id={cls[userOrderStatus.confirming_payment > 0 && 'active']}>{userOrderStatus.confirming_payment}</span>
+              <span
+                id={cls[userOrderStatus.confirming_payment > 0 && 'active']}
+              >
+                {userOrderStatus.confirming_payment}
+              </span>
               <p>confirming payment</p>
             </div>
             <AiOutlineRight />
           </div>
           <div className={cls['user-status__body__child']}>
             <div>
-              <span id={cls[userOrderStatus.preparing_for_delivery > 0 && 'active']}>{userOrderStatus.preparing_for_delivery}</span>
+              <span
+                id={cls[userOrderStatus.preparing_for_delivery > 0 && 'active']}
+              >
+                {userOrderStatus.preparing_for_delivery}
+              </span>
               <p>preparing for delivery</p>
             </div>
             <AiOutlineRight />
           </div>
           <div className={cls['user-status__body__child']}>
             <div>
-              <span id={cls[userOrderStatus.shipped > 0 && 'active']}>{userOrderStatus.shipped}</span>
+              <span id={cls[userOrderStatus.shipped > 0 && 'active']}>
+                {userOrderStatus.shipped}
+              </span>
               <p>shipped</p>
             </div>
             <AiOutlineRight />
           </div>
           <div className={cls['user-status__body__child']}>
             <div>
-              <span id={cls[userOrderStatus.delivered > 0 && 'active']}>{userOrderStatus.delivered}</span>
+              <span id={cls[userOrderStatus.delivered > 0 && 'active']}>
+                {userOrderStatus.delivered}
+              </span>
               <p>delivered</p>
             </div>
           </div>

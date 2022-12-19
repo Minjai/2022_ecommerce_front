@@ -9,13 +9,40 @@ import EmptyText from '../components/elements/UI/EmptyText';
 import PageWrapper from '../components/layouts/PageWrapper';
 import Loader from '../components/elements/UI/Loader';
 import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 
 const SingleProduct = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetSingleProductQuery({ id });
+
+  const [page, setPage] = useState(1);
+  const [pageStart, setPageStart] = useState(0);
+  const [offset, setOffset] = useState(0);
+  const [pageEnd, setPageEnd] = useState(3);
+
   const { data: generalData, isLoading: isLoad } = useGetConsultationsQuery(
-    localStorage.getItem('accessToken')
+    {
+      token: localStorage.getItem('accessToken'),
+      page,
+      offset,
+    },
+    {
+      refetchOnMountOrArgChange: true,
+    }
   );
+
+  const paginationOptions = {
+    limit: 5,
+    pageCount: generalData?.count,
+    page,
+    offset,
+    setPage,
+    setOffset,
+    pageStart,
+    setPageStart,
+    pageEnd,
+    setPageEnd,
+  };
 
   return (
     <PageWrapper>
@@ -32,8 +59,12 @@ const SingleProduct = () => {
         <Description>1:1 General Consultations</Description>
         {isLoad ? (
           <Loader />
-        ) : generalData?.results.length !== 0 ? (
-          <ConsultationList data={generalData?.results} bottom={true} />
+        ) : generalData?.results ? (
+          <ConsultationList
+            options={paginationOptions}
+            data={generalData?.results}
+            bottom={true}
+          />
         ) : (
           <EmptyText text={'general consultation'} />
         )}

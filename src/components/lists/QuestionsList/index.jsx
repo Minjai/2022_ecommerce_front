@@ -1,12 +1,12 @@
 import { AiOutlineDown, AiOutlineLock } from 'react-icons/ai';
 import { dateParser } from '../../../utils/dateParser';
 import Pagination from '../../elements/Pagination';
+import { paths } from '../../../constants/paths';
 import { useNavigate } from 'react-router-dom';
 import cls from './questionsList.module.scss';
 import { useState } from 'react';
-import { paths } from '../../../constants/paths';
 
-const QuestionsList = ({ data }) => {
+const QuestionsList = ({ data, options }) => {
   const [select, setSelect] = useState('select range');
   const [isRange, setRange] = useState(false);
 
@@ -19,8 +19,8 @@ const QuestionsList = ({ data }) => {
 
   const navigatePostHandler = () => {
     window.scrollTo(window.scrollX, 0);
-    navigate(`/${paths.CUSTOMER_POST}`)
-  }
+    navigate(`/${paths.CUSTOMER_POST}`);
+  };
 
   return (
     <div className={cls['question']}>
@@ -45,11 +45,9 @@ const QuestionsList = ({ data }) => {
                 <li onClick={() => handleRange('All order')}>All order</li>
               </ul>
             </span>
-            <button onClick={navigatePostHandler}>
-              Ask New
-            </button>
+            <button onClick={navigatePostHandler}>Ask New</button>
           </div>
-          <p>{data.results.length} Questions</p>
+          <p>{data.count} Questions</p>
         </div>
       </div>
       <div className={cls['question__body']}>
@@ -81,7 +79,7 @@ const QuestionsList = ({ data }) => {
           }
         )}
       </div>
-      <Pagination />
+      {options.pageCount > options.limit && <Pagination options={options} />}
     </div>
   );
 };

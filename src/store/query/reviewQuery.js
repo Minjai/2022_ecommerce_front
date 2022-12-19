@@ -9,7 +9,10 @@ export const reviewQuery = createApi({
   }),
   endpoints: (builder) => ({
     getReviews: builder.query({
-      query: ({ userId }) => `reviews/reviews/?user=${userId}`,
+      query: ({ userId, page, offset }) =>
+        `reviews/reviews/?user=${userId}&limit=4${
+          page > 1 ? `&offset=${offset}` : ''
+        }`,
       providesTags: () => ['REVIEW_TAG'],
     }),
     getAllReviews: builder.query({

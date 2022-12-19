@@ -19,12 +19,30 @@ const UserReviewList = () => {
     setRange(false);
   };
 
+  const [page, setPage] = useState(1);
+  const [pageStart, setPageStart] = useState(0);
+  const [offset, setOffset] = useState(0);
+  const [pageEnd, setPageEnd] = useState(3);
+
   const { data, isLoading } = useGetReviewsQuery(
-    { userId: userInfo.id },
+    { userId: userInfo.id, page, offset },
     {
       refetchOnMountOrArgChange: true,
     }
   );
+
+  const paginationOptions = {
+    limit: 4,
+    pageCount: data?.count,
+    page,
+    offset,
+    setPage,
+    setOffset,
+    pageStart,
+    setPageStart,
+    pageEnd,
+    setPageEnd,
+  };
 
   return (
     <div className={cls['review']}>
@@ -50,7 +68,7 @@ const UserReviewList = () => {
               </ul>
             </span>
           </div>
-          <p>{data?.results?.length} Reviews</p>
+          <p>{data?.count} Reviews</p>
         </div>
       </div>
       <div className={cls['review__body']}>
@@ -80,7 +98,9 @@ const UserReviewList = () => {
           <EmptyText text={'reviews'} />
         )}
       </div>
-      <Pagination />
+      {paginationOptions.pageCount > paginationOptions.limit && (
+        <Pagination options={paginationOptions} />
+      )}
     </div>
   );
 };

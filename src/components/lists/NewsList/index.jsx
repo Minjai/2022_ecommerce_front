@@ -3,7 +3,7 @@ import Pagination from '../../elements/Pagination';
 import { useNavigate } from 'react-router-dom';
 import cls from './newsList.module.scss';
 
-const NewsList = ({ data }) => {
+const NewsList = ({ data, options }) => {
   const navigate = useNavigate();
 
   return (
@@ -20,9 +20,11 @@ const NewsList = ({ data }) => {
           </div>
         ))}
       </div>
-      <div className={cls['news-list__footer']}>
-        <Pagination pages={10} />
-      </div>
+      {options.pageCount > options.limit && (
+        <div className={cls['news-list__footer']}>
+          <Pagination options={options} />
+        </div>
+      )}
     </div>
   );
 };

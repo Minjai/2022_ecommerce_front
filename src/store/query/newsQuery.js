@@ -9,8 +9,10 @@ export const newsQuery = createApi({
   }),
   endpoints: (builder) => ({
     getNews: builder.query({
-      query: ({ newsSearch }) =>
-        `news/news/${newsSearch ? `?search=${newsSearch}` : ''}`,
+      query: ({ newsSearch, page, offset }) =>
+        `news/news/?limit=5${page > 1 ? `&offset=${offset}` : ''}${
+          newsSearch ? `&search=${newsSearch}` : ''
+        }`,
       providesTags: () => ['NEWS_TAG'],
     }),
     getSingleNew: builder.query({

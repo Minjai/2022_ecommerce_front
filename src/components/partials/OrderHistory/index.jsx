@@ -1,4 +1,5 @@
 import { useGetOrdersQuery } from '../../../store/query/orderQuery';
+import { dateRangeParser } from '../../../utils/dateRangeParser';
 import { axiosInstance } from '../../../constants/axios';
 import Pagination from '../../elements/Pagination';
 import { AiOutlineDown } from 'react-icons/ai';
@@ -12,17 +13,30 @@ import 'rsuite/dist/rsuite.css';
 
 const OrderHistory = () => {
   const [select, setSelect] = useState('select range');
+  const [date, setDate] = useState([
+    new Date(),
+    new Date()
+  ]);
   const [isRange, setRange] = useState(false);
   const [orders, setOrders] = useState([]);
   const [load, setLoad] = useState(0);
   const [count, setCount] = useState(0);
 
-  const { userInfo } = useSelector(state => state.user)
+  const [page, setPage] = useState(1);
+  const [pageStart, setPageStart] = useState(0);
+  const [offset, setOffset] = useState(0);
+  const [pageEnd, setPageEnd] = useState(3);
+
+  console.log(dateRangeParser(date));
+
+  const { userInfo } = useSelector((state) => state.user);
 
   const { data, isLoading } = useGetOrdersQuery(
     {
       token: localStorage.getItem('accessToken'),
-      userId: userInfo.id
+      userId: userInfo.id,
+      page,
+      offset,
     },
     {
       refetchOnMountOrArgChange: true,
@@ -84,11 +98,24 @@ const OrderHistory = () => {
     setOrders(result);
   }, [data]);
 
+  const paginationOptions = {
+    limit: 4,
+    pageCount: data?.count,
+    page,
+    offset,
+    setPage,
+    setOffset,
+    pageStart,
+    setPageStart,
+    pageEnd,
+    setPageEnd,
+  };
+
   return (
     <div className={cls['points']}>
       <h3 className={cls['points__header']}>
         Order History
-        <span>Total {data?.results.length} orders</span>
+        <span>Total {data?.count} orders</span>
       </h3>
       <div className={cls['points__body']}>
         <span className={cls[isRange ? 'active' : '']}>
@@ -105,6 +132,7 @@ const OrderHistory = () => {
           </ul>
         </span>
         <DateRangePicker
+          onChange={setDate}
           showOneCalendar
           ranges={[]}
           className={cls['picker']}
@@ -115,10 +143,12 @@ const OrderHistory = () => {
       </div>
       {isLoading || load !== count ? (
         <Loader />
-      ) : ( 
+      ) : (
         <>
           <OrderList data={orders} />
-          {orders?.length > 0 && <Pagination />}
+          {paginationOptions?.pageCount > paginationOptions?.limit && (
+            <Pagination options={paginationOptions} />
+          )}
         </>
       )}
     </div>
