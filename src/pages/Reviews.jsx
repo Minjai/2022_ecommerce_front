@@ -67,7 +67,9 @@ const Reviews = () => {
           <>
             <Description>Reviews Library</Description>
             <ReviewsList reviews={data?.results} />
-            <Pagination options={paginationOptions} />
+            {paginationOptions.pageCount > paginationOptions.limit && (
+              <Pagination options={paginationOptions} />
+            )}
           </>
         ) : (
           <EmptyText text={'review'} />

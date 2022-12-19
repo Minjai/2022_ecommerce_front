@@ -43,7 +43,7 @@ const UserPoints = () => {
     <div className="user-width">
       {isLoading ? (
         <Loader />
-      ) : pointsData.results.length > 0 ? (
+      ) : pointsData?.results.length > 0 ? (
         <PointsList
           points={allPoints}
           options={paginationOptions}

@@ -1,6 +1,7 @@
 import { notificationQuery } from '../query/notificationQuery';
 import { consultationQuery } from '../query/consultationQuery';
 import { productSearchQuery } from '../query/productSearch';
+import { settingsQuery } from '../query/settingsQuery';
 import { categoryQuery } from '../query/categoryQuery';
 import { productQuery } from '../query/productQuery';
 import { pointsQuery } from '../query/pointsQuery';
@@ -41,4 +42,5 @@ export const rootSlice = combineReducers({
   [productSearchQuery.reducerPath]: productSearchQuery.reducer,
   [notificationQuery.reducerPath]: notificationQuery.reducer,
   [orderQuery.reducerPath]: orderQuery.reducer,
+  [settingsQuery.reducerPath]: settingsQuery.reducer,
 });

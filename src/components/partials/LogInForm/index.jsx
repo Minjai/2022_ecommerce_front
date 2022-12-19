@@ -1,9 +1,10 @@
+import { setContent, setModal } from '../../../store/slices/modal';
+import { modalPaths, paths } from '../../../constants/paths';
 import { setAuth } from '../../../store/slices/user/user';
 import { axiosInstance } from '../../../constants/axios';
 import { yupResolver } from '@hookform/resolvers/yup';
 import FormInput from '../../elements/FormInput';
 import Button from '../../elements/UI/FormButton';
-import { paths } from '../../../constants/paths';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import cls from './loginForm.module.scss';
@@ -44,7 +45,7 @@ const LoginForm = () => {
 
       dispatch(setAuth(true));
       navigate(paths.HOME);
-      reset()
+      reset();
     } catch (error) {
       if (error.response.data.detail) {
         setError('email', {
@@ -53,6 +54,11 @@ const LoginForm = () => {
         });
       }
     }
+  };
+
+  const handleForgetPassword = () => {
+    dispatch(setModal(true));
+    dispatch(setContent(modalPaths.FORGET_PASSWORD));
   };
 
   return (
@@ -71,7 +77,7 @@ const LoginForm = () => {
           rules={register('password')}
         />
         {errors.password && <p>{errors.password.message}</p>}
-        <span>Forgot password?</span>
+        <span onClick={handleForgetPassword}>Forgot password?</span>
         <Button type="submit">Log In</Button>
       </form>
       <span className={cls['login__confirm']}>

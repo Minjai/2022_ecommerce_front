@@ -14,8 +14,8 @@ import 'rsuite/dist/rsuite.css';
 const OrderHistory = () => {
   const [select, setSelect] = useState('select range');
   const [date, setDate] = useState([
-    new Date(),
-    new Date()
+    new Date('2000-01-01 01:00:00'),
+    new Date('2025-01-01   01:00:00')
   ]);
   const [isRange, setRange] = useState(false);
   const [orders, setOrders] = useState([]);
@@ -27,7 +27,7 @@ const OrderHistory = () => {
   const [offset, setOffset] = useState(0);
   const [pageEnd, setPageEnd] = useState(3);
 
-  console.log(dateRangeParser(date));
+  const { startDate, endDate } = dateRangeParser(date)
 
   const { userInfo } = useSelector((state) => state.user);
 
@@ -37,6 +37,8 @@ const OrderHistory = () => {
       userId: userInfo.id,
       page,
       offset,
+      endDate,
+      startDate
     },
     {
       refetchOnMountOrArgChange: true,

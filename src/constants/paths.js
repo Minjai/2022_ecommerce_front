@@ -11,6 +11,7 @@ export const paths = {
   BEST: 'best',
   CUSTOMER_HELP: 'customer-help',
   REVIEW: 'review',
+  FORGET_PASSWORD: 'forget-password',
   NEWS: 'news',
   FAQ: 'faq',
   CONSULTATION: 'consultation',
@@ -41,5 +42,6 @@ export const modalPaths = {
   ORDER: 'order',
   SEARCH: 'search',
   ALARM: 'alarm',
-  PAYMENT: 'payment'
+  PAYMENT: 'payment',
+  FORGET_PASSWORD: 'forget-password'
 }

@@ -9,10 +9,10 @@ export const orderQuery = createApi({
   }),
   endpoints: (builder) => ({
     getOrders: builder.query({
-      query: ({ token, userId, offset, page }) => ({
-        url: `orders/orders/?buyer=${userId}&limit=4${
-          page > 1 ? `&offset=${offset}` : ''
-        }`,
+      query: ({ token, userId, offset, page, startDate, endDate }) => ({
+        url: `orders/orders/?buyer=${userId}${
+          startDate ? `&start_date=${startDate}&end_date=${endDate}` : ''
+        }&limit=4${page > 1 ? `&offset=${offset}` : ''}`,
         headers: {
           Authorization: `Bearer ${token}`,
         },

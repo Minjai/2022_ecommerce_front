@@ -1,6 +1,8 @@
 import { consultationQuery } from './query/consultationQuery';
+import { notificationQuery } from './query/notificationQuery';
 import { productSearchQuery } from './query/productSearch';
 import { categoryQuery } from './query/categoryQuery';
+import { settingsQuery } from './query/settingsQuery';
 import { productQuery } from './query/productQuery';
 import { pointsQuery } from './query/pointsQuery';
 import { configureStore } from '@reduxjs/toolkit';
@@ -9,7 +11,6 @@ import { orderQuery } from './query/orderQuery';
 import { newsQuery } from './query/newsQuery';
 import { faqQuery } from './query/faqQuery';
 import { rootSlice } from './slices';
-import { notificationQuery } from './query/notificationQuery';
 
 export const store = configureStore({
   reducer: rootSlice,
@@ -24,6 +25,7 @@ export const store = configureStore({
       newsQuery.middleware,
       faqQuery.middleware,
       pointsQuery.middleware,
+      settingsQuery.middleware,
       notificationQuery.middleware
     ),
 });

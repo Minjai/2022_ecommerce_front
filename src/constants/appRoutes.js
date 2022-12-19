@@ -1,3 +1,4 @@
+import ForgetPassword from '../pages/authorization/ForgetPassword';
 import Consultation from '../pages/customer-help/Consultation';
 import CustomerHelp from '../pages/customer-help/CustomerHelp';
 import CheckoutSecond from '../pages/checkout/CheckoutSecond';
@@ -26,12 +27,12 @@ import Category from '../pages/Category';
 import Redirect from '../pages/Redirect';
 import AboutUs from '../pages/AboutUs';
 import Reviews from '../pages/Reviews';
+import Search from '../pages/Search';
 import Order from '../pages/Order';
 import Best from '../pages/Best';
 import Home from '../pages/Home';
 import Cart from '../pages/Cart';
 import { paths } from './paths';
-import Search from '../pages/Search';
 
 export const localRoutes = [
   {
@@ -130,6 +131,11 @@ export const localRoutes = [
     id: 17,
     path: paths.SEARCH,
     element: <Search />,
+  },
+  {
+    id: 18,
+    path: paths.FORGET_PASSWORD,
+    element: <ForgetPassword />,
   },
 ];
 
@@ -295,4 +301,4 @@ export const privateRoutes = [
     path: paths.SEARCH,
     element: <Search />,
   },
-]
+];

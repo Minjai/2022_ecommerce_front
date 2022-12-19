@@ -7,17 +7,18 @@ import { useSelector } from 'react-redux';
 import cls from './modal.module.scss';
 import { useEffect } from 'react';
 import PaymentInfo from '../../partials/PaymentInfo/index.jsx';
+import ForgetModal from '../../partials/ForgetModal/index.jsx';
 
 const ModalWrapper = () => {
   const { isActive, content } = useSelector((state) => state.modal);
 
   useEffect(() => {
-    if(window.innerWidth > 700){
+    if (window.innerWidth > 700) {
       window.scrollTo(window.scrollX, 18);
-    }else{
+    } else {
       window.scrollTo(window.scrollX, 0);
     }
-  }, [isActive])
+  }, [isActive]);
 
   return (
     <div id={cls[isActive ? 'active' : '']} className={cls['modal']}>
@@ -41,10 +42,14 @@ const ModalWrapper = () => {
           <TrackingList />
         </CustomContent>
       ) : content === modalPaths.SEARCH ? (
-        <MobileSearch/>
+        <MobileSearch />
       ) : content === modalPaths.ALARM ? (
-        <AlarmContent/>
-      ) : <PaymentInfo/>}
+        <AlarmContent />
+      ) : content === modalPaths.PAYMENT ? (
+        <PaymentInfo />
+      ) : (
+        <ForgetModal />
+      )}
     </div>
   );
 };
