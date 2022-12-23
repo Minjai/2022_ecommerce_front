@@ -48,6 +48,10 @@
         margin-top: 20px;
       }
 
+      .clickable {
+        pointer-events: none;
+      }
+
       > label {
         display: flex;
         justify-content: space-between;
@@ -98,18 +102,21 @@
           }
 
           ul {
-            width: 101%;
+            width: 100.8%;
             background: #fff;
             margin: 0;
             padding: 0;
-            left: -0.5%;
+            left: -0.4%;
             top: 48px;
+            max-height: 206px;
             position: absolute;
             list-style: none;
             z-index: 4;
             border: 2px solid rgba(128, 128, 128, 0.3);
             border-bottom: 1px solid rgba(128, 128, 128, 0.3);
             border-top: none;
+            overflow-x: hidden;
+            overflow-y: scroll;
             opacity: 0;
             pointer-events: none;
 

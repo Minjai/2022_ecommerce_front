@@ -1,14 +1,12 @@
-import {
-  AiOutlineDown,
-  AiOutlineShoppingCart,
-  AiOutlineUser,
-  AiOutlineClose,
-} from 'react-icons/ai';
+import { useGetAllCategoriesQuery } from '../../../store/query/productQuery';
+import { setCategoryData } from '../../../store/slices/category';
 import { setActiveBurger } from '../../../store/slices/burger';
+import { setAuth } from '../../../store/slices/user/user';
 import { useDispatch, useSelector } from 'react-redux';
 import RouterLink from '../../elements/RouterLink';
 import { paths } from '../../../constants/paths';
-import { TbTruckDelivery } from 'react-icons/tb';
+import { AiOutlineClose } from 'react-icons/ai';
+import { FiChevronDown } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import cls from './headerModal.module.scss';
 import Logo from '../../elements/UI/Logo';
@@ -21,7 +19,7 @@ const HeaderModal = () => {
   const [isCategory, setCategory] = useState(false);
   const [isCustomer, setCustomer] = useState(false);
 
-  const { userInfo } = useSelector(state => state.user)
+  const { userInfo } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,6 +33,21 @@ const HeaderModal = () => {
     navigate(path);
   };
 
+  const handleCategory = (item) => {
+    dispatch(setCategoryData(item));
+    navigate(`/${paths.CATEGORY}`);
+    closeModalHandler()
+  };
+
+  const logOutHandler = () => {
+    dispatch(setAuth(false));
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('accessToken');
+    navigate(paths.HOME);
+  };
+
+  const { data } = useGetAllCategoriesQuery();
+
   return (
     <div id={cls[isActive ? 'modal_active' : '']} className={cls['modal']}>
       <div className={cls['modal-wrapper']}>
@@ -42,7 +55,7 @@ const HeaderModal = () => {
           <div className={cls['modal-wrapper__container']}>
             <div className={cls['modal-wrapper__header']}>
               <Logo />
-              <span onClick={() => dispatch(setActiveBurger(false))}>
+              <span onClick={closeModalHandler}>
                 <AiOutlineClose />
               </span>
             </div>
@@ -68,7 +81,7 @@ const HeaderModal = () => {
                 className={cls['modal-wrapper__mid__currency']}
               >
                 <span onClick={() => setCurrencty((prev) => !prev)}>
-                  <p>USD ($)</p> <AiOutlineDown />
+                  <p>USD ($)</p> <FiChevronDown />
                 </span>
                 <ul>
                   <li>Test</li>
@@ -82,22 +95,30 @@ const HeaderModal = () => {
               <div className={cls['modal-wrapper__body__userLinks']}>
                 <span
                   onClick={() =>
-                    navigateHandler(isAuth ? `/${paths.MY_PAGE}/${paths.USER_PROFILE}` : `/${paths.SIGNUP}`)
+                    navigateHandler(
+                      isAuth
+                        ? `/${paths.MY_PAGE}/${paths.USER_PROFILE}`
+                        : `/${paths.SIGNUP}`
+                    )
                   }
                 >
-                  <AiOutlineUser />
+                  <img src="/img/user-icon.png" alt="user-icon" />
                   <p>My Page</p>
                 </span>
                 <span onClick={() => navigateHandler(`/${paths.CART}`)}>
-                  <AiOutlineShoppingCart />
+                  <img src="/img/cart.png" alt="" />
                   <p>Cart</p>
                 </span>
                 <span
                   onClick={() =>
-                    navigateHandler(isAuth ? `/${paths.MY_PAGE}/${paths.ORDER_HISTORY}` : `/${paths.SIGNUP}`)
+                    navigateHandler(
+                      isAuth
+                        ? `/${paths.MY_PAGE}/${paths.ORDER_HISTORY}`
+                        : `/${paths.SIGNUP}`
+                    )
                   }
                 >
-                  <TbTruckDelivery />
+                  <img src="/img/delivery.png" alt="delivery-icon" />
                   <p>Orders</p>
                 </span>
               </div>
@@ -110,12 +131,14 @@ const HeaderModal = () => {
                 <div className={cls[isCategory ? 'active' : '']}>
                   <span onClick={() => setCategory((prev) => !prev)}>
                     Category
-                    <AiOutlineDown />
+                    <FiChevronDown />
                   </span>
                   <ul>
-                    <li>test</li>
-                    <li>test</li>
-                    <li>test</li>
+                    {data?.slice(0, 4).map((item) => (
+                      <li onClick={() => handleCategory(item)} key={item.id}>
+                        {item.title}
+                      </li>
+                    ))}
                   </ul>
                 </div>
                 <div>
@@ -125,7 +148,7 @@ const HeaderModal = () => {
                 </div>
                 <div className={cls[isCustomer ? 'active' : '']}>
                   <span onClick={() => setCustomer((prev) => !prev)}>
-                    Customer Help <AiOutlineDown />
+                    Customer Help <FiChevronDown />
                   </span>
                   <ul>
                     <li
@@ -184,7 +207,7 @@ const HeaderModal = () => {
               >
                 1:1 General Consultation
               </button>
-              {isAuth && <button className={cls['full']}>Log out</button>}
+              {isAuth && <button onClick={logOutHandler} className={cls['full']}>Log out</button>}
             </div>
           </div>
         </div>

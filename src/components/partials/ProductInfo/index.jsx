@@ -71,13 +71,13 @@ const ProductInfo = ({ data }) => {
               </ul>
             </div>
           </div>
-          <button
+          <button id={cls[status === 'out_of_stock' ? 'outOfStock' : '']}
             className={cls['cart-btn']}
             onClick={isInCart(id) ? cartNavigate : addCartHandler}
           >
             {isInCart(id) ? 'Cart' : 'Add to Cart'}
           </button>
-          <button>Purchase now</button>
+          <button id={cls[status === 'out_of_stock' ? 'outOfStock' : '']}>Purchase now</button>
           {status === 'out_of_stock' && <h5>*This product is out of stock</h5>}
         </div>
       </div>

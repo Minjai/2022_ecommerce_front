@@ -112,6 +112,7 @@
         img {
           width: 16%;
           height: 90px;
+          object-fit: contain;
         }
 
         div {
@@ -290,6 +291,12 @@
     &-subtotal {
       position: relative;
       padding: 20px 0;
+
+      .discount{
+        span{
+          color: $app-main-color;
+        }
+      }
 
       &::before {
         @extend %border-bottom;

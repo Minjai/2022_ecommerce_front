@@ -19,8 +19,6 @@ const Search = () => {
           <>
             <PageTitle>Results of "{searchValue}"</PageTitle>
             <PaginatedList
-              limit={9}
-              count={searchData?.count}
               data={searchData?.results}
             />
           </>

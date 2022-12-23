@@ -9,25 +9,32 @@ import { reviewQuery } from '../query/reviewQuery';
 import { combineReducers } from '@reduxjs/toolkit';
 import { orderQuery } from '../query/orderQuery';
 import { newsQuery } from '../query/newsQuery';
+import { countryQuery } from '../query/country';
+import consultationSlice from './consultation';
 import { faqQuery } from '../query/faqQuery';
 import categorySlice from './category';
 import productSlice from './product';
 import userSlice from './user/user';
 import burgerSlice from './burger';
+import pointSlice from './points';
 import searchSlice from './search';
 import reviewSlice from './review';
+import deliverySlice from './delivery';
 import alertSlice from './alert';
 import orderSlice from './order';
 import modalSlice from './modal';
 import cartSlice from './cart';
 
 export const rootSlice = combineReducers({
+  consultation: consultationSlice,
   category: categorySlice,
+  delivery: deliverySlice,
   product: productSlice,
   burger: burgerSlice,
   search: searchSlice,
   order: orderSlice,
   alert: alertSlice,
+  points: pointSlice,
   modal: modalSlice,
   review: reviewSlice,
   user: userSlice,
@@ -43,4 +50,5 @@ export const rootSlice = combineReducers({
   [notificationQuery.reducerPath]: notificationQuery.reducer,
   [orderQuery.reducerPath]: orderQuery.reducer,
   [settingsQuery.reducerPath]: settingsQuery.reducer,
+  [countryQuery.reducerPath]: countryQuery.reducer,
 });

@@ -91,13 +91,13 @@
       margin: 0;
       padding: 0;
       display: flex;
-      position: relative;
 
       & li:nth-child(1) {
         margin-right: 15px;
       }
 
       li {
+        position: relative;
         span {
           font-size: 26px;
 

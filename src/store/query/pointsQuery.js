@@ -9,17 +9,17 @@ export const pointsQuery = createApi({
   }),
   endpoints: (builder) => ({
     getUserPoints: builder.query({
-      query: ({ userId, page, offset }) =>
-        `accounts/points/?user=${userId}&limit=5${
+      query: ({ userId, page, offset, token }) => ({
+        url: `accounts/points/?user=${userId}&limit=5${
           page > 1 ? `&offset=${offset}` : ''
         }`,
-      providesTags: () => ['POINTS_TAG'],
-    }),
-    getAllUserPoints: builder.query({
-      query: ({ userId }) => `accounts/points/?user=${userId}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      }),
       providesTags: () => ['POINTS_TAG'],
     }),
   }),
 });
 
-export const { useGetUserPointsQuery, useGetAllUserPointsQuery } = pointsQuery;
+export const { useGetUserPointsQuery } = pointsQuery;

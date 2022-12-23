@@ -28,11 +28,12 @@ import Redirect from '../pages/Redirect';
 import AboutUs from '../pages/AboutUs';
 import Reviews from '../pages/Reviews';
 import Search from '../pages/Search';
-import Order from '../pages/Order';
 import Best from '../pages/Best';
 import Home from '../pages/Home';
 import Cart from '../pages/Cart';
 import { paths } from './paths';
+import Policy from '../pages/Policy';
+import Terms from '../pages/Terms';
 
 export const localRoutes = [
   {
@@ -59,11 +60,6 @@ export const localRoutes = [
     id: 5,
     path: paths.CART,
     element: <Cart />,
-  },
-  {
-    id: 6,
-    path: paths.ORDERS,
-    element: <Order />,
   },
   {
     id: 7,
@@ -123,11 +119,6 @@ export const localRoutes = [
     element: <SingleNew />,
   },
   {
-    id: 16,
-    path: paths.CONSULTATION_INFO,
-    element: <SingleConsultation />,
-  },
-  {
     id: 17,
     path: paths.SEARCH,
     element: <Search />,
@@ -136,6 +127,16 @@ export const localRoutes = [
     id: 18,
     path: paths.FORGET_PASSWORD,
     element: <ForgetPassword />,
+  },
+  {
+    id: 19,
+    path: paths.POLICY,
+    element: <Policy />,
+  },
+  {
+    id: 20,
+    path: paths.TERMS_CONDITIONS,
+    element: <Terms />,
   },
 ];
 
@@ -154,11 +155,6 @@ export const privateRoutes = [
     id: 3,
     path: paths.CART,
     element: <Cart />,
-  },
-  {
-    id: 4,
-    path: paths.ORDERS,
-    element: <Order />,
   },
   {
     id: 5,
@@ -300,5 +296,20 @@ export const privateRoutes = [
     id: 17,
     path: paths.SEARCH,
     element: <Search />,
+  },
+  {
+    id: 18,
+    path: paths.FORGET_PASSWORD,
+    element: <ForgetPassword />,
+  },
+  {
+    id: 19,
+    path: paths.POLICY,
+    element: <Policy />,
+  },
+  {
+    id: 20,
+    path: paths.TERMS_CONDITIONS,
+    element: <Terms />,
   },
 ];

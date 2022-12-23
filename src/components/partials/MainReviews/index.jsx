@@ -6,6 +6,7 @@ import EmptyText from '../../elements/UI/EmptyText';
 import { paths } from '../../../constants/paths';
 import { useNavigate } from 'react-router-dom';
 import cls from './mainReviews.module.scss';
+import { AiOutlineRight } from 'react-icons/ai';
 
 const MainReviews = () => {
   const navigate = useNavigate();
@@ -26,12 +27,12 @@ const MainReviews = () => {
     <div className={cls['reviews']}>
       <div className={cls['reviews__header']}>
         <Description>Reviews</Description>
-        <span onClick={reviewHandler}>View More</span>
+        <span onClick={reviewHandler}>View More <AiOutlineRight/></span>
       </div>
       {isLoading ? (
         <ReviewSkeleton />
       ) : data?.results !== 0 ? (
-        <ReviewsCarousel data={data.results} />
+        <ReviewsCarousel data={data?.results} />
       ) : (
         <EmptyText text={'review'} />
       )}

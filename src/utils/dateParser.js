@@ -1,4 +1,4 @@
-export const dateParser = (date) => {
+export const dateParser = (date = '') => {
   const newDate = new Date(date);
 
   const month = newDate.getMonth();

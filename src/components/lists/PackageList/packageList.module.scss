@@ -72,6 +72,19 @@
       & div:last-child {
         width: 43%;
 
+        .cross {
+          position: relative;
+          &::before {
+            content: '';
+            position: absolute;
+            width: 110%;
+            height: 1px;
+            top: 49%;
+            background: #a6a6a6;
+            left: -5%;
+          }
+        }
+
         p {
           color: #a6a6a6;
           font-size: 14px;

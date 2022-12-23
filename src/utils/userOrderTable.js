@@ -9,7 +9,7 @@ export const orderTable = (data) => {
 
   data?.results.forEach((item) => {
     let count = 0;
-    orderObject[item.status] = count + 1;
+    orderObject[item.status] += count + 1;
   });
 
   return orderObject

@@ -1,5 +1,6 @@
-import cls from './reviewItem.module.scss';
 import { dateParser } from '../../../utils/dateParser';
+import { nameClose } from '../../../utils/nameCloser';
+import cls from './reviewItem.module.scss';
 import Rating from '../UI/Rating';
 
 const ReviewItem = ({ review }) => {
@@ -20,7 +21,7 @@ const ReviewItem = ({ review }) => {
         </div>
         <h4>{product.product_name}</h4>
         <span>
-          {user.username} {dateParser(created_at)}
+          {nameClose(user.username)} {dateParser(created_at)}
         </span>
         <p>{comment}</p>
       </div>

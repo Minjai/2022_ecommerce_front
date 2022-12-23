@@ -8,6 +8,7 @@ import { pointsQuery } from './query/pointsQuery';
 import { configureStore } from '@reduxjs/toolkit';
 import { reviewQuery } from './query/reviewQuery';
 import { orderQuery } from './query/orderQuery';
+import { countryQuery } from './query/country';
 import { newsQuery } from './query/newsQuery';
 import { faqQuery } from './query/faqQuery';
 import { rootSlice } from './slices';
@@ -26,6 +27,7 @@ export const store = configureStore({
       faqQuery.middleware,
       pointsQuery.middleware,
       settingsQuery.middleware,
-      notificationQuery.middleware
+      notificationQuery.middleware,
+      countryQuery.middleware
     ),
 });

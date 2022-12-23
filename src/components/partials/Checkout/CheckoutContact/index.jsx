@@ -1,13 +1,17 @@
 import { useCheckoutButtons } from '../../../../hooks/useCheckoutButtons';
+import { useGetCountriesQuery } from '../../../../store/query/country';
 import CheckoutButtons from '../../../elements/UI/CheckoutButtons';
+import { setDelivery } from '../../../../store/slices/delivery';
+import { axiosInstance } from '../../../../constants/axios';
+import { useDispatch, useSelector } from 'react-redux';
 import { paths } from '../../../../constants/paths';
 import cls from './checkoutContact.module.scss';
 import { AiOutlineDown } from 'react-icons/ai';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { setPoints } from '../../../../store/slices/points';
 
 const CheckoutContact = () => {
-  const [country, setCountry] = useState('Select country');
+  const [country, setCountry] = useState({ title: 'Select country' });
   const [list, setList] = useState(false);
   const [state, setState] = useState({
     firstName: '',
@@ -21,8 +25,12 @@ const CheckoutContact = () => {
     points: '',
   });
 
-  const newCountryHandler = (str) => {
-    setCountry(str);
+  const { userInfo } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
+
+  const newCountryHandler = (item) => {
+    setCountry(item);
     setList(false);
   };
 
@@ -30,7 +38,35 @@ const CheckoutContact = () => {
     `/${paths.CHECK_OUT}/${paths.CHECK_OUT_THIRD}`
   );
 
-  const { userInfo } = useSelector((state) => state.user);
+  const { data } = useGetCountriesQuery();
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axiosInstance.post(
+        'orders/delivery_address/',
+        {
+          first_name: state.firstName,
+          last_name: state.lastName,
+          address_1: state.addressOne,
+          address_2: state.addressTwo,
+          city: state.city,
+          state: state.state,
+          zip_code: state.zipCode,
+          country: country.id,
+          phone_number: state.phoneNumber,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        }
+      );
+      dispatch(setDelivery({ ...response.data, countryName: country.title }));
+      nextBtnhandler();
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
 
   return (
     <div className={cls['contact']}>
@@ -86,7 +122,7 @@ const CheckoutContact = () => {
               setState((prev) => ({ ...prev, city: e.target.value }))
             }
             className={cls['half']}
-            placeholder={'Cyty'}
+            placeholder={'City'}
           />
           <input
             type="text"
@@ -108,11 +144,14 @@ const CheckoutContact = () => {
           />
           <div id={cls[list ? 'active' : '']} className={cls['half']}>
             <span onClick={() => setList((prev) => !prev)}>
-              {country} <AiOutlineDown />
+              {country.title} <AiOutlineDown />
             </span>
             <ul>
-              <li onClick={() => newCountryHandler('Berlin')}>Berlin</li>
-              <li onClick={() => newCountryHandler('New York')}>New York</li>
+              {data?.results.map((item) => (
+                <li key={item.id} onClick={() => newCountryHandler(item)}>
+                  {item.title}
+                </li>
+              ))}
             </ul>
           </div>
           <input
@@ -128,7 +167,7 @@ const CheckoutContact = () => {
       </div>
       <div className={cls['contact__points']}>
         <h3>Apply points</h3>
-        <p>You have 1000 points available.</p>
+        <p>You have {userInfo.point} points available.</p>
         <span>
           <input
             value={state.points}
@@ -138,10 +177,10 @@ const CheckoutContact = () => {
             type="text"
             placeholder="Please enter the amount points"
           />
-          <button>Apply Points</button>
+          <button onClick={() => dispatch(setPoints(state.points))}>Apply Points</button>
         </span>
       </div>
-      <CheckoutButtons prev={backBtnHandler} next={nextBtnhandler} />
+      <CheckoutButtons prev={backBtnHandler} next={handleSubmit} />
     </div>
   );
 };

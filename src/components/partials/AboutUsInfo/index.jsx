@@ -10,7 +10,7 @@ const AboutUsInfo = () => {
   return (
     <div className={cls['about']}>
       <div className={cls['about__body']}>
-        <img src='https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/Zugpsitze_mountain.jpg?crop=0%2C176%2C3008%2C1654&wid=4000&hei=2200&scl=0.752' alt="" />
+        <img src={data?.results[0].image} alt="about-pic" />
         <div>
           <Logo />
           <p className={cls['active']}>Address: {data?.results[0].address}</p>

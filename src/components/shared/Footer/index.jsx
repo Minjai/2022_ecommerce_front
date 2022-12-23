@@ -27,10 +27,16 @@ const Footer = () => {
             <ul>
               <h3>Policies</h3>
               <li>
-                <span>Our Policy</span>
+                <span onClick={() => navigateHandler(`/${paths.POLICY}`)}>
+                  Our Policy
+                </span>
               </li>
               <li>
-                <span>Terms & Contidions</span>
+                <span
+                  onClick={() => navigateHandler(`/${paths.TERMS_CONDITIONS}`)}
+                >
+                  Terms & Contidions
+                </span>
               </li>
             </ul>
             <ul>

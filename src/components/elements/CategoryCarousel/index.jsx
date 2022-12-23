@@ -9,11 +9,7 @@ import { useDispatch } from 'react-redux';
 import { Navigation } from 'swiper';
 import 'swiper/css/navigation';
 
-const CategoryCarousel = ({
-  data,
-  path,
-  hasFeatures = false,
-}) => {
+const CategoryCarousel = ({ data, path, hasFeatures = false }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -35,27 +31,35 @@ const CategoryCarousel = ({
       className={`mySwiper ${cls['category-swiper']}`}
       breakpoints={{
         300: {
-          slidesPerView: 3.2,
+          slidesPerView: 2.5,
+          spaceBetween: 10,
+        },
+        350: {
+          slidesPerView: 3,
           spaceBetween: 10,
         },
         400: {
-          slidesPerView: 3.6,
+          slidesPerView: 3.5,
           spaceBetween: 10,
         },
-        500: {
+        550: {
           slidesPerView: 4,
           spaceBetween: 10,
         },
-        700: {
-          slidesPerView: 5,
+        600: {
+          slidesPerView: 5.5,
+          spaceBetween: 10,
         },
-        900: {
+        850: {
+          slidesPerView: 6.5,
+        },
+        1000: {
           spaceBetween: 20,
-          slidesPerView: 6,
+          slidesPerView: 7.5,
         },
-        1100: {
+        1150: {
           spaceBetween: 30,
-          slidesPerView: 7,
+          slidesPerView: 8,
         },
         1300: {
           slidesPerView: 8.5,

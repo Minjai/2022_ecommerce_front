@@ -1,7 +1,4 @@
-import {
-  useGetAllUserPointsQuery,
-  useGetUserPointsQuery,
-} from '../../store/query/pointsQuery';
+import { useGetUserPointsQuery } from '../../store/query/pointsQuery';
 import EmptyText from '../../components/elements/UI/EmptyText';
 import PointsList from '../../components/lists/PointsList';
 import Loader from '../../components/elements/UI/Loader';
@@ -18,12 +15,9 @@ const UserPoints = () => {
 
   const { data: pointsData, isLoading } = useGetUserPointsQuery({
     userId: userInfo.id,
+    token: localStorage.getItem('accessToken'),
     page,
     offset,
-  });
-
-  const { data: allPoints } = useGetAllUserPointsQuery({
-    userId: userInfo.id,
   });
 
   const paginationOptions = {
@@ -45,7 +39,7 @@ const UserPoints = () => {
         <Loader />
       ) : pointsData?.results.length > 0 ? (
         <PointsList
-          points={allPoints}
+          points={userInfo?.point > 0 ? userInfo?.point : 0}
           options={paginationOptions}
           data={pointsData}
         />

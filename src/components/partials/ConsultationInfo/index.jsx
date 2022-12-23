@@ -1,10 +1,69 @@
+import { setAlert, setAlertContent } from '../../../store/slices/alert';
+import { initConsultation } from '../../../store/slices/consultation';
+import { axiosInstance } from '../../../constants/axios';
+import { dateParser } from '../../../utils/dateParser';
+import { useDispatch, useSelector } from 'react-redux';
 import PageTitle from '../../elements/UI/PageTitle';
 import cls from './consultationInfo.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { BiEnvelope } from 'react-icons/bi';
+import { useState } from 'react';
 
 const ConsultationInfo = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [comment, setComment] = useState('');
+
+  const { data } = useSelector((state) => state.consultation);
+  const { userInfo } = useSelector((state) => state.user);
+
+  console.log(data);
+
+  const submitHandler = async () => {
+    try {
+      if (
+        data.user.username === userInfo.username &&
+        data.user.email === userInfo.email
+      ) {
+        const response = await axiosInstance.patch(
+          `consultations/consultations/${data.id}/`,
+          {
+            detail: comment,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            },
+          }
+        );
+
+        console.log(response);
+      } else {
+        const response = await axiosInstance.post(
+          'consultations/consultations/',
+          {
+            username: userInfo.username,
+            category: data.category.id,
+            product: data.product.id,
+            detail: comment,
+            parent: data.id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            },
+          }
+        );
+      }
+
+      setComment('');
+      dispatch(setAlert(true));
+      dispatch(setAlertContent('Your comment has been added !'));
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
 
   return (
     <div className={cls['consultation']}>
@@ -13,58 +72,56 @@ const ConsultationInfo = () => {
         <div className={cls['consultation__child__title']}>
           <p>I have a question</p>
           <span>
-            By username <b>01/01/2022</b>
+            By {data.username} <b>{dateParser(data?.created_at)}</b>
           </span>
+        </div>
+        <div className={cls['consultation__child__images']}>
+          {data?.consultation_files?.length > 0
+            ? data?.consultation_files.map((item) => (
+                <img
+                  key={item.id}
+                  src={item.attachments}
+                  alt="consultation-pic"
+                />
+              ))
+            : null}
         </div>
         <div className={cls['consultation__child__body']}>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
-            quos dicta consequuntur perspiciatis ipsa, a, eos autem incidunt
-            nulla voluptates itaque, alias consequatur cum! Voluptatum incidunt
-            vero ea repellendus id.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
-            quos dicta consequuntur perspiciatis ipsa, a, eos autem incidunt
-            nulla voluptates itaque, alias consequatur cum! Voluptatum incidunt
-            vero ea repellendus id.
-          </p>
-          <span>
-            <BiEnvelope />1 reply for this question
-          </span>
+          <p>{data?.detail}</p>
         </div>
       </div>
-      <div id={cls['active']} className={cls['consultation__child']}>
-        <div className={cls['consultation__child__title']}>
-          <p>Re: I have a question</p>
-          <span>
-            By manager <b>01/01/2022</b>
-          </span>
-        </div>
-        <div className={cls['consultation__child__body']}>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
-            quos dicta consequuntur perspiciatis ipsa, a, eos autem incidunt
-            nulla voluptates itaque, alias consequatur cum! Voluptatum incidunt
-            vero ea repellendus id.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
-            quos dicta consequuntur perspiciatis ipsa, a, eos autem incidunt
-            nulla voluptates itaque, alias consequatur cum! Voluptatum incidunt
-            vero ea repellendus id.
-          </p>
-        </div>
-      </div>
+      {data?.children?.length > 0
+        ? data?.children?.map((item) => (
+            <div
+              key={item.id}
+              id={cls['active']}
+              className={cls['consultation__child']}
+            >
+              <div className={cls['consultation__child__title']}>
+                <p>Re: I have a question</p>
+                <span>
+                  By {item.username} <b>{dateParser(item.created_at)}</b>
+                </span>
+              </div>
+              <div className={cls['consultation__child__body']}>
+                <p>{item.detail}</p>
+                <span onClick={() => dispatch(initConsultation(item))}>
+                  <BiEnvelope />
+                  {item.children.length} reply for this question
+                </span>
+              </div>
+            </div>
+          ))
+        : null}
       <div className={cls['consultation-comment']}>
         <div>
           <p>Comment:</p>
           <textarea
             placeholder="Enter details of your question"
-            cols="30"
-            rows="10"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
           ></textarea>
-          <span>Submit Comment</span>
+          <span onClick={submitHandler}>Submit Comment</span>
         </div>
       </div>
       <div className={cls['consultation__footer']}>

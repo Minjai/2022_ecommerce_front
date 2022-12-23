@@ -5,41 +5,39 @@ import { useState } from 'react';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
-const data = [
-  {
-    id: 1,
-    title: 'Shoes',
-  },
-  {
-    id: 2,
-    title: 'Pants',
-  },
-  {
-    id: 3,
-    title: 'Shirts',
-  },
-];
+import {
+  useGetAllCategoriesQuery,
+  useGetSingleCategoryProductsQuery,
+} from '../../../store/query/productQuery';
+import { axiosInstance } from '../../../constants/axios';
+import { setAlert, setAlertContent } from '../../../store/slices/alert';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const schema = yup.object().shape({
-  username: yup.string().required(),
-  details: yup.string().required(),
+  detail: yup.string().required(),
 });
 
 const CostumerForm = () => {
   const [categoryActive, setCategoryActive] = useState(false);
   const [productActive, setProductActive] = useState(false);
-  const [category, setCategory] = useState('Optional');
-  const [product, setProduct] = useState('Optional');
+  const [category, setCategory] = useState({ title: 'None' });
+  const [product, setProduct] = useState({ product_name: 'None' });
+  const [file, setFile] = useState(null);
 
-  const {
-    formState: { errors },
-    register,
-    reset,
-    handleSubmit,
-  } = useForm({
+  const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.user);
+  const { data } = useGetAllCategoriesQuery();
+
+  const { register, reset, handleSubmit } = useForm({
     resolver: yupResolver(schema),
     mode: 'all',
+  });
+
+  const dispatch = useDispatch();
+
+  const { data: productData } = useGetSingleCategoryProductsQuery({
+    id: category.id,
   });
 
   const dropDownHandler = (setter, closer, str) => {
@@ -47,8 +45,48 @@ const CostumerForm = () => {
     closer(false);
   };
 
-  const costumerFormHandler = (data) => {
-    reset();
+  const costumerFormHandler = async (data) => {
+    try {
+      const response = await axiosInstance.post(
+        'consultations/consultations/',
+        {
+          ...data,
+          username: userInfo.username,
+          category: category.id,
+          product: product.id,
+          parent: ''
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        }
+      );
+
+      const formData = new FormData();
+
+      formData.append('attachments', file);
+      formData.append('consultation', response.data.id);
+
+      const fileResponse = await axiosInstance.post(
+        'consultations/consultations_files/',
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            'Content-type': 'multipart/form-data',
+          },
+        }
+      );
+
+      reset();
+      setCategory({ title: 'Optional' });
+      setProduct({ product_name: 'Optional' });
+      dispatch(setAlert(true));
+      dispatch(setAlertContent('Your question has been added !'));
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
   return (
@@ -63,32 +101,31 @@ const CostumerForm = () => {
           to make a type specimen book.{' '}
         </p>
         <form onSubmit={handleSubmit(costumerFormHandler)}>
-          <label>
+          <label className={cls['clickable']}>
             <span>{window.innerWidth > 500 ? 'User Name' : 'User ID'}</span>
             <input
               className={cls['costumer-input']}
               type="text"
               name="username"
-              placeholder="User name"
-              {...register('username')}
+              placeholder={userInfo.username}
             />
           </label>
           <label>
             <span>Category</span>
             <div className={cls[categoryActive ? 'costumer-list_active' : '']}>
               <div onClick={() => setCategoryActive((prev) => !prev)}>
-                <span>{category}</span>
+                <span>{category.title}</span>
                 <BsChevronDown />
               </div>
               <ul>
-                {data.map(({ id, title }) => (
+                {data?.map((item) => (
                   <li
                     onClick={() =>
-                      dropDownHandler(setCategory, setCategoryActive, title)
+                      dropDownHandler(setCategory, setCategoryActive, item)
                     }
-                    key={id}
+                    key={item.id}
                   >
-                    {title}
+                    {item.title}
                   </li>
                 ))}
               </ul>
@@ -98,18 +135,18 @@ const CostumerForm = () => {
             <span>Product</span>
             <div className={cls[productActive ? 'costumer-list_active' : '']}>
               <div onClick={() => setProductActive((prev) => !prev)}>
-                <span>{product}</span>
+                <span>{product.product_name}</span>
                 <BsChevronDown />
               </div>
               <ul>
-                {data.map(({ id, title }) => (
+                {productData?.results.map((item) => (
                   <li
                     onClick={() =>
-                      dropDownHandler(setProduct, setProductActive, title)
+                      dropDownHandler(setProduct, setProductActive, item)
                     }
-                    key={id}
+                    key={item.id}
                   >
-                    {title}
+                    {item.product_name}
                   </li>
                 ))}
               </ul>
@@ -120,21 +157,28 @@ const CostumerForm = () => {
             <textarea
               placeholder="Enter details of your question"
               name="details"
-              {...register('details')}
+              {...register('detail')}
             />
           </label>
           <label className={cls['costumer-label']}>
             <span>Attachments</span>{' '}
             <label className={cls['input-file']}>
-              <input type="file" name="file" />
+              <input
+                accept="image/png, image/jpeg"
+                onChange={(e) => setFile(e.target.files[0])}
+                type="file"
+                name="file"
+              />
               <span className={cls['input-file-btn']}>Select a file</span>
               <span className={cls['input-file-text']}>
-                File is not selected yet
+                {file ? file.name : 'File is not selected yet'}
               </span>
             </label>
           </label>
           <div className={cls['costumer__body__buttons']}>
-            <button>{window.innerWidth > 500 ? 'Cancel' : 'Go Back'}</button>
+            <button onClick={() => navigate(-1)}>
+              {window.innerWidth > 500 ? 'Cancel' : 'Go Back'}
+            </button>
             <button id={cls['active']} type="submit">
               Post
             </button>

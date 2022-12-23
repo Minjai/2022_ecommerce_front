@@ -52,7 +52,7 @@
     align-items: center;
     justify-content: space-between;
     color: $app-dark-color;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 13px;
     cursor: pointer;
 
@@ -128,7 +128,7 @@
       span {
         color: $app-dark-color;
         font-weight: 600;
-        font-size: 13px;
+        font-size: 14px;
         cursor: pointer;
       }
 
@@ -136,7 +136,7 @@
         text-decoration: none;
         color: $app-dark-color;
         font-weight: 600;
-        font-size: 13px;
+        font-size: 14px;
       }
     }
 
@@ -184,6 +184,11 @@
         margin: 0 13px;
         position: relative;
 
+        span{
+          cursor: pointer;
+        }
+
+        span,
         a {
           color: $app-dark-color;
           font-weight: 600;
@@ -193,9 +198,10 @@
           align-items: center;
 
           svg {
-            color: $app-dark-color;
+            color: #000;
             margin-left: 10px;
-            font-size: 14px;
+            font-weight: 600;
+            font-size: 17px;
           }
         }
 
@@ -252,6 +258,10 @@
         .category-list {
           width: 210px;
         }
+      }
+
+      .click{
+        
       }
 
       .active{

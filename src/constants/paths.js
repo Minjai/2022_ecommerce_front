@@ -8,6 +8,8 @@ export const paths = {
   ORDERS: 'orders',
   CATEGORY: 'category',
   SEARCH: 'search',
+  POLICY: 'policy',
+  TERMS_CONDITIONS: 'terms-conditions',
   BEST: 'best',
   CUSTOMER_HELP: 'customer-help',
   REVIEW: 'review',
@@ -33,7 +35,7 @@ export const paths = {
   USER_REVIEWS: 'reviews',
   EDIT_PROFILE: 'edit-profile',
   CHANGE_PASSWORD: "change-password",
-  WRITE_REVIEW: "write-review"
+  WRITE_REVIEW: "write-review/:id"
 };
 
 export const modalPaths = {

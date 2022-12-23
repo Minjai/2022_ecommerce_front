@@ -1,13 +1,21 @@
+import { useGetSingleProductQuery } from '../../../store/query/productQuery';
 import { setContent, setModal } from '../../../store/slices/modal';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { axiosInstance } from '../../../constants/axios';
 import { modalPaths } from '../../../constants/paths';
+import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import cls from './reviewForm.module.scss';
 import { useDispatch } from 'react-redux';
 
 const ReviewForm = () => {
+  const [comment, setComment] = useState('');
   const [rating, setRating] = useState([]);
-  const [stars, setStars] = useState(3);
+  const [stars, setStars] = useState(0);
+
+  const { id } = useParams();
+
+  const { data: productData } = useGetSingleProductQuery({ id });
 
   useEffect(() => {
     const data = [];
@@ -23,12 +31,44 @@ const ReviewForm = () => {
     setRating(data);
   }, [stars]);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const handleReviewModal = () => {
-    dispatch(setModal(true))
-    dispatch(setContent(modalPaths.REVIEW))
-  }
+  const handleReviewModal = async () => {
+    try {
+      const response = await axiosInstance.post(
+        'reviews/reviews/',
+        {
+          product: productData.id,
+          comment,
+          parent: null,
+          stars,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        }
+      );
+
+      const setStars = await axiosInstance.post(
+        'reviews/star/',
+        {
+          star: stars,
+          product: productData.id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        }
+      );
+
+      dispatch(setModal(true));
+      dispatch(setContent(modalPaths.REVIEW));
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
 
   return (
     <div className={cls['review']}>
@@ -38,13 +78,16 @@ const ReviewForm = () => {
           <h4>Item Name</h4>
           <div>
             <img
-              src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/Zugpsitze_mountain.jpg?crop=0%2C176%2C3008%2C1654&wid=4000&hei=2200&scl=0.752"
+              src={
+                productData?.images.find((item) => item.is_feature === true)
+                  .image
+              }
               alt="review-pic"
             />
             <span>
-              <p>Lorem ipsum dolor sit amet.</p>
-              <b>100 ea</b>
-              <h5>$ 15.34</h5>
+              <p>{productData?.product_name}</p>
+              <b>{productData?.prices[0].package}</b>
+              <h5>$ {productData?.prices[0].selling_price}</h5>
             </span>
           </div>
         </div>
@@ -62,7 +105,11 @@ const ReviewForm = () => {
         </div>
         <div className={cls['review-details']}>
           <p>Details</p>
-          <textarea placeholder="Enter details of your review"></textarea>
+          <textarea
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            placeholder="Enter details of your review"
+          ></textarea>
         </div>
         <div className={cls['review-select']}>
           <p>Attachments</p>
@@ -77,7 +124,9 @@ const ReviewForm = () => {
       </div>
       <div className={cls['review-button']}>
         <button>{window.innerWidth <= 500 ? 'Go Back' : 'Cancel'}</button>
-        <button onClick={(handleReviewModal)} className={cls['active']}>Post</button>
+        <button onClick={handleReviewModal} className={cls['active']}>
+          Post
+        </button>
       </div>
     </div>
   );

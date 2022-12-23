@@ -1,4 +1,4 @@
-import { BsChevronDown } from 'react-icons/bs';
+import { FiChevronDown } from 'react-icons/fi';
 import { paths } from './paths';
 
 export const currencyLink = [
@@ -72,35 +72,9 @@ export const headerLowerLinks = [
   {
     id: 2,
     to: paths.CATEGORY,
+    isClick: true,
     text: 'Category',
-    icon: <BsChevronDown />,
-    list: [
-      {
-        id: 1,
-        text: 'Hair Loss',
-        icon: <BsChevronDown />,
-      },
-      {
-        id: 2,
-        text: 'Sleeping Aid',
-        icon: <BsChevronDown />,
-      },
-      {
-        id: 3,
-        text: 'Skin Care',
-        icon: <BsChevronDown />,
-      },
-      {
-        id: 4,
-        text: "Hair's Health",
-        icon: <BsChevronDown />,
-      },
-      {
-        id: 5,
-        text: 'Weight Loss',
-        icon: <BsChevronDown />,
-      },
-    ],
+    icon: <FiChevronDown />,
   },
   {
     id: 3,
@@ -111,7 +85,7 @@ export const headerLowerLinks = [
     id: 4,
     to: `${paths.CUSTOMER_HELP}/${paths.NEWS}`,
     text: 'Customer Help',
-    icon: <BsChevronDown />,
+    icon: <FiChevronDown />,
     list: [
       {
         id: 1,

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addCart } from '../../../store/slices/cart';
 import { paths } from '../../../constants/paths';
-import { GiShoppingCart } from 'react-icons/gi';
+import { FiShoppingCart } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import cls from './productItem.module.scss';
 import Rating from '../UI/Rating';
@@ -54,10 +54,10 @@ const ProductItem = ({ item }) => {
         <Rating productRating={get_review_start.star__avg} />
         <div className={cls['product-item__body__price']}>
           <span>
-            ${prices?.length && prices[0]?.selling_price} {'(USD)'}
+            $ {prices?.length && prices[0]?.selling_price} {'(USD)'}
           </span>
           <button onClick={isInCart(id) ? cartNavigate : addCartHandler}>
-            <GiShoppingCart /> {isInCart(id) ? 'Cart' : 'Add'}
+            <FiShoppingCart /> {isInCart(id) ? 'Cart' : 'Add'}
           </button>
         </div>
       </div>

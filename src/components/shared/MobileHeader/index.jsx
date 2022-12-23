@@ -1,3 +1,4 @@
+import { useGetUserNotificationsQuery } from '../../../store/query/notificationQuery';
 import { setContent, setModal } from '../../../store/slices/modal';
 import { setActiveBurger } from '../../../store/slices/burger';
 import { modalPaths, paths } from '../../../constants/paths';
@@ -13,6 +14,9 @@ const MobileHeader = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { carts } = useSelector(state => state.cart)
+  const { userInfo } = useSelector(state => state.user)
+
+  const { data } = useGetUserNotificationsQuery({ userId: userInfo.id })
 
   const setModalHandler = () => {
     dispatch(setActiveBurger(true));
@@ -51,6 +55,7 @@ const MobileHeader = () => {
               <span onClick={() => modalHandler(modalPaths.ALARM)}>
                 <VscBell />
               </span>
+              {data?.results.length > 0 && <b>{data?.results.length}</b>}
             </li>
             <li>
               <span onClick={() => navigate(`/${paths.CART}`)}>

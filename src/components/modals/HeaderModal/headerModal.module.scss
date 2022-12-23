@@ -102,12 +102,12 @@
           font-weight: 600;
 
           p {
-            margin: 0 15px 0 0;
+            margin: 0 13px 0 0;
             font-size: 14px;
           }
 
           svg {
-            font-size: 14px;
+            font-size: 16px;
           }
         }
 
@@ -160,7 +160,11 @@
           display: flex;
           flex-direction: column;
           align-items: center;
-          font-size: 22px;
+
+          img{
+            width: 17px;
+            margin-bottom: 2px;
+          }
 
           p {
             margin: 3px 0 0 0;
@@ -172,6 +176,17 @@
             p{
               font-size: 15px;
             }
+          }
+        }
+
+        span:nth-child(3){
+          img{
+            width: 21px;
+            margin-bottom: 0px;
+          }
+
+          p{
+            margin-top: 0;
           }
         }
 
@@ -198,7 +213,7 @@
             width: 100%;
             height: 100%;
             display: block;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 16px;
             color: $app-dark-color;
             text-decoration: none;
@@ -210,17 +225,17 @@
 
             p{
               margin: 0;
-              padding: 12px;
+              padding: 13px;
             }
           }
 
           span {
-            font-weight: 700;
+            font-weight: 600;
             font-size: 16px;
             color: $app-dark-color;
             width: 100%;
             height: 100%;
-            padding: 12px;
+            padding: 13px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -230,7 +245,7 @@
             }
 
             svg{
-              font-size: 13px;
+              font-size: 15px;
             }
           }
 
@@ -239,6 +254,8 @@
             padding: 0 0 10px 20px;
             list-style: none;
             display: none;
+            max-height: 130px;
+            overflow: hidden;
 
             li{
               color: $app-dark-color;
@@ -278,8 +295,11 @@
         font-weight: 500;
         color: $app-dark-color;
         margin-bottom: 15px;
-
         font-size: 12px;
+
+        @media screen and (max-width: 350px) {
+          font-size: 10px;
+        }
       }
 
       .full{

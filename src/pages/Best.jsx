@@ -59,7 +59,7 @@ const Best = () => {
   }, [categoryId]);
 
   const options = {
-    limit: 1,
+    limit: 6,
     pageCount: categoryProduct?.count,
     page,
     offset,

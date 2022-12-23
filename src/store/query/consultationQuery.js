@@ -8,6 +8,15 @@ export const consultationQuery = createApi({
     baseUrl: API_URL,
   }),
   endpoints: (builder) => ({
+    getSingleConsultations: builder.query({
+      query: ({ token, id }) => ({
+        url: `consultations/consultations/${id}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+      providesTags: () => ['CONSULTATION_TAG'],
+    }),
     getConsultations: builder.query({
       query: ({ token, page, offset }) => ({
         url: `consultations/consultations/?limit=5${
@@ -20,9 +29,11 @@ export const consultationQuery = createApi({
       providesTags: () => ['CONSULTATION_TAG'],
     }),
     getUserConsultations: builder.query({
-      query: ({ token, userId, page, offset }) => ({
+      query: ({ token, userId, page, offset, date }) => ({
         url: `consultations/consultations/?user=${userId}&limit=4${
           page > 1 ? `&offset=${offset}` : ''
+        }${
+          date ? `&start_date=${date.start_date}&end_date=${date.end_date}` : ''
         }`,
         headers: {
           Authorization: `Bearer ${token}`,
@@ -33,5 +44,8 @@ export const consultationQuery = createApi({
   }),
 });
 
-export const { useGetConsultationsQuery, useGetUserConsultationsQuery } =
-  consultationQuery;
+export const {
+  useGetConsultationsQuery,
+  useGetUserConsultationsQuery,
+  useGetSingleConsultationsQuery,
+} = consultationQuery;

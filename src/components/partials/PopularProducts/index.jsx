@@ -17,6 +17,7 @@ import ProductList from '../../lists/ProductList';
 import { paths } from '../../../constants/paths';
 import cls from './popularProducts.module.scss';
 import { useNavigate } from 'react-router-dom';
+import { AiOutlineRight } from 'react-icons/ai';
 import { useEffect } from 'react';
 
 const PopularProducts = () => {
@@ -55,7 +56,7 @@ const PopularProducts = () => {
     <div className={cls['popular']}>
       <div className={cls['popular__header']}>
         <Description>Popular Products</Description>
-        <span onClick={navigateHandler}>View More</span>
+        <span onClick={navigateHandler}>View More <AiOutlineRight/></span>
       </div>
       <CategoryButtons
         picker={removePopularCategory}

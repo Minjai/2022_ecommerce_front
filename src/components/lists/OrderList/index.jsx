@@ -5,11 +5,13 @@ import { dateParser } from '../../../utils/dateParser';
 import { orderStatus } from '../../../constants/order';
 import { modalPaths } from '../../../constants/paths';
 import EmptyText from '../../elements/UI/EmptyText';
+import { useNavigate } from 'react-router-dom';
 import cls from './orderList.module.scss';
 import { useDispatch } from 'react-redux';
 
 const OrderList = ({ data }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const orderModalHandler = () => {
     dispatch(setModal(true));
@@ -37,7 +39,16 @@ const OrderList = ({ data }) => {
                 </span>
                 <span>
                   <p>Total</p>
-                  <p>$100</p>
+                  <p>
+                    ${' '}
+                    {data?.map((item) =>
+                      item?.order_items.reduce(
+                        (prev, elem) =>
+                          (prev += +elem?.info?.prices[0]?.selling_price),
+                        0
+                      )
+                    )}
+                  </p>
                 </span>
               </div>
               <span>
@@ -81,10 +92,14 @@ const OrderList = ({ data }) => {
                     />
                     <div>
                       <p>{item?.info?.product_name}</p>
-                      <span>100 ea</span>
-                      <p>${item?.info?.prices[0]?.selling_price}</p>
+                      <span>{item?.info?.prices[0]?.package}</span>
+                      <p>$ {+item?.info?.prices[0]?.selling_price}</p>
                       {elem.status === 'sent' && (
-                        <button>Write a review</button>
+                        <button
+                          onClick={() => navigate(`write-review/${item.id}`)}
+                        >
+                          Write a review
+                        </button>
                       )}
                     </div>
                   </div>

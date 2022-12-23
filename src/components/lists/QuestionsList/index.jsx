@@ -4,11 +4,9 @@ import Pagination from '../../elements/Pagination';
 import { paths } from '../../../constants/paths';
 import { useNavigate } from 'react-router-dom';
 import cls from './questionsList.module.scss';
-import { useState } from 'react';
 
-const QuestionsList = ({ data, options }) => {
-  const [select, setSelect] = useState('select range');
-  const [isRange, setRange] = useState(false);
+const QuestionsList = ({ data, options, filterOptions }) => {
+  const { isRange, setSelect, select, setRange} = filterOptions
 
   const handleRange = (str) => {
     setSelect(str);
@@ -60,7 +58,7 @@ const QuestionsList = ({ data, options }) => {
                 className={cls['question__body__child']}
               >
                 <div>
-                  <span>{index}</span>
+                  <span>{index + 1}</span>
                   <img
                     src={product.images.find((item) => item.is_feature).image}
                     alt="question-list"

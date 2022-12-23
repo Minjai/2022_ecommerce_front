@@ -1,16 +1,19 @@
 import { useGetReviewsQuery } from '../../../store/query/reviewQuery';
+import { dateFilter } from '../../../utils/dateFilter';
+import { dateParser } from '../../../utils/dateParser';
 import EmptyText from '../../elements/UI/EmptyText';
 import Pagination from '../../elements/Pagination';
 import { AiOutlineDown } from 'react-icons/ai';
 import Loader from '../../elements/UI/Loader';
 import Rating from '../../elements/UI/Rating';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import cls from './userList.module.scss';
-import { useState } from 'react';
 
 const UserReviewList = () => {
   const [select, setSelect] = useState('select range');
   const [isRange, setRange] = useState(false);
+  const [date, setDate] = useState('');
 
   const { userInfo } = useSelector((state) => state.user);
 
@@ -18,14 +21,14 @@ const UserReviewList = () => {
     setSelect(str);
     setRange(false);
   };
-
+  
   const [page, setPage] = useState(1);
   const [pageStart, setPageStart] = useState(0);
   const [offset, setOffset] = useState(0);
   const [pageEnd, setPageEnd] = useState(3);
 
   const { data, isLoading } = useGetReviewsQuery(
-    { userId: userInfo.id, page, offset },
+    { userId: userInfo.id, page, offset, date },
     {
       refetchOnMountOrArgChange: true,
     }
@@ -43,6 +46,20 @@ const UserReviewList = () => {
     pageEnd,
     setPageEnd,
   };
+
+  useEffect(() => {
+    if (select === 'Past 3 months') {
+      setDate(dateFilter(3));
+    } else if (select === 'Past 6 months') {
+      setDate(dateFilter(6));
+    } else if (select === 'Past 12 months') {
+      setDate(dateFilter(12));
+    } else {
+      setDate('');
+    }
+  }, [select]);
+
+  console.log(data);
 
   return (
     <div className={cls['review']}>
@@ -75,7 +92,7 @@ const UserReviewList = () => {
         {isLoading ? (
           <Loader />
         ) : data.results.length > 0 ? (
-          data.results.map(({ comment, product, stars, id }) => (
+          data.results.map(({ comment, product, stars, id, created_at }) => (
             <div key={comment} className={cls['review__body__child']}>
               <div>
                 <span>{id}</span>
@@ -90,7 +107,7 @@ const UserReviewList = () => {
               </div>
               <div>
                 <Rating productRating={stars} />
-                <p>01/04/2022</p>
+                <p>{dateParser(created_at)}</p>
               </div>
             </div>
           ))

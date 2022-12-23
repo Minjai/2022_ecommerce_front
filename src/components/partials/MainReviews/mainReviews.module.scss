@@ -10,11 +10,18 @@
     align-self: center;
 
     span {
-      color: $app-gray-color;
+      color: #808080;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
+      font-size: 12px;
+
+      svg {
+        font-size: 12px;
+        margin-top: 2px;
+        margin-left: 2px;
+      }
 
       @media screen and (max-width: 700px) {
         margin-right: 100px;

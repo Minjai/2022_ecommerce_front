@@ -4,6 +4,7 @@ import {
   headerLowerLinks,
   headerPrivateMidLinks,
 } from '../../../constants/header';
+import { useGetAllCategoriesQuery } from '../../../store/query/productQuery';
 import { setContent, setModal } from '../../../store/slices/modal';
 import { modalPaths, paths } from '../../../constants/paths';
 import { setAuth } from '../../../store/slices/user/user';
@@ -14,6 +15,8 @@ import { BsChevronDown } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../elements/UI/Logo';
 import cls from './header.module.scss';
+import { FiChevronDown } from 'react-icons/fi';
+import { setCategoryData } from '../../../store/slices/category';
 
 const Header = () => {
   const { isAuth } = useSelector((state) => state.user);
@@ -33,6 +36,13 @@ const Header = () => {
     navigate(paths.HOME);
   };
 
+  const { data } = useGetAllCategoriesQuery();
+
+  const handleCategory = (item) => {
+    dispatch(setCategoryData(item))
+    navigate(`/${paths.CATEGORY}`)
+  }
+  
   return (
     <header>
       <div className={cls['header-upper']}>
@@ -71,19 +81,25 @@ const Header = () => {
       <div className={cls['header-lower']}>
         <div>
           <ul>
-            {headerLowerLinks.map(({ id, text, icon, to, list }) => (
-              <li key={id}>
-                <RouterLink to={to}>
-                  {text}
-                  {icon}
-                </RouterLink>
+            {headerLowerLinks.map(({ id, text, icon, to, list, isClick }) => (
+              <li className={cls[isClick ? 'click' : '']} key={id}>
+                {isClick ? (
+                  <span>
+                    {' '}
+                    {text}
+                    {icon}
+                  </span>
+                ) : (
+                  <RouterLink to={to}>
+                    {text}
+                    {icon}
+                  </RouterLink>
+                )}
                 {list && (
                   <div
                     className={
                       cls[
-                        to === paths.CATEGORY
-                          ? 'category-list'
-                          : to === `${paths.CUSTOMER_HELP}/${paths.NEWS}`
+                        to === `${paths.CUSTOMER_HELP}/${paths.NEWS}`
                           ? 'customer-list'
                           : ''
                       ]
@@ -93,6 +109,24 @@ const Header = () => {
                       {list.map((item) => (
                         <li onClick={() => navigate(item.to)} key={item.id}>
                           {item.text} {item.icon}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {isClick && (
+                  <div
+                    className={
+                      cls[to === paths.CATEGORY ? 'category-list' : '']
+                    }
+                  >
+                    <ul>
+                      {data?.slice(0, 4).map((item) => (
+                        <li
+                          onClick={() => handleCategory(item)}
+                          key={item.id}
+                        >
+                          {item.title} <FiChevronDown />
                         </li>
                       ))}
                     </ul>

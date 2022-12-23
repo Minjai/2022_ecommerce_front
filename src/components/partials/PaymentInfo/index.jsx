@@ -1,3 +1,4 @@
+import { setAlert, setAlertContent } from '../../../store/slices/alert';
 import { axiosInstance } from '../../../constants/axios';
 import CloseButton from '../../elements/UI/CloseButton';
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,7 +33,9 @@ const PaymentInfo = () => {
           }
         );
 
-        dispatch(setModal(false))
+        dispatch(setModal(false));
+        dispatch(setAlert(true));
+        dispatch(setAlertContent('Your order payment has been added !'));
       } catch (error) {
         console.log(error.response);
       }

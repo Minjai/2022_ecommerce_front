@@ -1,8 +1,8 @@
 import { useGetUserConsultationsQuery } from '../../../store/query/consultationQuery';
-import { useGetUserPointsQuery } from '../../../store/query/pointsQuery';
 import { useGetReviewsQuery } from '../../../store/query/reviewQuery';
 import { useGetOrdersQuery } from '../../../store/query/orderQuery';
 import { orderTable } from '../../../utils/userOrderTable';
+import { dateFilter } from '../../../utils/dateFilter';
 import { paths } from '../../../constants/paths';
 import { AiOutlineRight } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
@@ -13,17 +13,19 @@ const UserStatus = () => {
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.user);
 
+  const { start_date, end_date } = dateFilter(3);
+
   const newPageHandler = (path) => {
     window.scrollTo(window.scrollX, 0);
     navigate(path);
   };
 
-  const { data: pointsData } = useGetUserPointsQuery({ userId: userInfo.id });
-
   const { data } = useGetOrdersQuery(
     {
       token: localStorage.getItem('accessToken'),
       userId: userInfo.id,
+      startDate: start_date,
+      endDate: end_date
     },
     {
       refetchOnMountOrArgChange: true,
@@ -60,14 +62,7 @@ const UserStatus = () => {
           <div
             onClick={() => newPageHandler(`/${paths.MY_PAGE}/${paths.POINTS}`)}
           >
-            <b>
-              {pointsData?.results
-                ? pointsData?.results.reduce(
-                    (prev, item) => (prev += item.point),
-                    0
-                  )
-                : 0}
-            </b>
+            <b>{userInfo?.point > 0 ? userInfo?.point : 0}</b>
             <span>points</span>
           </div>
         </div>

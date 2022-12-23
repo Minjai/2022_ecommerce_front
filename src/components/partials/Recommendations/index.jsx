@@ -16,6 +16,7 @@ import { paths } from '../../../constants/paths';
 import { useNavigate } from 'react-router-dom';
 import cls from './recommend.module.scss';
 import { useEffect } from 'react';
+import { AiOutlineRight } from 'react-icons/ai';
 
 const Recommendations = () => {
   const { recommendedCategories, recommendedId } = useSelector(
@@ -54,7 +55,7 @@ const Recommendations = () => {
     <div className={cls['recommend']}>
       <div className={cls['recommend__header']}>
         <Description>Recommendations</Description>
-        <span onClick={navigateHandler}>View More</span>
+        <span onClick={navigateHandler}>View More <AiOutlineRight/></span>
       </div>
       <CategoryButtons
         picker={removeRecommendedCategory}

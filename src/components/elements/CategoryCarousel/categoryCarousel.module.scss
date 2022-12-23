@@ -33,17 +33,14 @@
       object-fit: contain;
     }
 
-    @media screen and (max-width: 700px) {
-      height: 140px;
-    }
-
     @media screen and (max-width: 600px) {
       height: 120px;
     }
 
     @media screen and (max-width: 500px) {
       img{
-        width: 50px;
+        width: 30px;
+        height: 30px;
       }
 
       height: 100px;
@@ -55,7 +52,7 @@
     text-align: center;
 
     p {
-      font-size: 18px;
+      font-size: 13px;
       color: $app-dark-color;
       font-weight: 600;
       margin: 0;
@@ -67,12 +64,9 @@
     }
 
     span {
-      color: $app-dark-color;
+      color: #808080;
       font-weight: 500;
-
-      @media screen and (max-width: 600px) {
-        font-size: 12px;
-      }
+      font-size: 12px;
     }
   }
 }

@@ -2,18 +2,19 @@ import { setAlert, setAlertContent } from '../../../../store/slices/alert';
 import { useCheckoutButtons } from '../../../../hooks/useCheckoutButtons';
 import CheckoutButtons from '../../../elements/UI/CheckoutButtons';
 import { axiosInstance } from '../../../../constants/axios';
+import { useDispatch, useSelector } from 'react-redux';
 import { paths } from '../../../../constants/paths';
 import { IoCheckmarkSharp } from 'react-icons/io5';
 import MobileOrderNav from '../../MobileOrderNav';
 import cls from './checkoutTransfer.module.scss';
-import { useDispatch } from 'react-redux';
+import { mathTotal } from '../../../../utils/mathTotal';
 
 const CheckoutTransfer = () => {
   const { backBtnHandler } = useCheckoutButtons(
     `/${paths.CHECK_OUT}/${paths.CHECK_OUT_FOURTH}`
   );
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const createOrderItems = async (data, id) => {
     try {
@@ -30,8 +31,7 @@ const CheckoutTransfer = () => {
           },
         }
       );
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const createOrder = async () => {
@@ -58,12 +58,17 @@ const CheckoutTransfer = () => {
         carts.forEach((item) => createOrderItems(response.data, item.id));
       }
 
-      dispatch(setAlert(true))
-      dispatch(setAlertContent('Your order has been added !'))
+      dispatch(setAlert(true));
+      dispatch(setAlertContent('Your order has been added !'));
     } catch (error) {
       console.log(error.response);
     }
   };
+
+  const { userInfo } = useSelector((state) => state.user);
+  const { carts } = useSelector((state) => state.cart);
+
+  console.log(carts);
 
   return (
     <div className={cls['transfer']}>
@@ -74,7 +79,7 @@ const CheckoutTransfer = () => {
         </span>
       </h2>
       <p className={cls['paragraph']}>
-        Your email test@gmail.com 으로 주문 내용이 발송되었습니다.
+        Your email {userInfo.email} 으로 주문 내용이 발송되었습니다.
       </p>
       {window.innerWidth < 950 && <MobileOrderNav />}
       <div className={cls['transfer__body']}>
@@ -89,8 +94,8 @@ const CheckoutTransfer = () => {
       </div>
       <div className={cls['transfer__footer']}>
         <p>
-          • Please treanfer $ 00.00 USD ( S$ 00.00 (SGD) ) to our bank account
-          for payment
+          • Please treanfer $ {mathTotal(carts, '1', '1.5')} USD ( ${' '}
+          {mathTotal(carts, '1', '1.5')} (SGD) ) to our bank account for payment
         </p>
         <p className={cls['active']}>
           • Bank transfer fees are the buyer’s payments.

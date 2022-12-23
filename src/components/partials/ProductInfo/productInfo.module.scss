@@ -128,12 +128,15 @@
         }
       }
 
+      #outOfStock{
+        pointer-events: none;
+      }
+
       button {
         width: 100%;
         font-size: 15px;
         height: 53px;
         border-radius: 30px;
-        background: none;
         cursor: pointer;
         outline: none;
         border: 1px solid rgba(128, 128, 128, 0.3);

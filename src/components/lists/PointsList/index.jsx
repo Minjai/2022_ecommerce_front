@@ -8,10 +8,7 @@ const PointsList = ({ data, options, points }) => {
       <div className={cls['user-width__header']}>
         <h3>Usable Points</h3>
         <span>
-          {points?.results
-            ? points?.results.reduce((prev, item) => (prev += item.point), 0)
-            : 0}{' '}
-          points
+          {points} points
         </span>
       </div>
       <div className={cls['user-width__body']}>

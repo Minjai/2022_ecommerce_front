@@ -15,8 +15,9 @@ const OrderHistory = () => {
   const [select, setSelect] = useState('select range');
   const [date, setDate] = useState([
     new Date('2000-01-01 01:00:00'),
-    new Date('2025-01-01   01:00:00')
+    new Date('2025-01-01 01:00:00')
   ]);
+
   const [isRange, setRange] = useState(false);
   const [orders, setOrders] = useState([]);
   const [load, setLoad] = useState(0);

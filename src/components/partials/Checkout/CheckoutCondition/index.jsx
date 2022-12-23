@@ -92,9 +92,7 @@ const CheckoutCondition = () => {
                 value={state.drug_allergies}
               ></textarea>
             )}
-            <b className={cls[!state.drug && 'appear']}>
-              * This field is required
-            </b>
+            {!state.drug_allergies && <b>* This field is required</b>}
           </div>
           <div className={cls['condition__field']}>
             <p>
@@ -130,7 +128,6 @@ const CheckoutCondition = () => {
                 value={state.current_medications}
               ></textarea>
             )}
-            <b>* This field is required</b>
           </div>
           <div className={cls['condition__field']}>
             <p>
@@ -166,7 +163,7 @@ const CheckoutCondition = () => {
                 value={state.current_treatments}
               ></textarea>
             )}
-            <b>* This field is required</b>
+            {!state.current_treatments && <b>* This field is required</b>}
           </div>
           <div className={`flex ${cls['condition__child']}`}>
             <div id={cls['block']} className={cls['condition__field']}>
@@ -191,7 +188,7 @@ const CheckoutCondition = () => {
                   Female
                 </span>
               </label>
-              <b className={cls['appear']}>* This field is required</b>
+              {!state.gender && <b>* This field is required</b>}
             </div>
             <div id={cls['block']} className={cls['condition__field']}>
               <p>
@@ -205,7 +202,7 @@ const CheckoutCondition = () => {
                 type="text"
                 placeholder="YYYY-MM-DD"
               />
-              <b className={cls['appear']}>* This field is required</b>
+              {!state.date_of_birth && <b>* This field is required</b>}
             </div>
           </div>
           <div id={cls['block']} className={cls['condition__field']}>
