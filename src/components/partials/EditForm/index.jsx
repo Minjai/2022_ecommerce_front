@@ -36,7 +36,6 @@ const EditForm = () => {
       dispatch(setAlertContent('Your profile has been edited !'))
       dispatch(setUserInfo(response.data))
       reset()
-      console.log(response);
     } catch (error) {
       console.log(error.response);
     }

@@ -18,8 +18,6 @@ const ConsultationInfo = () => {
   const { data } = useSelector((state) => state.consultation);
   const { userInfo } = useSelector((state) => state.user);
 
-  console.log(data);
-
   const submitHandler = async () => {
     try {
       if (

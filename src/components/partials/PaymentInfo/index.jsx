@@ -1,4 +1,5 @@
 import { setAlert, setAlertContent } from '../../../store/slices/alert';
+import { mathModalTotal } from '../../../utils/mathTotal';
 import { axiosInstance } from '../../../constants/axios';
 import CloseButton from '../../elements/UI/CloseButton';
 import { useDispatch, useSelector } from 'react-redux';
@@ -61,8 +62,10 @@ const PaymentInfo = () => {
           </div>
           <div className={cls['payment-info__footer']}>
             <p>
-              • Please treanfer $ 00.00 USD ( S$ 00.00 (SGD) ) to our bank
-              account for payment
+              • Please treanfer ${' '}
+              {mathModalTotal(data?.order_items, '1', '1.5')} USD ( ${' '}
+              {mathModalTotal(data?.order_items, '1', '1.5')} (SGD) ) to our
+              bank account for payment
             </p>
             <p className={cls['active']}>
               • Bank transfer fees are the buyer’s payments.

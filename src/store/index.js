@@ -4,6 +4,7 @@ import { productSearchQuery } from './query/productSearch';
 import { categoryQuery } from './query/categoryQuery';
 import { settingsQuery } from './query/settingsQuery';
 import { productQuery } from './query/productQuery';
+import { paymentQuery } from './query/paymentQuery';
 import { pointsQuery } from './query/pointsQuery';
 import { configureStore } from '@reduxjs/toolkit';
 import { reviewQuery } from './query/reviewQuery';
@@ -28,6 +29,7 @@ export const store = configureStore({
       pointsQuery.middleware,
       settingsQuery.middleware,
       notificationQuery.middleware,
-      countryQuery.middleware
+      countryQuery.middleware,
+      paymentQuery.middleware
     ),
 });

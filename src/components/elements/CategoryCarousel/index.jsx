@@ -21,7 +21,7 @@ const CategoryCarousel = ({ data, path, hasFeatures = false }) => {
 
   const pickCategoryHandler = (item) => {
     dispatch(setPickedCategories({ ...item, isActive: true }));
-  };
+  };  
 
   return (
     <Swiper
@@ -83,7 +83,7 @@ const CategoryCarousel = ({ data, path, hasFeatures = false }) => {
                 </div>
                 <div className={cls['category-child__body']}>
                   <p>{item.title}</p>
-                  <span>{item.children?.length} items</span>
+                  <span>{item?.count_products} {item?.count_products === 1 ? 'item' : 'items'}</span>
                 </div>
               </div>
             </SwiperSlide>
@@ -103,7 +103,7 @@ const CategoryCarousel = ({ data, path, hasFeatures = false }) => {
                 </div>
                 <div className={cls['category-child__body']}>
                   <p>{item.title}</p>
-                  <span>{item.children?.length} items</span>
+                  <span>{item?.count_products} {item?.count_products === 1 ? 'item' : 'items'}</span>
                 </div>
               </div>
             </SwiperSlide>

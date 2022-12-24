@@ -27,9 +27,6 @@ const UserQuestions = () => {
     date,
   });
 
-  console.log(data);
-  console.log(date);
-
   const filterOptions = {
     setRange,
     select,

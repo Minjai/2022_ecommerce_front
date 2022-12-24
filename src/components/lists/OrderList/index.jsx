@@ -1,6 +1,6 @@
+import { setSingleOrder, setTrackingNumber } from '../../../store/slices/order';
 import { useDeleteOrderMutation } from '../../../store/query/orderQuery';
 import { setContent, setModal } from '../../../store/slices/modal';
-import { setSingleOrder } from '../../../store/slices/order';
 import { dateParser } from '../../../utils/dateParser';
 import { orderStatus } from '../../../constants/order';
 import { modalPaths } from '../../../constants/paths';
@@ -16,6 +16,7 @@ const OrderList = ({ data }) => {
   const orderModalHandler = () => {
     dispatch(setModal(true));
     dispatch(setContent(modalPaths.ORDER));
+    dispatch(setTrackingNumber(data?.tracking_number))
   };
 
   const orderPaymentHandler = (data) => {

@@ -1,13 +1,13 @@
 import MobileSearch from '../../partials/MobileSearch/index.jsx';
 import AlarmContent from '../../partials/AlarmContent/index.jsx';
 import CustomContent from '../content/CustomContent/index.jsx';
+import PaymentInfo from '../../partials/PaymentInfo/index.jsx';
+import ForgetModal from '../../partials/ForgetModal/index.jsx';
 import TrackingList from '../../lists/TrackingList/index.jsx';
 import { modalPaths } from '../../../constants/paths.js';
 import { useSelector } from 'react-redux';
 import cls from './modal.module.scss';
 import { useEffect } from 'react';
-import PaymentInfo from '../../partials/PaymentInfo/index.jsx';
-import ForgetModal from '../../partials/ForgetModal/index.jsx';
 
 const ModalWrapper = () => {
   const { isActive, content } = useSelector((state) => state.modal);

@@ -1,13 +1,14 @@
+import { useGetPaymentInfoQuery } from '../../../../store/query/paymentQuery';
 import { setAlert, setAlertContent } from '../../../../store/slices/alert';
 import { useCheckoutButtons } from '../../../../hooks/useCheckoutButtons';
 import CheckoutButtons from '../../../elements/UI/CheckoutButtons';
 import { axiosInstance } from '../../../../constants/axios';
+import { mathTotal } from '../../../../utils/mathTotal';
 import { useDispatch, useSelector } from 'react-redux';
 import { paths } from '../../../../constants/paths';
 import { IoCheckmarkSharp } from 'react-icons/io5';
 import MobileOrderNav from '../../MobileOrderNav';
 import cls from './checkoutTransfer.module.scss';
-import { mathTotal } from '../../../../utils/mathTotal';
 
 const CheckoutTransfer = () => {
   const { backBtnHandler } = useCheckoutButtons(
@@ -65,10 +66,14 @@ const CheckoutTransfer = () => {
     }
   };
 
+  const { data } = useGetPaymentInfoQuery({
+    token: localStorage.getItem('accessToken'),
+  });
+
+  console.log(data);
+
   const { userInfo } = useSelector((state) => state.user);
   const { carts } = useSelector((state) => state.cart);
-
-  console.log(carts);
 
   return (
     <div className={cls['transfer']}>
@@ -84,13 +89,13 @@ const CheckoutTransfer = () => {
       {window.innerWidth < 950 && <MobileOrderNav />}
       <div className={cls['transfer__body']}>
         <h3>Payment Information</h3>
-        <p>Account Name: test</p>
-        <p>Account Number: test</p>
-        <p>Account Address: lorem</p>
-        <p>Swift Code: Test</p>
-        <p>Bank Name: Test</p>
-        <p>Bank Address: Test</p>
-        <p>Country / Region: Test</p>
+        <p>Account Name: {data?.results[0].account_name}</p>
+        <p>Account Number: {data?.results[0].account_number}</p>
+        <p>Account Address: {data?.results[0].account_address}</p>
+        <p>Swift Code: {data?.results[0].swift_code}</p>
+        <p>Bank Name: {data?.results[0].bank_name}</p>
+        <p>Bank Address: {data?.results[0].bank_address}</p>
+        <p>Country / Region: {data?.results[0].county_region}</p>
       </div>
       <div className={cls['transfer__footer']}>
         <p>

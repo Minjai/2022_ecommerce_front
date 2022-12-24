@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   data: [],
+  trackingNumber: '',
 };
 
 const orderSlice = createSlice({
@@ -9,13 +10,19 @@ const orderSlice = createSlice({
   initialState,
   reducers: {
     setSingleOrder: (state, action) => {
-      state.data = {...action.payload, order_items: action.payload.order_items.map(item => ({
-        ...item,
-        ...item.info
-      }))};
+      state.data = {
+        ...action.payload,
+        order_items: action.payload.order_items.map((item) => ({
+          ...item,
+          ...item.info,
+        })),
+      };
+    },
+    setTrackingNumber: (state, action) => {
+      state.trackingNumber = action;
     },
   },
 });
 
-export const { setSingleOrder } = orderSlice.actions;
+export const { setSingleOrder, setTrackingNumber } = orderSlice.actions;
 export default orderSlice.reducer;

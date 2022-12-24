@@ -2,8 +2,9 @@ import { axiosInstance } from '../../../constants/axios';
 import { yupResolver } from '@hookform/resolvers/yup';
 import cls from './changeForm.module.scss';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
+import { setAlert, setAlertContent } from '../../../store/slices/alert';
 
 const schema = yup.object().shape({
   oldPassword: yup.string().min(5).max(15).required(),
@@ -19,25 +20,33 @@ const ChangeForm = () => {
     register,
     formState: { errors },
     handleSubmit,
+    reset
   } = useForm({
     resolver: yupResolver(schema),
-    mode: 'all'
+    mode: 'all',
   });
 
   const { userInfo } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const handler = async (state) => {
     try {
-      const response = await axiosInstance.post(`accounts/profiles/${userInfo.id}/change_password/`, {
-        old_password: state.oldPassword,
-        new_password: state.newPassword
-      }, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      const response = await axiosInstance.post(
+        `accounts/profiles/${userInfo.id}/change_password/`,
+        {
+          old_password: state.oldPassword,
+          new_password: state.newPassword,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
         }
-      })
+      );
 
-      console.log(response);
+      dispatch(setAlert(true));
+      dispatch(setAlertContent('Your password has been changed !'));
+      reset()
     } catch (error) {
       console.log(error.response);
     }
@@ -68,7 +77,7 @@ const ChangeForm = () => {
             {...register('confirmPassword')}
             placeholder={window.innerWidth > 600 ? 'Confirm Password' : ''}
           />
-          <p>{errors?.confirmPassword?.message}</p>
+          {errors?.confirmPassword?.message && <p>Confirm new password</p>}
           <button type="submit">Save</button>
         </form>
       </div>

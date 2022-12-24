@@ -3,6 +3,7 @@ import { consultationQuery } from '../query/consultationQuery';
 import { productSearchQuery } from '../query/productSearch';
 import { settingsQuery } from '../query/settingsQuery';
 import { categoryQuery } from '../query/categoryQuery';
+import { paymentQuery } from '../query/paymentQuery';
 import { productQuery } from '../query/productQuery';
 import { pointsQuery } from '../query/pointsQuery';
 import { reviewQuery } from '../query/reviewQuery';
@@ -51,4 +52,5 @@ export const rootSlice = combineReducers({
   [orderQuery.reducerPath]: orderQuery.reducer,
   [settingsQuery.reducerPath]: settingsQuery.reducer,
   [countryQuery.reducerPath]: countryQuery.reducer,
+  [paymentQuery.reducerPath]: paymentQuery.reducer,
 });

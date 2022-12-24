@@ -59,8 +59,6 @@ const UserReviewList = () => {
     }
   }, [select]);
 
-  console.log(data);
-
   return (
     <div className={cls['review']}>
       <div className={cls['review__header']}>
