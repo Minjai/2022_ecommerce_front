@@ -13,6 +13,9 @@ import { countryQuery } from './query/country';
 import { newsQuery } from './query/newsQuery';
 import { faqQuery } from './query/faqQuery';
 import { rootSlice } from './slices';
+import { policyQuery } from './query/policyQuery';
+import { footerQuery } from './query/footerQuery';
+import { termsQuery } from './query/termsQuery';
 
 export const store = configureStore({
   reducer: rootSlice,
@@ -30,6 +33,9 @@ export const store = configureStore({
       settingsQuery.middleware,
       notificationQuery.middleware,
       countryQuery.middleware,
-      paymentQuery.middleware
+      paymentQuery.middleware,
+      policyQuery.middleware,
+      footerQuery.middleware,
+      termsQuery.middleware
     ),
 });

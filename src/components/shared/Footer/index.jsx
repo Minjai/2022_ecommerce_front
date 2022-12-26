@@ -1,3 +1,5 @@
+import { useGetFooterInfoQuery } from '../../../store/query/footerQuery';
+import { useGetContactsQuery } from '../../../store/query/settingsQuery';
 import { paths } from '../../../constants/paths';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../elements/UI/Logo';
@@ -5,6 +7,10 @@ import cls from './footer.module.scss';
 
 const Footer = () => {
   const navigate = useNavigate();
+
+  const { data } = useGetFooterInfoQuery()
+
+  const { data: contactData } = useGetContactsQuery()
 
   const navigateHandler = (path) => {
     window.scrollTo(window.scrollX, 0);
@@ -17,11 +23,8 @@ const Footer = () => {
         <div className={cls['footer-upper']}>
           <div className={cls['footer-upper__logo']}>
             <Logo />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
-              dolor nemo ipsam eligendi praesentium? Reprehenderit?
-            </p>
-            <p>Email: email@gmail.com</p>
+            {<p>{data?.results[0].description}</p>}
+            <p>Email: {contactData?.results[0].email}</p>
           </div>
           <div className={cls['footer-upper__links']}>
             <ul>
@@ -74,12 +77,7 @@ const Footer = () => {
           </div>
         </div>
         <div className={cls['footer-lower']}>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-            vero a nisi, laboriosam omnis dignissimos officia, exercitationem
-            assumenda sequi corporis veniam doloremque praesentium porro vitae
-            nulla asperiores autem, nam impedit.
-          </p>
+        {<p>{data?.results[0].description}</p>}
           <span>Copyright C 2022 test. All Rights Reserved</span>
         </div>
       </div>

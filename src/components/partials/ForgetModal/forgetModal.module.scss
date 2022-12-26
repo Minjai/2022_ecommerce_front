@@ -29,6 +29,10 @@
       margin: 0;
       color: $app-dark-color;
       text-align: center;
+
+      @media screen and (max-width: 700px) {
+        font-size: 19px;
+      }
     }
 
     p{
@@ -37,6 +41,16 @@
       margin: 0;
       line-height: 1.6;
       text-align: center;
+    }
+
+    @media screen and (max-width: 700px) {
+      h3{
+        font-size: 20px;
+      }
+
+      p{
+        font-size: 16px;
+      }
     }
 
     form{

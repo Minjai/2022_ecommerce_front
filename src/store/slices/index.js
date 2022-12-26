@@ -6,21 +6,24 @@ import { categoryQuery } from '../query/categoryQuery';
 import { paymentQuery } from '../query/paymentQuery';
 import { productQuery } from '../query/productQuery';
 import { pointsQuery } from '../query/pointsQuery';
+import { footerQuery } from '../query/footerQuery';
 import { reviewQuery } from '../query/reviewQuery';
 import { combineReducers } from '@reduxjs/toolkit';
+import { policyQuery } from '../query/policyQuery';
 import { orderQuery } from '../query/orderQuery';
-import { newsQuery } from '../query/newsQuery';
+import { termsQuery } from '../query/termsQuery';
 import { countryQuery } from '../query/country';
+import { newsQuery } from '../query/newsQuery';
 import consultationSlice from './consultation';
 import { faqQuery } from '../query/faqQuery';
 import categorySlice from './category';
+import deliverySlice from './delivery';
 import productSlice from './product';
 import userSlice from './user/user';
 import burgerSlice from './burger';
-import pointSlice from './points';
 import searchSlice from './search';
 import reviewSlice from './review';
-import deliverySlice from './delivery';
+import pointSlice from './points';
 import alertSlice from './alert';
 import orderSlice from './order';
 import modalSlice from './modal';
@@ -53,4 +56,7 @@ export const rootSlice = combineReducers({
   [settingsQuery.reducerPath]: settingsQuery.reducer,
   [countryQuery.reducerPath]: countryQuery.reducer,
   [paymentQuery.reducerPath]: paymentQuery.reducer,
+  [policyQuery.reducerPath]: policyQuery.reducer,
+  [footerQuery.reducerPath]: footerQuery.reducer,
+  [termsQuery.reducerPath]: termsQuery.reducer,
 });
