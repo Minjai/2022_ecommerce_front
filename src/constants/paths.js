@@ -45,5 +45,6 @@ export const modalPaths = {
   SEARCH: 'search',
   ALARM: 'alarm',
   PAYMENT: 'payment',
-  FORGET_PASSWORD: 'forget-password'
+  FORGET_PASSWORD: 'forget-password',
+  REVIEW_INFO: 'review-info'
 }

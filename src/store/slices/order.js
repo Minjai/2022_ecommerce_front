@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   data: [],
   trackingNumber: '',
+  conditionId: '',
 };
 
 const orderSlice = createSlice({
@@ -21,8 +22,15 @@ const orderSlice = createSlice({
     setTrackingNumber: (state, action) => {
       state.trackingNumber = action;
     },
+    setConditionId: (state, action) => {
+      state.conditionId = action.payload;
+    },
   },
 });
 
-export const { setSingleOrder, setTrackingNumber } = orderSlice.actions;
+export const {
+  setSingleOrder,
+  setTrackingNumber,
+  setConditionId,
+} = orderSlice.actions;
 export default orderSlice.reducer;

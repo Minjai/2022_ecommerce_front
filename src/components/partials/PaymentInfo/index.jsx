@@ -1,3 +1,4 @@
+import { useGetPaymentInfoQuery } from '../../../store/query/paymentQuery';
 import { setAlert, setAlertContent } from '../../../store/slices/alert';
 import { mathModalTotal } from '../../../utils/mathTotal';
 import { axiosInstance } from '../../../constants/axios';
@@ -14,6 +15,12 @@ const PaymentInfo = () => {
 
   const { data } = useSelector((state) => state.order);
   const dispatch = useDispatch();
+
+  const modalHandler = () => {
+    dispatch(setAlertContent('Your order payment has been added !'));
+    dispatch(setModal(false));
+    dispatch(setAlert(true));
+  };
 
   const postPaymentHandler = async () => {
     const formData = new FormData();
@@ -34,38 +41,41 @@ const PaymentInfo = () => {
           }
         );
 
-        dispatch(setModal(false));
-        dispatch(setAlert(true));
-        dispatch(setAlertContent('Your order payment has been added !'));
+        modalHandler();
       } catch (error) {
         console.log(error.response);
       }
     }
   };
 
+  const { data: paymentData } = useGetPaymentInfoQuery({
+    token: localStorage.getItem('accessToken'),
+  });
+
   return (
     <div className={cls['payment']}>
       <CloseButton />
       <div className={cls['payment-wrapper']}>
-        {window.innerWidth < 950 && <MobileOrderNav />}
         <div className={cls['payment-info']}>
           <h2>Make a Payment</h2>
+          {window.innerWidth < 950 && <h5>Please upload a payment here.</h5>}
+          {window.innerWidth < 950 && <MobileOrderNav isOrder={true} />}
           <div className={cls['payment-info__body']}>
             <h3>Payment Information</h3>
-            <p>Account Name: test</p>
-            <p>Account Number: test</p>
-            <p>Account Address: lorem</p>
-            <p>Swift Code: Test</p>
-            <p>Bank Name: Test</p>
-            <p>Bank Address: Test</p>
-            <p>Country / Region: Test</p>
+            <p>Account Name: {paymentData?.results[0].account_name}</p>
+            <p>Account Number: {paymentData?.results[0].account_number}</p>
+            <p>Account Address: {paymentData?.results[0].account_address}</p>
+            <p>Swift Code: {paymentData?.results[0].swift_code}</p>
+            <p>Bank Name: {paymentData?.results[0].bank_name}</p>
+            <p>Bank Address: {paymentData?.results[0].bank_address}</p>
+            <p>Country / Region: {paymentData?.results[0].county_region}</p>
           </div>
           <div className={cls['payment-info__footer']}>
             <p>
               • Please treanfer ${' '}
-              {mathModalTotal(data?.order_items, '1', '1.5')} USD ( ${' '}
-              {mathModalTotal(data?.order_items, '1', '1.5')} (SGD) ) to our
-              bank account for payment
+              {mathModalTotal(data?.order_items, '1', data?.point_used)} USD ( ${' '}
+              {mathModalTotal(data?.order_items, '1', data?.point_used)} (SGD) )
+              to our bank account for payment
             </p>
             <p className={cls['active']}>
               • Bank transfer fees are the buyer’s payments.
@@ -87,7 +97,7 @@ const PaymentInfo = () => {
             </p>
           </div>
         </div>
-        <CheckoutPrice data={data.order_items} />
+        <CheckoutPrice isOrder={true} data={data} />
       </div>
       <div className={cls['payment-buttons']}>
         <button onClick={() => dispatch(setModal(false))}>Cancel</button>

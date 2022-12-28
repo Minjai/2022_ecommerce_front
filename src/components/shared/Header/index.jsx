@@ -1,11 +1,12 @@
 import {
-  currencyLink,
   headerLocalMidLinks,
   headerLowerLinks,
   headerPrivateMidLinks,
 } from '../../../constants/header';
 import { useGetAllCategoriesQuery } from '../../../store/query/productQuery';
+import { useGetCurrencyQuery } from '../../../store/query/currency';
 import { setContent, setModal } from '../../../store/slices/modal';
+import { setCategoryData } from '../../../store/slices/category';
 import { modalPaths, paths } from '../../../constants/paths';
 import { setAuth } from '../../../store/slices/user/user';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +17,8 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../../elements/UI/Logo';
 import cls from './header.module.scss';
 import { FiChevronDown } from 'react-icons/fi';
-import { setCategoryData } from '../../../store/slices/category';
+import { useEffect } from 'react';
+import { initCurrency } from '../../../store/slices/currency';
 
 const Header = () => {
   const { isAuth } = useSelector((state) => state.user);
@@ -39,10 +41,17 @@ const Header = () => {
   const { data } = useGetAllCategoriesQuery();
 
   const handleCategory = (item) => {
-    dispatch(setCategoryData(item))
-    navigate(`/${paths.CATEGORY}`)
-  }
-  
+    dispatch(setCategoryData(item));
+    navigate(`/${paths.CATEGORY}`);
+  };
+
+  const { data: currencyData } = useGetCurrencyQuery();
+  const { activeCurrency } = useSelector(state => state.currency)
+
+  useEffect(() => {
+    dispatch(initCurrency(currencyData?.results[0].currency));
+  }, [currencyData?.results, dispatch]);
+
   return (
     <header>
       <div className={cls['header-upper']}>
@@ -122,10 +131,7 @@ const Header = () => {
                   >
                     <ul>
                       {data?.slice(0, 4).map((item) => (
-                        <li
-                          onClick={() => handleCategory(item)}
-                          key={item.id}
-                        >
+                        <li onClick={() => handleCategory(item)} key={item.id}>
                           {item.title} <FiChevronDown />
                         </li>
                       ))}
@@ -137,12 +143,14 @@ const Header = () => {
           </ul>
           <div className={cls['header-currency']}>
             <span>
-              USD {'($)'} <BsChevronDown />
+              {activeCurrency} <BsChevronDown />
             </span>
             <div>
               <ul>
-                {currencyLink.map(({ id, text }) => (
-                  <li key={id}>{text}</li>
+                {currencyData?.results.map(({ id, currency }) => (
+                  <li onClick={() => dispatch(initCurrency(currency))} key={id}>
+                    {currency}
+                  </li>
                 ))}
               </ul>
             </div>

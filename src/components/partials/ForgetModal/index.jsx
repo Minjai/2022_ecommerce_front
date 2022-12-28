@@ -1,3 +1,4 @@
+import { axiosInstance } from '../../../constants/axios';
 import CloseButton from '../../elements/UI/CloseButton';
 import { setModal } from '../../../store/slices/modal';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -24,8 +25,15 @@ const ForgetModal = () => {
     mode: 'all',
   });
 
-  const handleFormSubmit = (e) => {
-    console.log(e);
+  const handleFormSubmit = async (e) => {
+    try {
+      const response = await axiosInstance.post('accounts/profiles/reset_password_send_email/' , {
+        email: e.email
+      })
+
+    } catch (error) {
+      console.log(error.response);
+    }
   }
 
   return (

@@ -1,13 +1,25 @@
+import { setContent, setModal } from '../../../store/slices/modal';
+import { setPickedReview } from '../../../store/slices/review';
 import { dateParser } from '../../../utils/dateParser';
+import { modalPaths } from '../../../constants/paths';
 import { nameClose } from '../../../utils/nameCloser';
 import cls from './reviewItem.module.scss';
+import { useDispatch } from 'react-redux';
 import Rating from '../UI/Rating';
 
 const ReviewItem = ({ review }) => {
   const { comment, stars, product, user, created_at } = review;
 
+  const dispatch = useDispatch();
+
+  const reviewHandler = () => {
+    dispatch(setPickedReview(review))
+    dispatch(setModal(true));
+    dispatch(setContent(modalPaths.REVIEW_INFO));
+  };
+
   return (
-    <div className={cls['review']}>
+    <div onClick={reviewHandler} className={cls['review']}>
       <div className={cls['review-image']}>
         <img
           src={product.images.find((item) => item.is_feature).image}

@@ -1,4 +1,5 @@
 import { useGetUserConsultationsQuery } from '../../../store/query/consultationQuery';
+import { useGetUserPointsQuery } from '../../../store/query/pointsQuery';
 import { useGetReviewsQuery } from '../../../store/query/reviewQuery';
 import { useGetOrdersQuery } from '../../../store/query/orderQuery';
 import { orderTable } from '../../../utils/userOrderTable';
@@ -13,6 +14,13 @@ const UserStatus = () => {
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.user);
 
+  const { data: userPoints } = useGetUserPointsQuery({
+    userId: userInfo.id,
+    token: localStorage.getItem('accessToken'),
+  }, {
+    refetchOnMountOrArgChange: true
+  });
+
   const { start_date, end_date } = dateFilter(3);
 
   const newPageHandler = (path) => {
@@ -25,7 +33,7 @@ const UserStatus = () => {
       token: localStorage.getItem('accessToken'),
       userId: userInfo.id,
       startDate: start_date,
-      endDate: end_date
+      endDate: end_date,
     },
     {
       refetchOnMountOrArgChange: true,
@@ -62,7 +70,7 @@ const UserStatus = () => {
           <div
             onClick={() => newPageHandler(`/${paths.MY_PAGE}/${paths.POINTS}`)}
           >
-            <b>{userInfo?.point > 0 ? userInfo?.point : 0}</b>
+            <b>{userPoints?.results[0]?.point > 0 ? userPoints?.results[0]?.point : 0}</b>
             <span>points</span>
           </div>
         </div>

@@ -16,6 +16,7 @@ import { rootSlice } from './slices';
 import { policyQuery } from './query/policyQuery';
 import { footerQuery } from './query/footerQuery';
 import { termsQuery } from './query/termsQuery';
+import { currencyQuery } from './query/currency';
 
 export const store = configureStore({
   reducer: rootSlice,
@@ -32,10 +33,11 @@ export const store = configureStore({
       pointsQuery.middleware,
       settingsQuery.middleware,
       notificationQuery.middleware,
+      currencyQuery.middleware,
       countryQuery.middleware,
       paymentQuery.middleware,
       policyQuery.middleware,
       footerQuery.middleware,
-      termsQuery.middleware
+      termsQuery.middleware,
     ),
 });

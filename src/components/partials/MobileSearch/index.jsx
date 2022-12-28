@@ -41,17 +41,18 @@ const MobileSearch = () => {
   const addCartHandler = (e, item) => {
     e.stopPropagation();
 
-    dispatch(addCart(item));
-    if (localStorage.getItem('shop-cart')) {
-      const cart = JSON.parse(localStorage.getItem('shop-cart'));
-      localStorage.setItem('shop-cart', JSON.stringify([...cart, item]));
-    }
+    dispatch(addCart({ ...item, pickedPackage: item?.prices[0] }));
+    const cart = JSON.parse(localStorage.getItem('shop-cart'));
+    localStorage.setItem(
+      'shop-cart',
+      JSON.stringify([...cart, { ...item, pickedPackage: item?.prices[0] }])
+    );
   };
 
   const productNavigateHandler = (id) => {
     dispatch(setModal(false));
-    navigate(`/${paths.SINGLE_PRODUCT}/${id}`)
-  }
+    navigate(`/${paths.SINGLE_PRODUCT}/${id}`);
+  };
 
   return (
     <div className={cls['search']}>
@@ -68,37 +69,39 @@ const MobileSearch = () => {
         </span>
       </div>
       <div className={cls['search__body']}>
-        {
-          data?.results.length > 0 ? (
-            data?.results.map((item) => (
-              <div
-                onClick={() => productNavigateHandler(item.id)}
-                key={item.id}
-                className={cls['search__body__child']}
-              >
-                <img
-                  src={item.images.find((item) => item.is_feature === true).image}
-                  alt="search-pic"
-                />
-                <div className={cls['content']}>
-                  <p>{item.product_name}</p>
-                  <span>100 ea</span>
-                  <b>${item.prices[0].selling_price}</b>
-                </div>
-                <div className={cls['buttons']}>
-                  <button
-                    className={cls[isInCart(item.id) ? 'active' : 'none']}
-                    onClick={(e) =>
-                      isInCart(item.id) ? cartNavigate(e) : addCartHandler(e, item)
-                    }
-                  >
-                    <BsCart />
-                  </button>
-                </div>
+        {data?.results.length > 0 ? (
+          data?.results.map((item) => (
+            <div
+              onClick={() => productNavigateHandler(item.id)}
+              key={item.id}
+              className={cls['search__body__child']}
+            >
+              <img
+                src={item.images.find((item) => item.is_feature === true).image}
+                alt="search-pic"
+              />
+              <div className={cls['content']}>
+                <p>{item.product_name}</p>
+                <span>100 ea</span>
+                <b>${item.prices[0].selling_price}</b>
               </div>
-            ))
-          ) : <EmptyText text={'search'} />
-        }
+              <div className={cls['buttons']}>
+                <button
+                  className={cls[isInCart(item.id) ? 'active' : 'none']}
+                  onClick={(e) =>
+                    isInCart(item.id)
+                      ? cartNavigate(e)
+                      : addCartHandler(e, item)
+                  }
+                >
+                  <BsCart />
+                </button>
+              </div>
+            </div>
+          ))
+        ) : (
+          <EmptyText text={'search'} />
+        )}
       </div>
     </div>
   );

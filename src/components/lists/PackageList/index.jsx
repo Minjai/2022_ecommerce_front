@@ -1,20 +1,12 @@
 import { HiOutlineArrowRight } from 'react-icons/hi';
 import cls from './packageList.module.scss';
-import { useState } from 'react';
 
-const PackageList = ({ list }) => {
-  const productPrices = list.map((item) => ({ ...item, is_picked: false }));
-  const [data, setData] = useState(productPrices);
-
-  const pickedPackageHandler = (id) => {
-    setData((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? { ...item, is_picked: !item.is_picked }
-          : { ...item, is_picked: false }
-      )
-    );
+const PackageList = ({ list, options }) => {
+  const pickedPackageHandler = (item) => {
+    setPricePackage(item)
   };
+
+  const { pricePackage, setPricePackage } = options;
 
   return (
     <div className={cls['package']}>
@@ -23,31 +15,27 @@ const PackageList = ({ list }) => {
         <span>Price</span>
       </div>
       <div className={cls['package__body']}>
-        {data.map(
-          ({
-            id,
-            package: packages,
-            regular_price,
-            selling_price,
-            is_picked,
-          }) => (
-            <div
-              onClick={() => pickedPackageHandler(id)}
-              key={id}
-              className={cls['package__body__child']}
-            >
-              <div>
-                <span className={cls[is_picked ? 'active' : '']}></span>
-                <p>{packages}</p>
-              </div>
-              <div>
-                <p className={cls['cross']}>{`$ ${regular_price}`}</p>
-                <HiOutlineArrowRight />
-                <b>{`$ ${selling_price}`}</b>
-              </div>
+        {list.map((item) => (
+          <div
+            onClick={() => pickedPackageHandler(item)}
+            key={item['id']}
+            className={cls['package__body__child']}
+          >
+            <div>
+              <span
+                className={cls[pricePackage?.id === item['id'] ? 'active' : '']}
+              ></span>
+              <p>{item['package']}</p>
             </div>
-          )
-        )}
+            <div>
+              <p>
+                <span className={cls['cross']}>{`$ ${item['regular_price']}`}</span>
+              </p>
+              <HiOutlineArrowRight />
+              <b>{`$ ${item['selling_price']}`}</b>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

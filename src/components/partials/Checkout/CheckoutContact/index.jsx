@@ -1,3 +1,4 @@
+import { decrementStatisPoints, setPoints } from '../../../../store/slices/points';
 import { useCheckoutButtons } from '../../../../hooks/useCheckoutButtons';
 import { useGetCountriesQuery } from '../../../../store/query/country';
 import CheckoutButtons from '../../../elements/UI/CheckoutButtons';
@@ -8,7 +9,6 @@ import { paths } from '../../../../constants/paths';
 import cls from './checkoutContact.module.scss';
 import { AiOutlineDown } from 'react-icons/ai';
 import { useState } from 'react';
-import { setPoints } from '../../../../store/slices/points';
 
 const CheckoutContact = () => {
   const [country, setCountry] = useState({ title: 'Select country' });
@@ -67,6 +67,16 @@ const CheckoutContact = () => {
       console.log(error.response);
     }
   };
+
+  const { staticPoints } = useSelector(state => state.points)
+
+  const pointsHandler = () => {
+    if(state.points <= staticPoints){
+      dispatch(decrementStatisPoints(state.points))
+      dispatch(setPoints(state.points))
+      setState((prev) => ({ ...prev, points: '' }))
+    }
+  }
 
   return (
     <div className={cls['contact']}>
@@ -167,7 +177,7 @@ const CheckoutContact = () => {
       </div>
       <div className={cls['contact__points']}>
         <h3>Apply points</h3>
-        <p>You have {userInfo.point} points available.</p>
+        <p>You have {staticPoints} points available.</p>
         <span>
           <input
             value={state.points}
@@ -177,7 +187,7 @@ const CheckoutContact = () => {
             type="text"
             placeholder="Please enter the amount points"
           />
-          <button onClick={() => dispatch(setPoints(state.points))}>Apply Points</button>
+          <button onClick={pointsHandler}>Apply Points</button>
         </span>
       </div>
       <CheckoutButtons prev={backBtnHandler} next={handleSubmit} />

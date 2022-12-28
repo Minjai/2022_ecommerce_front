@@ -17,7 +17,7 @@ const MainCarousel = () => {
         <Swiper
           navigation={true}
           modules={[Navigation]}
-          className="mySwiper main-swiper"
+          className="main-swiper"
         >
           {data?.results.map(({ banner_images }) =>
             banner_images.map((item) => (

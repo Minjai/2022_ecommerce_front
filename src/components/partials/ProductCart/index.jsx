@@ -25,12 +25,12 @@ const ProductCart = () => {
             Sub total: <p>${mathSubTotal(carts)}</p>
           </span>
           <span>
-            Shipping fee: <p>$1.76</p>
+            Shipping fee: <p>$1</p>
           </span>
         </div>
         <div className={cls['cart-footer__total']}>
           <span>
-            Order total: <p>${mathTotal(carts, '1.76')}</p>
+            Order total: <p>${mathTotal(carts, '1')}</p>
           </span>
         </div>
         <div className={cls['cart-footer__buttons']}>

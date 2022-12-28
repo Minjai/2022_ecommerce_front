@@ -10,6 +10,7 @@ import { footerQuery } from '../query/footerQuery';
 import { reviewQuery } from '../query/reviewQuery';
 import { combineReducers } from '@reduxjs/toolkit';
 import { policyQuery } from '../query/policyQuery';
+import { currencyQuery } from '../query/currency';
 import { orderQuery } from '../query/orderQuery';
 import { termsQuery } from '../query/termsQuery';
 import { countryQuery } from '../query/country';
@@ -24,6 +25,7 @@ import burgerSlice from './burger';
 import searchSlice from './search';
 import reviewSlice from './review';
 import pointSlice from './points';
+import currencySlice from './currency';
 import alertSlice from './alert';
 import orderSlice from './order';
 import modalSlice from './modal';
@@ -42,6 +44,7 @@ export const rootSlice = combineReducers({
   modal: modalSlice,
   review: reviewSlice,
   user: userSlice,
+  currency: currencySlice,
   cart: cartSlice,
   [categoryQuery.reducerPath]: categoryQuery.reducer,
   [pointsQuery.reducerPath]: pointsQuery.reducer,
@@ -59,4 +62,5 @@ export const rootSlice = combineReducers({
   [policyQuery.reducerPath]: policyQuery.reducer,
   [footerQuery.reducerPath]: footerQuery.reducer,
   [termsQuery.reducerPath]: termsQuery.reducer,
+  [currencyQuery.reducerPath]: currencyQuery.reducer,
 });

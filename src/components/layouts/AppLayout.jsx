@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom';
 import Header from '../shared/Header';
 import { axiosInstance } from '../../constants/axios';
 import { setUserInfo } from '../../store/slices/user/user';
+import { setStaticPoints } from '../../store/slices/points';
 
 const ModalWrapper = lazy(() => import('../modals/ModalWrapper'));
 const HeaderModal = lazy(() => import('../modals/HeaderModal'));
@@ -14,10 +15,21 @@ const Alert = lazy(() => import('../modals/Alert'));
 
 const AppLayout = () => {
   const { isActive: isModal } = useSelector((state) => state.modal);
+  const { isAuth, userInfo } = useSelector((state) => state.user);
   const { isActive } = useSelector((state) => state.burger);
-  const { isAuth } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
+
+  const setPoints = async () => {
+    try {
+      const response = await axiosInstance.get(`accounts/points/?user=${userInfo?.id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      })
+      dispatch(setStaticPoints(response?.data.results[0].point));
+    } catch (error) {}
+  };
 
   useEffect(() => {
     if (isActive || isModal) {
@@ -40,20 +52,22 @@ const AppLayout = () => {
     const request = async () => {
       try {
         const response = await axiosInstance.get(
-          'accounts/profiles/get_userinfo/' ,{
+          'accounts/profiles/get_userinfo/',
+          {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
             },
           }
         );
-        
-        dispatch(setUserInfo(response.data))
+
+        dispatch(setUserInfo(response.data));
+        setPoints()
       } catch (error) {
         console.log(error.response);
-      } 
+      }
     };
 
-    request()
+    request();
   }, [isAuth, dispatch]);
 
   return (

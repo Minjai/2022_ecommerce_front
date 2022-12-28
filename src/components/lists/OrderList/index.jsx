@@ -16,7 +16,7 @@ const OrderList = ({ data }) => {
   const orderModalHandler = () => {
     dispatch(setModal(true));
     dispatch(setContent(modalPaths.ORDER));
-    dispatch(setTrackingNumber(data?.tracking_number))
+    dispatch(setTrackingNumber(data?.tracking_number));
   };
 
   const orderPaymentHandler = (data) => {
@@ -42,13 +42,10 @@ const OrderList = ({ data }) => {
                   <p>Total</p>
                   <p>
                     ${' '}
-                    {data?.map((item) =>
-                      item?.order_items.reduce(
-                        (prev, elem) =>
-                          (prev += +elem?.info?.prices[0]?.selling_price),
-                        0
-                      )
-                    )}
+                    {elem?.order_items.reduce(
+                      (prev, elem) => (prev += +elem?.quantity?.selling_price),
+                      0
+                    ) - elem.point_used / 1000}
                   </p>
                 </span>
               </div>
@@ -85,16 +82,16 @@ const OrderList = ({ data }) => {
                   >
                     <img
                       src={
-                        item?.info?.images?.find(
+                        item?.product?.images?.find(
                           (image) => image.is_feature === true
                         ).image
                       }
                       alt="order-product-pic"
                     />
                     <div>
-                      <p>{item?.info?.product_name}</p>
-                      <span>{item?.info?.prices[0]?.package}</span>
-                      <p>$ {+item?.info?.prices[0]?.selling_price}</p>
+                      <p>{item?.product?.product_name}</p>
+                      <span>{item?.quantity.package}</span>
+                      <p>$ {+item?.quantity.selling_price}</p>
                       {elem.status === 'sent' && (
                         <button
                           onClick={() => navigate(`write-review/${item.id}`)}

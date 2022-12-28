@@ -112,7 +112,7 @@ const CostumerForm = () => {
           </label>
           <label>
             <span>Category</span>
-            <div className={cls[categoryActive ? 'costumer-list_active' : '']}>
+            <div id={cls['z-index']} className={cls[categoryActive ? 'costumer-list_active' : '']}>
               <div onClick={() => setCategoryActive((prev) => !prev)}>
                 <span>{category.title}</span>
                 <BsChevronDown />

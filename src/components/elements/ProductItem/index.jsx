@@ -19,29 +19,35 @@ const ProductItem = ({ item }) => {
   };
 
   const cartNavigate = (e) => {
-    e.stopPropagation()
+    e.stopPropagation();
 
     navigate(`/${paths.CART}`);
     window.scrollTo(window.scrollX, 0);
   };
 
   const addCartHandler = (e) => {
-    e.stopPropagation()
+    e.stopPropagation();
 
-    dispatch(addCart(item));
-    const cart = JSON.parse(localStorage.getItem("shop-cart"));
-    localStorage.setItem('shop-cart',  JSON.stringify([...cart, item]))
+    dispatch(addCart({ ...item, pickedPackage: item?.prices[0] }));
+    const cart = JSON.parse(localStorage.getItem('shop-cart'));
+    localStorage.setItem(
+      'shop-cart',
+      JSON.stringify([...cart, { ...item, pickedPackage: item?.prices[0] }])
+    );
   };
 
   const productNavigate = (e) => {
     navigate(`/${paths.SINGLE_PRODUCT}/${id}`);
     window.scrollTo(window.scrollX, 0);
-  }
+  };
 
   return (
     <div onClick={productNavigate} className={cls['product-item']}>
       <div className={cls['product-item__header']}>
-        <img src={images?.find(item => item.is_feature === true)?.image} alt="product-pic" />
+        <img
+          src={images?.find((item) => item.is_feature === true)?.image}
+          alt="product-pic"
+        />
         {top && (
           <span>
             No. <p>{top}</p>{' '}

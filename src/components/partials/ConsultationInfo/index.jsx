@@ -36,7 +36,6 @@ const ConsultationInfo = () => {
           }
         );
 
-        console.log(response);
       } else {
         const response = await axiosInstance.post(
           'consultations/consultations/',

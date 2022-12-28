@@ -6,7 +6,7 @@ const CheckoutSecond = () => {
   return (
     <div className="w-50">
       <PageTitle>Check Out</PageTitle>
-      {window.innerWidth < 950 && <MobileOrderNav />}
+      {window.innerWidth < 950 && <MobileOrderNav applyPoints={true} />}
       <CheckoutContact />
     </div>
   );

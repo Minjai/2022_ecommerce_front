@@ -33,13 +33,28 @@
     padding: 0 20px;
     position: relative;
     flex-wrap: wrap;
+
+    @media screen and (max-width: 950px) {
+      padding: 0 15px;
+    }
   }
 
   &-info {
     width: 40%;
+
+    @media screen and (max-width: 950px) {
+      width: 100%;
+    }
+
     h2 {
       color: $app-dark-color;
       font-size: 24px;
+      margin: 0;
+    }
+
+    > h5{
+      color: $app-dark-color;
+      font-size: 14px;
       margin: 0;
     }
 

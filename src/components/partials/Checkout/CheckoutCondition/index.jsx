@@ -4,7 +4,9 @@ import { axiosInstance } from '../../../../constants/axios';
 import { paths } from '../../../../constants/paths';
 import { IoCheckmarkSharp } from 'react-icons/io5';
 import cls from './checkoutCondition.module.scss';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { setConditionId } from '../../../../store/slices/order';
 
 const CheckoutCondition = () => {
   const [state, setState] = useState({
@@ -22,6 +24,8 @@ const CheckoutCondition = () => {
   const { backBtnHandler, nextBtnhandler } = useCheckoutButtons(
     `/${paths.CHECK_OUT}/${paths.CHECK_OUT_SECOND}`
   );
+
+  const dispatch = useDispatch()
 
   const conditionHandler = async () => {
     const formData = new FormData();
@@ -49,6 +53,7 @@ const CheckoutCondition = () => {
         }
       );
 
+      dispatch(setConditionId(response.data.id))
       nextBtnhandler();
     } catch (error) {
       console.log(error.response);

@@ -15,6 +15,15 @@
 }
 
 .mySwiper {
+  @include carousel-paginaiton
+}
+
+.main-swiper {
+  width: 108%;
+  left: -4%;
+  height: 100%;
+  position: absolute;
+
   .swiper-button-next {
     color: gray;
     background-color: white;
@@ -70,13 +79,6 @@
       top: 27%;
     }
   }
-}
-
-.main-swiper {
-  width: 108%;
-  left: -4%;
-  height: 100%;
-  position: absolute;
 
   .swiper-slide a {
     width: 92%;
@@ -85,7 +87,7 @@
     text-decoration: none;
     display: block;
 
-    img{
+    img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -100,11 +102,26 @@
       width: 100%;
     }
 
-    .swiper-button-next ,
+    .swiper-button-next,
     .swiper-button-prev {
       &::before {
         bottom: 48%;
       }
+    }
+  }
+}
+
+.review-swiper {
+  height: 100%;
+
+  .swiper-slide div {
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
   }
 }

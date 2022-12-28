@@ -11,6 +11,11 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    padding: 0 20px;
+
+    @media screen and (max-width: 430px) {
+      padding-right: 30px;
+    }
 
     span {
       color: $app-dark-color;
@@ -35,8 +40,7 @@
       }
 
       & div:first-child {
-        width: 40%;
-        padding-right: 42px;
+        width: 37%;
 
         span {
           border-radius: 50%;
@@ -61,35 +65,90 @@
 
         p {
           margin: 0;
+          margin-left: 0px;
           color: $app-dark-color;
+          text-align: center;
+          width: 70px;
+          
           p {
             font-size: 14px;
             font-weight: 600;
           }
         }
+
+        @media screen and (max-width: 1000px) {
+          padding-right: 23px;
+        }
+
+        @media screen and (max-width: 930px) {
+          padding-right: 15px;
+        }
+
+        @media screen and (max-width: 850px) {
+          padding-right: 17px;
+        }
+
+        @media screen and (max-width: 750px) {
+          padding-right: 10px;
+        }
+
+        @media screen and (max-width: 630px) {
+          padding-right: 0px;
+        }
+
+        @media screen and (max-width: 600px) {
+          padding-right: 30px;
+        }
+
+        @media screen and (max-width: 530px) {
+          padding-right: 25px;
+        }
+
+        @media screen and (max-width: 470px) {
+          padding-right: 20px;
+        }
+
+        @media screen and (max-width: 420px) {
+          padding-right: 15px;
+        }
+
+        @media screen and (max-width: 400px) {
+          padding-right: 10px;
+        }
+
+        @media screen and (max-width: 350px) {
+          p{
+            width: 60px;
+          }
+        }
       }
 
       & div:last-child {
-        width: 43%;
-
-        .cross {
-          position: relative;
-          &::before {
-            content: '';
-            position: absolute;
-            width: 110%;
-            height: 1px;
-            top: 49%;
-            background: #a6a6a6;
-            left: -5%;
-          }
-        }
+        width: 50%;
 
         p {
-          color: #a6a6a6;
-          font-size: 14px;
           margin: 0;
-          font-weight: 600;
+          text-align: center;
+          width: 70px;
+
+          .cross {
+            position: relative;
+            &::before {
+              content: '';
+              position: absolute;
+              width: 110%;
+              height: 1px;
+              top: 49%;
+              background: #a6a6a6;
+              left: -5%;
+            }
+          }
+
+          span{
+            color: #a6a6a6;
+            font-size: 14px;
+            font-weight: 600;
+          }
         }
 
         svg {
@@ -100,11 +159,18 @@
         b {
           color: $app-main-color;
           font-size: 14px;
+          text-align: center;
+          width: 70px;
+        }
+      }
+      
+      @media screen and (max-width: 1050px) {
+        & div:last-child{
+          width: 50%;
         }
       }
 
       @media screen and (max-width: 1000px) {
-        & div:last-child,
         & div:first-child {
           width: 45%;
         }
@@ -118,7 +184,7 @@
     &__body {
       &__child {
         & div:last-child {
-          width: 47%;
+          width: 49%;
         }
 
         & div:first-child {
@@ -131,10 +197,6 @@
   @media screen and (max-width: 600px) {
     &__body {
       &__child {
-        & div:last-child {
-          width: 45%;
-        }
-
         & div:first-child {
           width: 39%;
         }
@@ -145,12 +207,28 @@
   @media screen and (max-width: 470px) {
     &__body {
       &__child {
-        & div:last-child {
-          width: 47%;
-        }
-
         & div:first-child {
           width: 41%;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 430px) {
+    &__body {
+      &__child {
+        & div:last-child {
+          width: 53%;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 360px) {
+    &__body {
+      &__child {
+        & div:last-child {
+          width: 57%;
         }
       }
     }

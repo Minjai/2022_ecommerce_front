@@ -1,14 +1,13 @@
 import { useGetOrdersQuery } from '../../../store/query/orderQuery';
 import { dateRangeParser } from '../../../utils/dateRangeParser';
-import { axiosInstance } from '../../../constants/axios';
 import Pagination from '../../elements/Pagination';
 import { AiOutlineDown } from 'react-icons/ai';
 import OrderList from '../../lists/OrderList';
 import Loader from '../../elements/UI/Loader';
 import cls from './orderHistory.module.scss';
-import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { DateRangePicker } from 'rsuite';
+import { useState } from 'react';
 import 'rsuite/dist/rsuite.css';
 
 const OrderHistory = () => {
@@ -19,10 +18,6 @@ const OrderHistory = () => {
   ]);
 
   const [isRange, setRange] = useState(false);
-  const [orders, setOrders] = useState([]);
-  const [load, setLoad] = useState(0);
-  const [count, setCount] = useState(0);
-
   const [page, setPage] = useState(1);
   const [pageStart, setPageStart] = useState(0);
   const [offset, setOffset] = useState(0);
@@ -50,56 +45,6 @@ const OrderHistory = () => {
     setSelect(str);
     setRange(false);
   };
-
-  const getSingleProduct = async (id) => {
-    try {
-      const response = await axiosInstance.get(`products/products/${id}`);
-      return await response.data;
-    } catch (error) {
-      return error;
-    }
-  };
-
-  useEffect(() => {
-    const res = data?.results?.map((elem) => {
-      return {
-        ...elem,
-        order_items: elem.order_items?.map(async (item) => {
-          const product = await getSingleProduct(item.product).then((info) => {
-            if (item?.product === info?.id) {
-              return {
-                ...item,
-                info,
-              };
-            } else {
-              return item;
-            }
-          });
-          setLoad((prev) => (prev = prev + 1));
-
-          setCount((prev) => (prev = prev + 1));
-          return product;
-        }),
-      };
-    });
-
-    const result = res?.map((item) => {
-      const infos = [];
-
-      item?.order_items?.map((res) =>
-        res.then((r) => {
-          infos.push(r);
-        })
-      );
-
-      return {
-        ...item,
-        order_items: infos,
-      };
-    });
-
-    setOrders(result);
-  }, [data]);
 
   const paginationOptions = {
     limit: 4,
@@ -144,11 +89,11 @@ const OrderHistory = () => {
         />
         <button>Search</button>
       </div>
-      {isLoading || load !== count ? (
+      {isLoading ? (
         <Loader />
       ) : (
         <>
-          <OrderList data={orders} />
+          <OrderList data={data?.results} />
           {paginationOptions?.pageCount > paginationOptions?.limit && (
             <Pagination options={paginationOptions} />
           )}

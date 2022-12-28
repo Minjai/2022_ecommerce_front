@@ -422,6 +422,10 @@
           }
         }
       }
+
+      @media screen and (max-width: 700px) {
+        height: 88px;
+      }
     }
 
     #active {

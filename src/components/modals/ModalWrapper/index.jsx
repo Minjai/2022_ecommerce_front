@@ -8,6 +8,7 @@ import { modalPaths } from '../../../constants/paths.js';
 import { useSelector } from 'react-redux';
 import cls from './modal.module.scss';
 import { useEffect } from 'react';
+import ReviewInfo from '../../partials/ReviewInfo/index.jsx';
 
 const ModalWrapper = () => {
   const { isActive, content } = useSelector((state) => state.modal);
@@ -47,8 +48,10 @@ const ModalWrapper = () => {
         <AlarmContent />
       ) : content === modalPaths.PAYMENT ? (
         <PaymentInfo />
-      ) : (
+      ) : content === modalPaths.FORGET_PASSWORD ? (
         <ForgetModal />
+      ) : (
+        <ReviewInfo />
       )}
     </div>
   );

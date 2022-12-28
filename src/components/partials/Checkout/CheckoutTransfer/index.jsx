@@ -1,7 +1,9 @@
 import { useGetPaymentInfoQuery } from '../../../../store/query/paymentQuery';
+import { useGetUserPointsQuery } from '../../../../store/query/pointsQuery';
 import { setAlert, setAlertContent } from '../../../../store/slices/alert';
 import { useCheckoutButtons } from '../../../../hooks/useCheckoutButtons';
 import CheckoutButtons from '../../../elements/UI/CheckoutButtons';
+import { setDiscountPoints } from '../../../../store/slices/points';
 import { axiosInstance } from '../../../../constants/axios';
 import { mathTotal } from '../../../../utils/mathTotal';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,13 +19,17 @@ const CheckoutTransfer = () => {
 
   const dispatch = useDispatch();
 
-  const createOrderItems = async (data, id) => {
+  const { conditionId } = useSelector((state) => state.order);
+  const { data: deliveryData } = useSelector((state) => state.delivery);
+  const { points, staticPoints } = useSelector((state) => state.points);
+
+  const createOrderItems = async (data, item) => {
     try {
       const response = await axiosInstance.post(
         'orders/order_items/',
         {
-          product: id,
-          quantity: JSON.parse(localStorage.getItem('shop-cart')).length,
+          product: item.id,
+          quantity: item.pickedPackage.id,
           order: data.id,
         },
         {
@@ -35,12 +41,33 @@ const CheckoutTransfer = () => {
     } catch (error) {}
   };
 
+  const decrementUserPoints = async () => {
+    try {
+      const response = await axiosInstance.patch(
+        `accounts/points/${pointsData.results[0].id}/`,
+        {
+          point: staticPoints,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        }
+      );
+
+      dispatch(setDiscountPoints(0))
+    } catch (error) {}
+  };
+
   const createOrder = async () => {
     try {
       const response = await axiosInstance.post(
         'orders/orders/',
         {
           status: 'awaiting_payment',
+          medical_condition: conditionId,
+          delivery_address: deliveryData.id,
+          point_used: +points,
         },
         {
           headers: {
@@ -50,15 +77,14 @@ const CheckoutTransfer = () => {
       );
 
       if (JSON.parse(localStorage.getItem('shop-cart')).length === 1) {
-        createOrderItems(
-          response.data,
-          JSON.parse(localStorage.getItem('shop-cart'))[0].id
-        );
+        const carts = JSON.parse(localStorage.getItem('shop-cart'));
+        createOrderItems(response.data, carts[0]);
       } else {
         const carts = JSON.parse(localStorage.getItem('shop-cart'));
-        carts.forEach((item) => createOrderItems(response.data, item.id));
+        carts.forEach((item) => createOrderItems(response.data, item));
       }
 
+      decrementUserPoints();
       dispatch(setAlert(true));
       dispatch(setAlertContent('Your order has been added !'));
     } catch (error) {
@@ -70,10 +96,13 @@ const CheckoutTransfer = () => {
     token: localStorage.getItem('accessToken'),
   });
 
-  console.log(data);
-
   const { userInfo } = useSelector((state) => state.user);
   const { carts } = useSelector((state) => state.cart);
+
+  const { data: pointsData } = useGetUserPointsQuery({
+    userId: userInfo.id,
+    token: localStorage.getItem('accessToken'),
+  });
 
   return (
     <div className={cls['transfer']}>
@@ -86,7 +115,7 @@ const CheckoutTransfer = () => {
       <p className={cls['paragraph']}>
         Your email {userInfo.email} 으로 주문 내용이 발송되었습니다.
       </p>
-      {window.innerWidth < 950 && <MobileOrderNav />}
+      {window.innerWidth < 950 && <MobileOrderNav applyPoints={true} />}
       <div className={cls['transfer__body']}>
         <h3>Payment Information</h3>
         <p>Account Name: {data?.results[0].account_name}</p>
@@ -99,8 +128,8 @@ const CheckoutTransfer = () => {
       </div>
       <div className={cls['transfer__footer']}>
         <p>
-          • Please treanfer $ {mathTotal(carts, '1', '1.5')} USD ( ${' '}
-          {mathTotal(carts, '1', '1.5')} (SGD) ) to our bank account for payment
+          • Please treanfer $ {mathTotal(carts, '1', points)} USD ( ${' '}
+          {mathTotal(carts, '1', points)} (SGD) ) to our bank account for payment
         </p>
         <p className={cls['active']}>
           • Bank transfer fees are the buyer’s payments.

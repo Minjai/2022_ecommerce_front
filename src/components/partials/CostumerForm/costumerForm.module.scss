@@ -76,6 +76,12 @@
           color: $app-gray-color;
         }
 
+        #z-index{
+          ul{
+            z-index: 5;
+          }
+        }
+
         > div {
           width: 77%;
           height: 50px;
