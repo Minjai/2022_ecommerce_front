@@ -4,6 +4,7 @@ const initialState = {
   data: [],
   trackingNumber: '',
   conditionId: '',
+  singleOrder: [],
 };
 
 const orderSlice = createSlice({
@@ -25,6 +26,9 @@ const orderSlice = createSlice({
     setConditionId: (state, action) => {
       state.conditionId = action.payload;
     },
+    setSingleItemOrder: (state, action) => {
+      state.singleOrder = action.payload
+    }
   },
 });
 
@@ -32,5 +36,6 @@ export const {
   setSingleOrder,
   setTrackingNumber,
   setConditionId,
+  setSingleItemOrder
 } = orderSlice.actions;
 export default orderSlice.reducer;

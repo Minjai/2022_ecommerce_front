@@ -29,7 +29,7 @@ export const productQuery = createApi({
     }),
     getBestProducts: builder.query({
       query: ({ id, page, offset }) =>
-        `products/products/?category=${id}&limit=6${
+        `products/products/?category=${id}&limit=8${
           page > 1 ? `&offset=${offset}` : ''
         }`,
       providesTags: () => ['PRODUCT_TAG'],

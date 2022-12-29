@@ -51,9 +51,9 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
         <div className={cls['total']}>
           <p>
             Total:{' '}
-            <span>$ {mathTotal(data?.order_items, '1', data?.point_used)}</span>
+            <span>$ {mathTotal(data?.order_items, 1, data?.point_used)}</span>
           </p>
-          <b>$ {mathTotal(data?.order_items, '1', data?.point_used)}</b>
+          <b>$ {mathTotal(data?.order_items, 1, data?.point_used)}</b>
         </div>
       </div>
     </div>
@@ -106,9 +106,9 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
         ) : null}
         <div className={cls['total']}>
           <p>
-            Total: <span>$ {mathTotal(data, '1', points)}</span>
+            Total: <span>$ {mathTotal(data, 1, points)}</span>
           </p>
-          <b>$ {mathTotal(data, '1', points)}</b>
+          <b>$ {mathTotal(data, 1, points)}</b>
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { setSingleItemOrder } from '../../../store/slices/order';
 import ProductImages from '../../elements/ProductImages';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCart } from '../../../store/slices/cart';
@@ -51,13 +52,20 @@ const ProductInfo = ({ data }) => {
     setPricePackage,
   };
 
+  const purchaseHandler = () => {
+    navigate(`/${paths.CHECK_OUT}/${paths.CHECK_OUT_ONE}`)
+    dispatch(setSingleItemOrder([{ ...data, pickedPackage: pricePackage }]))
+  }
+
+  const { activeCurrency } = useSelector((state) => state.currency);
+
   return (
     <div className={cls['product']}>
       <ProductImages images={data?.images} />
       <div className={cls['product-info']}>
         <h4>{product_name}</h4>
         <p>
-          $ {prices[0]?.selling_price} (USD){' '}
+          $ {prices[0]?.selling_price * +activeCurrency.currency_value} (USD){' '}
           {status === 'out_of_stock' && <b>*Out of Stock</b>}
         </p>
         <span>Manufactured By TEST</span>
@@ -85,12 +93,16 @@ const ProductInfo = ({ data }) => {
             </div>
           </div>
           <button
+            id={cls[status === 'out_of_stock' ? 'outOfStock' : '']}
             className={cls['cart-btn']}
             onClick={isInCart(id) ? cartNavigate : addCartHandler}
           >
             {isInCart(id) ? 'Cart' : 'Add to Cart'}
           </button>
-          <button id={cls[status === 'out_of_stock' ? 'outOfStock' : '']}>
+          <button
+            onClick={purchaseHandler}
+            id={cls[status === 'out_of_stock' ? 'outOfStock' : '']}
+          >
             Purchase now
           </button>
           {status === 'out_of_stock' && <h5>*This product is out of stock</h5>}

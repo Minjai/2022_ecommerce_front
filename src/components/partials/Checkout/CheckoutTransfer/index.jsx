@@ -22,6 +22,7 @@ const CheckoutTransfer = () => {
   const { conditionId } = useSelector((state) => state.order);
   const { data: deliveryData } = useSelector((state) => state.delivery);
   const { points, staticPoints } = useSelector((state) => state.points);
+  const { singleOrder } = useSelector((state) => state.order);
 
   const createOrderItems = async (data, item) => {
     try {
@@ -55,7 +56,7 @@ const CheckoutTransfer = () => {
         }
       );
 
-      dispatch(setDiscountPoints(0))
+      dispatch(setDiscountPoints(0));
     } catch (error) {}
   };
 
@@ -76,12 +77,16 @@ const CheckoutTransfer = () => {
         }
       );
 
-      if (JSON.parse(localStorage.getItem('shop-cart')).length === 1) {
-        const carts = JSON.parse(localStorage.getItem('shop-cart'));
-        createOrderItems(response.data, carts[0]);
-      } else {
-        const carts = JSON.parse(localStorage.getItem('shop-cart'));
-        carts.forEach((item) => createOrderItems(response.data, item));
+      if(singleOrder?.length){
+        createOrderItems(response.data, singleOrder[0]);
+      }else{
+        if (JSON.parse(localStorage.getItem('shop-cart')).length === 1) {
+          const carts = JSON.parse(localStorage.getItem('shop-cart'));
+          createOrderItems(response.data, carts[0]);
+        } else {
+          const carts = JSON.parse(localStorage.getItem('shop-cart'));
+          carts.forEach((item) => createOrderItems(response.data, item));
+        }
       }
 
       decrementUserPoints();
@@ -128,8 +133,10 @@ const CheckoutTransfer = () => {
       </div>
       <div className={cls['transfer__footer']}>
         <p>
-          • Please treanfer $ {mathTotal(carts, '1', points)} USD ( ${' '}
-          {mathTotal(carts, '1', points)} (SGD) ) to our bank account for payment
+          • Please treanfer ${' '}
+          {mathTotal(singleOrder?.length ? singleOrder : carts, 1, points)} USD (
+          $ {mathTotal(singleOrder?.length ? singleOrder : carts, 1, points)}{' '}
+          (SGD) ) to our bank account for payment
         </p>
         <p className={cls['active']}>
           • Bank transfer fees are the buyer’s payments.

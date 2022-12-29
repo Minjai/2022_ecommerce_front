@@ -10,7 +10,9 @@ import { FiChevronDown } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import cls from './headerModal.module.scss';
 import Logo from '../../elements/UI/Logo';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useGetCurrencyQuery } from '../../../store/query/currency';
+import { initCurrency } from '../../../store/slices/currency';
 
 const HeaderModal = () => {
   const { isActive } = useSelector((state) => state.burger);
@@ -36,7 +38,7 @@ const HeaderModal = () => {
   const handleCategory = (item) => {
     dispatch(setCategoryData(item));
     navigate(`/${paths.CATEGORY}`);
-    closeModalHandler()
+    closeModalHandler();
   };
 
   const logOutHandler = () => {
@@ -47,6 +49,12 @@ const HeaderModal = () => {
   };
 
   const { data } = useGetAllCategoriesQuery();
+  const { data: currencyData } = useGetCurrencyQuery();
+  const { activeCurrency } = useSelector((state) => state.currency);
+
+  useEffect(() => {
+    dispatch(initCurrency(currencyData?.results[0]));
+  }, [currencyData?.results, dispatch]);
 
   return (
     <div id={cls[isActive ? 'modal_active' : '']} className={cls['modal']}>
@@ -81,11 +89,17 @@ const HeaderModal = () => {
                 className={cls['modal-wrapper__mid__currency']}
               >
                 <span onClick={() => setCurrencty((prev) => !prev)}>
-                  <p>USD ($)</p> <FiChevronDown />
+                  <p>{activeCurrency?.currency} ($)</p> <FiChevronDown />
                 </span>
                 <ul>
-                  <li>Test</li>
-                  <li>Test</li>
+                  {currencyData?.results.map((item) => (
+                    <li
+                      onClick={() => dispatch(initCurrency(item.currency))}
+                      key={item.id}
+                    >
+                      {item.currency}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -207,7 +221,11 @@ const HeaderModal = () => {
               >
                 1:1 General Consultation
               </button>
-              {isAuth && <button onClick={logOutHandler} className={cls['full']}>Log out</button>}
+              {isAuth && (
+                <button onClick={logOutHandler} className={cls['full']}>
+                  Log out
+                </button>
+              )}
             </div>
           </div>
         </div>

@@ -1,12 +1,14 @@
+import { initConsultation } from '../../../store/slices/consultation';
 import { AiOutlineDown, AiOutlineLock } from 'react-icons/ai';
 import { dateParser } from '../../../utils/dateParser';
 import Pagination from '../../elements/Pagination';
 import { paths } from '../../../constants/paths';
 import { useNavigate } from 'react-router-dom';
 import cls from './questionsList.module.scss';
+import { useDispatch } from 'react-redux'
 
 const QuestionsList = ({ data, options, filterOptions }) => {
-  const { isRange, setSelect, select, setRange} = filterOptions
+  const { isRange, setSelect, select, setRange } = filterOptions;
 
   const handleRange = (str) => {
     setSelect(str);
@@ -14,10 +16,16 @@ const QuestionsList = ({ data, options, filterOptions }) => {
   };
 
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const navigatePostHandler = () => {
     window.scrollTo(window.scrollX, 0);
     navigate(`/${paths.CUSTOMER_POST}`);
+  };
+
+  const initQuestionsHandler = (item) => {
+    dispatch(initConsultation(item));
+    navigate(`/${paths.CONSULTATION}/${item.category.id}/`);
   };
 
   return (
@@ -49,33 +57,35 @@ const QuestionsList = ({ data, options, filterOptions }) => {
         </div>
       </div>
       <div className={cls['question__body']}>
-        {data.results.map(
-          ({ product, detail, children, created_at }, index) => {
-            return (
-              <div
-                id={cls[product.images.length > 0 ? '' : 'active']}
-                key={created_at}
-                className={cls['question__body__child']}
-              >
+        {data.results.map((item, index) => {
+          return (
+            <div
+              id={cls[item.product.images.length > 0 ? '' : 'active']}
+              key={item.created_at}
+              className={cls['question__body__child']}
+            >
+              <div>
+                <span>{index + 1}</span>
+                <img
+                  src={
+                    item.product.images.find((item) => item.is_feature).image
+                  }
+                  alt="question-list"
+                />
                 <div>
-                  <span>{index + 1}</span>
-                  <img
-                    src={product.images.find((item) => item.is_feature).image}
-                    alt="question-list"
-                  />
-                  <div>
-                    <AiOutlineLock />
-                    <p>{detail}</p>
-                  </div>
-                </div>
-                <div>
-                  <span>{children.length} replies</span>
-                  <p>{dateParser(created_at)}</p>
+                  <AiOutlineLock />
+                  <p>{item.detail}</p>
                 </div>
               </div>
-            );
-          }
-        )}
+              <div>
+                <span className={cls['pointer']} onClick={() => initQuestionsHandler(item)}>
+                  {item.children.length} replies
+                </span>
+                <p>{dateParser(item.created_at)}</p>
+              </div>
+            </div>
+          );
+        })}
       </div>
       {options.pageCount > options.limit && <Pagination options={options} />}
     </div>

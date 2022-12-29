@@ -55,7 +55,7 @@ const SingleProduct = () => {
             <ProductDescription list={data.descriptions} />
           </>
         )}
-        <MainReviews />
+        <MainReviews productId={id} />
         <Description>1:1 General Consultations</Description>
         {isLoad ? (
           <Loader />

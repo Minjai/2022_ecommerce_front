@@ -22,18 +22,18 @@ const ReviewItem = ({ review }) => {
     <div onClick={reviewHandler} className={cls['review']}>
       <div className={cls['review-image']}>
         <img
-          src={product.images.find((item) => item.is_feature).image}
+          src={product?.images?.find((item) => item.is_feature)?.image}
           alt="review-pic"
         />
       </div>
       <div className={cls['review-body']}>
         <div className={cls['review-body__title']}>
-          <span>{product.category.title}</span>
+          <span>{product?.category.title}</span>
           <Rating productRating={stars} />
         </div>
-        <h4>{product.product_name}</h4>
+        <h4>{product?.product_name}</h4>
         <span>
-          {nameClose(user.username)} {dateParser(created_at)}
+          {nameClose(user?.username)} {dateParser(created_at)}
         </span>
         <p>{comment}</p>
       </div>

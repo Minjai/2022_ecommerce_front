@@ -39,7 +39,7 @@ const UserPoints = () => {
         <Loader />
       ) : pointsData?.results.length > 0 ? (
         <PointsList
-          points={userInfo?.point > 0 ? userInfo?.point : 0}
+          points={pointsData?.results?.reduce((prev, item) => prev += item.point, 0)}
           options={paginationOptions}
           data={pointsData}
         />

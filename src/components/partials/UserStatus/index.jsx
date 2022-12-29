@@ -1,6 +1,6 @@
 import { useGetUserConsultationsQuery } from '../../../store/query/consultationQuery';
+import { useGetAllUserReviewsQuery } from '../../../store/query/reviewQuery';
 import { useGetUserPointsQuery } from '../../../store/query/pointsQuery';
-import { useGetReviewsQuery } from '../../../store/query/reviewQuery';
 import { useGetOrdersQuery } from '../../../store/query/orderQuery';
 import { orderTable } from '../../../utils/userOrderTable';
 import { dateFilter } from '../../../utils/dateFilter';
@@ -40,7 +40,7 @@ const UserStatus = () => {
     }
   );
 
-  const { data: reviewData } = useGetReviewsQuery(
+  const { data: reviewData } = useGetAllUserReviewsQuery(
     { userId: userInfo.id },
     {
       refetchOnMountOrArgChange: true,
@@ -53,6 +53,8 @@ const UserStatus = () => {
   });
 
   const userOrderStatus = orderTable(data);
+
+  console.log(reviewData);
 
   return (
     <div className={cls['user']}>
@@ -70,7 +72,7 @@ const UserStatus = () => {
           <div
             onClick={() => newPageHandler(`/${paths.MY_PAGE}/${paths.POINTS}`)}
           >
-            <b>{userPoints?.results[0]?.point > 0 ? userPoints?.results[0]?.point : 0}</b>
+            <b>{userPoints?.results.reduce((prev, item) => prev += item.point, 0)}</b>
             <span>points</span>
           </div>
         </div>

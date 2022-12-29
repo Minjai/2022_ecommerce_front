@@ -22,12 +22,19 @@ const AppLayout = () => {
 
   const setPoints = async () => {
     try {
-      const response = await axiosInstance.get(`accounts/points/?user=${userInfo?.id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      })
-      dispatch(setStaticPoints(response?.data.results[0].point));
+      const response = await axiosInstance.get(
+        `accounts/points/?user=${userInfo?.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        }
+      );
+      dispatch(
+        setStaticPoints(
+          response?.data?.results.reduce((prev, item) => (prev += item.point), 0)
+        )
+      );
     } catch (error) {}
   };
 
@@ -61,7 +68,7 @@ const AppLayout = () => {
         );
 
         dispatch(setUserInfo(response.data));
-        setPoints()
+        setPoints();
       } catch (error) {
         console.log(error.response);
       }

@@ -2,9 +2,7 @@ import {
   removePickedCategory,
   setInitPickedCategories,
 } from '../store/slices/category';
-import {
-  useGetBestProductsQuery,
-} from '../store/query/productQuery';
+import { useGetBestProductsQuery } from '../store/query/productQuery';
 import ProductListSkeleton from '../components/skeletons/ProductListSkeleton';
 import CategoryCarousel from '../components/elements/CategoryCarousel';
 import { useGetCategoriesQuery } from '../store/query/categoryQuery';
@@ -23,8 +21,8 @@ const Best = () => {
     (state) => state.category
   );
 
+  const [newData, setNewData] = useState([])
   const { data } = useGetCategoriesQuery();
-  const bestCategory = data?.find((item) => item.title === 'Best Sellers');
 
   const { categoryProducts } = useSelector((state) => state.product);
 
@@ -34,24 +32,27 @@ const Best = () => {
   const [pageEnd, setPageEnd] = useState(3);
 
   const { data: categoryProduct, isLoading } = useGetBestProductsQuery({
-    id: categoryId ? categoryId : bestCategory?.id,
+    id: categoryId,
     page,
     offset,
   });
 
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
-    dispatch(setInitPickedCategories(bestCategory?.children));
-  }, [bestCategory, dispatch]);
+    const arr = [];
+  
+    data?.forEach((item) => {
+      item.children.forEach((elem) => arr.push(elem));
+    });
+  
+    setNewData(arr)
+    dispatch(setInitPickedCategories(arr));
+  }, [data, dispatch]);
 
   useEffect(() => {
     dispatch(setCategoryProducts(categoryProduct?.results));
   }, [categoryProduct?.results, dispatch]);
-
-  useEffect(() => {
-    dispatch(setInitPickedCategories([]));
-  }, [dispatch]);
 
   useEffect(() => {
     setPage(1);
@@ -59,7 +60,7 @@ const Best = () => {
   }, [categoryId]);
 
   const options = {
-    limit: 6,
+    limit: 8,
     pageCount: categoryProduct?.count,
     page,
     offset,
@@ -75,11 +76,11 @@ const Best = () => {
     <PageWrapper>
       <div className="container">
         <PageTitle>Best Sellers</PageTitle>
-        {bestCategory?.children.length > 0 && (
+        {newData?.length > 0 && (
           <CategoryCarousel
             hasFeatures={true}
             pickedCategories={pickedCategories}
-            data={bestCategory?.children}
+            data={newData}
           />
         )}
         <CategoryButtons

@@ -18,10 +18,16 @@ export const reviewQuery = createApi({
       providesTags: () => ['REVIEW_TAG'],
     }),
     getAllReviews: builder.query({
-      query: () => `reviews/reviews/`,
+      query: ({ productId }) =>
+        `reviews/reviews/${productId ? `?product=${productId}` : ''}`,
+      providesTags: () => ['REVIEW_TAG'],
+    }),
+    getAllUserReviews: builder.query({
+      query: ({ userId }) =>
+        `reviews/reviews/?user=${userId}`,
       providesTags: () => ['REVIEW_TAG'],
     }),
   }),
 });
 
-export const { useGetReviewsQuery, useGetAllReviewsQuery } = reviewQuery;
+export const { useGetReviewsQuery, useGetAllReviewsQuery, useGetAllUserReviewsQuery } = reviewQuery;

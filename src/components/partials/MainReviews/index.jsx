@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import cls from './mainReviews.module.scss';
 import { AiOutlineRight } from 'react-icons/ai';
 
-const MainReviews = () => {
+const MainReviews = ({ productId = '' }) => {
   const navigate = useNavigate();
 
   const reviewHandler = () => {
@@ -17,7 +17,7 @@ const MainReviews = () => {
   };
 
   const { data, isLoading } = useGetAllReviewsQuery(
-    {},
+    { productId },
     {
       refetchOnMountOrArgChange: true,
     }
@@ -27,11 +27,13 @@ const MainReviews = () => {
     <div className={cls['reviews']}>
       <div className={cls['reviews__header']}>
         <Description>Reviews</Description>
-        <span onClick={reviewHandler}>View More <AiOutlineRight/></span>
+        <span onClick={reviewHandler}>
+          View More <AiOutlineRight />
+        </span>
       </div>
       {isLoading ? (
         <ReviewSkeleton />
-      ) : data?.results !== 0 ? (
+      ) : data?.results.length > 0 ? (
         <ReviewsCarousel data={data?.results} />
       ) : (
         <EmptyText text={'review'} />

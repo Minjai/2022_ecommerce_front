@@ -12,6 +12,7 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
   const [active, setActive] = useState(false);
   const [discount, setDiscount] = useState('');
   const { data } = useSelector((state) => state.order);
+  const { singleOrder } = useSelector((state) => state.order);
 
   const dispatch = useDispatch();
 
@@ -32,16 +33,20 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
       >
         <span>Order Detail</span>
         <span>
-          $ {mathTotal(data?.order_items, '1', data?.point_used)} <AiOutlineDown />
+          $ {mathTotal(data?.order_items, 1, data?.point_used)}{' '}
+          <AiOutlineDown />
         </span>
       </div>
       <div className={cls['order-body']}>
         <div className={cls['order-body-list']}>
           {data?.order_items.length > 0 ? (
-            data?.order_items.map(({ id, product, quantity, }) => (
+            data?.order_items.map(({ id, product, quantity }) => (
               <div key={id} className={cls['order-body-list__child']}>
                 <img
-                  src={product?.images.find((item) => item.is_feature === true).image}
+                  src={
+                    product?.images.find((item) => item.is_feature === true)
+                      .image
+                  }
                   alt="order-product-pic"
                 />
                 <div>
@@ -90,7 +95,7 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
         </div>
         <div className={cls['order-body-total']}>
           <span>Total:</span>
-          <span>${mathTotal(data?.order_items, '1', data?.point_used)}</span>
+          <span>${mathTotal(data?.order_items, 1, data?.point_used)}</span>
         </div>
       </div>
     </div>
@@ -103,12 +108,29 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
       >
         <span>Order Detail</span>
         <span>
-          ${mathSubTotal(carts, 1, points)} <AiOutlineDown />
+          $ {mathTotal(singleOrder?.length ? singleOrder : carts, 1, points)}{' '}
+          <AiOutlineDown />
         </span>
       </div>
       <div className={cls['order-body']}>
         <div className={cls['order-body-list']}>
-          {carts.length > 0 ? (
+          {singleOrder?.length ? (
+            singleOrder?.map(({ id, product_name, pickedPackage, images }) => (
+              <div key={id} className={cls['order-body-list__child']}>
+                <img
+                  src={images.find((item) => item.is_feature === true).image}
+                  alt="order-product-pic"
+                />
+                <div>
+                  <span>
+                    <p>{product_name}</p>
+                    <b>{pickedPackage.package}</b>
+                  </span>
+                  <h5>$ {pickedPackage.selling_price}</h5>
+                </div>
+              </div>
+            ))
+          ) : carts?.length > 0 ? (
             carts.map(({ id, product_name, pickedPackage, images }) => (
               <div key={id} className={cls['order-body-list__child']}>
                 <img
@@ -146,7 +168,9 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
         <div className={cls['order-body-subtotal']}>
           <div>
             <span>Sub total:</span>
-            <span>${mathSubTotal(carts)}</span>
+            <span>
+              ${mathSubTotal(singleOrder?.length ? singleOrder : carts)}
+            </span>
           </div>
           <div>
             <span>Shipping Fee:</span>
@@ -161,7 +185,9 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
         </div>
         <div className={cls['order-body-total']}>
           <span>Total:</span>
-          <span>${mathTotal(carts, '1', points)}</span>
+          <span>
+            ${mathTotal(singleOrder?.length ? singleOrder : carts, 1, points)}
+          </span>
         </div>
       </div>
     </div>

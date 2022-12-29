@@ -160,19 +160,28 @@
           color: $app-main-color;
           font-size: 14px;
           text-align: center;
-          width: 70px;
         }
       }
       
       @media screen and (max-width: 1050px) {
         & div:last-child{
-          width: 50%;
+          width: 55%;
         }
       }
 
       @media screen and (max-width: 1000px) {
         & div:first-child {
           width: 45%;
+        }
+      }
+
+      @media screen and (max-width: 900px) {
+        & div:first-child {
+          width: 40%;
+        }
+
+        & div:last-child {
+          width: 60%;
         }
       }
     }

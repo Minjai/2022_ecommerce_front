@@ -7,6 +7,7 @@ import { useGetAllCategoriesQuery } from '../../../store/query/productQuery';
 import { useGetCurrencyQuery } from '../../../store/query/currency';
 import { setContent, setModal } from '../../../store/slices/modal';
 import { setCategoryData } from '../../../store/slices/category';
+import { initCurrency } from '../../../store/slices/currency';
 import { modalPaths, paths } from '../../../constants/paths';
 import { setAuth } from '../../../store/slices/user/user';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,15 +15,15 @@ import SearchInput from '../../elements/SearchInput';
 import RouterLink from '../../elements/RouterLink';
 import { BsChevronDown } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+import { FiChevronDown } from 'react-icons/fi';
+import { useEffect, useState } from 'react';
 import Logo from '../../elements/UI/Logo';
 import cls from './header.module.scss';
-import { FiChevronDown } from 'react-icons/fi';
-import { useEffect } from 'react';
-import { initCurrency } from '../../../store/slices/currency';
 
 const Header = () => {
   const { isAuth } = useSelector((state) => state.user);
   const { carts } = useSelector((state) => state.cart);
+  const [subCategory, setSubCategory] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -46,19 +47,23 @@ const Header = () => {
   };
 
   const { data: currencyData } = useGetCurrencyQuery();
-  const { activeCurrency } = useSelector(state => state.currency)
+  const { activeCurrency } = useSelector((state) => state.currency);
 
   useEffect(() => {
-    dispatch(initCurrency(currencyData?.results[0].currency));
+    dispatch(initCurrency(currencyData?.results[0]));
   }, [currencyData?.results, dispatch]);
 
   return (
     <header>
       <div className={cls['header-upper']}>
-        <a href="url">[Notice] Free Shipping Worldwide</a>
+        <button onClick={() => navigate('/')}>
+          [Notice] Free Shipping Worldwide
+        </button>
       </div>
       <div className={cls['header-mid']}>
-        <Logo />
+        <button onClick={() => navigate('/')}>
+          <Logo />
+        </button>
         <SearchInput />
         <div className={cls['header-links']}>
           <ul>
@@ -91,7 +96,7 @@ const Header = () => {
         <div>
           <ul>
             {headerLowerLinks.map(({ id, text, icon, to, list, isClick }) => (
-              <li className={cls[isClick ? 'click' : '']} key={id}>
+              <li key={id}>
                 {isClick ? (
                   <span>
                     {' '}
@@ -131,9 +136,27 @@ const Header = () => {
                   >
                     <ul>
                       {data?.slice(0, 4).map((item) => (
-                        <li onClick={() => handleCategory(item)} key={item.id}>
-                          {item.title} <FiChevronDown />
-                        </li>
+                        <>
+                          <li
+                            onMouseEnter={() => setSubCategory(item.children)}
+                            onClick={() => handleCategory(item)}
+                            key={item.id}
+                          >
+                            {item.title} <FiChevronDown />
+                          </li>
+                          {subCategory.length ? (
+                            <div key={item.id} className={cls['subCategory']}>
+                              {subCategory.map((item) => (
+                                <span
+                                  key={item.id}
+                                  onClick={() => handleCategory(item)}
+                                >
+                                  {item.title}
+                                </span>
+                              ))}
+                            </div>
+                          ) : null}
+                        </>
                       ))}
                     </ul>
                   </div>
@@ -143,13 +166,16 @@ const Header = () => {
           </ul>
           <div className={cls['header-currency']}>
             <span>
-              {activeCurrency} <BsChevronDown />
+              {activeCurrency?.currency} <BsChevronDown />
             </span>
             <div>
               <ul>
-                {currencyData?.results.map(({ id, currency }) => (
-                  <li onClick={() => dispatch(initCurrency(currency))} key={id}>
-                    {currency}
+                {currencyData?.results.map((item) => (
+                  <li
+                    onClick={() => dispatch(initCurrency(item))}
+                    key={item.id}
+                  >
+                    {item.currency}
                   </li>
                 ))}
               </ul>

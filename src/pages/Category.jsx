@@ -44,10 +44,6 @@ const Category = () => {
   }, [categoryProduct?.results, dispatch]);
 
   useEffect(() => {
-    dispatch(setInitPickedCategories([]));
-  }, [dispatch]);
-
-  useEffect(() => {
     setPage(1)
     setOffset(0);
   }, [categoryId]);

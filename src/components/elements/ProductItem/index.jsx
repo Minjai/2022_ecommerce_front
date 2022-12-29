@@ -10,6 +10,8 @@ const ProductItem = ({ item }) => {
   const { product_name, images, prices, get_review_start, category, top, id } =
     item;
 
+    console.log(prices);
+
   const { carts } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,10 +38,12 @@ const ProductItem = ({ item }) => {
     );
   };
 
-  const productNavigate = (e) => {
+  const productNavigate = () => {
     navigate(`/${paths.SINGLE_PRODUCT}/${id}`);
     window.scrollTo(window.scrollX, 0);
   };
+
+  const { activeCurrency } = useSelector((state) => state.currency);
 
   return (
     <div onClick={productNavigate} className={cls['product-item']}>
@@ -60,7 +64,7 @@ const ProductItem = ({ item }) => {
         <Rating productRating={get_review_start.star__avg} />
         <div className={cls['product-item__body__price']}>
           <span>
-            $ {prices?.length && prices[0]?.selling_price} {'(USD)'}
+            $ {prices?.length && prices[0]?.selling_price * +activeCurrency.currency_value} {'(USD)'}
           </span>
           <button onClick={isInCart(id) ? cartNavigate : addCartHandler}>
             <FiShoppingCart /> {isInCart(id) ? 'Cart' : 'Add'}

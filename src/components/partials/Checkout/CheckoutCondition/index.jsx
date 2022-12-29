@@ -1,14 +1,15 @@
 import { useCheckoutButtons } from '../../../../hooks/useCheckoutButtons';
 import CheckoutButtons from '../../../elements/UI/CheckoutButtons';
+import { setConditionId } from '../../../../store/slices/order';
 import { axiosInstance } from '../../../../constants/axios';
 import { paths } from '../../../../constants/paths';
 import { IoCheckmarkSharp } from 'react-icons/io5';
 import cls from './checkoutCondition.module.scss';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { setConditionId } from '../../../../store/slices/order';
 
 const CheckoutCondition = () => {
+  const [required, setRequired] = useState(false);
   const [state, setState] = useState({
     current_medications: '',
     drug_allergies: '',
@@ -19,44 +20,73 @@ const CheckoutCondition = () => {
     primary_name: '',
     primary_phone_number: '',
     date_of_birth: '',
+    prescription: '',
   });
 
   const { backBtnHandler, nextBtnhandler } = useCheckoutButtons(
     `/${paths.CHECK_OUT}/${paths.CHECK_OUT_SECOND}`
   );
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  const requiredHandler = () => {
+    if (
+      !state.drug_allergies ||
+      !state.current_treatments ||
+      !state.gender ||
+      !state.date_of_birth
+    ) {
+      setRequired(true);
+
+      return false;
+    } else {
+      setRequired(false);
+
+      return true;
+    }
+  };
 
   const conditionHandler = async () => {
-    const formData = new FormData();
+    if (requiredHandler()) {
+      const formData = new FormData();
 
-    formData.append('primary_name', state.primary_name)
-    formData.append('primary_phone_number', state.primary_phone_number)
-    formData.append('drink', state.drink)
-    formData.append('date_of_birth', state.date_of_birth)
-    formData.append('prescription', state.prescription)
-    formData.append('smoke', state.smoke)
-    formData.append('gender', state.gender)
-    formData.append('current_treatments', state.current_treatments)
-    formData.append('current_medications', state.current_medications)
-    formData.append('drug_allergies', state.drug_allergies)
-
-    try {
-      const response = await axiosInstance.post(
-        'orders/medical_conditions/',
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-            'Content-type': 'multipart/form-data',
-          },
-        }
+      formData.append(
+        'primary_name',
+        state.primary_name ? state.primary_name : 'none'
       );
+      formData.append(
+        'primary_phone_number',
+        state.primary_phone_number ? state.primary_phone_number : 'none'
+      );
+      formData.append('drink', state.drink ? state.drink : 'No');
+      formData.append('date_of_birth', state.date_of_birth);
+      formData.append('prescription', state.prescription);
+      formData.append('smoke', state.smoke ? state.smoke : 'No');
+      formData.append('gender', state.gender);
+      formData.append('current_treatments', state.current_treatments);
+      formData.append(
+        'current_medications',
+        state.current_medications ? state.current_medications : 'none'
+      );
+      formData.append('drug_allergies', state.drug_allergies);
 
-      dispatch(setConditionId(response.data.id))
-      nextBtnhandler();
-    } catch (error) {
-      console.log(error.response);
+      try {
+        const response = await axiosInstance.post(
+          'orders/medical_conditions/',
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+              'Content-type': 'multipart/form-data',
+            },
+          }
+        );
+
+        dispatch(setConditionId(response.data.id));
+        nextBtnhandler();
+      } catch (error) {
+        console.log(error.response);
+      }
     }
   };
 
@@ -97,7 +127,9 @@ const CheckoutCondition = () => {
                 value={state.drug_allergies}
               ></textarea>
             )}
-            {!state.drug_allergies && <b>* This field is required</b>}
+            {!state.drug_allergies && required && (
+              <b>* This field is required</b>
+            )}
           </div>
           <div className={cls['condition__field']}>
             <p>
@@ -168,7 +200,9 @@ const CheckoutCondition = () => {
                 value={state.current_treatments}
               ></textarea>
             )}
-            {!state.current_treatments && <b>* This field is required</b>}
+            {!state.current_treatments && required && (
+              <b>* This field is required</b>
+            )}
           </div>
           <div className={`flex ${cls['condition__child']}`}>
             <div id={cls['block']} className={cls['condition__field']}>
@@ -193,7 +227,7 @@ const CheckoutCondition = () => {
                   Female
                 </span>
               </label>
-              {!state.gender && <b>* This field is required</b>}
+              {!state.gender && required && <b>* This field is required</b>}
             </div>
             <div id={cls['block']} className={cls['condition__field']}>
               <p>
@@ -202,12 +236,17 @@ const CheckoutCondition = () => {
               <input
                 value={state.date_of_birth}
                 onChange={(e) =>
-                  setState((prev) => ({ ...prev, date_of_birth: e.target.value }))
+                  setState((prev) => ({
+                    ...prev,
+                    date_of_birth: e.target.value,
+                  }))
                 }
                 type="text"
                 placeholder="YYYY-MM-DD"
               />
-              {!state.date_of_birth && <b>* This field is required</b>}
+              {!state.date_of_birth && required && (
+                <b>* This field is required</b>
+              )}
             </div>
           </div>
           <div id={cls['block']} className={cls['condition__field']}>

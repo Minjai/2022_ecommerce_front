@@ -20,12 +20,12 @@ const PointsList = ({ data, options, points }) => {
           <span>Points</span>
         </div>
         <div className={cls['user-width__body__list']}>
-          {data.results.map(({ id, point, created_at }, index) => (
+          {data.results.map(({ id, point, created_at, description }, index) => (
             <div key={id} className={cls['user-width__body__list__child']}>
               <span>{index + 1}</span>
               <div>
                 <span>{dateParser(created_at)}</span>
-                <p>Points description</p>
+                <p>{description}</p>
               </div>
               <b>+ {point} points</b>
             </div>

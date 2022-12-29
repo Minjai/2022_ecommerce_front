@@ -45,7 +45,7 @@ const OrderList = ({ data }) => {
                     {elem?.order_items.reduce(
                       (prev, elem) => (prev += +elem?.quantity?.selling_price),
                       0
-                    ) - elem.point_used / 1000}
+                    ) - elem.point_used / 1000 + 1}
                   </p>
                 </span>
               </div>

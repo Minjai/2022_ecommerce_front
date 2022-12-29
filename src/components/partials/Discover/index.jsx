@@ -10,9 +10,9 @@ const Discover = () => {
 
   const navigate = useNavigate();
 
-  const navigateHandler = () => {
+  const navigateHandler = (id) => {
     window.scrollTo(window.scrollX, 0);
-    navigate(`/${paths.CUSTOMER_HELP}/${paths.NEWS}`)
+    navigate(`/${paths.NEWS}/${id}`)
   }
 
   return isloading ? (
@@ -29,7 +29,7 @@ const Discover = () => {
           <img src={item.banner} alt="discover-pic" />
           <p>{item.text}</p>
           <button
-            onClick={navigateHandler}
+            onClick={() => navigateHandler(item.id)}
           >
             View More
           </button>
