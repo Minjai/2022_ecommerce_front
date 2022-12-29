@@ -86,11 +86,39 @@
     margin: 0 auto;
     text-decoration: none;
     display: block;
+    position: relative;
+
+    &::before{
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+    }
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    div{
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      span{
+        color: #fff;
+        font-size: 20px;
+      }
     }
   }
 

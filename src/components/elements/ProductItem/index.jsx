@@ -10,8 +10,6 @@ const ProductItem = ({ item }) => {
   const { product_name, images, prices, get_review_start, category, top, id } =
     item;
 
-    console.log(prices);
-
   const { carts } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -64,7 +62,16 @@ const ProductItem = ({ item }) => {
         <Rating productRating={get_review_start.star__avg} />
         <div className={cls['product-item__body__price']}>
           <span>
-            $ {prices?.length && prices[0]?.selling_price * +activeCurrency.currency_value} {'(USD)'}
+            {
+              prices?.find(
+                (item) => item?.currency?.currency === activeCurrency?.currency
+              )?.currency?.currency_value
+            }{' '}
+            {
+              prices?.find(
+                (item) => item?.currency?.currency === activeCurrency?.currency
+              )?.selling_price
+            }
           </span>
           <button onClick={isInCart(id) ? cartNavigate : addCartHandler}>
             <FiShoppingCart /> {isInCart(id) ? 'Cart' : 'Add'}

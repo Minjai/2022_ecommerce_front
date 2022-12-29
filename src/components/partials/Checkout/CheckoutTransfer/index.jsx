@@ -11,6 +11,7 @@ import { paths } from '../../../../constants/paths';
 import { IoCheckmarkSharp } from 'react-icons/io5';
 import MobileOrderNav from '../../MobileOrderNav';
 import cls from './checkoutTransfer.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutTransfer = () => {
   const { backBtnHandler } = useCheckoutButtons(
@@ -18,11 +19,35 @@ const CheckoutTransfer = () => {
   );
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { conditionId } = useSelector((state) => state.order);
   const { data: deliveryData } = useSelector((state) => state.delivery);
   const { points, staticPoints } = useSelector((state) => state.points);
   const { singleOrder } = useSelector((state) => state.order);
+  const { userInfo } = useSelector((state) => state.user);
+
+  const setOrderAlarm = async () => {
+    try {
+      const response = await axiosInstance.post(
+        'notifications/notifications/',
+        {
+          recipient: userInfo.id,
+          source: 'user',
+          extra_info: 'Your order has been added !',
+          status_to_read: true,
+          type_notification: 'order_accept',
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
 
   const createOrderItems = async (data, item) => {
     try {
@@ -77,9 +102,9 @@ const CheckoutTransfer = () => {
         }
       );
 
-      if(singleOrder?.length){
+      if (singleOrder?.length) {
         createOrderItems(response.data, singleOrder[0]);
-      }else{
+      } else {
         if (JSON.parse(localStorage.getItem('shop-cart')).length === 1) {
           const carts = JSON.parse(localStorage.getItem('shop-cart'));
           createOrderItems(response.data, carts[0]);
@@ -89,9 +114,11 @@ const CheckoutTransfer = () => {
         }
       }
 
+      navigate(`/${paths.MY_PAGE}/${paths.ORDER_HISTORY}`);
       decrementUserPoints();
       dispatch(setAlert(true));
       dispatch(setAlertContent('Your order has been added !'));
+      setOrderAlarm();
     } catch (error) {
       console.log(error.response);
     }
@@ -101,13 +128,14 @@ const CheckoutTransfer = () => {
     token: localStorage.getItem('accessToken'),
   });
 
-  const { userInfo } = useSelector((state) => state.user);
   const { carts } = useSelector((state) => state.cart);
 
   const { data: pointsData } = useGetUserPointsQuery({
     userId: userInfo.id,
     token: localStorage.getItem('accessToken'),
   });
+
+  const { activeCurrency } = useSelector((state) => state.currency);
 
   return (
     <div className={cls['transfer']}>
@@ -133,10 +161,21 @@ const CheckoutTransfer = () => {
       </div>
       <div className={cls['transfer__footer']}>
         <p>
-          • Please treanfer ${' '}
-          {mathTotal(singleOrder?.length ? singleOrder : carts, 1, points)} USD (
-          $ {mathTotal(singleOrder?.length ? singleOrder : carts, 1, points)}{' '}
-          (SGD) ) to our bank account for payment
+          • Please treanfer {activeCurrency?.currency_value} {'   '}
+          {mathTotal(
+            activeCurrency,
+            singleOrder?.length ? singleOrder : carts,
+            1,
+            points
+          )}{' '}
+          ( {activeCurrency?.currency_value} {' '}
+          {mathTotal(
+            activeCurrency,
+            singleOrder?.length ? singleOrder : carts,
+            1,
+            points
+          )}{' '}
+          ) to our bank account for payment
         </p>
         <p className={cls['active']}>
           • Bank transfer fees are the buyer’s payments.

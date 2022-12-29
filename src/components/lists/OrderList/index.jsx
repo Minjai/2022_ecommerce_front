@@ -3,11 +3,11 @@ import { useDeleteOrderMutation } from '../../../store/query/orderQuery';
 import { setContent, setModal } from '../../../store/slices/modal';
 import { dateParser } from '../../../utils/dateParser';
 import { orderStatus } from '../../../constants/order';
+import { useDispatch, useSelector } from 'react-redux';
 import { modalPaths } from '../../../constants/paths';
 import EmptyText from '../../elements/UI/EmptyText';
 import { useNavigate } from 'react-router-dom';
 import cls from './orderList.module.scss';
-import { useDispatch } from 'react-redux';
 
 const OrderList = ({ data }) => {
   const dispatch = useDispatch();
@@ -27,6 +27,8 @@ const OrderList = ({ data }) => {
 
   const [deleteOrder] = useDeleteOrderMutation();
 
+  const { activeCurrency } = useSelector((state) => state.currency);
+
   return (
     <div className={cls['order']}>
       {data?.length > 0 ? (
@@ -41,11 +43,18 @@ const OrderList = ({ data }) => {
                 <span>
                   <p>Total</p>
                   <p>
-                    ${' '}
-                    {elem?.order_items.reduce(
-                      (prev, elem) => (prev += +elem?.quantity?.selling_price),
-                      0
-                    ) - elem.point_used / 1000 + 1}
+                    {activeCurrency?.currency_value}{' '}
+                    {elem?.order_items.reduce((prev, arr) => {
+                      const finalPrice = arr?.product?.prices?.find(
+                        (elem) =>
+                          elem?.currency?.currency ===
+                            activeCurrency?.currency &&
+                          elem?.package === arr?.quantity?.package
+                      );
+                      return (prev += +finalPrice?.selling_price);
+                    }, 0) -
+                      elem.point_used / 1000 +
+                      1}
                   </p>
                 </span>
               </div>
@@ -75,33 +84,44 @@ const OrderList = ({ data }) => {
                   : ''}
               </h4>
               {elem.order_items?.length > 0 ? (
-                elem.order_items?.map((item) => (
-                  <div
-                    key={item?.id}
-                    className={cls['order__child__body__content']}
-                  >
-                    <img
-                      src={
-                        item?.product?.images?.find(
-                          (image) => image.is_feature === true
-                        ).image
-                      }
-                      alt="order-product-pic"
-                    />
-                    <div>
-                      <p>{item?.product?.product_name}</p>
-                      <span>{item?.quantity.package}</span>
-                      <p>$ {+item?.quantity.selling_price}</p>
-                      {elem.status === 'sent' && (
-                        <button
-                          onClick={() => navigate(`write-review/${item.id}`)}
-                        >
-                          Write a review
-                        </button>
-                      )}
+                elem.order_items?.map((item) => {
+                  const finalPrice = item?.product?.prices?.find(
+                    (elem) =>
+                      elem?.currency?.currency === activeCurrency?.currency &&
+                      elem?.package === item?.quantity?.package
+                  );
+
+                  return (
+                    <div
+                      key={item?.id}
+                      className={cls['order__child__body__content']}
+                    >
+                      <img
+                        src={
+                          item?.product?.images?.find(
+                            (image) => image.is_feature === true
+                          ).image
+                        }
+                        alt="order-product-pic"
+                      />
+                      <div>
+                        <p>{item?.product?.product_name}</p>
+                        <span>{item?.quantity.package}</span>
+                        <p>
+                          {activeCurrency?.currency_value}{' '}
+                          {+finalPrice?.selling_price}
+                        </p>
+                        {elem.status === 'sent' && (
+                          <button
+                            onClick={() => navigate(`write-review/${item.id}`)}
+                          >
+                            Write a review
+                          </button>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))
+                  );
+                })
               ) : (
                 <EmptyText text={'order'} />
               )}

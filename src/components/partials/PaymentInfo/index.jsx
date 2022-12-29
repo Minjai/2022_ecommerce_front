@@ -52,6 +52,8 @@ const PaymentInfo = () => {
     token: localStorage.getItem('accessToken'),
   });
 
+  const { activeCurrency } = useSelector((state) => state.currency);
+
   return (
     <div className={cls['payment']}>
       <CloseButton />
@@ -73,8 +75,8 @@ const PaymentInfo = () => {
           <div className={cls['payment-info__footer']}>
             <p>
               • Please treanfer ${' '}
-              {mathModalTotal(data?.order_items, 1, data?.point_used)} USD ( ${' '}
-              {mathModalTotal(data?.order_items, 1, data?.point_used)} (SGD) )
+              {mathModalTotal(activeCurrency, data?.order_items, 1, data?.point_used)} USD ( ${' '}
+              {mathModalTotal(activeCurrency, data?.order_items, 1, data?.point_used)} (SGD) )
               to our bank account for payment
             </p>
             <p className={cls['active']}>

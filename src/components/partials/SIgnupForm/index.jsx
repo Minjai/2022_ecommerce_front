@@ -36,10 +36,11 @@ const SignupForm = () => {
         email: e.email,
         password: e.password,
       });
-
-      reset();
+      
       navigate(`/${paths.LOGIN}`);
+      reset();
     } catch (error) {
+      console.log(error.response);
       if (error.response.data.email) {
         setError('email', {
           type: 'validate',

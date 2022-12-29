@@ -128,7 +128,7 @@
         }
       }
 
-      #outOfStock{
+      #outOfStock {
         pointer-events: none;
       }
 
@@ -149,6 +149,13 @@
         background: $app-main-color;
         color: #fff;
         border: none;
+      }
+
+      #outOfStockBtn {
+        border: 1px solid rgba(128, 128, 128, 0.3);
+        background: rgba(128, 128, 128, 0.1);
+        pointer-events: none;
+        color: $app-dark-color;
       }
 
       h5 {

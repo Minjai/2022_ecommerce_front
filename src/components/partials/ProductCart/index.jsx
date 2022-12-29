@@ -21,6 +21,8 @@ const ProductCart = () => {
     dispatch(setSingleItemOrder([]));
   };
 
+  const { activeCurrency } = useSelector((state) => state.currency);
+
   return (
     <div className={cls['cart']}>
       <div className={cls['cart-body']}>
@@ -33,7 +35,7 @@ const ProductCart = () => {
       <div className={cls['cart-footer']}>
         <div className={cls['cart-footer__subTotal']}>
           <span>
-            Sub total: <p>${mathSubTotal(carts)}</p>
+            Sub total: <p>{activeCurrency?.currency_value} {mathSubTotal(activeCurrency, carts)}</p>
           </span>
           <span>
             Shipping fee: <p>$1</p>
@@ -41,7 +43,7 @@ const ProductCart = () => {
         </div>
         <div className={cls['cart-footer__total']}>
           <span>
-            Order total: <p>${mathTotal(carts, 1)}</p>
+            Order total: <p>{activeCurrency?.currency_value} {mathTotal(activeCurrency, carts, 1)}</p>
           </span>
         </div>
         <div className={cls['cart-footer__buttons']}>

@@ -1,17 +1,36 @@
-export const mathSubTotal = (arr) => {
+export const mathSubTotal = (activeCurrency, arr) => {
   return arr?.reduce((prev, item) => {
     if (item.pickedPackage) {
-      return prev + +item.pickedPackage?.selling_price;
+      const finalPrice = item.prices?.find(
+        (elem) =>
+          elem?.currency?.currency === activeCurrency?.currency &&
+          elem?.package === item.pickedPackage?.package
+      );
+
+      return prev + +finalPrice?.selling_price;
     } else {
-      return prev + +item.quantity?.selling_price;
+      const finalPrice = item?.product.prices?.find(
+        (elem) =>
+          elem?.currency?.currency === activeCurrency?.currency &&
+          elem?.package === item.quantity?.package
+      );
+
+      return prev + +finalPrice?.selling_price;
     }
   }, 0);
 };
 
-export const mathTotal = (arr, fee = 0, discount = 0) => {
+export const mathTotal = (activeCurrency, arr, fee = 0, discount = 0) => {
   const price = arr?.reduce((prev, item) => {
     if (item.pickedPackage) {
-      return prev + +item.pickedPackage?.selling_price;
+      const finalPrice = item.prices?.find(
+        (elem) =>
+          elem?.currency?.currency === activeCurrency?.currency &&
+          elem?.package === item.pickedPackage?.package
+      );
+
+
+      return prev + +finalPrice?.selling_price;
     } else {
       return prev + +item.quantity?.selling_price;
     }
@@ -20,9 +39,15 @@ export const mathTotal = (arr, fee = 0, discount = 0) => {
   return price + fee - discount / 1000;
 };
 
-export const mathModalTotal = (arr, fee = 0, discount = 0) => {
+export const mathModalTotal = (activeCurrency, arr, fee = 0, discount = 0) => {
   const price = arr?.reduce((prev, item) => {
-    return prev + +item.quantity?.selling_price;
+    const finalPrice = item?.product?.prices?.find(
+      (elem) =>
+        elem?.currency?.currency === activeCurrency?.currency &&
+        elem?.package === item.quantity?.package
+    );
+
+    return prev + +finalPrice?.selling_price;
   }, 0);
 
   return price + fee - discount / 1000;

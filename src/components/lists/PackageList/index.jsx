@@ -3,7 +3,7 @@ import cls from './packageList.module.scss';
 
 const PackageList = ({ list, options }) => {
   const pickedPackageHandler = (item) => {
-    setPricePackage(item)
+    setPricePackage(item);
   };
 
   const { pricePackage, setPricePackage } = options;
@@ -15,7 +15,7 @@ const PackageList = ({ list, options }) => {
         <span>Price</span>
       </div>
       <div className={cls['package__body']}>
-        {list.map((item) => (
+        {list?.map((item) => (
           <div
             onClick={() => pickedPackageHandler(item)}
             key={item['id']}
@@ -29,10 +29,14 @@ const PackageList = ({ list, options }) => {
             </div>
             <div>
               <p>
-                <span className={cls['cross']}>{`$ ${item['regular_price']}`}</span>
+                <span className={cls['cross']}>
+                  {item['currency']?.currency_value} {item['regular_price']}
+                </span>
               </p>
               <HiOutlineArrowRight />
-              <b>{`$ ${item['selling_price']}`}</b>
+              <b>
+                {item['currency']?.currency_value} {item['selling_price']}
+              </b>
             </div>
           </div>
         ))}

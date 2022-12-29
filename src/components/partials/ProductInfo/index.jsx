@@ -7,7 +7,7 @@ import { paths } from '../../../constants/paths';
 import { FiChevronDown } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import cls from './productInfo.module.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const ProductInfo = ({ data }) => {
   const [method, setMethod] = useState('Shipping method');
@@ -43,9 +43,17 @@ const ProductInfo = ({ data }) => {
     );
   };
 
+  const { activeCurrency } = useSelector((state) => state.currency);
+
+  const newList = useMemo(() =>
+    prices?.filter(
+      (item) => item?.currency?.currency === activeCurrency?.currency
+    )
+  , [prices, activeCurrency?.currency]);
+
   useEffect(() => {
-    setPricePackage(prices[0]);
-  }, [prices]);
+    setPricePackage(newList[0]);
+  }, [newList]);
 
   const options = {
     pricePackage,
@@ -53,11 +61,9 @@ const ProductInfo = ({ data }) => {
   };
 
   const purchaseHandler = () => {
-    navigate(`/${paths.CHECK_OUT}/${paths.CHECK_OUT_ONE}`)
-    dispatch(setSingleItemOrder([{ ...data, pickedPackage: pricePackage }]))
-  }
-
-  const { activeCurrency } = useSelector((state) => state.currency);
+    navigate(`/${paths.CHECK_OUT}/${paths.CHECK_OUT_ONE}`);
+    dispatch(setSingleItemOrder([{ ...data, pickedPackage: pricePackage }]));
+  };
 
   return (
     <div className={cls['product']}>
@@ -65,12 +71,17 @@ const ProductInfo = ({ data }) => {
       <div className={cls['product-info']}>
         <h4>{product_name}</h4>
         <p>
-          $ {prices[0]?.selling_price * +activeCurrency.currency_value} (USD){' '}
+          {activeCurrency?.currency_value}{' '}
+          {
+            prices?.find(
+              (item) => item?.currency?.currency === activeCurrency?.currency
+            )?.selling_price
+          }
           {status === 'out_of_stock' && <b>*Out of Stock</b>}
         </p>
         <span>Manufactured By TEST</span>
         <span>Contains TEST</span>
-        <PackageList options={options} list={prices} />
+        <PackageList options={options} list={newList} />
         <div className={cls['product-info__footer']}>
           <div>
             <h4>Shipping Method</h4>
@@ -93,7 +104,7 @@ const ProductInfo = ({ data }) => {
             </div>
           </div>
           <button
-            id={cls[status === 'out_of_stock' ? 'outOfStock' : '']}
+            id={cls[status === 'out_of_stock' ? 'outOfStockBtn' : '']}
             className={cls['cart-btn']}
             onClick={isInCart(id) ? cartNavigate : addCartHandler}
           >

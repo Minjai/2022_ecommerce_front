@@ -24,6 +24,9 @@ const MainCarousel = () => {
               <SwiperSlide key={item.id}>
                 <a href={item.link_to_product}>
                   <img src={item.image} alt="banner" />
+                  <div>
+                    <span>{item.description}</span>
+                  </div>
                 </a>
               </SwiperSlide>
             ))

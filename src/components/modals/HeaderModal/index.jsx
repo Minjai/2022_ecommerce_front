@@ -89,12 +89,12 @@ const HeaderModal = () => {
                 className={cls['modal-wrapper__mid__currency']}
               >
                 <span onClick={() => setCurrencty((prev) => !prev)}>
-                  <p>{activeCurrency?.currency} ($)</p> <FiChevronDown />
+                  <p>{activeCurrency?.currency} ({activeCurrency?.currency_value})</p> <FiChevronDown />
                 </span>
                 <ul>
                   {currencyData?.results.map((item) => (
                     <li
-                      onClick={() => dispatch(initCurrency(item.currency))}
+                      onClick={() => dispatch(initCurrency(item))}
                       key={item.id}
                     >
                       {item.currency}

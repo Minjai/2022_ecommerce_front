@@ -54,8 +54,6 @@ const UserStatus = () => {
 
   const userOrderStatus = orderTable(data);
 
-  console.log(reviewData);
-
   return (
     <div className={cls['user']}>
       <div className={cls['user-board']}>

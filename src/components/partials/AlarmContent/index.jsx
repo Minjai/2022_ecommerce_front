@@ -32,7 +32,7 @@ const AlarmContent = () => {
               </div>
             ))
           ) : (
-            <EmptyText />
+            <EmptyText text={'alarm'} />
           )}
         </div>
       </div>
