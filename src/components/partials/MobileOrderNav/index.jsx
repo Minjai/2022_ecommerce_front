@@ -116,7 +116,11 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
             <div className={cls['discount']}>
               <span>Discount:</span>
               <span>
-                {activeCurrency?.currency_value} {data?.point_used / 1000}
+                {activeCurrency?.currency_value}{' '}
+                {mathCurrency(
+                  data?.point_used / 1000,
+                  activeCurrency?.currency_price
+                )}
               </span>
             </div>
           ) : null}
