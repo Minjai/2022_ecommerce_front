@@ -1,3 +1,4 @@
+import { mathCurrency } from '../../../utils/mathCurrency';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCart } from '../../../store/slices/cart';
 import { paths } from '../../../constants/paths';
@@ -62,16 +63,8 @@ const ProductItem = ({ item }) => {
         <Rating productRating={get_review_start.star__avg} />
         <div className={cls['product-item__body__price']}>
           <span>
-            {
-              prices?.find(
-                (item) => item?.currency?.currency === activeCurrency?.currency
-              )?.currency?.currency_value
-            }{' '}
-            {
-              prices?.find(
-                (item) => item?.currency?.currency === activeCurrency?.currency
-              )?.selling_price
-            }
+            {activeCurrency.currency_value} {" "}
+            {mathCurrency(prices[0]?.selling_price, activeCurrency?.currency_price)}
           </span>
           <button onClick={isInCart(id) ? cartNavigate : addCartHandler}>
             <FiShoppingCart /> {isInCart(id) ? 'Cart' : 'Add'}

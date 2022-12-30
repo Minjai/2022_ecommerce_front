@@ -165,14 +165,14 @@ const CheckoutTransfer = () => {
           {mathTotal(
             activeCurrency,
             singleOrder?.length ? singleOrder : carts,
-            1,
+            activeCurrency?.currency_price,
             points
           )}{' '}
-          ( {activeCurrency?.currency_value} {' '}
+          ( {activeCurrency?.currency_value}{' '}
           {mathTotal(
             activeCurrency,
             singleOrder?.length ? singleOrder : carts,
-            1,
+            activeCurrency?.currency_price,
             points
           )}{' '}
           ) to our bank account for payment

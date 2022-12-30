@@ -74,10 +74,21 @@ const PaymentInfo = () => {
           </div>
           <div className={cls['payment-info__footer']}>
             <p>
-              • Please treanfer ${' '}
-              {mathModalTotal(activeCurrency, data?.order_items, 1, data?.point_used)} USD ( ${' '}
-              {mathModalTotal(activeCurrency, data?.order_items, 1, data?.point_used)} (SGD) )
-              to our bank account for payment
+              • Please treanfer {activeCurrency?.currency_value}{' '}
+              {mathModalTotal(
+                activeCurrency,
+                data?.order_items,
+                activeCurrency?.currency_price,
+                data?.point_used
+              )}{' '}
+              ( {activeCurrency?.currency_value}{' '}
+              {mathModalTotal(
+                activeCurrency,
+                data?.order_items,
+                activeCurrency?.currency_price,
+                data?.point_used
+              )}
+              {" "}) to our bank account for payment
             </p>
             <p className={cls['active']}>
               • Bank transfer fees are the buyer’s payments.

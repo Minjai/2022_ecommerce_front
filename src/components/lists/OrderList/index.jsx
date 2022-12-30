@@ -8,6 +8,7 @@ import { modalPaths } from '../../../constants/paths';
 import EmptyText from '../../elements/UI/EmptyText';
 import { useNavigate } from 'react-router-dom';
 import cls from './orderList.module.scss';
+import { mathCurrency } from '../../../utils/mathCurrency';
 
 const OrderList = ({ data }) => {
   const dispatch = useDispatch();
@@ -45,13 +46,10 @@ const OrderList = ({ data }) => {
                   <p>
                     {activeCurrency?.currency_value}{' '}
                     {elem?.order_items.reduce((prev, arr) => {
-                      const finalPrice = arr?.product?.prices?.find(
-                        (elem) =>
-                          elem?.currency?.currency ===
-                            activeCurrency?.currency &&
-                          elem?.package === arr?.quantity?.package
-                      );
-                      return (prev += +finalPrice?.selling_price);
+                      return (prev += mathCurrency(
+                        arr?.quantity?.selling_price,
+                        activeCurrency?.currency_price
+                      ));
                     }, 0) -
                       elem.point_used / 1000 +
                       1}
@@ -85,12 +83,6 @@ const OrderList = ({ data }) => {
               </h4>
               {elem.order_items?.length > 0 ? (
                 elem.order_items?.map((item) => {
-                  const finalPrice = item?.product?.prices?.find(
-                    (elem) =>
-                      elem?.currency?.currency === activeCurrency?.currency &&
-                      elem?.package === item?.quantity?.package
-                  );
-
                   return (
                     <div
                       key={item?.id}
@@ -106,10 +98,13 @@ const OrderList = ({ data }) => {
                       />
                       <div>
                         <p>{item?.product?.product_name}</p>
-                        <span>{item?.quantity.package}</span>
+                        <span>{item?.quantity?.package}</span>
                         <p>
                           {activeCurrency?.currency_value}{' '}
-                          {+finalPrice?.selling_price}
+                          {mathCurrency(
+                            item?.quantity?.selling_price,
+                            activeCurrency?.currency_price
+                          )}
                         </p>
                         {elem.status === 'sent' && (
                           <button

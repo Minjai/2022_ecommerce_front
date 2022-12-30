@@ -6,6 +6,7 @@ import {
 import EmptyText from '../../../elements/UI/EmptyText';
 import cls from './checkoutPrice.module.scss';
 import { useSelector } from 'react-redux';
+import { mathCurrency } from '../../../../utils/mathCurrency';
 
 const CheckoutPrice = ({ data, isOrder = false }) => {
   const { points } = useSelector((state) => state.points);
@@ -20,12 +21,6 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
       >
         {data?.order_items.length > 0 ? (
           data?.order_items.map(({ id, quantity, product }) => {
-            const finalPrice = product?.prices?.find(
-              (elem) =>
-                elem?.currency?.currency === activeCurrency?.currency &&
-                elem?.package === quantity?.package
-            );
-
             return (
               <div key={id} className={cls['checkout-price__child']}>
                 <img
@@ -39,7 +34,11 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
                   <p>{product.product_name}</p>
                   <span>{quantity?.package}</span>
                   <p>
-                    {activeCurrency?.currency_value} {finalPrice?.selling_price}
+                    {activeCurrency?.currency_value}{' '}
+                    {mathCurrency(
+                      quantity?.selling_price,
+                      activeCurrency?.currency_price
+                    )}
                   </p>
                 </div>
               </div>
@@ -59,7 +58,10 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
             </span>
           </p>
           <p>
-            Shipping Fee: <span>$ 1</span>
+            Shipping Fee:{' '}
+            <span>
+              {activeCurrency?.currency_value} {activeCurrency?.currency_price}
+            </span>
           </p>
         </div>
         {data?.point_used ? (
@@ -67,7 +69,11 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
             <p>
               Discount:{' '}
               <span>
-                - {activeCurrency?.currency_value} {data?.point_used / 1000}
+                - {activeCurrency?.currency_value}{' '}
+                {mathCurrency(
+                  data?.point_used / 1000,
+                  activeCurrency?.currency_price
+                )}
               </span>
             </p>
           </div>
@@ -80,7 +86,7 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
               {mathModalTotal(
                 activeCurrency,
                 data?.order_items,
-                1,
+                activeCurrency?.currency_price,
                 data?.point_used
               )}
             </span>
@@ -90,7 +96,7 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
             {mathModalTotal(
               activeCurrency,
               data?.order_items,
-              1,
+              activeCurrency?.currency_price,
               data?.point_used
             )}
           </b>
@@ -105,12 +111,6 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
       >
         {data?.length > 0 ? (
           data?.map(({ id, images, product_name, pickedPackage, prices }) => {
-            const finalPrice = prices?.find(
-              (item) =>
-                item?.currency?.currency === activeCurrency?.currency &&
-                item?.package === pickedPackage?.package
-            );
-
             return (
               <div key={id} className={cls['checkout-price__child']}>
                 <img
@@ -124,7 +124,12 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
                       ? pickedPackage?.package
                       : prices[0]?.package}
                   </span>
-                  <p>{finalPrice?.selling_price}</p>
+                  <p>
+                    {mathCurrency(
+                      pickedPackage?.selling_price,
+                      activeCurrency?.currency_price
+                    )}
+                  </p>
                 </div>
               </div>
             );
@@ -143,7 +148,10 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
             </span>
           </p>
           <p>
-            Shipping Fee: <span>$ 1</span>
+            Shipping Fee:{' '}
+            <span>
+              {activeCurrency?.currency_value} {activeCurrency?.currency_price}
+            </span>
           </p>
         </div>
         {points ? (
@@ -151,7 +159,8 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
             <p>
               Discount:{' '}
               <span>
-                - {activeCurrency?.currency_value} {points / 1000}
+                - {activeCurrency?.currency_value}{' '}
+                {mathCurrency(points / 1000, activeCurrency?.currency_price)}
               </span>
             </p>
           </div>
@@ -161,12 +170,22 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
             Total:{' '}
             <span>
               {activeCurrency?.currency_value}{' '}
-              {mathTotal(activeCurrency, data, 1, points)}
+              {mathTotal(
+                activeCurrency,
+                data,
+                activeCurrency?.currency_price,
+                points
+              )}
             </span>
           </p>
           <b>
             {activeCurrency?.currency_value}{' '}
-            {mathTotal(activeCurrency, data, 1, points)}
+            {mathTotal(
+              activeCurrency,
+              data,
+              activeCurrency?.currency_price,
+              points
+            )}
           </b>
         </div>
       </div>

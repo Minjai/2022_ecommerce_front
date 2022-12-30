@@ -9,7 +9,7 @@ import cls from './productCart.module.scss';
 
 const ProductCart = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const { carts } = useSelector((state) => state.cart);
   const { isAuth } = useSelector((state) => state.user);
@@ -35,15 +35,26 @@ const ProductCart = () => {
       <div className={cls['cart-footer']}>
         <div className={cls['cart-footer__subTotal']}>
           <span>
-            Sub total: <p>{activeCurrency?.currency_value} {mathSubTotal(activeCurrency, carts)}</p>
+            Sub total:{' '}
+            <p>
+              {activeCurrency?.currency_value}{' '}
+              {mathSubTotal(activeCurrency, carts)}
+            </p>
           </span>
           <span>
-            Shipping fee: <p>$1</p>
+            Shipping fee:{' '}
+            <p>
+              {activeCurrency?.currency_value} {activeCurrency?.currency_price}
+            </p>
           </span>
         </div>
         <div className={cls['cart-footer__total']}>
           <span>
-            Order total: <p>{activeCurrency?.currency_value} {mathTotal(activeCurrency, carts, 1)}</p>
+            Order total:{' '}
+            <p>
+              {activeCurrency?.currency_value}{' '}
+              {mathTotal(activeCurrency, carts, activeCurrency?.currency_price)}
+            </p>
           </span>
         </div>
         <div className={cls['cart-footer__buttons']}>

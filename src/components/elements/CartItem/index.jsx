@@ -4,9 +4,10 @@ import { paths } from '../../../constants/paths';
 import { IoCloseOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 import cls from './cartItem.module.scss';
+import { mathCurrency } from '../../../utils/mathCurrency';
 
 const CartItem = ({ data }) => {
-  const { product_name, images, id, pickedPackage, prices } = data;
+  const { product_name, images, id, pickedPackage } = data;
 
   const { activeCurrency } = useSelector((state) => state.currency);
 
@@ -21,12 +22,6 @@ const CartItem = ({ data }) => {
     const newCart = cart.filter((item) => item.id !== id);
     localStorage.setItem('shop-cart', JSON.stringify(newCart));
   };
-
-  const finalPrice = prices?.find(
-    (item) =>
-      item?.currency?.currency === activeCurrency?.currency &&
-      item?.package === pickedPackage?.package
-  );
 
   return (
     <div
@@ -43,7 +38,10 @@ const CartItem = ({ data }) => {
           <b>{pickedPackage?.package}</b>
           <span>
             {activeCurrency?.currency_value}{' '}
-            {finalPrice?.selling_price}
+            {mathCurrency(
+              pickedPackage?.selling_price,
+              activeCurrency?.currency_price
+            )}
           </span>
         </div>
       </div>

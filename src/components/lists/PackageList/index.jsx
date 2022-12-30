@@ -1,5 +1,7 @@
+import { mathCurrency } from '../../../utils/mathCurrency';
 import { HiOutlineArrowRight } from 'react-icons/hi';
 import cls from './packageList.module.scss';
+import { useSelector } from 'react-redux';
 
 const PackageList = ({ list, options }) => {
   const pickedPackageHandler = (item) => {
@@ -7,6 +9,8 @@ const PackageList = ({ list, options }) => {
   };
 
   const { pricePackage, setPricePackage } = options;
+
+  const { activeCurrency } = useSelector((state) => state.currency);
 
   return (
     <div className={cls['package']}>
@@ -30,12 +34,20 @@ const PackageList = ({ list, options }) => {
             <div>
               <p>
                 <span className={cls['cross']}>
-                  {item['currency']?.currency_value} {item['regular_price']}
+                  {activeCurrency?.currency_value}{' '}
+                  {mathCurrency(
+                    item['regular_price'],
+                    activeCurrency?.currency_price
+                  )}
                 </span>
               </p>
               <HiOutlineArrowRight />
               <b>
-                {item['currency']?.currency_value} {item['selling_price']}
+                {activeCurrency?.currency_value}{' '}
+                {mathCurrency(
+                  item['selling_price'],
+                  activeCurrency?.currency_price
+                )}
               </b>
             </div>
           </div>

@@ -10,6 +10,7 @@ import {
   useGetSingleCategoryProductsQuery,
 } from '../../../store/query/productQuery';
 import { axiosInstance } from '../../../constants/axios';
+import { paths } from '../../../constants/paths';
 import { setAlert, setAlertContent } from '../../../store/slices/alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -54,7 +55,7 @@ const CostumerForm = () => {
           username: userInfo.username,
           category: category.id,
           product: product.id,
-          parent: ''
+          parent: '',
         },
         {
           headers: {
@@ -68,22 +69,21 @@ const CostumerForm = () => {
       formData.append('attachments', file);
       formData.append('consultation', response.data.id);
 
-      const fileResponse = await axiosInstance.post(
-        'consultations/consultations_files/',
-        formData,
-        {
+      const fileResponse = await axiosInstance
+        .post('consultations/consultations_files/', formData, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
             'Content-type': 'multipart/form-data',
           },
-        }
-      );
+        })
 
       reset();
       setCategory({ title: 'Optional' });
       setProduct({ product_name: 'Optional' });
       dispatch(setAlert(true));
       dispatch(setAlertContent('Your question has been added !'));
+      navigate(`/${paths.CUSTOMER_HELP}/${paths.CONSULTATION}`);
+      window.scrollTo(window.scrollX, 0);
     } catch (error) {
       console.log(error.response);
     }
@@ -112,7 +112,10 @@ const CostumerForm = () => {
           </label>
           <label>
             <span>Category</span>
-            <div id={cls['z-index']} className={cls[categoryActive ? 'costumer-list_active' : '']}>
+            <div
+              id={cls['z-index']}
+              className={cls[categoryActive ? 'costumer-list_active' : '']}
+            >
               <div onClick={() => setCategoryActive((prev) => !prev)}>
                 <span>{category.title}</span>
                 <BsChevronDown />

@@ -8,6 +8,7 @@ import { FiChevronDown } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import cls from './productInfo.module.scss';
 import { useEffect, useMemo, useState } from 'react';
+import { mathCurrency } from '../../../utils/mathCurrency';
 
 const ProductInfo = ({ data }) => {
   const [method, setMethod] = useState('Shipping method');
@@ -45,15 +46,9 @@ const ProductInfo = ({ data }) => {
 
   const { activeCurrency } = useSelector((state) => state.currency);
 
-  const newList = useMemo(() =>
-    prices?.filter(
-      (item) => item?.currency?.currency === activeCurrency?.currency
-    )
-  , [prices, activeCurrency?.currency]);
-
   useEffect(() => {
-    setPricePackage(newList[0]);
-  }, [newList]);
+    setPricePackage(prices[0]);
+  }, [prices]);
 
   const options = {
     pricePackage,
@@ -73,15 +68,13 @@ const ProductInfo = ({ data }) => {
         <p>
           {activeCurrency?.currency_value}{' '}
           {
-            prices?.find(
-              (item) => item?.currency?.currency === activeCurrency?.currency
-            )?.selling_price
+            mathCurrency(prices[0]?.selling_price, activeCurrency?.currency_price)
           }
           {status === 'out_of_stock' && <b>*Out of Stock</b>}
         </p>
         <span>Manufactured By TEST</span>
         <span>Contains TEST</span>
-        <PackageList options={options} list={newList} />
+        <PackageList options={options} list={prices} />
         <div className={cls['product-info__footer']}>
           <div>
             <h4>Shipping Method</h4>

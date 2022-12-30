@@ -40,10 +40,11 @@ const ConsultationList = ({ bottom = false, data, options }) => {
       <div className={cls['consultation-list']}>
         {data?.map((item, index) => (
           <div
+            onClick={isAuth ? () => initQuestionsHandler(item) : modalHandler}
             id={
               cls[
                 !item.product.images.find((item) => item.is_feature === true)
-                  .image
+                  ?.image
                   ? 'active'
                   : ''
               ]
@@ -54,11 +55,11 @@ const ConsultationList = ({ bottom = false, data, options }) => {
             <div className={cls['consultation-list__child__left']}>
               <span>{index + 1}</span>
               {item.product.images.find((item) => item.is_feature === true)
-                .image && (
+                ?.image && (
                 <img
                   src={
                     item.product.images.find((item) => item.is_feature === true)
-                      .image
+                      ?.image
                   }
                   alt="consutation-pic"
                 />
@@ -68,13 +69,7 @@ const ConsultationList = ({ bottom = false, data, options }) => {
               </p>
             </div>
             <div className={cls['consultation-list__child__right']}>
-              <span
-                onClick={
-                  isAuth ? () => initQuestionsHandler(item) : modalHandler
-                }
-              >
-                {item.children.length} replies
-              </span>
+              <span>{item.children.length} replies</span>
               <p>{nameClose(item.user.username)}</p>
               <p>{dateParser(item.created_at)}</p>
             </div>

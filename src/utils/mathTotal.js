@@ -1,53 +1,60 @@
+import { mathCurrency } from './mathCurrency';
+
 export const mathSubTotal = (activeCurrency, arr) => {
   return arr?.reduce((prev, item) => {
     if (item.pickedPackage) {
-      const finalPrice = item.prices?.find(
-        (elem) =>
-          elem?.currency?.currency === activeCurrency?.currency &&
-          elem?.package === item.pickedPackage?.package
+      return (
+        prev +
+        mathCurrency(
+          +item?.pickedPackage?.selling_price,
+          activeCurrency?.currency_price
+        )
       );
-
-      return prev + +finalPrice?.selling_price;
     } else {
-      const finalPrice = item?.product.prices?.find(
-        (elem) =>
-          elem?.currency?.currency === activeCurrency?.currency &&
-          elem?.package === item.quantity?.package
+      return (
+        prev +
+        mathCurrency(
+          +item?.quantity?.selling_price,
+          activeCurrency?.currency_price
+        )
       );
-
-      return prev + +finalPrice?.selling_price;
     }
   }, 0);
 };
 
-export const mathTotal = (activeCurrency, arr, fee = 0, discount = 0) => {
+export const mathTotal = (activeCurrency, arr, fee, discount = 0) => {
   const price = arr?.reduce((prev, item) => {
     if (item.pickedPackage) {
-      const finalPrice = item.prices?.find(
-        (elem) =>
-          elem?.currency?.currency === activeCurrency?.currency &&
-          elem?.package === item.pickedPackage?.package
+      return (
+        prev +
+        mathCurrency(
+          +item?.pickedPackage?.selling_price,
+          activeCurrency?.currency_price
+        )
       );
-
-
-      return prev + +finalPrice?.selling_price;
     } else {
-      return prev + +item.quantity?.selling_price;
+      return (
+        prev +
+        mathCurrency(
+          +item?.quantity?.selling_price,
+          activeCurrency?.currency_price
+        )
+      );
     }
   }, 0);
 
-  return price + fee - discount / 1000;
+  return price + fee - mathCurrency(discount / 1000, activeCurrency?.currency_price);
 };
 
 export const mathModalTotal = (activeCurrency, arr, fee = 0, discount = 0) => {
   const price = arr?.reduce((prev, item) => {
-    const finalPrice = item?.product?.prices?.find(
-      (elem) =>
-        elem?.currency?.currency === activeCurrency?.currency &&
-        elem?.package === item.quantity?.package
+    return (
+      prev +
+      mathCurrency(
+        +item?.quantity?.selling_price,
+        activeCurrency?.currency_price
+      )
     );
-
-    return prev + +finalPrice?.selling_price;
   }, 0);
 
   return price + fee - discount / 1000;
