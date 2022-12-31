@@ -63,7 +63,7 @@ const ProductItem = ({ item }) => {
         <Rating productRating={get_review_start.star__avg} />
         <div className={cls['product-item__body__price']}>
           <span>
-            {activeCurrency.currency_value} {" "}
+            {activeCurrency?.currency_value} {" "}
             {mathCurrency(prices[0]?.selling_price, activeCurrency?.currency_price)}
           </span>
           <button onClick={isInCart(id) ? cartNavigate : addCartHandler}>
