@@ -1,3 +1,4 @@
+import { setShippingPrice } from '../../../store/slices/shipping';
 import { setSingleItemOrder } from '../../../store/slices/order';
 import { mathCurrency } from '../../../utils/mathCurrency';
 import ProductImages from '../../elements/ProductImages';
@@ -11,7 +12,7 @@ import cls from './productInfo.module.scss';
 import { useEffect, useState } from 'react';
 
 const ProductInfo = ({ data }) => {
-  const [method, setMethod] = useState('Shipping method');
+  const [method, setMethod] = useState({ title: 'Shipping method' });
   const { carts } = useSelector((state) => state.cart);
   const { isAuth } = useSelector((state) => state.user);
   const [pricePackage, setPricePackage] = useState('');
@@ -37,6 +38,7 @@ const ProductInfo = ({ data }) => {
   };
 
   const addCartHandler = () => {
+    dispatch(setShippingPrice(method))
     dispatch(addCart({ ...data, pickedPackage: pricePackage }));
     const cart = JSON.parse(localStorage.getItem('shop-cart'));
     localStorage.setItem(
@@ -60,8 +62,8 @@ const ProductInfo = ({ data }) => {
     if (isAuth) {
       navigate(`/${paths.CHECK_OUT}/${paths.CHECK_OUT_ONE}`);
       dispatch(setSingleItemOrder([{ ...data, pickedPackage: pricePackage }]));
-    }else{
-      navigate(`/${paths.SIGNUP}`)
+    } else {
+      navigate(`/${paths.SIGNUP}`);
     }
   };
 
@@ -90,14 +92,14 @@ const ProductInfo = ({ data }) => {
               className={cls['product-info__footer__list']}
             >
               <span onClick={() => setActive((prev) => !prev)}>
-                <p>{method}</p>
+                <p>{method.title}</p>
                 <FiChevronDown />
               </span>
               <ul>
                 {data.shipping_method.length > 0 &&
-                  data.shipping_method.map(({ title, id }) => (
-                    <li key={id} onClick={() => methodHandler(title)}>
-                      {title}
+                  data.shipping_method.map((item) => (
+                    <li key={item.id} onClick={() => methodHandler(item)}>
+                      {item.title}
                     </li>
                   ))}
               </ul>

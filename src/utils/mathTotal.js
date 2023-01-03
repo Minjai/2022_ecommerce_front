@@ -43,7 +43,7 @@ export const mathTotal = (activeCurrency, arr, fee, discount = 0) => {
     }
   }, 0);
 
-  return price + fee - mathCurrency(discount / 1000, activeCurrency?.currency_price);
+  return price + fee - +mathCurrency(discount / 1000, activeCurrency?.currency_price);
 };
 
 export const mathModalTotal = (activeCurrency, arr, fee = 0, discount = 0) => {

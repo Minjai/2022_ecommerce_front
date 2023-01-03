@@ -92,7 +92,7 @@ const OrderList = ({ data }) => {
                         src={
                           item?.product?.images?.find(
                             (image) => image.is_feature === true
-                          ).image
+                          )?.image
                         }
                         alt="order-product-pic"
                       />

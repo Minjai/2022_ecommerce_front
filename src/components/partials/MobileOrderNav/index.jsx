@@ -58,7 +58,7 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
                 <div key={id} className={cls['order-body-list__child']}>
                   <img
                     src={
-                      product?.images.find((item) => item.is_feature === true)
+                      product?.images?.find((item) => item.is_feature === true)
                         .image
                     }
                     alt="order-product-pic"
@@ -110,7 +110,7 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
             <span>Shipping Fee:</span>
             <span>
               {activeCurrency?.currency_value}{' '}
-              {activeCurrency?.currency_price?.toFixed(2)}
+              {+activeCurrency?.currency_price?.toFixed(2)}
             </span>
           </div>
           {data?.point_used ? (
@@ -175,7 +175,7 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
                   <div key={id} className={cls['order-body-list__child']}>
                     <img
                       src={
-                        images.find((item) => item.is_feature === true).image
+                        images?.find((item) => item.is_feature === true)?.image
                       }
                       alt="order-product-pic"
                     />
@@ -198,7 +198,7 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
               return (
                 <div key={id} className={cls['order-body-list__child']}>
                   <img
-                    src={images.find((item) => item.is_feature === true).image}
+                    src={images?.find((item) => item.is_feature === true)?.image}
                     alt="order-product-pic"
                   />
                   <div>
@@ -251,7 +251,7 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
             <span>Shipping Fee:</span>
             <span>
               {activeCurrency?.currency_value}{' '}
-              {(activeCurrency?.currency_price).toFixed(2)}
+              {(+activeCurrency?.currency_price).toFixed(2)}
             </span>
           </div>
           {points ? (

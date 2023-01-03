@@ -80,7 +80,7 @@ const ReviewForm = () => {
             <img
               src={
                 productData?.images.find((item) => item.is_feature === true)
-                  .image
+                  ?.image
               }
               alt="review-pic"
             />

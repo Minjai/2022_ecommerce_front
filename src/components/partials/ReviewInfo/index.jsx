@@ -38,7 +38,7 @@ const ReviewInfo = () => {
               src={
                 pickedReview?.product?.images?.find(
                   (item) => item.is_feature === true
-                ).image
+                )?.image
               }
               alt="review-pic"
             />

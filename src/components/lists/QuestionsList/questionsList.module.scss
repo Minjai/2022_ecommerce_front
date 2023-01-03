@@ -110,6 +110,7 @@
           color: #fff;
           font-weight: 600;
           cursor: pointer;
+          white-space: nowrap;
         }
 
         @media screen and (max-width: 600px) {
@@ -179,7 +180,7 @@
 
   &__body {
     margin-top: 35px;
-    border-top: 1px solid rgba(128, 128, 128, 0.3);
+    border-top: 1px solid #dbe1e5;
 
     @media screen and (max-width: 700px) {
       margin-top: 25px;
@@ -190,7 +191,8 @@
       padding: 10px 15px;
       display: flex;
       justify-content: space-between;
-      border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+      border-bottom: 1px solid #dbe1e5;
+      cursor: pointer;
 
       > div {
         width: 45%;
@@ -234,7 +236,6 @@
             width: 250px;
             height: 22px;
             overflow: hidden;
-            margin: 0 0 0 15px;
           }
         }
 

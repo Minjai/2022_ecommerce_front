@@ -5,7 +5,7 @@ import Pagination from '../../elements/Pagination';
 import { paths } from '../../../constants/paths';
 import { useNavigate } from 'react-router-dom';
 import cls from './questionsList.module.scss';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 
 const QuestionsList = ({ data, options, filterOptions }) => {
   const { isRange, setSelect, select, setRange } = filterOptions;
@@ -16,7 +16,7 @@ const QuestionsList = ({ data, options, filterOptions }) => {
   };
 
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const navigatePostHandler = () => {
     window.scrollTo(window.scrollX, 0);
@@ -57,28 +57,28 @@ const QuestionsList = ({ data, options, filterOptions }) => {
         </div>
       </div>
       <div className={cls['question__body']}>
-        {data.results.map((item, index) => {
+        {data?.results.map((item, index) => {
           return (
             <div
+              onClick={() => initQuestionsHandler(item)}
               id={cls[item.product.images.length > 0 ? '' : 'active']}
               key={item.created_at}
               className={cls['question__body__child']}
             >
               <div>
-                <span>{index + 1}</span>
+                <span>{data?.results.length - index}</span>
                 <img
                   src={
-                    item.product.images.find((item) => item.is_feature).image
+                    item.product.images.find((item) => item.is_feature)?.image
                   }
                   alt="question-list"
                 />
                 <div>
-                  <AiOutlineLock />
                   <p>{item.detail}</p>
                 </div>
               </div>
               <div>
-                <span className={cls['pointer']} onClick={() => initQuestionsHandler(item)}>
+                <span className={cls['pointer']}>
                   {item.children.length} replies
                 </span>
                 <p>{dateParser(item.created_at)}</p>

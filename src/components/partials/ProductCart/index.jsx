@@ -6,6 +6,7 @@ import { paths } from '../../../constants/paths';
 import { useNavigate } from 'react-router-dom';
 import CartItem from '../../elements/CartItem';
 import cls from './productCart.module.scss';
+import { mathShipping } from '../../../utils/mathCurrency';
 
 const ProductCart = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const ProductCart = () => {
 
   const { carts } = useSelector((state) => state.cart);
   const { isAuth } = useSelector((state) => state.user);
+  const { shippings } = useSelector((state) => state.shipping);
 
   const checkoutHandler = () => {
     navigate(
@@ -22,6 +24,9 @@ const ProductCart = () => {
   };
 
   const { activeCurrency } = useSelector((state) => state.currency);
+
+  console.log(shippings);
+  console.log(mathShipping(shippings, +activeCurrency?.currency_price));
 
   return (
     <div className={cls['cart']}>
@@ -42,7 +47,10 @@ const ProductCart = () => {
           <span>
             Shipping fee:{' '}
             <p>
-              {activeCurrency?.currency_value} {(activeCurrency?.currency_price)?.toFixed(2)}
+              {shippings?.length > 0
+                ? (activeCurrency?.currency_value,
+                  mathShipping(shippings, +activeCurrency?.currency_price))
+                : `${activeCurrency?.currency_value} 0`}
             </p>
           </span>
         </div>
@@ -51,7 +59,11 @@ const ProductCart = () => {
             Order total:{' '}
             <p>
               {activeCurrency?.currency_value}{' '}
-              {mathTotal(activeCurrency, carts, activeCurrency?.currency_price)?.toFixed(2)}
+              {mathTotal(
+                activeCurrency,
+                carts,
+                activeCurrency?.currency_price
+              )?.toFixed(2)}
             </p>
           </span>
         </div>

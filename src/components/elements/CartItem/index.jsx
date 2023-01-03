@@ -30,7 +30,7 @@ const CartItem = ({ data }) => {
     >
       <div className={cls['cart-item__image']}>
         <img
-          src={images?.find((item) => item.is_feature === true).image}
+          src={images?.find((item) => item.is_feature === true)?.image}
           alt="product-pic"
         />
         <div>

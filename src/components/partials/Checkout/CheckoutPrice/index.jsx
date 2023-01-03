@@ -26,7 +26,7 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
                 <img
                   src={
                     product.images?.find((item) => item.is_feature === true)
-                      .image
+                      ?.image
                   }
                   alt="product-pic"
                 />
@@ -60,7 +60,8 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
           <p>
             Shipping Fee:{' '}
             <span>
-              {activeCurrency?.currency_value} {(activeCurrency?.currency_price)?.toFixed(2)}
+              {activeCurrency?.currency_value}{' '}
+              {(+activeCurrency?.currency_price)?.toFixed(2)}
             </span>
           </p>
         </div>
@@ -114,7 +115,7 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
             return (
               <div key={id} className={cls['checkout-price__child']}>
                 <img
-                  src={images?.find((item) => item.is_feature === true).image}
+                  src={images?.find((item) => item.is_feature === true)?.image}
                   alt="product-pic"
                 />
                 <div>
@@ -150,7 +151,8 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
           <p>
             Shipping Fee:{' '}
             <span>
-              {activeCurrency?.currency_value} {(activeCurrency?.currency_price)?.toFixed(2)}
+              {activeCurrency?.currency_value}{' '}
+              {(+activeCurrency?.currency_price)?.toFixed(2)}
             </span>
           </p>
         </div>

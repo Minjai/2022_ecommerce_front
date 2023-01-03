@@ -21,7 +21,7 @@ const UserReviewList = () => {
     setSelect(str);
     setRange(false);
   };
-  
+
   const [page, setPage] = useState(1);
   const [pageStart, setPageStart] = useState(0);
   const [offset, setOffset] = useState(0);
@@ -97,7 +97,7 @@ const UserReviewList = () => {
                 <img
                   src={
                     product?.images.find((item) => item.is_feature === true)
-                      .image
+                      ?.image
                   }
                   alt="review-list"
                 />

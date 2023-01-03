@@ -6,7 +6,7 @@ const ProductImages = ({ images }) => {
 
   useEffect(() => {
     setCurrentImage(
-      () => images?.find((item) => item.is_feature === true).image
+      () => images?.find((item) => item.is_feature === true)?.image
     );
   }, [images]);
 

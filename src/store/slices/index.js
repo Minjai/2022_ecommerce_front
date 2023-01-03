@@ -18,14 +18,15 @@ import { newsQuery } from '../query/newsQuery';
 import consultationSlice from './consultation';
 import { faqQuery } from '../query/faqQuery';
 import categorySlice from './category';
+import shippingSlice from './shipping';
 import deliverySlice from './delivery';
+import currencySlice from './currency';
 import productSlice from './product';
 import userSlice from './user/user';
 import burgerSlice from './burger';
 import searchSlice from './search';
 import reviewSlice from './review';
 import pointSlice from './points';
-import currencySlice from './currency';
 import alertSlice from './alert';
 import orderSlice from './order';
 import modalSlice from './modal';
@@ -46,6 +47,7 @@ export const rootSlice = combineReducers({
   user: userSlice,
   currency: currencySlice,
   cart: cartSlice,
+  shipping: shippingSlice,
   [categoryQuery.reducerPath]: categoryQuery.reducer,
   [pointsQuery.reducerPath]: pointsQuery.reducer,
   [consultationQuery.reducerPath]: consultationQuery.reducer,

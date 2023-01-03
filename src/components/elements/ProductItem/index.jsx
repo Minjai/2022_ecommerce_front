@@ -65,7 +65,7 @@ const ProductItem = ({ item, isBest }) => {
         )}
       </div>
       <div className={cls['product-item__body']}>
-        <span>{category.title}</span>
+        <span>{category?.title}</span>
         <p>{product_name}</p>
         <Rating productRating={get_review_start.star__avg} />
         <div className={cls['product-item__body__price']}>
