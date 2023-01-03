@@ -23,8 +23,8 @@ const Footer = () => {
         <div className={cls['footer-upper']}>
           <div className={cls['footer-upper__logo']}>
             <Logo />
-            {<p>{data?.results[0].description}</p>}
-            <p>Email: {contactData?.results[0].email}</p>
+            {<p>{data?.results[0]?.description}</p>}
+            <p>Email: {contactData?.results[0]?.email}</p>
           </div>
           <div className={cls['footer-upper__links']}>
             <ul>
@@ -77,7 +77,7 @@ const Footer = () => {
           </div>
         </div>
         <div className={cls['footer-lower']}>
-        {<p>{data?.results[0].description}</p>}
+        {<p>{data?.results[0]?.description}</p>}
           <span>Copyright C 2022 test. All Rights Reserved</span>
         </div>
       </div>

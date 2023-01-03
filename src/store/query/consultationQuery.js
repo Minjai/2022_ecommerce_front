@@ -18,10 +18,10 @@ export const consultationQuery = createApi({
       providesTags: () => ['CONSULTATION_TAG'],
     }),
     getConsultations: builder.query({
-      query: ({ token, page, offset }) => ({
+      query: ({ token, page, offset, product }) => ({
         url: `consultations/consultations/?limit=5${
           page > 1 ? `&offset=${offset}` : ''
-        }`,
+        }${product ? `&product=${product}` : ''}`,
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -1,9 +1,13 @@
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import cls from './productDescription.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const ProductDescription = ({ list }) => {
   const [active, setActive] = useState('');
+
+  useEffect(() => {
+    setActive(list[0]?.id)
+  }, [list])
 
   return (
     <div className={cls['description']}>

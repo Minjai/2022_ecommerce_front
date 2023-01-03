@@ -1,14 +1,14 @@
 @import '../../../scss/variables.scss';
 
-.news-list{
+.news-list {
   margin-top: 40px;
 
-  &__body{
-    border-top: 1px solid rgba(128, 128, 128, 0.3);
+  &__body {
+    border-top: 1px solid #dbe1e5;
   }
 
-  &__child{
-    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+  &__child {
+    border-bottom: 1px solid #dbe1e5;
     padding: 15px 0;
     display: flex;
     justify-content: space-between;
@@ -18,7 +18,7 @@
     font-weight: 500;
     font-size: 12px;
 
-    p{
+    p {
       margin: 0;
     }
   }

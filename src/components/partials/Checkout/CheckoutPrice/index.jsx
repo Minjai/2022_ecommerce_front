@@ -54,13 +54,13 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
             Sub total:{' '}
             <span>
               {activeCurrency?.currency_value}{' '}
-              {mathSubTotal(activeCurrency, data?.order_items)}
+              {mathSubTotal(activeCurrency, data?.order_items)?.toFixed(2)}
             </span>
           </p>
           <p>
             Shipping Fee:{' '}
             <span>
-              {activeCurrency?.currency_value} {activeCurrency?.currency_price}
+              {activeCurrency?.currency_value} {(activeCurrency?.currency_price)?.toFixed(2)}
             </span>
           </p>
         </div>
@@ -88,7 +88,7 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
                 data?.order_items,
                 activeCurrency?.currency_price,
                 data?.point_used
-              )}
+              )?.toFixed(2)}
             </span>
           </p>
           <b>
@@ -98,7 +98,7 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
               data?.order_items,
               activeCurrency?.currency_price,
               data?.point_used
-            )}
+            )?.toFixed(2)}
           </b>
         </div>
       </div>
@@ -144,13 +144,13 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
             Sub total:{' '}
             <span>
               {activeCurrency?.currency_value}{' '}
-              {mathSubTotal(activeCurrency, data)}
+              {mathSubTotal(activeCurrency, data)?.toFixed(2)}
             </span>
           </p>
           <p>
             Shipping Fee:{' '}
             <span>
-              {activeCurrency?.currency_value} {activeCurrency?.currency_price}
+              {activeCurrency?.currency_value} {(activeCurrency?.currency_price)?.toFixed(2)}
             </span>
           </p>
         </div>
@@ -175,7 +175,7 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
                 data,
                 activeCurrency?.currency_price,
                 points
-              )}
+              )?.toFixed(2)}
             </span>
           </p>
           <b>
@@ -185,7 +185,7 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
               data,
               activeCurrency?.currency_price,
               points
-            )}
+            )?.toFixed(2)}
           </b>
         </div>
       </div>

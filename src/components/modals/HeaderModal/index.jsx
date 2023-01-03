@@ -17,7 +17,7 @@ import { initCurrency } from '../../../store/slices/currency';
 const HeaderModal = () => {
   const { isActive } = useSelector((state) => state.burger);
   const { isAuth } = useSelector((state) => state.user);
-  const [isCurrency, setCurrencty] = useState(false);
+  const [isCurrency, setCurrency] = useState(false);
   const [isCategory, setCategory] = useState(false);
   const [isCustomer, setCustomer] = useState(false);
 
@@ -47,6 +47,11 @@ const HeaderModal = () => {
     localStorage.removeItem('accessToken');
     navigate(paths.HOME);
   };
+
+  const currencyHandler = (item) => {
+    setCurrency((prev) => !prev)
+    dispatch(initCurrency(item))
+  }
 
   const { data } = useGetAllCategoriesQuery();
   const { data: currencyData } = useGetCurrencyQuery();
@@ -88,16 +93,16 @@ const HeaderModal = () => {
                 id={cls[isCurrency ? 'active' : '']}
                 className={cls['modal-wrapper__mid__currency']}
               >
-                <span onClick={() => setCurrencty((prev) => !prev)}>
-                  <p>{activeCurrency?.currency}</p> <FiChevronDown />
+                <span onClick={() => setCurrency((prev) => !prev)}>
+                  <p>{activeCurrency?.currency} {activeCurrency?.currency_value}</p> <FiChevronDown />
                 </span>
                 <ul>
                   {currencyData?.results.map((item) => (
                     <li
-                      onClick={() => dispatch(initCurrency(item))}
+                      onClick={() => currencyHandler(item)}
                       key={item.id}
                     >
-                      {item.currency}
+                      {item.currency} {item.currency_value}
                     </li>
                   ))}
                 </ul>

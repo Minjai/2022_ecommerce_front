@@ -5,7 +5,7 @@ export const mathSubTotal = (activeCurrency, arr) => {
     if (item.pickedPackage) {
       return (
         prev +
-        mathCurrency(
+        +mathCurrency(
           +item?.pickedPackage?.selling_price,
           activeCurrency?.currency_price
         )
@@ -13,7 +13,7 @@ export const mathSubTotal = (activeCurrency, arr) => {
     } else {
       return (
         prev +
-        mathCurrency(
+        +mathCurrency(
           +item?.quantity?.selling_price,
           activeCurrency?.currency_price
         )
@@ -27,7 +27,7 @@ export const mathTotal = (activeCurrency, arr, fee, discount = 0) => {
     if (item.pickedPackage) {
       return (
         prev +
-        mathCurrency(
+        +mathCurrency(
           +item?.pickedPackage?.selling_price,
           activeCurrency?.currency_price
         )
@@ -35,7 +35,7 @@ export const mathTotal = (activeCurrency, arr, fee, discount = 0) => {
     } else {
       return (
         prev +
-        mathCurrency(
+        +mathCurrency(
           +item?.quantity?.selling_price,
           activeCurrency?.currency_price
         )
@@ -50,12 +50,12 @@ export const mathModalTotal = (activeCurrency, arr, fee = 0, discount = 0) => {
   const price = arr?.reduce((prev, item) => {
     return (
       prev +
-      mathCurrency(
+      +mathCurrency(
         +item?.quantity?.selling_price,
         activeCurrency?.currency_price
       )
     );
   }, 0);
 
-  return price + fee - discount / 1000;
+  return price + fee - mathCurrency(discount / 1000, activeCurrency?.currency_price);
 };

@@ -8,11 +8,11 @@ const ContactUs = () => {
 
   const navigateHandler = () => {
     window.scrollTo(window.scrollX, 0);
-    navigate(`/${paths.CUSTOMER_HELP}/${paths.CONSULTATION}`)
-  }
+    navigate(`/${paths.CUSTOMER_HELP}/${paths.CONSULTATION}`);
+  };
 
   return (
-    <div className={cls['contact-us']}>
+    <div onClick={navigateHandler} className={cls['contact-us']}>
       <div className={cls['contact-us__body']}>
         <div className={cls['contact-us__body__content']}>
           <h4>Contact Us</h4>
@@ -22,9 +22,7 @@ const ContactUs = () => {
           </p>
         </div>
         <div className={cls['contact-us__body__button']}>
-          <button
-            onClick={navigateHandler}
-          >
+          <button>
             <HiArrowRight />
           </button>
         </div>

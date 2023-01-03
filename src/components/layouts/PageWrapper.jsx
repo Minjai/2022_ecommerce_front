@@ -1,9 +1,7 @@
-const PageWrapper = ({ children }) => {
+const PageWrapper = ({ children, index = false }) => {
   return (
-    <div className="page-wrapper">
-      {children}
-    </div>
-  )
-}
+    <div className={`page-wrapper ${index ? 'home-wrapper' : ''}`}>{children}</div>
+  );
+};
 
-export default PageWrapper
+export default PageWrapper;

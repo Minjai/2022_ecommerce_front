@@ -78,7 +78,7 @@ const LoginForm = () => {
         />
         {errors.password && <p>{errors.password.message}</p>}
         <span onClick={handleForgetPassword}>Forgot password?</span>
-        <Button type="submit">Log In</Button>
+        <Button auth={true} type="submit">Log In</Button>
       </form>
       <span className={cls['login__confirm']}>
         Don't have an account?{' '}

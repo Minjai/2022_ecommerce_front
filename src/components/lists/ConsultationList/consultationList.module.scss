@@ -1,8 +1,12 @@
 @import '../../../scss/variables.scss';
 
+.consultation-bottom{
+  margin-bottom: 150px;
+}
+
 .consultation {
   margin-top: 20px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
   position: relative;
 
   &-create {
@@ -12,7 +16,7 @@
       width: 142px;
       height: 35px;
       font-size: 12px;
-      border: 2px solid #8080804d;
+      border: 1px solid rgba(211, 211, 212, 0.5);
       outline: none;
       cursor: pointer;
       background: none;
@@ -24,7 +28,6 @@
       @media screen and (max-width: 750px) {
         width: 112px;
         height: 33px;
-        border: 1px solid #8080804d;
       }
     }
   }
@@ -35,10 +38,10 @@
 
   &-list {
     margin-top: 25px;
-    border-top: 1px solid rgba(128, 128, 128, 0.3);
+    border-top: 1px solid #dbe1e5;
 
     &__child {
-      border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+      border-bottom: 1px solid #dbe1e5;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -85,7 +88,7 @@
           }
 
           b{
-            width: 70%;
+            width: 100%;
             color: $app-dark-color;
             font-weight: 500;
           }
@@ -386,8 +389,14 @@
 #active {
   .consultation-create {
     position: absolute;
-    bottom: -50px;
+    bottom: -60px;
     right: 0;
+
+    button{
+      width: 167px;
+      height: 47px;
+      font-size: 15px;
+    }
 
     @media screen and (max-width: 1000px) {
       button {
@@ -396,14 +405,8 @@
         padding: 0;
         font-size: 14px;
       }
-    }
-  }
 
-  .consultation-list {
-    margin-bottom: 60px;
-
-    @media screen and (max-width: 700px) {
-      margin-bottom: 70px;
+      bottom: 30px;
     }
   }
 }

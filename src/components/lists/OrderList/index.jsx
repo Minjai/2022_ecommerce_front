@@ -45,14 +45,14 @@ const OrderList = ({ data }) => {
                   <p>Total</p>
                   <p>
                     {activeCurrency?.currency_value}{' '}
-                    {elem?.order_items.reduce((prev, arr) => {
-                      return (prev += mathCurrency(
+                    {(elem?.order_items.reduce((prev, arr) => {
+                      return (prev += +mathCurrency(
                         arr?.quantity?.selling_price,
                         activeCurrency?.currency_price
                       ));
                     }, 0) -
                       elem.point_used / 1000 +
-                      1}
+                      1)?.toFixed(2)}
                   </p>
                 </span>
               </div>

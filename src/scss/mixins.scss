@@ -2,10 +2,18 @@
 
 @mixin authForm() {
   text-align: center;
+  margin-top: 70px;
+  margin-bottom: 130px;
+
+  @media screen and (max-width: 550px) {
+    margin-top: 40px;
+    margin-bottom: 60px;
+  }
 
   h3 {
     font-size: 35px;
     margin: 0;
+    margin-bottom: 20px;
     color: $app-dark-color;
 
     @media screen and (max-width: 1400px) {
@@ -25,7 +33,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 500px;
+    width: 392px;
     margin: 0 auto;
 
     @media screen and (max-width: 550px) {
@@ -36,10 +44,12 @@
       margin: 15px 0;
       border-radius: 5px;
       color: $app-dark-color;
+      font-size: 15px;
+      border: 1px solid #dadada;
 
       &::placeholder {
-        color: $app-dark-color;
-        opacity: 0.5;
+        color: #b1b1b1;
+        font-size: 15px;
 
         @media screen and (max-width: 900px) {
           opacity: 1;
@@ -84,6 +94,7 @@
     b {
       color: $app-main-color;
       cursor: pointer;
+      margin-left: 5px;
       font-weight: 600;
     }
 
@@ -110,19 +121,21 @@
     &::before {
       content: '';
       position: absolute;
-      right: 8px;
-      width: 16px;
-      bottom: 49%;
-      height: 1px;
-      background: gray;
+      right: 10px;
+      width: 12px;
+      bottom: 47.5%;
+      height: 2px;
+      background: rgb(99, 99, 99);
       cursor: pointer;
     }
 
     &::after {
-      font-size: 15px;
-      right: 7px;
-      top: 27%;
+      color: #000;
       position: absolute;
+      font-size: 13px;
+      right: 10px;
+      font-weight: 600;
+      top: 30%;
     }
   }
 
@@ -138,19 +151,21 @@
     &::before {
       content: '';
       position: absolute;
-      left: 8px;
-      width: 16px;
-      bottom: 49%;
-      height: 1px;
-      background: gray;
+      left: 10px;
+      width: 12px;
+      bottom: 47.5%;
+      height: 2px;
+      background: rgb(99, 99, 99);
       cursor: pointer;
     }
 
     &::after {
+      color: #000;
       position: absolute;
-      font-size: 15px;
-      left: 7px;
-      top: 27%;
+      font-size: 13px;
+      left: 10px;
+      font-weight: 600;
+      top: 30%;
     }
   }
 }
@@ -160,22 +175,24 @@
   flex-wrap: wrap;
 
   &__child {
-    width: 123px;
+    width: 122px;
     height: 33px;
     cursor: pointer;
-    border: 1px solid rgba(128, 128, 128, 0.5);
-    border-radius: 40px;
+    border: 1px solid #DBE1E5;
+    border-radius: 30px;
     margin-right: 20px;
     margin-top: 15px;
     align-items: center;
     display: flex;
     justify-content: center;
+    white-space: nowrap;
 
     p {
       margin: 0;
       color: $app-gray-color;
       opacity: 0.7;
       font-weight: 600;
+      font-size: 12px;
     }
   }
 

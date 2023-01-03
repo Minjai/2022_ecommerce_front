@@ -25,6 +25,7 @@ const SingleProduct = () => {
       token: localStorage.getItem('accessToken'),
       page,
       offset,
+      product: id
     },
     {
       refetchOnMountOrArgChange: true,

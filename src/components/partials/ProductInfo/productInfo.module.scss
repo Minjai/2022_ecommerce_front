@@ -36,7 +36,7 @@
     > span {
       color: $app-dark-color;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 500;
       margin-bottom: 5px;
       display: block;
     }
@@ -130,6 +130,8 @@
 
       #outOfStock {
         pointer-events: none;
+        background: #8080801a;
+        color: #fff;
       }
 
       button {
@@ -139,9 +141,10 @@
         border-radius: 30px;
         cursor: pointer;
         outline: none;
-        border: 1px solid rgba(128, 128, 128, 0.3);
+        border: 1px solid #dbe1e5;
         margin-bottom: 20px;
         font-weight: 500;
+        background: none;
         color: $app-dark-color;
       }
 
@@ -152,10 +155,11 @@
       }
 
       #outOfStockBtn {
-        border: 1px solid rgba(128, 128, 128, 0.3);
-        background: rgba(128, 128, 128, 0.1);
+        border: 1px solid #dbe1e5;
+        background: #8080801a;
         pointer-events: none;
         color: $app-dark-color;
+        color: #fff;
       }
 
       h5 {

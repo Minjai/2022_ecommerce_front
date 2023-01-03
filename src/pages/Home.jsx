@@ -8,7 +8,7 @@ import Discover from '../components/partials/Discover';
 
 const Home = () => {
   return (
-    <PageWrapper>
+    <PageWrapper index={true}>
       <div className="container">
         <MainCarousel />
         <FeaturedCategory />

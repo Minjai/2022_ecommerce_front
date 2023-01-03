@@ -1,8 +1,19 @@
 @import '../../../scss/variables.scss';
 
 .cart {
-  border-top: 2px solid $app-light-gray-color;
   margin-top: 40px;
+  padding: 0 20px;
+  position: relative;
+  
+  &::before{
+    content: '';
+    position: absolute;
+    width: 95.5%;
+    left: 2.25%;
+    top: 0;
+    height: 2px;
+    background: $app-light-gray-color;
+  }
 
   &-footer {
     margin-top: 30px;
@@ -42,13 +53,23 @@
     }
 
     &__total {
-      padding-right: 30px;
+      padding-right: 0px;
       margin-top: 30px;
-      background-color: $app-light-gray-color;
       display: flex;
       justify-content: flex-end;
       align-items: center;
       height: 67px;
+      position: relative;
+
+      &::before{
+        content: '';
+        position: absolute;
+        left: -2.25%;
+        top: 0;
+        width: 104.5%;
+        height: 100%;
+        background-color: $app-light-gray-color;
+      }
 
       span {
         display: flex;
@@ -56,6 +77,7 @@
         color: $app-dark-color;
         font-weight: 600;
         align-items: center;
+        position: relative;
 
         p {
           margin: 0 0 0 40px;
@@ -87,7 +109,7 @@
         cursor: pointer;
         border-radius: 30px;
         font-size: 15px;
-        font-weight: 600;
+        font-weight: 500;
 
         @media screen and (max-width: 550px) {
           width: 100%;

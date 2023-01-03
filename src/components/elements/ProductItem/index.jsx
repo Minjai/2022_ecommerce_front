@@ -7,9 +7,16 @@ import { useNavigate } from 'react-router-dom';
 import cls from './productItem.module.scss';
 import Rating from '../UI/Rating';
 
-const ProductItem = ({ item }) => {
-  const { product_name, images, prices, get_review_start, category, top, id } =
-    item;
+const ProductItem = ({ item, isBest }) => {
+  const {
+    product_name,
+    images,
+    prices,
+    get_review_start,
+    category,
+    id,
+    the_best_number_product,
+  } = item;
 
   const { carts } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -51,9 +58,9 @@ const ProductItem = ({ item }) => {
           src={images?.find((item) => item.is_feature === true)?.image}
           alt="product-pic"
         />
-        {top && (
+        {the_best_number_product && isBest && (
           <span>
-            No. <p>{top}</p>{' '}
+            No. <p>{the_best_number_product}</p>{' '}
           </span>
         )}
       </div>
@@ -63,8 +70,12 @@ const ProductItem = ({ item }) => {
         <Rating productRating={get_review_start.star__avg} />
         <div className={cls['product-item__body__price']}>
           <span>
-            {activeCurrency?.currency_value} {" "}
-            {mathCurrency(prices[0]?.selling_price, activeCurrency?.currency_price)}
+            {activeCurrency?.currency_value}{' '}
+            {mathCurrency(
+              prices[0]?.selling_price,
+              activeCurrency?.currency_price
+            )}{' '}
+            ({activeCurrency?.currency})
           </span>
           <button onClick={isInCart(id) ? cartNavigate : addCartHandler}>
             <FiShoppingCart /> {isInCart(id) ? 'Cart' : 'Add'}

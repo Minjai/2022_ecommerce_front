@@ -14,7 +14,7 @@ const SingleNew = () => {
 
   return (
     <PageWrapper>
-      <div className="container">
+      <div className="container my-page">
         <PageTitle>News</PageTitle>
         {isLoading ? (
           <Loader />

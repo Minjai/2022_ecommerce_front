@@ -4,12 +4,14 @@ import PageWrapper from '../components/layouts/PageWrapper';
 import { useSelector } from 'react-redux';
 
 const Cart = () => {
-  const { carts } = useSelector(state => state.cart)
+  const { carts } = useSelector((state) => state.cart);
 
   return (
     <PageWrapper>
       <div className="container w-950">
-        <Description>Items In Your Cart ( {carts.length} items )</Description>
+        <Description cartTitle={true}>
+          Items In Your Cart ( {carts.length} items )
+        </Description>
         <ProductCart />
       </div>
     </PageWrapper>

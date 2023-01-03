@@ -36,7 +36,7 @@ const SignupForm = () => {
         email: e.email,
         password: e.password,
       });
-      
+
       navigate(`/${paths.LOGIN}`);
       reset();
     } catch (error) {
@@ -78,7 +78,9 @@ const SignupForm = () => {
           rules={register('confirmPassword')}
         />
         {errors.confirmPassword && <p>Input value should match password</p>}
-        <Button type="submit">Sign Up</Button>
+        <Button auth={true} type="submit">
+          Sign Up
+        </Button>
       </form>
       <span className={cls['signup__confirm']}>
         Already have an account?{' '}

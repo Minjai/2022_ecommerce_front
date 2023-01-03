@@ -44,9 +44,9 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
           {mathModalTotal(
             activeCurrency,
             data?.order_items,
-            1,
+            activeCurrency?.currency_price,
             data?.point_used
-          )}{' '}
+          )?.toFixed(2)}{' '}
           <AiOutlineDown />
         </span>
       </div>
@@ -103,13 +103,14 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
             <span>Sub total:</span>
             <span>
               {activeCurrency?.currency_value}{' '}
-              {mathSubTotal(activeCurrency, data.order_items)}
+              {mathSubTotal(activeCurrency, data.order_items)?.toFixed(2)}
             </span>
           </div>
           <div>
             <span>Shipping Fee:</span>
             <span>
-              {activeCurrency?.currency_value} {activeCurrency?.currency_price}
+              {activeCurrency?.currency_value}{' '}
+              {activeCurrency?.currency_price?.toFixed(2)}
             </span>
           </div>
           {data?.point_used ? (
@@ -134,7 +135,7 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
               data?.order_items,
               activeCurrency?.currency_price,
               data?.point_used
-            )}
+            )?.toFixed(2)}
           </span>
         </div>
       </div>
@@ -154,7 +155,7 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
             singleOrder?.length ? singleOrder : carts,
             activeCurrency?.currency_price,
             points
-          )}{' '}
+          )?.toFixed(2)}{' '}
           <AiOutlineDown />
         </span>
       </div>
@@ -243,13 +244,14 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
               {mathSubTotal(
                 activeCurrency,
                 singleOrder?.length ? singleOrder : carts
-              )}
+              )?.toFixed(2)}
             </span>
           </div>
           <div>
             <span>Shipping Fee:</span>
             <span>
-              {activeCurrency?.currency_value} {activeCurrency?.currency_price}
+              {activeCurrency?.currency_value}{' '}
+              {(activeCurrency?.currency_price).toFixed(2)}
             </span>
           </div>
           {points ? (
@@ -271,7 +273,7 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
               singleOrder?.length ? singleOrder : carts,
               activeCurrency?.currency_price,
               points
-            )}
+            )?.toFixed(2)}
           </span>
         </div>
       </div>

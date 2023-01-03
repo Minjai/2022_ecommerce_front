@@ -35,7 +35,6 @@ const ConsultationInfo = () => {
             },
           }
         );
-
       } else {
         const response = await axiosInstance.post(
           'consultations/consultations/',
@@ -90,6 +89,7 @@ const ConsultationInfo = () => {
       {data?.children?.length > 0
         ? data?.children?.map((item) => (
             <div
+              onClick={() => dispatch(initConsultation(item))}
               key={item.id}
               id={cls['active']}
               className={cls['consultation__child']}
@@ -102,7 +102,7 @@ const ConsultationInfo = () => {
               </div>
               <div className={cls['consultation__child__body']}>
                 <p>{item.detail}</p>
-                <span onClick={() => dispatch(initConsultation(item))}>
+                <span>
                   <BiEnvelope />
                   {item.children.length} reply for this question
                 </span>

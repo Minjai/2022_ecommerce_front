@@ -61,7 +61,7 @@ const MobileHeader = () => {
               <span onClick={() => navigate(`/${paths.CART}`)}>
                 <AiOutlineShoppingCart />
               </span>
-              {carts.length > 0 && <b>{carts.length}</b>}
+              {carts?.length > 0 && <b>{carts?.length}</b>}
             </li>
           </ul>
         </div>

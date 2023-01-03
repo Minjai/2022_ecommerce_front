@@ -130,6 +130,7 @@ const Header = () => {
                 )}
                 {isClick && (
                   <div
+                    onMouseLeave={() => setSubCategory([])}
                     className={
                       cls[to === paths.CATEGORY ? 'category-list' : '']
                     }
@@ -140,7 +141,7 @@ const Header = () => {
                           <li
                             onMouseEnter={() => setSubCategory(item.children)}
                             onClick={() => handleCategory(item)}
-                            key={item.id}
+                            key={`${item.id} ${item.title}`}
                           >
                             {item.title} <FiChevronDown />
                           </li>
@@ -166,7 +167,8 @@ const Header = () => {
           </ul>
           <div className={cls['header-currency']}>
             <span>
-              {activeCurrency?.currency} <BsChevronDown />
+              {activeCurrency?.currency} {activeCurrency?.currency_value}{' '}
+              <BsChevronDown />
             </span>
             <div>
               <ul>
@@ -175,7 +177,7 @@ const Header = () => {
                     onClick={() => dispatch(initCurrency(item))}
                     key={item.id}
                   >
-                    {item.currency}
+                    {item.currency} {item.currency_value}
                   </li>
                 ))}
               </ul>

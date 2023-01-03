@@ -1,3 +1,5 @@
 export const mathCurrency = (value, currencyValue) => {
-  return +value * currencyValue
+  const number = +value * currencyValue
+
+  return number?.toFixed(2)
 }

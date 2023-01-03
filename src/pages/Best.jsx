@@ -21,7 +21,7 @@ const Best = () => {
     (state) => state.category
   );
 
-  const [newData, setNewData] = useState([])
+  const [newData, setNewData] = useState([]);
   const { data } = useGetCategoriesQuery();
 
   const { categoryProducts } = useSelector((state) => state.product);
@@ -38,15 +38,15 @@ const Best = () => {
   });
 
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     const arr = [];
-  
+
     data?.forEach((item) => {
       item.children.forEach((elem) => arr.push(elem));
     });
-  
-    setNewData(arr)
+
+    setNewData(arr);
     dispatch(setInitPickedCategories(arr));
   }, [data, dispatch]);
 
@@ -90,7 +90,11 @@ const Best = () => {
         {isLoading ? (
           <ProductListSkeleton />
         ) : categoryProducts?.length > 0 ? (
-          <PaginatedList options={options} data={categoryProducts} />
+          <PaginatedList
+            isBest={true}
+            options={options}
+            data={categoryProducts}
+          />
         ) : (
           <EmptyText text={'best seller'} />
         )}

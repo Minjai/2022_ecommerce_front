@@ -167,14 +167,14 @@ const CheckoutTransfer = () => {
             singleOrder?.length ? singleOrder : carts,
             activeCurrency?.currency_price,
             points
-          )}{' '}
+          )?.toFixed(2)} {activeCurrency.currency} {' '}
           ( {activeCurrency?.currency_value}{' '}
           {mathTotal(
             activeCurrency,
             singleOrder?.length ? singleOrder : carts,
             activeCurrency?.currency_price,
             points
-          )}{' '}
+          )?.toFixed(2)}{' '}
           ) to our bank account for payment
         </p>
         <p className={cls['active']}>

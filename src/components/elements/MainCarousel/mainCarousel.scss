@@ -18,6 +18,68 @@
   @include carousel-paginaiton
 }
 
+.category-swiper{
+  .swiper-button-next {
+    color: gray;
+    background-color: white;
+    width: 35px;
+    height: 35px;
+    margin-right: -10px;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 50%;
+
+    &::before {
+      content: '';
+      position: absolute;
+      right: 10px;
+      width: 12px;
+      bottom: 49%;
+      height: 2px;
+      background: rgb(99, 99, 99);
+      cursor: pointer;
+    }
+
+    &::after {
+      color: #000;
+      position: absolute;
+      font-size: 13px;
+      right: 10px;
+      font-weight: 600;
+      top: 30%;
+    }
+  }
+
+  .swiper-button-prev {
+    color: gray;
+    background-color: white;
+    width: 35px;
+    height: 35px;
+    margin-left: -10px;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 50%;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      width: 12px;
+      bottom: 49%;
+      height: 2px;
+      background: rgb(99, 99, 99);
+      cursor: pointer;
+    }
+
+    &::after {
+      color: #000;
+      position: absolute;
+      font-size: 13px;
+      left: 10px;
+      font-weight: 600;
+      top: 30%;
+    }
+  }
+}
+
 .main-swiper {
   width: 108%;
   left: -4%;
@@ -29,26 +91,28 @@
     background-color: white;
     width: 35px;
     height: 35px;
-    margin-right: -5px;
+    margin-right: -10px;
     border: 1px solid rgba(128, 128, 128, 0.5);
     border-radius: 50%;
 
     &::before {
       content: '';
       position: absolute;
-      right: 8px;
-      width: 16px;
+      right: 10px;
+      width: 12px;
       bottom: 49%;
-      height: 1px;
-      background: gray;
+      height: 2px;
+      background: rgb(99, 99, 99);
       cursor: pointer;
     }
 
     &::after {
-      font-size: 15px;
-      right: 7px;
-      top: 27%;
+      color: #000;
       position: absolute;
+      font-size: 13px;
+      right: 10px;
+      font-weight: 600;
+      top: 30%;
     }
   }
 
@@ -57,26 +121,28 @@
     background-color: white;
     width: 35px;
     height: 35px;
-    margin-left: -5px;
+    margin-left: -10px;
     border: 1px solid rgba(128, 128, 128, 0.5);
     border-radius: 50%;
 
     &::before {
       content: '';
       position: absolute;
-      left: 8px;
-      width: 16px;
+      left: 10px;
+      width: 12px;
       bottom: 49%;
-      height: 1px;
-      background: gray;
+      height: 2px;
+      background: rgb(99, 99, 99);
       cursor: pointer;
     }
 
     &::after {
+      color: #000;
       position: absolute;
-      font-size: 15px;
-      left: 7px;
-      top: 27%;
+      font-size: 13px;
+      left: 10px;
+      font-weight: 600;
+      top: 30%;
     }
   }
 

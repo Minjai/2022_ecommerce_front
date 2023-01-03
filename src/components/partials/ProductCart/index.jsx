@@ -25,26 +25,24 @@ const ProductCart = () => {
 
   return (
     <div className={cls['cart']}>
-      <div className={cls['cart-body']}>
-        {carts.length > 0 ? (
-          carts.map((item) => <CartItem key={item.id} data={item} />)
-        ) : (
-          <EmptyText text={'cart'} />
-        )}
-      </div>
+      {carts.length > 0 ? (
+        carts.map((item) => <CartItem key={item.id} data={item} />)
+      ) : (
+        <EmptyText text={'cart'} />
+      )}
       <div className={cls['cart-footer']}>
         <div className={cls['cart-footer__subTotal']}>
           <span>
             Sub total:{' '}
             <p>
               {activeCurrency?.currency_value}{' '}
-              {mathSubTotal(activeCurrency, carts)}
+              {mathSubTotal(activeCurrency, carts)?.toFixed(2)}
             </p>
           </span>
           <span>
             Shipping fee:{' '}
             <p>
-              {activeCurrency?.currency_value} {activeCurrency?.currency_price}
+              {activeCurrency?.currency_value} {(activeCurrency?.currency_price)?.toFixed(2)}
             </p>
           </span>
         </div>
@@ -53,7 +51,7 @@ const ProductCart = () => {
             Order total:{' '}
             <p>
               {activeCurrency?.currency_value}{' '}
-              {mathTotal(activeCurrency, carts, activeCurrency?.currency_price)}
+              {mathTotal(activeCurrency, carts, activeCurrency?.currency_price)?.toFixed(2)}
             </p>
           </span>
         </div>

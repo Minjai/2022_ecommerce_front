@@ -1,4 +1,5 @@
 import { setSingleItemOrder } from '../../../store/slices/order';
+import { mathCurrency } from '../../../utils/mathCurrency';
 import ProductImages from '../../elements/ProductImages';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCart } from '../../../store/slices/cart';
@@ -7,12 +8,12 @@ import { paths } from '../../../constants/paths';
 import { FiChevronDown } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import cls from './productInfo.module.scss';
-import { useEffect, useMemo, useState } from 'react';
-import { mathCurrency } from '../../../utils/mathCurrency';
+import { useEffect, useState } from 'react';
 
 const ProductInfo = ({ data }) => {
   const [method, setMethod] = useState('Shipping method');
   const { carts } = useSelector((state) => state.cart);
+  const { isAuth } = useSelector((state) => state.user);
   const [pricePackage, setPricePackage] = useState('');
   const [active, setActive] = useState(false);
 
@@ -56,8 +57,12 @@ const ProductInfo = ({ data }) => {
   };
 
   const purchaseHandler = () => {
-    navigate(`/${paths.CHECK_OUT}/${paths.CHECK_OUT_ONE}`);
-    dispatch(setSingleItemOrder([{ ...data, pickedPackage: pricePackage }]));
+    if (isAuth) {
+      navigate(`/${paths.CHECK_OUT}/${paths.CHECK_OUT_ONE}`);
+      dispatch(setSingleItemOrder([{ ...data, pickedPackage: pricePackage }]));
+    }else{
+      navigate(`/${paths.SIGNUP}`)
+    }
   };
 
   return (
@@ -67,9 +72,11 @@ const ProductInfo = ({ data }) => {
         <h4>{product_name}</h4>
         <p>
           {activeCurrency?.currency_value}{' '}
-          {
-            mathCurrency(prices[0]?.selling_price, activeCurrency?.currency_price)
-          }
+          {mathCurrency(
+            prices[0]?.selling_price,
+            activeCurrency?.currency_price
+          )}{' '}
+          ({activeCurrency?.currency})
           {status === 'out_of_stock' && <b>*Out of Stock</b>}
         </p>
         <span>Manufactured By TEST</span>
@@ -107,7 +114,7 @@ const ProductInfo = ({ data }) => {
             onClick={purchaseHandler}
             id={cls[status === 'out_of_stock' ? 'outOfStock' : '']}
           >
-            Purchase now
+            Purchase Now
           </button>
           {status === 'out_of_stock' && <h5>*This product is out of stock</h5>}
         </div>

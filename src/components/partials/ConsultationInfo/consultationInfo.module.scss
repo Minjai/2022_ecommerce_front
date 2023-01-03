@@ -150,6 +150,7 @@
 
   #active {
     position: relative;
+    cursor: pointer;
 
     @media screen and (max-width: 600px) {
       &::before {
@@ -206,8 +207,11 @@
         padding: 15px 25px;
         color: $app-dark-color;
         font-weight: 500;
+        display: flex;
+        justify-content: center;
         border: 1px solid #8080804d;
         align-self: flex-end;
+        white-space: nowrap;
       }
 
       @media screen and (max-width: 1400px) {
@@ -251,8 +255,9 @@
   }
 
   &__footer {
-    text-align: center;
     margin-top: 50px;
+    display: flex;
+    justify-content: center;
 
     button {
       background: $app-main-color;
@@ -261,18 +266,10 @@
       border-radius: 30px;
       border: none;
       cursor: pointer;
-      font-size: 18px;
+      height: 42px;
+      width: 200px;
+      font-size: 12px;
       outline: none;
-      width: 230px;
-      height: 50px;
-    }
-
-    @media screen and (max-width: 1400px) {
-      button {
-        height: 42px;
-        width: 200px;
-        font-size: 12px;
-      }
     }
 
     @media screen and (max-width: 600px) {

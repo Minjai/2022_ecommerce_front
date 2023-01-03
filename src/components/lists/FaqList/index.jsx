@@ -1,5 +1,5 @@
-import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import Pagination from '../../elements/Pagination';
+import { BsPlusLg } from 'react-icons/bs';
 import cls from './faqList.module.scss';
 import { useState } from 'react';
 
@@ -29,9 +29,9 @@ const FaqList = ({ data, options }) => {
               </p>
               <span>
                 {active === question_title ? (
-                  <AiOutlineMinus />
+                  <b></b>
                 ) : (
-                  <AiOutlinePlus />
+                  <BsPlusLg />
                 )}
               </span>
             </div>

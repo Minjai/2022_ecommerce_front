@@ -28,7 +28,7 @@ const CategoryCarousel = ({ data, path, hasFeatures = false }) => {
       spaceBetween={50}
       navigation={true}
       modules={[Navigation]}
-      className={`mySwiper ${cls['category-swiper']}`}
+      className={`category-swiper`}
       breakpoints={{
         300: {
           slidesPerView: 2.5,

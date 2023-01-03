@@ -80,14 +80,14 @@ const PaymentInfo = () => {
                 data?.order_items,
                 activeCurrency?.currency_price,
                 data?.point_used
-              )}{' '}
+              )?.toFixed(2)} {activeCurrency?.currency} {' '}
               ( {activeCurrency?.currency_value}{' '}
               {mathModalTotal(
                 activeCurrency,
                 data?.order_items,
                 activeCurrency?.currency_price,
                 data?.point_used
-              )}
+              )?.toFixed(2)}
               {" "}) to our bank account for payment
             </p>
             <p className={cls['active']}>
