@@ -9,7 +9,6 @@ import { setAlert, setAlertContent } from '../../../store/slices/alert';
 
 const schema = yup.object().shape({
   username: yup.string().required(),
-  email: yup.string().email().required(),
 });
 
 const EditForm = () => {
@@ -17,13 +16,13 @@ const EditForm = () => {
     register,
     formState: { errors },
     handleSubmit,
-    reset
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   const { userInfo } = useSelector((state) => state.user);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handler = async (state) => {
     try {
@@ -32,10 +31,10 @@ const EditForm = () => {
         state
       );
 
-      dispatch(setAlert(true))
-      dispatch(setAlertContent('Your profile has been edited !'))
-      dispatch(setUserInfo(response.data))
-      reset()
+      dispatch(setAlert(true));
+      dispatch(setAlertContent('Your profile has been edited !'));
+      dispatch(setUserInfo(response.data));
+      reset();
     } catch (error) {
       console.log(error.response);
     }
@@ -47,11 +46,7 @@ const EditForm = () => {
       <div className={cls['edit__body']}>
         <form onSubmit={handleSubmit(handler)}>
           {window.innerWidth < 600 && <span>Email</span>}
-          <input
-            type="email"
-            {...register('email')}
-            placeholder={window.innerWidth > 600 ? 'User email' : ''}
-          />
+          <input className={cls['disabled']} placeholder={userInfo?.email} />
           <p>{errors?.email?.message}</p>
           {window.innerWidth < 600 && <span>User name</span>}
           <input

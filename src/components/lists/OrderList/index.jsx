@@ -1,6 +1,8 @@
 import { setSingleOrder, setTrackingNumber } from '../../../store/slices/order';
 import { useDeleteOrderMutation } from '../../../store/query/orderQuery';
+import { mathCurrency, mathShipping } from '../../../utils/mathCurrency';
 import { setContent, setModal } from '../../../store/slices/modal';
+import { mathModalTotal } from '../../../utils/mathTotal';
 import { dateParser } from '../../../utils/dateParser';
 import { orderStatus } from '../../../constants/order';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +10,6 @@ import { modalPaths } from '../../../constants/paths';
 import EmptyText from '../../elements/UI/EmptyText';
 import { useNavigate } from 'react-router-dom';
 import cls from './orderList.module.scss';
-import { mathCurrency } from '../../../utils/mathCurrency';
 
 const OrderList = ({ data }) => {
   const dispatch = useDispatch();
@@ -45,14 +46,15 @@ const OrderList = ({ data }) => {
                   <p>Total</p>
                   <p>
                     {activeCurrency?.currency_value}{' '}
-                    {(elem?.order_items.reduce((prev, arr) => {
-                      return (prev += +mathCurrency(
-                        arr?.quantity?.selling_price,
-                        activeCurrency?.currency_price
-                      ));
-                    }, 0) -
-                      elem.point_used / 1000 +
-                      1)?.toFixed(2)}
+                    {mathModalTotal(
+                      activeCurrency,
+                      elem?.order_items,
+                      +mathShipping(
+                        elem?.shipping_fee,
+                        +activeCurrency?.currency_price
+                      ),
+                      elem?.point_used
+                    )?.toFixed(2)}
                   </p>
                 </span>
               </div>

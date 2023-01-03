@@ -90,7 +90,7 @@ const CategoryCarousel = ({ data, path, hasFeatures = false }) => {
         : data?.children?.map((item) => (
             <SwiperSlide key={item.id}>
               <div
-                onClick={() => categoryHandler(data)  }
+                onClick={() => categoryHandler(data)}
                 className={cls['category-child']}
               >
                 <div className={cls['category-child__image']}>

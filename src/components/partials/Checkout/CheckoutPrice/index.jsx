@@ -3,10 +3,10 @@ import {
   mathSubTotal,
   mathTotal,
 } from '../../../../utils/mathTotal';
+import { mathCurrency, mathShipping } from '../../../../utils/mathCurrency';
 import EmptyText from '../../../elements/UI/EmptyText';
 import cls from './checkoutPrice.module.scss';
 import { useSelector } from 'react-redux';
-import { mathCurrency } from '../../../../utils/mathCurrency';
 
 const CheckoutPrice = ({ data, isOrder = false }) => {
   const { points } = useSelector((state) => state.points);
@@ -60,8 +60,12 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
           <p>
             Shipping Fee:{' '}
             <span>
-              {activeCurrency?.currency_value}{' '}
-              {(+activeCurrency?.currency_price)?.toFixed(2)}
+              {data?.shipping_fee > 0
+                ? `${activeCurrency?.currency_value} ${mathShipping(
+                    data?.shipping_fee,
+                    +activeCurrency?.currency_price
+                  )?.toFixed(2)}`
+                : `${activeCurrency?.currency_value} 0`}
             </span>
           </p>
         </div>
@@ -87,7 +91,7 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
               {mathModalTotal(
                 activeCurrency,
                 data?.order_items,
-                activeCurrency?.currency_price,
+                +mathShipping(data?.shipping_fee, +activeCurrency?.currency_price),
                 data?.point_used
               )?.toFixed(2)}
             </span>
@@ -97,7 +101,7 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
             {mathModalTotal(
               activeCurrency,
               data?.order_items,
-              activeCurrency?.currency_price,
+              +mathShipping(data?.shipping_fee, +activeCurrency?.currency_price),
               data?.point_used
             )?.toFixed(2)}
           </b>
@@ -151,8 +155,12 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
           <p>
             Shipping Fee:{' '}
             <span>
-              {activeCurrency?.currency_value}{' '}
-              {(+activeCurrency?.currency_price)?.toFixed(2)}
+              {data?.length > 0
+                ? `${activeCurrency?.currency_value} ${mathShipping(
+                    data,
+                    +activeCurrency?.currency_price
+                  )}`
+                : `${activeCurrency?.currency_value} 0`}
             </span>
           </p>
         </div>
@@ -175,7 +183,7 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
               {mathTotal(
                 activeCurrency,
                 data,
-                activeCurrency?.currency_price,
+                +mathShipping(data, +activeCurrency?.currency_price),
                 points
               )?.toFixed(2)}
             </span>
@@ -185,7 +193,7 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
             {mathTotal(
               activeCurrency,
               data,
-              activeCurrency?.currency_price,
+              +mathShipping(data, +activeCurrency?.currency_price),
               points
             )?.toFixed(2)}
           </b>

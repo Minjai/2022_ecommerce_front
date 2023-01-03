@@ -22,7 +22,11 @@ const MainCarousel = () => {
           {data?.results.map(({ banner_images }) =>
             banner_images.map((item) => (
               <SwiperSlide key={item.id}>
-                <a href={item.link_to_product}>
+                <a
+                  target={'_blank'}
+                  rel="noreferrer"
+                  href={item.link_to_product}
+                >
                   <img src={item.image} alt="banner" />
                   <div>
                     <span>{item.description}</span>

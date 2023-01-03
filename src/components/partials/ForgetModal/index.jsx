@@ -30,7 +30,6 @@ const ForgetModal = () => {
       const response = await axiosInstance.post('accounts/profiles/reset_password_send_email/' , {
         email: e.email
       })
-
     } catch (error) {
       console.log(error.response);
     }

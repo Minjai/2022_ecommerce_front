@@ -9,6 +9,7 @@ import CheckoutPrice from '../Checkout/CheckoutPrice';
 import MobileOrderNav from '../MobileOrderNav';
 import cls from './payment.module.scss';
 import { useState } from 'react';
+import { mathShipping } from '../../../utils/mathCurrency';
 
 const PaymentInfo = () => {
   const [file, setFile] = useState(null);
@@ -78,14 +79,14 @@ const PaymentInfo = () => {
               {mathModalTotal(
                 activeCurrency,
                 data?.order_items,
-                activeCurrency?.currency_price,
+                +mathShipping(data?.shipping_fee, +activeCurrency?.currency_price),
                 data?.point_used
               )?.toFixed(2)} {activeCurrency?.currency} {' '}
               ( {activeCurrency?.currency_value}{' '}
               {mathModalTotal(
                 activeCurrency,
                 data?.order_items,
-                activeCurrency?.currency_price,
+                +mathShipping(data?.shipping_fee, +activeCurrency?.currency_price),
                 data?.point_used
               )?.toFixed(2)}
               {" "}) to our bank account for payment

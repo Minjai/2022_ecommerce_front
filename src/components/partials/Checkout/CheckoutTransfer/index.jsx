@@ -4,6 +4,7 @@ import { setAlert, setAlertContent } from '../../../../store/slices/alert';
 import { useCheckoutButtons } from '../../../../hooks/useCheckoutButtons';
 import CheckoutButtons from '../../../elements/UI/CheckoutButtons';
 import { setDiscountPoints } from '../../../../store/slices/points';
+import { mathShipping } from '../../../../utils/mathCurrency';
 import { axiosInstance } from '../../../../constants/axios';
 import { mathTotal } from '../../../../utils/mathTotal';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,6 +27,7 @@ const CheckoutTransfer = () => {
   const { points, staticPoints } = useSelector((state) => state.points);
   const { singleOrder } = useSelector((state) => state.order);
   const { userInfo } = useSelector((state) => state.user);
+  const { carts } = useSelector((state) => state.cart);
 
   const setOrderAlarm = async () => {
     try {
@@ -51,20 +53,29 @@ const CheckoutTransfer = () => {
 
   const createOrderItems = async (data, item) => {
     try {
+      const itemObject = item.pickedMethod.id > 0 ?   {
+        product: item.id,
+        quantity: item.pickedPackage.id,
+        order: data.id,
+        shipping_method: item.pickedMethod.id
+      } : {
+        product: item.id,
+        quantity: item.pickedPackage.id,
+        order: data.id,
+      }
+
       const response = await axiosInstance.post(
         'orders/order_items/',
-        {
-          product: item.id,
-          quantity: item.pickedPackage.id,
-          order: data.id,
-        },
+        itemObject,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           },
         }
       );
-    } catch (error) {}
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 
   const decrementUserPoints = async () => {
@@ -85,6 +96,20 @@ const CheckoutTransfer = () => {
     } catch (error) {}
   };
 
+  const orderCreatedHandler = async (id) => {
+    try {
+      const response = await axiosInstance.patch(`orders/orders/${id}/`, {
+        order_created: true
+      }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      })
+    } catch (error) {
+      console.log(error.response);
+    }
+  }
+
   const createOrder = async () => {
     try {
       const response = await axiosInstance.post(
@@ -94,6 +119,7 @@ const CheckoutTransfer = () => {
           medical_condition: conditionId,
           delivery_address: deliveryData.id,
           point_used: +points,
+          shipping_fee: +mathShipping(carts, 1)
         },
         {
           headers: {
@@ -101,6 +127,8 @@ const CheckoutTransfer = () => {
           },
         }
       );
+
+      await orderCreatedHandler(response?.data?.id)
 
       if (singleOrder?.length) {
         createOrderItems(response.data, singleOrder[0]);
@@ -127,8 +155,6 @@ const CheckoutTransfer = () => {
   const { data } = useGetPaymentInfoQuery({
     token: localStorage.getItem('accessToken'),
   });
-
-  const { carts } = useSelector((state) => state.cart);
 
   const { data: pointsData } = useGetUserPointsQuery({
     userId: userInfo.id,
@@ -165,14 +191,14 @@ const CheckoutTransfer = () => {
           {mathTotal(
             activeCurrency,
             singleOrder?.length ? singleOrder : carts,
-            activeCurrency?.currency_price,
+            +mathShipping(carts, +activeCurrency?.currency_price),
             points
           )?.toFixed(2)} {activeCurrency.currency} {' '}
           ( {activeCurrency?.currency_value}{' '}
           {mathTotal(
             activeCurrency,
             singleOrder?.length ? singleOrder : carts,
-            activeCurrency?.currency_price,
+            +mathShipping(carts, +activeCurrency?.currency_price),
             points
           )?.toFixed(2)}{' '}
           ) to our bank account for payment

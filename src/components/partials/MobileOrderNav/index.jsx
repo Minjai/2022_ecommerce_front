@@ -4,7 +4,7 @@ import {
   mathSubTotal,
   mathTotal,
 } from '../../../utils/mathTotal';
-import { mathCurrency } from '../../../utils/mathCurrency';
+import { mathCurrency, mathShipping } from '../../../utils/mathCurrency';
 import { useDispatch, useSelector } from 'react-redux';
 import EmptyText from '../../elements/UI/EmptyText';
 import { AiOutlineDown } from 'react-icons/ai';
@@ -44,7 +44,7 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
           {mathModalTotal(
             activeCurrency,
             data?.order_items,
-            activeCurrency?.currency_price,
+            +mathShipping(data?.shipping_fee, +activeCurrency?.currency_price),
             data?.point_used
           )?.toFixed(2)}{' '}
           <AiOutlineDown />
@@ -109,15 +109,19 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
           <div>
             <span>Shipping Fee:</span>
             <span>
-              {activeCurrency?.currency_value}{' '}
-              {+activeCurrency?.currency_price?.toFixed(2)}
+              {data?.shipping_fee > 0
+                ? `${activeCurrency?.currency_value} ${mathShipping(
+                    data?.shipping_fee,
+                    +activeCurrency?.currency_price
+                  )}`
+                : `${activeCurrency?.currency_value} 0`}
             </span>
           </div>
           {data?.point_used ? (
             <div className={cls['discount']}>
               <span>Discount:</span>
               <span>
-                {activeCurrency?.currency_value}{' '}
+                - {activeCurrency?.currency_value}{' '}
                 {mathCurrency(
                   data?.point_used / 1000,
                   activeCurrency?.currency_price
@@ -133,7 +137,10 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
             {mathModalTotal(
               activeCurrency,
               data?.order_items,
-              activeCurrency?.currency_price,
+              +mathShipping(
+                data?.shipping_fee,
+                +activeCurrency?.currency_price
+              ),
               data?.point_used
             )?.toFixed(2)}
           </span>
@@ -153,7 +160,10 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
           {mathTotal(
             activeCurrency,
             singleOrder?.length ? singleOrder : carts,
-            activeCurrency?.currency_price,
+            +mathShipping(
+              singleOrder?.length ? singleOrder : carts,
+              +activeCurrency?.currency_price
+            ),
             points
           )?.toFixed(2)}{' '}
           <AiOutlineDown />
@@ -165,12 +175,6 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
           {singleOrder?.length ? (
             singleOrder?.map(
               ({ id, product_name, pickedPackage, images, prices }) => {
-                const finalPrice = prices?.find(
-                  (elem) =>
-                    elem?.currency?.currency === activeCurrency?.currency &&
-                    elem?.package === pickedPackage?.package
-                );
-
                 return (
                   <div key={id} className={cls['order-body-list__child']}>
                     <img
@@ -186,7 +190,10 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
                       </span>
                       <h5>
                         {activeCurrency?.currency_value}{' '}
-                        {finalPrice?.selling_price}
+                        {mathCurrency(
+                          pickedPackage?.selling_price,
+                          activeCurrency?.currency_price
+                        )}
                       </h5>
                     </div>
                   </div>
@@ -198,7 +205,9 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
               return (
                 <div key={id} className={cls['order-body-list__child']}>
                   <img
-                    src={images?.find((item) => item.is_feature === true)?.image}
+                    src={
+                      images?.find((item) => item.is_feature === true)?.image
+                    }
                     alt="order-product-pic"
                   />
                   <div>
@@ -250,15 +259,19 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
           <div>
             <span>Shipping Fee:</span>
             <span>
-              {activeCurrency?.currency_value}{' '}
-              {(+activeCurrency?.currency_price).toFixed(2)}
+              {carts?.length > 0
+                ? `${activeCurrency?.currency_value} ${mathShipping(
+                    carts,
+                    +activeCurrency?.currency_price
+                  )}`
+                : `${activeCurrency?.currency_value} 0`}
             </span>
           </div>
           {points ? (
             <div className={cls['discount']}>
               <span>Discount:</span>
               <span>
-                {activeCurrency?.currency_value}{' '}
+                - {activeCurrency?.currency_value}{' '}
                 {mathCurrency(points / 1000, activeCurrency?.currency_price)}
               </span>
             </div>
@@ -271,7 +284,7 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
             {mathTotal(
               activeCurrency,
               singleOrder?.length ? singleOrder : carts,
-              activeCurrency?.currency_price,
+              +mathShipping(carts, +activeCurrency?.currency_price),
               points
             )?.toFixed(2)}
           </span>

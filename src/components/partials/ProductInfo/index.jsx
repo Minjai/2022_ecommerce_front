@@ -1,4 +1,3 @@
-import { setShippingPrice } from '../../../store/slices/shipping';
 import { setSingleItemOrder } from '../../../store/slices/order';
 import { mathCurrency } from '../../../utils/mathCurrency';
 import ProductImages from '../../elements/ProductImages';
@@ -12,7 +11,7 @@ import cls from './productInfo.module.scss';
 import { useEffect, useState } from 'react';
 
 const ProductInfo = ({ data }) => {
-  const [method, setMethod] = useState({ title: 'Shipping method' });
+  const [method, setMethod] = useState({ title: 'Shipping method', price: 0, id: 0 });
   const { carts } = useSelector((state) => state.cart);
   const { isAuth } = useSelector((state) => state.user);
   const [pricePackage, setPricePackage] = useState('');
@@ -38,12 +37,11 @@ const ProductInfo = ({ data }) => {
   };
 
   const addCartHandler = () => {
-    dispatch(setShippingPrice(method))
-    dispatch(addCart({ ...data, pickedPackage: pricePackage }));
+    dispatch(addCart({ ...data, pickedPackage: pricePackage, pickedMethod: method }));
     const cart = JSON.parse(localStorage.getItem('shop-cart'));
     localStorage.setItem(
       'shop-cart',
-      JSON.stringify([...cart, { ...data, pickedPackage: pricePackage }])
+      JSON.stringify([...cart, { ...data, pickedPackage: pricePackage, pickedMethod: method  }])
     );
   };
 
@@ -61,7 +59,7 @@ const ProductInfo = ({ data }) => {
   const purchaseHandler = () => {
     if (isAuth) {
       navigate(`/${paths.CHECK_OUT}/${paths.CHECK_OUT_ONE}`);
-      dispatch(setSingleItemOrder([{ ...data, pickedPackage: pricePackage }]));
+      dispatch(setSingleItemOrder([{ ...data, pickedPackage: pricePackage, pickedMethod: method }]));
     } else {
       navigate(`/${paths.SIGNUP}`);
     }
