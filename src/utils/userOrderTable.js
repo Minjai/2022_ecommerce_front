@@ -5,6 +5,7 @@ export const orderTable = (data) => {
     preparing_for_delivery: 0,
     shipped: 0,
     delivered: 0,
+    canceled: 0
   };
 
   data?.results.forEach((item) => {

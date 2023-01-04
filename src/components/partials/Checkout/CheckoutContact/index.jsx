@@ -9,6 +9,7 @@ import { paths } from '../../../../constants/paths';
 import cls from './checkoutContact.module.scss';
 import { AiOutlineDown } from 'react-icons/ai';
 import { useState } from 'react';
+import { pointComma } from '../../../../utils/pointComma';
 
 const CheckoutContact = () => {
   const [country, setCountry] = useState({ title: 'Select country' });
@@ -177,7 +178,7 @@ const CheckoutContact = () => {
       </div>
       <div className={cls['contact__points']}>
         <h3>Apply points</h3>
-        <p>You have {staticPoints} points available.</p>
+        <p>You have {pointComma(staticPoints)} points available.</p>
         <span>
           <input
             value={state.points}

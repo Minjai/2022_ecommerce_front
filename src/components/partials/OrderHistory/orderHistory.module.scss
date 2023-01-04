@@ -29,7 +29,7 @@
     }
 
     > span {
-      border: 1px solid rgba(128, 128, 128, 0.3);
+      border: 1px solid #DBE1E5;
       border-radius: 30px;
       font-weight: 600;
       font-size: 17px;
@@ -47,6 +47,7 @@
         font-size: 12px;
         height: 31px;
         display: flex;
+        font-weight: 500;
         align-items: center;
         justify-content: space-between;
       }
@@ -64,14 +65,14 @@
         background: #fff;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
-        border: 1px solid rgba(128, 128, 128, 0.3);
+        border: 1px solid #DBE1E5;
         box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
 
         li {
           padding: 5px 15px;
           cursor: pointer;
           font-size: 12px;
-          font-weight: 600;
+          font-weight: 500;
           color: $app-dark-color;
         }
       }
@@ -136,7 +137,7 @@
           color: $app-dark-color !important;
         }
 
-        border: 1px solid rgba(128, 128, 128, 0.3) !important;
+        border: 1px solid #DBE1E5 !important;
         box-shadow: none !important;
       }
 

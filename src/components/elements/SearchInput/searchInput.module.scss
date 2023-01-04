@@ -1,7 +1,7 @@
 @import '../../../scss/variables.scss';
 
 .search-input {
-  width: 50%;
+  width: 56%;
   height: 51px;
   padding: 0 15px;
   position: relative;
@@ -10,7 +10,7 @@
   align-items: center;
   border-radius: 5px;
   border: 2px solid $app-main-color;
-  margin-left: 80px;
+  margin-left: 60px;
 
   input {
     width: 93%;
@@ -39,6 +39,11 @@
       color: $app-dark-color;
       margin-top: 5px;
     }
+  }
+
+  @media screen and (max-width: 1250px) {
+    width: 53%;
+    margin-left: 50px;
   }
 
   @media screen and (max-width: 1150px) {

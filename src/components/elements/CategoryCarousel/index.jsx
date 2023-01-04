@@ -67,45 +67,47 @@ const CategoryCarousel = ({ data, path, hasFeatures = false }) => {
         },
       }}
     >
-      {hasFeatures
-        ? data?.map((item) => (
-            <SwiperSlide key={item.id}>
-              <div
-                onClick={() => pickCategoryHandler(item)}
-                className={cls['category-child']}
-              >
-                <div className={cls['category-child__image']}>
-                  <img src={item.image} alt="category-pic" />
+      <div>
+        {hasFeatures
+          ? data?.map((item) => (
+              <SwiperSlide key={item.id}>
+                <div
+                  onClick={() => pickCategoryHandler(item)}
+                  className={cls['category-child']}
+                >
+                  <div className={cls['category-child__image']}>
+                    <img src={item.image} alt="category-pic" />
+                  </div>
+                  <div className={cls['category-child__body']}>
+                    <p>{item.title}</p>
+                    <span>
+                      {item?.count_products}{' '}
+                      {item?.count_products === 1 ? 'item' : 'items'}
+                    </span>
+                  </div>
                 </div>
-                <div className={cls['category-child__body']}>
-                  <p>{item.title}</p>
-                  <span>
-                    {item?.count_products}{' '}
-                    {item?.count_products === 1 ? 'item' : 'items'}
-                  </span>
+              </SwiperSlide>
+            ))
+          : data?.children?.map((item) => (
+              <SwiperSlide key={item.id}>
+                <div
+                  onClick={() => categoryHandler(data)}
+                  className={cls['category-child']}
+                >
+                  <div className={cls['category-child__image']}>
+                    <img src={item.image} alt="category-pic" />
+                  </div>
+                  <div className={cls['category-child__body']}>
+                    <p>{item.title}</p>
+                    <span>
+                      {item?.count_products}{' '}
+                      {item?.count_products === 1 ? 'item' : 'items'}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </SwiperSlide>
-          ))
-        : data?.children?.map((item) => (
-            <SwiperSlide key={item.id}>
-              <div
-                onClick={() => categoryHandler(data)}
-                className={cls['category-child']}
-              >
-                <div className={cls['category-child__image']}>
-                  <img src={item.image} alt="category-pic" />
-                </div>
-                <div className={cls['category-child__body']}>
-                  <p>{item.title}</p>
-                  <span>
-                    {item?.count_products}{' '}
-                    {item?.count_products === 1 ? 'item' : 'items'}
-                  </span>
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
+              </SwiperSlide>
+            ))}
+      </div>
     </Swiper>
   );
 };

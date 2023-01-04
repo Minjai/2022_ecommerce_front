@@ -15,15 +15,15 @@ const Alert = lazy(() => import('../modals/Alert'));
 
 const AppLayout = () => {
   const { isActive: isModal } = useSelector((state) => state.modal);
-  const { isAuth, userInfo } = useSelector((state) => state.user);
   const { isActive } = useSelector((state) => state.burger);
+  const { isAuth } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
-  const setPoints = async () => {
+  const setPoints = async (user) => {
     try {
       const response = await axiosInstance.get(
-        `accounts/points/?user=${userInfo?.id}`,
+        `accounts/points/?user=${user?.id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
@@ -68,7 +68,7 @@ const AppLayout = () => {
         );
 
         dispatch(setUserInfo(response.data));
-        setPoints();
+        setPoints(response.data);
       } catch (error) {
         console.log(error.response);
       }

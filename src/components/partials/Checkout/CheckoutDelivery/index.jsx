@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
 const CheckoutDelivery = () => {
-  const [isDelivery, setDelivery] = useState(false);
+  const [isDelivery, setDelivery] = useState(true);
 
   const { backBtnHandler, nextBtnhandler } = useCheckoutButtons(
     `/${paths.CHECK_OUT}/${paths.CHECK_OUT_FOURTH}`

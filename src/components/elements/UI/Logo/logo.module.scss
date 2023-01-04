@@ -4,16 +4,13 @@
   display: flex;
   align-items: center;
 
-  img{
-    width: 120px;
+  img {
+    width: 130px;
   }
 
-  @media screen and (max-width: 1050px) {
-    width: 150px;
-    font-size: 20px;
-  }
-
-  @media screen and (max-width: 830px) {
-    margin: 0;
+  @media screen and (max-width: 600px) {
+    img{
+      width: 120px;
+    }
   }
 }

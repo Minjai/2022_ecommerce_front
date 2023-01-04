@@ -4,14 +4,18 @@ import {
   mathTotal,
 } from '../../../../utils/mathTotal';
 import { mathCurrency, mathShipping } from '../../../../utils/mathCurrency';
+import { useGetCurrencyQuery } from '../../../../store/query/currency';
 import EmptyText from '../../../elements/UI/EmptyText';
 import cls from './checkoutPrice.module.scss';
 import { useSelector } from 'react-redux';
+import { mainCurrency } from '../../../../utils/mainCurrency';
 
 const CheckoutPrice = ({ data, isOrder = false }) => {
   const { points } = useSelector((state) => state.points);
 
   const { activeCurrency } = useSelector((state) => state.currency);
+
+  const { data: currencyData } = useGetCurrencyQuery();
 
   return isOrder ? (
     <div className={cls['checkout-price']}>
@@ -97,11 +101,11 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
             </span>
           </p>
           <b>
-            {activeCurrency?.currency_value}{' '}
+            {mainCurrency(currencyData?.results)?.currency_value}{' '}
             {mathModalTotal(
-              activeCurrency,
+              mainCurrency(currencyData?.results),
               data?.order_items,
-              +mathShipping(data?.shipping_fee, +activeCurrency?.currency_price),
+              +mathShipping(data?.shipping_fee, +mainCurrency(currencyData?.results)?.currency_price),
               data?.point_used
             )?.toFixed(2)}
           </b>
@@ -189,11 +193,11 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
             </span>
           </p>
           <b>
-            {activeCurrency?.currency_value}{' '}
+            {mainCurrency(currencyData?.results)?.currency_value}{' '}
             {mathTotal(
-              activeCurrency,
+              mainCurrency(currencyData?.results),
               data,
-              +mathShipping(data, +activeCurrency?.currency_price),
+              +mathShipping(data, +mainCurrency(currencyData?.results)?.currency_price),
               points
             )?.toFixed(2)}
           </b>

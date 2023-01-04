@@ -10,6 +10,7 @@
   &__header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     h3 {
       margin: 0;
@@ -19,7 +20,7 @@
 
     span {
       color: $app-main-color;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 16px;
     }
 
@@ -42,14 +43,14 @@
     }
 
     &__header {
-      border-top: 1px solid rgba(128, 128, 128, 0.3);
-      border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+      border-top: 1px solid #dbe1e5;
+      border-bottom: 1px solid #dbe1e5;
       font-size: 15px;
       padding: 20px 0 20px 90px;
       display: flex;
       justify-content: space-between;
       color: $app-dark-color;
-      font-weight: 600;
+      font-weight: 500;
 
       div {
         span:nth-child(1) {
@@ -79,7 +80,7 @@
 
     &__list {
       &__child {
-        border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+        border-bottom: 1px solid  #DBE1E5;
         padding: 20px 0;
         position: relative;
         display: flex;
@@ -110,7 +111,7 @@
             margin-left: 90px;
             padding: 0;
             color: $app-gray-color;
-            font-weight: 600;
+            font-weight: 500;
             font-size: 14px;
             overflow: hidden;
             width: 350px;
@@ -121,6 +122,7 @@
         b {
           color: $app-main-color;
           font-size: 14px;
+          font-weight: 600;
         }
 
         @media screen and (max-width: 1100px) {
@@ -155,7 +157,6 @@
           }
         }
 
-        
         @media screen and (max-width: 580px) {
           div {
             p {

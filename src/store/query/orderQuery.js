@@ -25,10 +25,13 @@ export const orderQuery = createApi({
       }),
       providesTags: () => ['ORDER_TAG'],
     }),
-    deleteOrder: builder.mutation({
+    cancelOrder: builder.mutation({
       query: ({ id, token }) => ({
         url: `orders/orders/${id}/`,
-        method: 'DELETE',
+        method: 'PATCH',
+        body: {
+          status: 'canceled'
+        },
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -39,7 +42,7 @@ export const orderQuery = createApi({
 });
 
 export const {
-  useDeleteOrderMutation,
   useGetOrderItemsQuery,
+  useCancelOrderMutation,
   useGetOrdersQuery,
 } = orderQuery;

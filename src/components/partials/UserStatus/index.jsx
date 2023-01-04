@@ -3,6 +3,7 @@ import { useGetAllUserReviewsQuery } from '../../../store/query/reviewQuery';
 import { useGetUserPointsQuery } from '../../../store/query/pointsQuery';
 import { useGetOrdersQuery } from '../../../store/query/orderQuery';
 import { orderTable } from '../../../utils/userOrderTable';
+import { pointComma } from '../../../utils/pointComma';
 import { dateFilter } from '../../../utils/dateFilter';
 import { paths } from '../../../constants/paths';
 import { AiOutlineRight } from 'react-icons/ai';
@@ -70,7 +71,7 @@ const UserStatus = () => {
           <div
             onClick={() => newPageHandler(`/${paths.MY_PAGE}/${paths.POINTS}`)}
           >
-            <b>{userPoints?.results.reduce((prev, item) => prev += item.point, 0)}</b>
+            <b>{pointComma(+userPoints?.results?.reduce((prev, item) => prev += item.point, 0))}</b>
             <span>points</span>
           </div>
         </div>
@@ -134,7 +135,7 @@ const UserStatus = () => {
               orders <span>{data?.results.length}</span>
             </p>
             <p>
-              canceled <span>0</span>
+              canceled <span>{userOrderStatus.canceled}</span>
             </p>
           </div>
         </div>

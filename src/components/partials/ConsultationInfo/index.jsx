@@ -3,6 +3,7 @@ import { initConsultation } from '../../../store/slices/consultation';
 import { axiosInstance } from '../../../constants/axios';
 import { dateParser } from '../../../utils/dateParser';
 import { useDispatch, useSelector } from 'react-redux';
+import { nameClose } from '../../../utils/nameCloser';
 import PageTitle from '../../elements/UI/PageTitle';
 import cls from './consultationInfo.module.scss';
 import { useNavigate } from 'react-router-dom';
@@ -68,7 +69,7 @@ const ConsultationInfo = () => {
         <div className={cls['consultation__child__title']}>
           <p>I have a question</p>
           <span>
-            By {data.username} <b>{dateParser(data?.created_at)}</b>
+            By {nameClose(data.username)} <b>{dateParser(data?.created_at)}</b>
           </span>
         </div>
         <div className={cls['consultation__child__images']}>

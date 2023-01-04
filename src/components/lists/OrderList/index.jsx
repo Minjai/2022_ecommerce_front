@@ -1,5 +1,5 @@
 import { setSingleOrder, setTrackingNumber } from '../../../store/slices/order';
-import { useDeleteOrderMutation } from '../../../store/query/orderQuery';
+import { useCancelOrderMutation } from '../../../store/query/orderQuery';
 import { mathCurrency, mathShipping } from '../../../utils/mathCurrency';
 import { setContent, setModal } from '../../../store/slices/modal';
 import { mathModalTotal } from '../../../utils/mathTotal';
@@ -15,10 +15,10 @@ const OrderList = ({ data }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const orderModalHandler = () => {
+  const orderModalHandler = (tracking) => {
     dispatch(setModal(true));
     dispatch(setContent(modalPaths.ORDER));
-    dispatch(setTrackingNumber(data?.tracking_number));
+    dispatch(setTrackingNumber(tracking));
   };
 
   const orderPaymentHandler = (data) => {
@@ -27,7 +27,7 @@ const OrderList = ({ data }) => {
     dispatch(setSingleOrder(data));
   };
 
-  const [deleteOrder] = useDeleteOrderMutation();
+  const [cancelOrder] = useCancelOrderMutation();
 
   const { activeCurrency } = useSelector((state) => state.currency);
 
@@ -81,6 +81,8 @@ const OrderList = ({ data }) => {
                   ? 'Delivired'
                   : elem.status === orderStatus.SHIPPED
                   ? 'Shipped'
+                  : elem.status === orderStatus.CANCELED
+                  ? 'Canceled'
                   : ''}
               </h4>
               {elem.order_items?.length > 0 ? (
@@ -124,14 +126,17 @@ const OrderList = ({ data }) => {
               )}
               <div className={cls['order__child__body__buttons']}>
                 <button
+                  id={
+                    cls[elem.status === orderStatus.CANCELED ? 'invalid' : '']
+                  }
                   onClick={() => {
                     elem.status === orderStatus.AWAITING_PAYMENT ||
                     elem.status === orderStatus.CONFIRMING_PAYMENT
-                      ? deleteOrder({
+                      ? cancelOrder({
                           id: elem.id,
                           token: localStorage.getItem('accessToken'),
                         })
-                      : orderModalHandler();
+                      : orderModalHandler(elem.tracking_number);
                   }}
                 >
                   {elem.status === orderStatus.AWAITING_PAYMENT ||
@@ -143,7 +148,8 @@ const OrderList = ({ data }) => {
                   id={
                     cls[
                       elem.status === orderStatus.SHIPPED ||
-                      elem.status === orderStatus.DELIVIRED
+                      elem.status === orderStatus.DELIVIRED ||
+                      elem.status === orderStatus.CANCELED
                         ? 'invalid'
                         : ''
                     ]

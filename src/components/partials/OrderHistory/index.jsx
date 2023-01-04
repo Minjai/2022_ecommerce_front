@@ -95,8 +95,8 @@ const OrderHistory = () => {
           showOneCalendar
           ranges={[]}
           className={cls['picker']}
-          placeholder="DD-MM-YYYY"
-          format={'dd-MM-yyyy'}
+          placeholder="MM-DD-YYYY"
+          format={'MM-dd-yyyy'}
         />
         <button onClick={searchHandler}>Search</button>
       </div>

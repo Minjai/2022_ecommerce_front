@@ -93,6 +93,7 @@ const CostumerForm = () => {
     <div className={cls['costumer']}>
       <div className={cls['costumer__title']}>
         <p>1 : 1 General Consultation</p>
+        <br />
       </div>
       <div className={cls['costumer__body']}>
         <p className={cls['costumer__description']}>

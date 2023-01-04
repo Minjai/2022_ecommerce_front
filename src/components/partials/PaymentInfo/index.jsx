@@ -1,5 +1,7 @@
 import { useGetPaymentInfoQuery } from '../../../store/query/paymentQuery';
 import { setAlert, setAlertContent } from '../../../store/slices/alert';
+import { useGetCurrencyQuery } from '../../../store/query/currency';
+import { mathShipping } from '../../../utils/mathCurrency';
 import { mathModalTotal } from '../../../utils/mathTotal';
 import { axiosInstance } from '../../../constants/axios';
 import CloseButton from '../../elements/UI/CloseButton';
@@ -9,7 +11,7 @@ import CheckoutPrice from '../Checkout/CheckoutPrice';
 import MobileOrderNav from '../MobileOrderNav';
 import cls from './payment.module.scss';
 import { useState } from 'react';
-import { mathShipping } from '../../../utils/mathCurrency';
+import { mainCurrency } from '../../../utils/mainCurrency';
 
 const PaymentInfo = () => {
   const [file, setFile] = useState(null);
@@ -54,6 +56,7 @@ const PaymentInfo = () => {
   });
 
   const { activeCurrency } = useSelector((state) => state.currency);
+  const { data: currencyData } = useGetCurrencyQuery();
 
   return (
     <div className={cls['payment']}>
@@ -75,24 +78,24 @@ const PaymentInfo = () => {
           </div>
           <div className={cls['payment-info__footer']}>
             <p>
-              • Please treanfer {activeCurrency?.currency_value}{' '}
+              <b>•</b> Please treanfer {activeCurrency?.currency_value}{' '}
               {mathModalTotal(
                 activeCurrency,
                 data?.order_items,
                 +mathShipping(data?.shipping_fee, +activeCurrency?.currency_price),
                 data?.point_used
               )?.toFixed(2)} {activeCurrency?.currency} {' '}
-              ( {activeCurrency?.currency_value}{' '}
+              ( {mainCurrency(currencyData?.results)?.currency_value}{' '}
               {mathModalTotal(
-                activeCurrency,
+                mainCurrency(currencyData?.results),
                 data?.order_items,
-                +mathShipping(data?.shipping_fee, +activeCurrency?.currency_price),
+                +mathShipping(data?.shipping_fee, +mainCurrency(currencyData?.results)?.currency_price),
                 data?.point_used
               )?.toFixed(2)}
               {" "}) to our bank account for payment
             </p>
             <p className={cls['active']}>
-              • Bank transfer fees are the buyer’s payments.
+              <b>•</b> Bank transfer fees are the buyer’s payments.
             </p>
             <p>
               Please upload a payment here.

@@ -33,9 +33,9 @@
         display: flex;
 
         span {
-          border: 1px solid rgba(128, 128, 128, 0.3);
+          border: 1px solid #dbe1e5;
           border-radius: 30px;
-          font-weight: 600;
+          font-weight: 500;
           font-size: 17px;
           border-radius: 5px;
           height: 34px;
@@ -69,7 +69,7 @@
             background: #fff;
             border-bottom-left-radius: 5px;
             border-bottom-right-radius: 5px;
-            border: 1px solid rgba(128, 128, 128, 0.3);
+            border: 1px solid #dbe1e5;
             box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
 
             li {

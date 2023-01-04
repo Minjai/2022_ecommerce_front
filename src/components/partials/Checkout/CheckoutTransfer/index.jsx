@@ -13,6 +13,8 @@ import { IoCheckmarkSharp } from 'react-icons/io5';
 import MobileOrderNav from '../../MobileOrderNav';
 import cls from './checkoutTransfer.module.scss';
 import { useNavigate } from 'react-router-dom';
+import { useGetCurrencyQuery } from '../../../../store/query/currency';
+import { mainCurrency } from '../../../../utils/mainCurrency';
 
 const CheckoutTransfer = () => {
   const { backBtnHandler } = useCheckoutButtons(
@@ -53,16 +55,19 @@ const CheckoutTransfer = () => {
 
   const createOrderItems = async (data, item) => {
     try {
-      const itemObject = item.pickedMethod.id > 0 ?   {
-        product: item.id,
-        quantity: item.pickedPackage.id,
-        order: data.id,
-        shipping_method: item.pickedMethod.id
-      } : {
-        product: item.id,
-        quantity: item.pickedPackage.id,
-        order: data.id,
-      }
+      const itemObject =
+        item.pickedMethod.id > 0
+          ? {
+              product: item.id,
+              quantity: item.pickedPackage.id,
+              order: data.id,
+              shipping_method: item.pickedMethod.id,
+            }
+          : {
+              product: item.id,
+              quantity: item.pickedPackage.id,
+              order: data.id,
+            };
 
       const response = await axiosInstance.post(
         'orders/order_items/',
@@ -98,17 +103,21 @@ const CheckoutTransfer = () => {
 
   const orderCreatedHandler = async (id) => {
     try {
-      const response = await axiosInstance.patch(`orders/orders/${id}/`, {
-        order_created: true
-      }, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      const response = await axiosInstance.patch(
+        `orders/orders/${id}/`,
+        {
+          order_created: true,
         },
-      })
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        }
+      );
     } catch (error) {
       console.log(error.response);
     }
-  }
+  };
 
   const createOrder = async () => {
     try {
@@ -119,7 +128,7 @@ const CheckoutTransfer = () => {
           medical_condition: conditionId,
           delivery_address: deliveryData.id,
           point_used: +points,
-          shipping_fee: +mathShipping(carts, 1)
+          shipping_fee: +mathShipping(carts, 1),
         },
         {
           headers: {
@@ -128,7 +137,7 @@ const CheckoutTransfer = () => {
         }
       );
 
-      await orderCreatedHandler(response?.data?.id)
+      await orderCreatedHandler(response?.data?.id);
 
       if (singleOrder?.length) {
         createOrderItems(response.data, singleOrder[0]);
@@ -163,6 +172,8 @@ const CheckoutTransfer = () => {
 
   const { activeCurrency } = useSelector((state) => state.currency);
 
+  const { data: currencyData } = useGetCurrencyQuery();
+
   return (
     <div className={cls['transfer']}>
       <h2 className={cls['transfer__title']}>
@@ -187,28 +198,28 @@ const CheckoutTransfer = () => {
       </div>
       <div className={cls['transfer__footer']}>
         <p>
-          • Please treanfer {activeCurrency?.currency_value} {'   '}
-          {mathTotal(
-            activeCurrency,
-            singleOrder?.length ? singleOrder : carts,
-            +mathShipping(carts, +activeCurrency?.currency_price),
-            points
-          )?.toFixed(2)} {activeCurrency.currency} {' '}
-          ( {activeCurrency?.currency_value}{' '}
+          <b>•</b> Please treanfer {activeCurrency?.currency_value} {'   '}
           {mathTotal(
             activeCurrency,
             singleOrder?.length ? singleOrder : carts,
             +mathShipping(carts, +activeCurrency?.currency_price),
             points
           )?.toFixed(2)}{' '}
+          {activeCurrency.currency} ( {mainCurrency(currencyData?.results)?.currency_value}{' '}
+          {mathTotal(
+            mainCurrency(currencyData?.results),
+            singleOrder?.length ? singleOrder : carts,
+            +mathShipping(carts, +mainCurrency(currencyData?.results)?.currency_price),
+            points
+          )?.toFixed(2)}{' '}
           ) to our bank account for payment
         </p>
         <p className={cls['active']}>
-          • Bank transfer fees are the buyer’s payments.
+          <b>•</b> Bank transfer fees are the buyer’s payments.
         </p>
         <p>
-          • Please upload the receipt or screenshot on the website “ My Page “ →
-          “Order History” page after deposit.
+          <b>•</b> Please upload the receipt or screenshot on the website “ My
+          Page “ → “Order History” page after deposit.
         </p>
       </div>
       <CheckoutButtons next={createOrder} prev={backBtnHandler} />

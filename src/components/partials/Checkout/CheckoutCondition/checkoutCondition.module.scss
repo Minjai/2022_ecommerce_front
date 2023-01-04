@@ -73,7 +73,7 @@
       outline: none;
       width: 100%;
       border-radius: 5px;
-      border: 1px solid rgba(128, 128, 128, 0.3);
+      border: 1px solid #e5e5e5;
       resize: none;
       font-size: 12px;
       margin-top: 10px;
@@ -136,7 +136,7 @@
       height: 30px;
       font-size: 11px;
       padding: 10px;
-      border: 1px solid rgba(128, 128, 128, 0.3);
+      border: 1px solid #e5e5e5;
       border-radius: 5px;
       outline: none;
       color: $app-gray-color;
@@ -236,7 +236,7 @@
         width: 49%;
         height: 30px;
         outline: none;
-        border: 1px solid rgba(128, 128, 128, 0.3);
+        border: 1px solid #e5e5e5;
         border-radius: 5px;
         color: $app-gray-color;
         font-size: 11px;
@@ -259,6 +259,10 @@
       display: inline-block;
       align-self: center;
 
+      span {
+        margin-right: 10px;
+      }
+
       &-btn {
         position: relative;
         display: inline-block;
@@ -267,15 +271,15 @@
         text-decoration: none;
         font-size: 14px;
         vertical-align: middle;
-        color: $app-gray-color;
+        color: #9a9a9a;
         text-align: center;
         border-radius: 4px;
-        background-color: $app-light-gray-color;
+        background-color: #f3f3f5;
         line-height: 22px;
         height: 40px;
-        padding: 10px 20px;
+        padding: 10px 30px;
         box-sizing: border-box;
-        border: none;
+        border: 1px solid #e5e5e5;
         margin: 0;
         transition: background-color 0.2s;
       }

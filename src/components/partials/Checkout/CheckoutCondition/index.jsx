@@ -1,4 +1,5 @@
 import { useCheckoutButtons } from '../../../../hooks/useCheckoutButtons';
+import { birthDateParser } from '../../../../utils/birthDateParser';
 import CheckoutButtons from '../../../elements/UI/CheckoutButtons';
 import { setConditionId } from '../../../../store/slices/order';
 import { axiosInstance } from '../../../../constants/axios';
@@ -59,7 +60,7 @@ const CheckoutCondition = () => {
         state.primary_phone_number ? state.primary_phone_number : 'none'
       );
       formData.append('drink', state.drink ? state.drink : 'No');
-      formData.append('date_of_birth', state.date_of_birth);
+      formData.append('date_of_birth', birthDateParser(state.date_of_birth));
       formData.append('prescription', state.prescription);
       formData.append('smoke', state.smoke ? state.smoke : 'No');
       formData.append('gender', state.gender);
@@ -234,6 +235,7 @@ const CheckoutCondition = () => {
                 Date of Birth: <sup>*</sup>
               </p>
               <input
+                maxLength={10}
                 value={state.date_of_birth}
                 onChange={(e) =>
                   setState((prev) => ({

@@ -10,6 +10,7 @@ import EmptyText from '../../elements/UI/EmptyText';
 import { AiOutlineDown } from 'react-icons/ai';
 import cls from './mobileOrder.module.scss';
 import { useState } from 'react';
+import { pointComma } from '../../../utils/pointComma';
 
 const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
   const { points, staticPoints } = useSelector((state) => state.points);
@@ -88,7 +89,7 @@ const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
             <h4>Apply Points</h4>
 
             <div>
-              <span>You have {staticPoints} points available.</span>
+              <span>You have {pointComma(staticPoints)} points available.</span>
               <input
                 value={discount}
                 onChange={(e) => setDiscount(e.target.value)}

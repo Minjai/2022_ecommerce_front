@@ -4,4 +4,5 @@ export const orderStatus = {
   PREPARING_FOR_DELIVERY: 'preparing_for_delivery',
   SHIPPED: 'shipped',
   DELIVIRED: 'delivered',
+  CANCELED: 'canceled'
 };

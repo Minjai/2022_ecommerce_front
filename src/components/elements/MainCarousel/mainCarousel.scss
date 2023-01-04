@@ -3,15 +3,7 @@
 
 .main-carousel {
   width: 100%;
-  height: 580px;
-
-  @media screen and (max-width: 1000px) {
-    height: 500px;
-  }
-
-  @media screen and (max-width: 700px) {
-    height: 425px;
-  }
+  height: 396px;
 }
 
 .mySwiper {
@@ -20,7 +12,7 @@
 
 .category-swiper{
   margin-top: 15px;
-  
+
   .swiper-button-next {
     color: gray;
     background-color: white;

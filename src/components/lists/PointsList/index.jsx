@@ -1,4 +1,5 @@
 import { dateParser } from '../../../utils/dateParser';
+import { pointComma } from '../../../utils/pointComma';
 import Pagination from '../../elements/Pagination';
 import cls from './pointsList.module.scss';
 
@@ -27,7 +28,7 @@ const PointsList = ({ data, options, points }) => {
                 <span>{dateParser(created_at)}</span>
                 <p>{description}</p>
               </div>
-              <b>+ {point} points</b>
+              <b>+ {pointComma(point)} points</b>
             </div>
           ))}
         </div>

@@ -21,7 +21,7 @@ const orderSlice = createSlice({
       };
     },
     setTrackingNumber: (state, action) => {
-      state.trackingNumber = action;
+      state.trackingNumber = action.payload;
     },
     setConditionId: (state, action) => {
       state.conditionId = action.payload;

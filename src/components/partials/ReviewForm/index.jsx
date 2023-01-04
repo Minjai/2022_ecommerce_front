@@ -2,11 +2,12 @@ import { useGetSingleProductQuery } from '../../../store/query/productQuery';
 import { setContent, setModal } from '../../../store/slices/modal';
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { axiosInstance } from '../../../constants/axios';
-import { modalPaths } from '../../../constants/paths';
-import { useParams } from 'react-router-dom';
+import { modalPaths, paths } from '../../../constants/paths';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import cls from './reviewForm.module.scss';
-import { useDispatch } from 'react-redux';
+import { setPickedReview } from '../../../store/slices/review';
 
 const ReviewForm = () => {
   const [comment, setComment] = useState('');
@@ -14,6 +15,8 @@ const ReviewForm = () => {
   const [stars, setStars] = useState(0);
 
   const { id } = useParams();
+  const { pickedReview } = useSelector((state) => state.review);
+  const { userInfo } = useSelector((state) => state.user);
 
   const { data: productData } = useGetSingleProductQuery({ id });
 
@@ -32,41 +35,85 @@ const ReviewForm = () => {
   }, [stars]);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const handleReviewModal = async () => {
-    try {
-      const response = await axiosInstance.post(
-        'reviews/reviews/',
-        {
-          product: productData.id,
-          comment,
-          parent: null,
-          stars,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    if (
+      pickedReview?.product?.id === +id &&
+      pickedReview?.user?.email === userInfo?.email
+    ) {
+      try {
+        const response = await axiosInstance.patch(
+          `reviews/reviews/${pickedReview?.id}/`,
+          {
+            product: productData.id,
+            comment,
+            parent: pickedReview?.parent,
+            stars,
           },
-        }
-      );
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            },
+          }
+        );
 
-      const setStars = await axiosInstance.post(
-        'reviews/star/',
-        {
-          star: stars,
-          product: productData.id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        const setStars = await axiosInstance.post(
+          'reviews/star/',
+          {
+            star: stars,
+            product: productData.id,
           },
-        }
-      );
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            },
+          }
+        );
 
-      dispatch(setModal(true));
-      dispatch(setContent(modalPaths.REVIEW));
-    } catch (error) {
-      console.log(error.response);
+        dispatch(setModal(true));
+        dispatch(setContent(modalPaths.REVIEW));
+        navigate(`/${paths.MY_PAGE}/${paths.USER_REVIEWS}`)
+        dispatch(setPickedReview({}))
+      } catch (error) {
+        console.log(error.response);
+      }
+    } else {
+      try {
+        const response = await axiosInstance.post(
+          'reviews/reviews/',
+          {
+            product: productData.id,
+            comment,
+            parent: null,
+            stars,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            },
+          }
+        );
+
+        const setStars = await axiosInstance.post(
+          'reviews/star/',
+          {
+            star: stars,
+            product: productData.id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            },
+          }
+        );
+
+        dispatch(setModal(true));
+        dispatch(setContent(modalPaths.REVIEW));
+        navigate(`/${paths.MY_PAGE}/${paths.USER_REVIEWS}`)
+      } catch (error) {
+        console.log(error.response);
+      }
     }
   };
 

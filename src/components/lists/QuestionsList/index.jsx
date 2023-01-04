@@ -31,7 +31,7 @@ const QuestionsList = ({ data, options, filterOptions }) => {
   return (
     <div className={cls['question']}>
       <div className={cls['question__header']}>
-        <h3>My questions</h3>
+        <h3>My Questions</h3>
         <div className={cls['question__header__child']}>
           <div>
             <span className={cls[isRange ? 'active' : '']}>
