@@ -23,7 +23,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./docker/nginx/prod:/etc/nginx/conf.d
+      - ./docker/nginx/dev:/etc/nginx/conf.d
     networks:
       - my-network
 
