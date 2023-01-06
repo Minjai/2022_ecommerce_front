@@ -5,10 +5,10 @@ import { setContent, setModal } from '../../../store/slices/modal';
 import { mathModalTotal } from '../../../utils/mathTotal';
 import { dateParser } from '../../../utils/dateParser';
 import { orderStatus } from '../../../constants/order';
-import { useDispatch, useSelector } from 'react-redux';
 import { modalPaths } from '../../../constants/paths';
 import EmptyText from '../../elements/UI/EmptyText';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import cls from './orderList.module.scss';
 
 const OrderList = ({ data }) => {
@@ -28,8 +28,6 @@ const OrderList = ({ data }) => {
   };
 
   const [cancelOrder] = useCancelOrderMutation();
-
-  const { activeCurrency } = useSelector((state) => state.currency);
 
   return (
     <div className={cls['order']}>

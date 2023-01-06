@@ -55,7 +55,6 @@ const PaymentInfo = () => {
     token: localStorage.getItem('accessToken'),
   });
 
-  const { activeCurrency } = useSelector((state) => state.currency);
   const { data: currencyData } = useGetCurrencyQuery();
 
   return (
