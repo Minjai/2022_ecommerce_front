@@ -2,6 +2,7 @@ import { useGetPaymentInfoQuery } from '../../../store/query/paymentQuery';
 import { setAlert, setAlertContent } from '../../../store/slices/alert';
 import { useGetCurrencyQuery } from '../../../store/query/currency';
 import { mathShipping } from '../../../utils/mathCurrency';
+import { mainCurrency } from '../../../utils/mainCurrency';
 import { mathModalTotal } from '../../../utils/mathTotal';
 import { axiosInstance } from '../../../constants/axios';
 import CloseButton from '../../elements/UI/CloseButton';
@@ -11,7 +12,6 @@ import CheckoutPrice from '../Checkout/CheckoutPrice';
 import MobileOrderNav from '../MobileOrderNav';
 import cls from './payment.module.scss';
 import { useState } from 'react';
-import { mainCurrency } from '../../../utils/mainCurrency';
 
 const PaymentInfo = () => {
   const [file, setFile] = useState(null);
@@ -78,13 +78,13 @@ const PaymentInfo = () => {
           </div>
           <div className={cls['payment-info__footer']}>
             <p>
-              <b>•</b> Please treanfer {activeCurrency?.currency_value}{' '}
+              <b>•</b> Please treanfer {data?.currency?.currency_value}{' '}
               {mathModalTotal(
-                activeCurrency,
+                data?.currency,
                 data?.order_items,
-                +mathShipping(data?.shipping_fee, +activeCurrency?.currency_price),
+                +mathShipping(data?.shipping_fee, +data?.currency?.currency_price),
                 data?.point_used
-              )?.toFixed(2)} {activeCurrency?.currency} {' '}
+              )?.toFixed(2)} {data?.currency?.currency} {' '}
               ( {mainCurrency(currencyData?.results)?.currency_value}{' '}
               {mathModalTotal(
                 mainCurrency(currencyData?.results),

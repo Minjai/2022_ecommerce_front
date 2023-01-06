@@ -5,7 +5,7 @@ const CategoryButtons = ({ data, picker }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className={cls['category-buttons']}>
+    <div id={cls[data?.length && window.innerWidth < 500 ? 'category-scroll' : '']} className={cls['category-buttons']}>
       {data?.map(({ title, isActive, id }) => (
         <div
           onClick={() => dispatch(picker({ title, id }))}

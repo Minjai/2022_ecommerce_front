@@ -3,6 +3,7 @@ import { setContent, setModal } from '../../../store/slices/modal';
 import { setActiveBurger } from '../../../store/slices/burger';
 import { modalPaths, paths } from '../../../constants/paths';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { BsCart3 } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import cls from './mobileHeader.module.scss';
@@ -59,7 +60,7 @@ const MobileHeader = () => {
             </li>
             <li>
               <span onClick={() => navigate(`/${paths.CART}`)}>
-                <AiOutlineShoppingCart />
+                <BsCart3 />
               </span>
               {carts?.length > 0 && <b>{carts?.length}</b>}
             </li>

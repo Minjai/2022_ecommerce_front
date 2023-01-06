@@ -108,6 +108,25 @@
       font-weight: 600;
       top: 30%;
     }
+
+    @media screen and (max-width: 450px) {
+      margin-right: 10px;
+      width: 25px;
+      height: 25px;
+
+      &::before {
+        right: 7px;
+        width: 11px;
+        bottom: 50%;
+        height: 1.5px;
+      }
+  
+      &::after {
+        font-size: 10px;
+        right: 5px;
+        top: 27.6%;
+      }
+    }
   }
 
   .swiper-button-prev {
@@ -137,6 +156,25 @@
       left: 10px;
       font-weight: 600;
       top: 30%;
+    }
+
+    @media screen and (max-width: 450px) {
+      margin-left: 10px;
+      width: 25px;
+      height: 25px;
+
+      &::before {
+        left: 7px;
+        width: 11px;
+        bottom: 50%;
+        height: 1.5px;
+      }
+  
+      &::after {
+        font-size: 10px;
+        left: 5px;
+        top: 27.6%;
+      }
     }
   }
 

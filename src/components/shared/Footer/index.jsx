@@ -23,7 +23,7 @@ const Footer = () => {
         <div className={cls['footer-upper']}>
           <div className={cls['footer-upper__logo']}>
             <Logo />
-            {<p>{data?.results[0]?.description}</p>}
+            {<p className={cls['footer-line']}>{data?.results[0]?.description}</p>}
             <p>Email: {contactData?.results[0]?.email}</p>
           </div>
           <div className={cls['footer-upper__links']}>

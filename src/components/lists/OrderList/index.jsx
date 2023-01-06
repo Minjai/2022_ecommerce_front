@@ -45,13 +45,13 @@ const OrderList = ({ data }) => {
                 <span>
                   <p>Total</p>
                   <p>
-                    {activeCurrency?.currency_value}{' '}
+                    {elem?.currency?.currency_value}{' '}
                     {mathModalTotal(
-                      activeCurrency,
+                      elem.currency,
                       elem?.order_items,
                       +mathShipping(
                         elem?.shipping_fee,
-                        +activeCurrency?.currency_price
+                        +elem?.currency?.currency_price
                       ),
                       elem?.point_used
                     )?.toFixed(2)}
@@ -104,10 +104,10 @@ const OrderList = ({ data }) => {
                         <p>{item?.product?.product_name}</p>
                         <span>{item?.quantity?.package}</span>
                         <p>
-                          {activeCurrency?.currency_value}{' '}
+                          {elem?.currency?.currency_value}{' '}
                           {mathCurrency(
                             item?.quantity?.selling_price,
-                            activeCurrency?.currency_price
+                            elem?.currency?.currency_price
                           )}
                         </p>
                         {elem.status === 'sent' && (

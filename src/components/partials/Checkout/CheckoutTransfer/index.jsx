@@ -30,6 +30,7 @@ const CheckoutTransfer = () => {
   const { singleOrder } = useSelector((state) => state.order);
   const { userInfo } = useSelector((state) => state.user);
   const { carts } = useSelector((state) => state.cart);
+  const { activeCurrency } = useSelector((state) => state.currency);
 
   const setOrderAlarm = async () => {
     try {
@@ -129,6 +130,7 @@ const CheckoutTransfer = () => {
           delivery_address: deliveryData.id,
           point_used: +points,
           shipping_fee: +mathShipping(carts, 1),
+          currency: activeCurrency?.id
         },
         {
           headers: {
@@ -169,8 +171,6 @@ const CheckoutTransfer = () => {
     userId: userInfo.id,
     token: localStorage.getItem('accessToken'),
   });
-
-  const { activeCurrency } = useSelector((state) => state.currency);
 
   const { data: currencyData } = useGetCurrencyQuery();
 

@@ -33,7 +33,7 @@ const ReviewItem = ({ review }) => {
         </div>
         <h4>{product?.product_name}</h4>
         <span>
-          {nameClose(user?.username)} {dateParser(created_at)}
+          <b>{nameClose(user?.username)}</b> {dateParser(created_at)}
         </span>
         <p>{comment}</p>
       </div>

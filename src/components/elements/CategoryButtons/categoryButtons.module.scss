@@ -5,6 +5,12 @@
   @include category-button;
 }
 
+#category-scroll{
+  overflow-x: scroll;
+  overflow-y: hidden;
+  flex-wrap: nowrap;
+}
+
 #active {
   border: none;
   background: $app-main-color;

@@ -31,11 +31,24 @@
       width: 400px;
 
       >p {
-        color: $app-dark-color;
+        color: #9A9A9C;
         font-size: 12px;
         line-height: 1.5;
         font-weight: 500;
         margin-top: 10px;
+
+        @media screen and (max-width: 450px){
+          font-size: 15px;
+          margin-top: 5px;
+        }
+      }
+      
+      @media screen and (max-width: 450px){
+        .footer-line{
+          margin-top: 15px;
+          padding-top: 5px;
+          border-top: 1px solid #DCDCDD;
+        }
       }
 
       div {
@@ -95,8 +108,12 @@
 
       h3 {
         font-size: 12px;
-        color: $app-dark-color;
+        color: #767678;
         margin: 0;
+
+        @media screen and (max-width: 720px) {
+          font-size: 14px;
+        }
       }
 
       ul:nth-child(1) {
@@ -115,8 +132,8 @@
           span {
             text-decoration: none;
             font-size: 13px;
-            color: $app-dark-color;
-            font-weight: 500;
+            color: #767678;
+            font-weight: 600;
 
             @media screen and (max-width: 720px) {
               font-size: 14px;
@@ -142,14 +159,16 @@
     text-align: center;
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 1px solid #D0D0D0;
+    border-top: 1px solid #DCDCDD;
 
     @media screen and (max-width: 600px) {
       text-align: left;
+      margin-top: 10px;
+      padding-top: 5px;
     }
 
     p {
-      color: $app-dark-color;
+      color: #9A9A9C;
       line-height: 1.5;
       font-weight: 500;
       font-size: 12px;
@@ -157,9 +176,20 @@
     }
 
     span {
-      color: $app-dark-color;
+      color: #9A9A9C;
       font-weight: 500;
       font-size: 12px;
+    }
+
+    @media screen and (max-width: 450px) {
+      p,
+      span{
+        font-size: 15px;
+      }
+
+      p{
+        margin-bottom: 5px;
+      }
     }
   }
 }

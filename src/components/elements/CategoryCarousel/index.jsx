@@ -31,14 +31,10 @@ const CategoryCarousel = ({ data, path, hasFeatures = false }) => {
       className={`category-swiper`}
       breakpoints={{
         300: {
-          slidesPerView: 2.5,
-          spaceBetween: 10,
-        },
-        350: {
           slidesPerView: 3,
           spaceBetween: 10,
         },
-        400: {
+        380: {
           slidesPerView: 3.5,
           spaceBetween: 10,
         },

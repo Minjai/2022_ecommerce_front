@@ -38,10 +38,10 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
                   <p>{product.product_name}</p>
                   <span>{quantity?.package}</span>
                   <p>
-                    {activeCurrency?.currency_value}{' '}
+                    {data?.currency?.currency_value}{' '}
                     {mathCurrency(
                       quantity?.selling_price,
-                      activeCurrency?.currency_price
+                      data?.currency?.currency_price
                     )}
                   </p>
                 </div>
@@ -57,19 +57,19 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
           <p>
             Sub total:{' '}
             <span>
-              {activeCurrency?.currency_value}{' '}
-              {mathSubTotal(activeCurrency, data?.order_items)?.toFixed(2)}
+              {data?.currency?.currency_value}{' '}
+              {mathSubTotal(data?.currency, data?.order_items)?.toFixed(2)}
             </span>
           </p>
           <p>
             Shipping Fee:{' '}
             <span>
               {data?.shipping_fee > 0
-                ? `${activeCurrency?.currency_value} ${mathShipping(
+                ? `${data?.currency?.currency_value} ${mathShipping(
                     data?.shipping_fee,
-                    +activeCurrency?.currency_price
+                    +data?.currency?.currency_price
                   )?.toFixed(2)}`
-                : `${activeCurrency?.currency_value} 0`}
+                : `${data.currency?.currency_value} 0`}
             </span>
           </p>
         </div>
@@ -78,10 +78,10 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
             <p>
               Discount:{' '}
               <span>
-                - {activeCurrency?.currency_value}{' '}
+                - {data?.currency?.currency_value}{' '}
                 {mathCurrency(
                   data?.point_used / 1000,
-                  activeCurrency?.currency_price
+                  data?.currency?.currency_price
                 )}
               </span>
             </p>
@@ -91,11 +91,11 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
           <p>
             Total:{' '}
             <span>
-              {activeCurrency?.currency_value}{' '}
+              {data?.currency?.currency_value}{' '}
               {mathModalTotal(
-                activeCurrency,
+                data?.currency,
                 data?.order_items,
-                +mathShipping(data?.shipping_fee, +activeCurrency?.currency_price),
+                +mathShipping(data?.shipping_fee, +data?.currency?.currency_price),
                 data?.point_used
               )?.toFixed(2)}
             </span>
