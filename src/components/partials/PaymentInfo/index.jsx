@@ -67,13 +67,13 @@ const PaymentInfo = () => {
           {window.innerWidth < 950 && <MobileOrderNav isOrder={true} />}
           <div className={cls['payment-info__body']}>
             <h3>Payment Information</h3>
-            <p>Account Name: {paymentData?.results[0].account_name}</p>
-            <p>Account Number: {paymentData?.results[0].account_number}</p>
-            <p>Account Address: {paymentData?.results[0].account_address}</p>
-            <p>Swift Code: {paymentData?.results[0].swift_code}</p>
-            <p>Bank Name: {paymentData?.results[0].bank_name}</p>
-            <p>Bank Address: {paymentData?.results[0].bank_address}</p>
-            <p>Country / Region: {paymentData?.results[0].county_region}</p>
+            <p>Account Name: {paymentData?.results[0]?.account_name}</p>
+            <p>Account Number: {paymentData?.results[0]?.account_number}</p>
+            <p>Account Address: {paymentData?.results[0]?.account_address}</p>
+            <p>Swift Code: {paymentData?.results[0]?.swift_code}</p>
+            <p>Bank Name: {paymentData?.results[0]?.bank_name}</p>
+            <p>Bank Address: {paymentData?.results[0]?.bank_address}</p>
+            <p>Country / Region: {paymentData?.results[0]?.county_region}</p>
           </div>
           <div className={cls['payment-info__footer']}>
             <p>

@@ -7,7 +7,7 @@
   bottom: -1px;
   width: 111%;
   height: 1px;
-  border-bottom: 1px solid #80808057;
+  border-bottom: 1px solid #e6e6e6;
 
   @media screen and (max-width: 700px) {
     width: 105.3%;
@@ -27,7 +27,7 @@
     top: -1px;
     width: 111%;
     height: 1px;
-    border-top: 1px solid #80808057;
+    border-top: 1px solid #e6e6e6;
 
     @media screen and (max-width: 700px) {
       width: 105.3%;
@@ -42,7 +42,7 @@
     bottom: -1px;
     width: 111%;
     height: 1px;
-    border-top: 1px solid #80808057;
+    border-top: 1px solid #e6e6e6;
 
     @media screen and (max-width: 700px) {
       width: 105.3%;
@@ -133,7 +133,7 @@
             height: 22px;
             overflow: hidden;
           }
-          
+
           b {
             font-weight: 400;
             color: $app-gray-color;
@@ -141,64 +141,64 @@
         }
 
         @media screen and (max-width: 750px) {
-          img{
+          img {
             width: 15%;
           }
 
-          div{
+          div {
             width: 83%;
 
-            p{
+            p {
               width: 350px;
             }
           }
         }
 
         @media screen and (max-width: 650px) {
-          img{
+          img {
             width: 19%;
           }
 
-          div{
+          div {
             width: 78%;
           }
         }
 
         @media screen and (max-width: 600px) {
-          img{
+          img {
             width: 17%;
             height: 66px;
           }
 
-          div{
+          div {
             width: 80%;
 
-            p{
+            p {
               width: 250px;
             }
           }
         }
 
         @media screen and (max-width: 500px) {
-          img{
+          img {
             width: 20%;
           }
 
-          div{
+          div {
             width: 77%;
 
-            p{
+            p {
               width: 150px;
             }
           }
         }
 
         @media screen and (max-width: 450px) {
-          img{
+          img {
             width: 22%;
           }
 
-          div{
+          div {
             width: 75%;
           }
         }
@@ -225,7 +225,7 @@
         width: 50%;
         height: 54px;
         position: relative;
-        border: 1px solid rgba(128, 128, 128, 0.3);
+        border: 1px solid #e6e6e6;
         border-radius: 5px;
         background: #fff;
         display: flex;
@@ -277,11 +277,11 @@
         }
 
         @media screen and (max-width: 450px) {
-          input{
+          input {
             width: 70%;
           }
 
-          button{
+          button {
             width: 30%;
           }
         }
@@ -292,8 +292,8 @@
       position: relative;
       padding: 20px 0;
 
-      .discount{
-        span{
+      .discount {
+        span {
           color: $app-main-color;
         }
       }

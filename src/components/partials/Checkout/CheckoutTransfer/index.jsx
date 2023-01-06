@@ -189,13 +189,13 @@ const CheckoutTransfer = () => {
       {window.innerWidth < 950 && <MobileOrderNav applyPoints={true} />}
       <div className={cls['transfer__body']}>
         <h3>Payment Information</h3>
-        <p>Account Name: {data?.results[0].account_name}</p>
-        <p>Account Number: {data?.results[0].account_number}</p>
-        <p>Account Address: {data?.results[0].account_address}</p>
-        <p>Swift Code: {data?.results[0].swift_code}</p>
-        <p>Bank Name: {data?.results[0].bank_name}</p>
-        <p>Bank Address: {data?.results[0].bank_address}</p>
-        <p>Country / Region: {data?.results[0].county_region}</p>
+        <p>Account Name: {data?.results[0]?.account_name}</p>
+        <p>Account Number: {data?.results[0]?.account_number}</p>
+        <p>Account Address: {data?.results[0]?.account_address}</p>
+        <p>Swift Code: {data?.results[0]?.swift_code}</p>
+        <p>Bank Name: {data?.results[0]?.bank_name}</p>
+        <p>Bank Address: {data?.results[0]?.bank_address}</p>
+        <p>Country / Region: {data?.results[0]?.county_region}</p>
       </div>
       <div className={cls['transfer__footer']}>
         <p>
