@@ -131,7 +131,10 @@ const CheckoutTransfer = () => {
           point_used: +points,
           shipping_fee: +mathShipping(carts, 1),
           currency: activeCurrency?.id,
-          convertor_point_value: mathCurrency(points / 1000, activeCurrency?.currency_price)
+          convertor_point_value: mathCurrency(
+            points / 1000,
+            activeCurrency?.currency_price
+          ),
         },
         {
           headers: {
@@ -139,8 +142,6 @@ const CheckoutTransfer = () => {
           },
         }
       );
-
-      await orderCreatedHandler(response?.data?.id);
 
       if (singleOrder?.length) {
         createOrderItems(response.data, singleOrder[0]);
@@ -153,6 +154,8 @@ const CheckoutTransfer = () => {
           carts.forEach((item) => createOrderItems(response.data, item));
         }
       }
+
+      await orderCreatedHandler(response?.data?.id);
 
       navigate(`/${paths.MY_PAGE}/${paths.ORDER_HISTORY}`);
       decrementUserPoints();
@@ -206,11 +209,15 @@ const CheckoutTransfer = () => {
             +mathShipping(carts, +activeCurrency?.currency_price),
             points
           )?.toFixed(2)}{' '}
-          {activeCurrency.currency} ( {mainCurrency(currencyData?.results)?.currency_value}{' '}
+          {activeCurrency.currency} ({' '}
+          {mainCurrency(currencyData?.results)?.currency_value}{' '}
           {mathTotal(
             mainCurrency(currencyData?.results),
             singleOrder?.length ? singleOrder : carts,
-            +mathShipping(carts, +mainCurrency(currencyData?.results)?.currency_price),
+            +mathShipping(
+              carts,
+              +mainCurrency(currencyData?.results)?.currency_price
+            ),
             points
           )?.toFixed(2)}{' '}
           ) to our bank account for payment

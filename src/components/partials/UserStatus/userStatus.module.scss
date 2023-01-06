@@ -100,7 +100,7 @@
     &__body {
       margin-top: 10px;
       padding-top: 40px;
-      border-top: 1px solid #dbe1e5;
+      border-top: 1px solid #E6E6E6;
       position: relative;
       display: flex;
 
@@ -140,8 +140,10 @@
         svg {
           align-self: center;
           margin: 0 20px 0 17px;
-          font-size: 17px;
-          color: $app-gray-color;
+          flex-basis: 17px;
+          flex-grow: 0;
+          flex-shrink: 0;
+          color: #65707D;
         }
 
         @media screen and (max-width: 600px) {
@@ -153,21 +155,21 @@
 
           svg {
             margin: 0 10px;
-            font-size: 15px;
+            flex-basis: 15px;
             width: 20px;
           }
         }
 
         @media screen and (max-width: 500px) {
           svg {
-            width: 25px;
+            flex-basis: 25px;
           }
         }
 
         @media screen and (max-width: 460px) {
           svg {
             margin: 0;
-            width: 20px;
+            flex-basis: 12px;
           }
         }
       }
