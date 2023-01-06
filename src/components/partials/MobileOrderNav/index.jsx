@@ -6,11 +6,11 @@ import {
 } from '../../../utils/mathTotal';
 import { mathCurrency, mathShipping } from '../../../utils/mathCurrency';
 import { useDispatch, useSelector } from 'react-redux';
+import { pointComma } from '../../../utils/pointComma';
 import EmptyText from '../../elements/UI/EmptyText';
 import { AiOutlineDown } from 'react-icons/ai';
 import cls from './mobileOrder.module.scss';
 import { useState } from 'react';
-import { pointComma } from '../../../utils/pointComma';
 
 const MobileOrderNav = ({ applyPoints = false, isOrder = false }) => {
   const { points, staticPoints } = useSelector((state) => state.points);

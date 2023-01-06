@@ -78,7 +78,7 @@
     }
 
     span {
-      font-size: 19px;
+      font-size: 22px;
       display: flex;
       align-items: center;
       color: $app-dark-color;
@@ -136,7 +136,11 @@
 
           b {
             font-weight: 400;
-            color: $app-gray-color;
+            color: #272b30;
+
+            @media screen and (max-width: 450px) {
+              font-size: 13px;
+            }
           }
         }
 

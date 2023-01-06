@@ -6,7 +6,7 @@ import ContactUs from '../components/partials/ContactUs';
 const AboutUs = () => {
   return (
     <PageWrapper>
-      <div className="container">
+      <div className="container cart-wrapper">
         <PageTitle>About Us</PageTitle>
         <AboutUsInfo />
         <ContactUs/>

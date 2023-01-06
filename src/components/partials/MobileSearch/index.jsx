@@ -41,11 +41,30 @@ const MobileSearch = () => {
   const addCartHandler = (e, item) => {
     e.stopPropagation();
 
-    dispatch(addCart({ ...item, pickedPackage: item?.prices[0] }));
+    dispatch(
+      addCart({
+        ...item,
+        pickedPackage: item?.prices[0],
+        pickedMethod:
+          item?.shipping_method.length > 0
+            ? item?.shipping_method[0]
+            : { id: 0, price: 0 },
+      })
+    );
     const cart = JSON.parse(localStorage.getItem('shop-cart'));
     localStorage.setItem(
       'shop-cart',
-      JSON.stringify([...cart, { ...item, pickedPackage: item?.prices[0] }])
+      JSON.stringify([
+        ...cart,
+        {
+          ...item,
+          pickedPackage: item?.prices[0],
+          pickedMethod:
+            item?.shipping_method.length > 0
+              ? item?.shipping_method[0]
+              : { id: 0, price: 0 },
+        },
+      ])
     );
   };
 

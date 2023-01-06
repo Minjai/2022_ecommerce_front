@@ -153,6 +153,8 @@
     cursor: pointer;
 
     @media screen and (max-width: 600px) {
+      padding: 15px 5px;
+
       &::before {
         content: '';
         position: absolute;

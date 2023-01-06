@@ -1,10 +1,12 @@
 import { useGetPaymentInfoQuery } from '../../../../store/query/paymentQuery';
 import { useGetUserPointsQuery } from '../../../../store/query/pointsQuery';
+import { mathCurrency, mathShipping } from '../../../../utils/mathCurrency';
 import { setAlert, setAlertContent } from '../../../../store/slices/alert';
 import { useCheckoutButtons } from '../../../../hooks/useCheckoutButtons';
-import CheckoutButtons from '../../../elements/UI/CheckoutButtons';
+import { useGetCurrencyQuery } from '../../../../store/query/currency';
 import { setDiscountPoints } from '../../../../store/slices/points';
-import { mathCurrency, mathShipping } from '../../../../utils/mathCurrency';
+import CheckoutButtons from '../../../elements/UI/CheckoutButtons';
+import { mainCurrency } from '../../../../utils/mainCurrency';
 import { axiosInstance } from '../../../../constants/axios';
 import { mathTotal } from '../../../../utils/mathTotal';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,8 +15,6 @@ import { IoCheckmarkSharp } from 'react-icons/io5';
 import MobileOrderNav from '../../MobileOrderNav';
 import cls from './checkoutTransfer.module.scss';
 import { useNavigate } from 'react-router-dom';
-import { useGetCurrencyQuery } from '../../../../store/query/currency';
-import { mainCurrency } from '../../../../utils/mainCurrency';
 
 const CheckoutTransfer = () => {
   const { backBtnHandler } = useCheckoutButtons(
