@@ -1,5 +1,5 @@
 import { mathCurrency } from '../../../utils/mathCurrency';
-import { HiOutlineArrowRight } from 'react-icons/hi';
+import { BsArrowRightShort } from 'react-icons/bs';
 import cls from './packageList.module.scss';
 import { useSelector } from 'react-redux';
 
@@ -41,7 +41,7 @@ const PackageList = ({ list, options }) => {
                   )}
                 </span>
               </p>
-              <HiOutlineArrowRight />
+              <BsArrowRightShort />
               <b>
                 {activeCurrency?.currency_value}{' '}
                 {mathCurrency(

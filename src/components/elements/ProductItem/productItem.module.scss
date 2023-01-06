@@ -71,6 +71,10 @@
       overflow: hidden;
       color: $app-dark-color;
       font-weight: 600;
+
+      @media screen and (max-width: 450px) {
+        font-size: 13px;
+      }
     }
 
     &__price {
@@ -118,6 +122,10 @@
 
       @media screen and (max-width: 600px) {
         margin-top: 15px;
+
+        span{
+          font-size: 13px;
+        }
 
         button {
           font-size: 12px;

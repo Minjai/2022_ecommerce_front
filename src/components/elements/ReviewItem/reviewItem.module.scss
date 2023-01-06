@@ -97,6 +97,12 @@
         font-weight: 500;
       }
 
+      @media screen and (max-width: 800px) {
+        div{
+          font-size: 12px;
+        }
+      }
+
       @media screen and (max-width: 500px) {
         span {
           font-size: 12px;

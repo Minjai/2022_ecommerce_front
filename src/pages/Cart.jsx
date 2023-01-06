@@ -8,7 +8,7 @@ const Cart = () => {
 
   return (
     <PageWrapper>
-      <div className="container w-950">
+      <div className="container w-950 cart-wrapper">
         <Description cartTitle={true}>
           Items In Your Cart ( {carts.length} items )
         </Description>

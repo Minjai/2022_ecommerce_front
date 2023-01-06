@@ -25,7 +25,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "GENERATE_SOURCEMAP=false && react-scripts start",
+    "start": "react-scripts start",
     "build:production": "env-cmd -f .env npm run build",
     "build": "react-scripts build",
     "test": "react-scripts test",

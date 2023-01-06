@@ -5,10 +5,10 @@ import {
 } from '../../../../utils/mathTotal';
 import { mathCurrency, mathShipping } from '../../../../utils/mathCurrency';
 import { useGetCurrencyQuery } from '../../../../store/query/currency';
+import { mainCurrency } from '../../../../utils/mainCurrency';
 import EmptyText from '../../../elements/UI/EmptyText';
 import cls from './checkoutPrice.module.scss';
 import { useSelector } from 'react-redux';
-import { mainCurrency } from '../../../../utils/mainCurrency';
 
 const CheckoutPrice = ({ data, isOrder = false }) => {
   const { points } = useSelector((state) => state.points);

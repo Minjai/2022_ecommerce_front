@@ -4,7 +4,7 @@ import { setAlert, setAlertContent } from '../../../../store/slices/alert';
 import { useCheckoutButtons } from '../../../../hooks/useCheckoutButtons';
 import CheckoutButtons from '../../../elements/UI/CheckoutButtons';
 import { setDiscountPoints } from '../../../../store/slices/points';
-import { mathShipping } from '../../../../utils/mathCurrency';
+import { mathCurrency, mathShipping } from '../../../../utils/mathCurrency';
 import { axiosInstance } from '../../../../constants/axios';
 import { mathTotal } from '../../../../utils/mathTotal';
 import { useDispatch, useSelector } from 'react-redux';
@@ -130,7 +130,8 @@ const CheckoutTransfer = () => {
           delivery_address: deliveryData.id,
           point_used: +points,
           shipping_fee: +mathShipping(carts, 1),
-          currency: activeCurrency?.id
+          currency: activeCurrency?.id,
+          convertor_point_value: mathCurrency(points / 1000, activeCurrency?.currency_price)
         },
         {
           headers: {
