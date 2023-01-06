@@ -12,7 +12,7 @@ WORKDIR /app
 ENV NODE_OPTIONS=--max-old-space-size=8192
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
-RUN yarn build
+RUN yarn build:production
 
 # Production image, copy all the files and run next
 FROM node:16-alpine AS runner
