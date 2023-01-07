@@ -70,6 +70,18 @@ body {
   }
 }
 
+.review-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span{
+    color: $app-main-color;
+    font-size: 15px;
+    font-weight: 600;
+  }
+}
+
 .cart-wrapper{
   margin-top: 20px;
 }

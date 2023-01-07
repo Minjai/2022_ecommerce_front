@@ -65,7 +65,10 @@ const Reviews = () => {
           <Loader />
         ) : data?.results.length > 0 ? (
           <>
-            <Description>Reviews Library</Description>
+            <div className='review-title'>
+              <Description>Reviews Library</Description>
+              <span>Total {data?.results?.length} Reviews</span>
+            </div>
             <ReviewsList reviews={data?.results} />
             {paginationOptions.pageCount > paginationOptions.limit && (
               <Pagination options={paginationOptions} />
