@@ -73,7 +73,7 @@ const ConsultationList = ({ bottom = false, data, options }) => {
               </div>
               <div className={cls['consultation-list__child__right']}>
                 <span>{item.children.length} replies</span>
-                <p>{nameClose(item.user.username)}</p>
+                <p>{nameClose(item.user.email)}</p>
                 <p>{dateParser(item.created_at)}</p>
               </div>
             </div>

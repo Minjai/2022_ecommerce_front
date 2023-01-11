@@ -58,7 +58,7 @@ const UserStatus = () => {
   return (
     <div className={cls['user']}>
       <div className={cls['user-board']}>
-        <h3>Hello {userInfo.username}</h3>
+        <h3>Hello {userInfo.email}</h3>
         <div className={cls['user-board__body']}>
           <div
             onClick={() =>

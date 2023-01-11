@@ -135,6 +135,12 @@ const CheckoutTransfer = () => {
             points / 1000,
             activeCurrency?.currency_price
           ),
+          total_sum: mathTotal(
+            activeCurrency,
+            singleOrder?.length ? singleOrder : carts,
+            0,
+            0
+          ),
         },
         {
           headers: {
@@ -175,6 +181,10 @@ const CheckoutTransfer = () => {
     userId: userInfo.id,
     token: localStorage.getItem('accessToken'),
   });
+
+  console.log(
+    mathTotal(activeCurrency, singleOrder?.length ? singleOrder : carts, 0, 0)
+  );
 
   const { data: currencyData } = useGetCurrencyQuery();
 

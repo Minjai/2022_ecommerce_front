@@ -1,6 +1,5 @@
 import {
   removeRecommendedCategory,
-  setCategoryData,
   setInitRecommendedCategories,
 } from '../../../store/slices/category';
 import { useGetSingleCategoryProductsQuery } from '../../../store/query/productQuery';
@@ -12,11 +11,8 @@ import Description from '../../elements/UI/Description';
 import { useDispatch, useSelector } from 'react-redux';
 import EmptyText from '../../elements/UI/EmptyText';
 import ProductList from '../../lists/ProductList';
-import { paths } from '../../../constants/paths';
-import { useNavigate } from 'react-router-dom';
 import cls from './recommend.module.scss';
 import { useEffect } from 'react';
-import { AiOutlineRight } from 'react-icons/ai';
 
 const Recommendations = () => {
   const { recommendedCategories, recommendedId } = useSelector(
@@ -29,14 +25,7 @@ const Recommendations = () => {
     (item) => item.title === 'Recommended'
   );
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const navigateHandler = () => {
-    window.scrollTo(window.scrollX, 0);
-    navigate(`/${paths.CATEGORY}`);
-    dispatch(setCategoryData(recommendedCategory))
-  };
 
   const { data: recommendedProduct, isLoading } =
     useGetSingleCategoryProductsQuery({
@@ -53,10 +42,7 @@ const Recommendations = () => {
 
   return (
     <div className={cls['recommend']}>
-      <div className={cls['recommend__header']}>
-        <Description>Recommendations</Description>
-        <span onClick={navigateHandler}>View More <AiOutlineRight/></span>
-      </div>
+      <Description>Recommendations</Description>
       <CategoryButtons
         picker={removeRecommendedCategory}
         data={recommendedCategories}

@@ -78,7 +78,7 @@ const Footer = () => {
         </div>
         <div className={cls['footer-lower']}>
         {<p>{data?.results[0]?.description}</p>}
-          <span>Copyright C 2022 test. All Rights Reserved</span>
+          <span>Copyright C 2023 test. All Rights Reserved</span>
         </div>
       </div>
     </footer>

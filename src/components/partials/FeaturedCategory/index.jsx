@@ -5,6 +5,7 @@ import {
 import CategorySkeleton from '../../skeletons/CategorySkeleton';
 import CategoryCarousel from '../../elements/CategoryCarousel';
 import Description from '../../elements/UI/Description';
+import EmptyText from '../../elements/UI/EmptyText';
 import { paths } from '../../../constants/paths';
 import './featuredCategory.scss';
 
@@ -25,11 +26,13 @@ const FeaturedCategory = () => {
       {isLoading ? (
         <CategorySkeleton />
       ) : (
-        <CategoryCarousel
-          pickedCategories={[]}
-          path={`/${paths.CATEGORY}`}
-          data={featuredData}
-        />
+        featuredData ? (
+          <CategoryCarousel
+            pickedCategories={[]}
+            path={`/${paths.CATEGORY}`}
+            data={featuredData}
+          />
+        ) : <EmptyText text={'featured'}/>
       )}
     </div>
   );
