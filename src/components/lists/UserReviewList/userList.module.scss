@@ -154,6 +154,7 @@
     border-top: 1px solid rgba(128, 128, 128, 0.3);
 
     &__child {
+      cursor: pointer;
       height: 84px;
       padding: 10px 15px;
       display: flex;
@@ -188,6 +189,8 @@
           font-weight: 500;
           color: $app-dark-color;
           line-height: 1.5;
+          height: 22px;
+          overflow: hidden;
           margin: 0 0 0 15px;
         }
 

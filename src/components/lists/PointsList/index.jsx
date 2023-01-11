@@ -9,7 +9,7 @@ const PointsList = ({ data, options, points }) => {
       <div className={cls['user-width__header']}>
         <h3>Usable Points</h3>
         <span>
-          {points} points
+          {pointComma(points)} points
         </span>
       </div>
       <div className={cls['user-width__body']}>

@@ -67,7 +67,7 @@ const ConsultationList = ({ bottom = false, data, options }) => {
                   />
                 )}
                 <p>
-                  {item.user.email === userInfo?.email? null : <CiLock />}
+                  {item.user.email === userInfo?.email ? null : <CiLock />}
                   <b>I have a question</b>
                 </p>
               </div>

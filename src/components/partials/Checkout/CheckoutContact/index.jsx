@@ -4,12 +4,12 @@ import { useGetCountriesQuery } from '../../../../store/query/country';
 import CheckoutButtons from '../../../elements/UI/CheckoutButtons';
 import { setDelivery } from '../../../../store/slices/delivery';
 import { axiosInstance } from '../../../../constants/axios';
+import { pointComma } from '../../../../utils/pointComma';
 import { useDispatch, useSelector } from 'react-redux';
 import { paths } from '../../../../constants/paths';
 import cls from './checkoutContact.module.scss';
 import { AiOutlineDown } from 'react-icons/ai';
 import { useState } from 'react';
-import { pointComma } from '../../../../utils/pointComma';
 
 const CheckoutContact = () => {
   const [country, setCountry] = useState({ title: 'Select country' });

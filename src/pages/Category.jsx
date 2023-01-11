@@ -36,15 +36,20 @@ const Category = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setInitPickedCategories(categoryData?.children));
-  }, [categoryData, dispatch]);
+    dispatch(
+      setInitPickedCategories([
+        { title: 'All Categories', isActive: true },
+        ...categoryData?.children,
+      ])
+    );
+  }, [categoryData, dispatch, categoryProduct?.length]);
 
   useEffect(() => {
     dispatch(setCategoryProducts(categoryProduct?.results));
   }, [categoryProduct?.results, dispatch]);
 
   useEffect(() => {
-    setPage(1)
+    setPage(1);
     setOffset(0);
   }, [categoryId]);
 

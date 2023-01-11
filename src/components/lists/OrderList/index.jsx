@@ -2,10 +2,10 @@ import { setSingleOrder, setTrackingNumber } from '../../../store/slices/order';
 import { useCancelOrderMutation } from '../../../store/query/orderQuery';
 import { mathCurrency, mathShipping } from '../../../utils/mathCurrency';
 import { setContent, setModal } from '../../../store/slices/modal';
+import { modalPaths, paths } from '../../../constants/paths';
 import { mathModalTotal } from '../../../utils/mathTotal';
 import { dateParser } from '../../../utils/dateParser';
 import { orderStatus } from '../../../constants/order';
-import { modalPaths } from '../../../constants/paths';
 import EmptyText from '../../elements/UI/EmptyText';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -67,6 +67,8 @@ const OrderList = ({ data }) => {
                   cls[
                     elem.status === orderStatus.CONFIRMING_PAYMENT
                       ? 'active'
+                      : elem.status === orderStatus.RETRY
+                      ? 'active'
                       : ''
                   ]
                 }
@@ -81,6 +83,8 @@ const OrderList = ({ data }) => {
                   ? 'Shipped'
                   : elem.status === orderStatus.CANCELED
                   ? 'Canceled'
+                  : elem.status === orderStatus.RETRY
+                  ? 'Retry Upload Receipt'
                   : ''}
               </h4>
               {elem.order_items?.length > 0 ? (
@@ -108,9 +112,14 @@ const OrderList = ({ data }) => {
                             elem?.currency?.currency_price
                           )}
                         </p>
-                        {elem.status === 'sent' && (
+                        {(elem.status === orderStatus.SHIPPED ||
+                          elem.status === orderStatus.DELIVIRED) && (
                           <button
-                            onClick={() => navigate(`write-review/${item.id}`)}
+                            onClick={() =>
+                              navigate(
+                                `/${paths.MY_PAGE}/write-review/${item.id}`
+                              )
+                            }
                           >
                             Write a review
                           </button>
@@ -158,7 +167,8 @@ const OrderList = ({ data }) => {
                   Make a Payment
                 </button>
                 <p>
-                  {elem.status === orderStatus.AWAITING_PAYMENT
+                  {elem.status === orderStatus.AWAITING_PAYMENT ||
+                  elem.status === orderStatus.RETRY
                     ? '*Please upload either bank receipt or screenshot'
                     : elem.status === orderStatus.SHIPPED ||
                       elem.status === orderStatus.DELIVIRED

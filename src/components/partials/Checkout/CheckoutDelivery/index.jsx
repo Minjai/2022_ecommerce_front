@@ -36,6 +36,7 @@ const CheckoutDelivery = () => {
           className={cls[isDelivery ? 'active' : '']}
           onClick={() => setDelivery((prev) => !prev)}
         >
+          <b><p></p></b>
           Bank transfer
         </span>
       </div>

@@ -1,17 +1,20 @@
 import { useGetReviewsQuery } from '../../../store/query/reviewQuery';
+import { setContent, setModal } from '../../../store/slices/modal';
+import { setPickedReview } from '../../../store/slices/review';
 import { dateFilter } from '../../../utils/dateFilter';
 import { dateParser } from '../../../utils/dateParser';
+import { useDispatch, useSelector } from 'react-redux';
+import { modalPaths } from '../../../constants/paths';
 import EmptyText from '../../elements/UI/EmptyText';
 import Pagination from '../../elements/Pagination';
 import { AiOutlineDown } from 'react-icons/ai';
 import Loader from '../../elements/UI/Loader';
 import Rating from '../../elements/UI/Rating';
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import cls from './userList.module.scss';
 
 const UserReviewList = () => {
-  const [select, setSelect] = useState('select range');
+  const [select, setSelect] = useState('Select Range');
   const [isRange, setRange] = useState(false);
   const [date, setDate] = useState('');
 
@@ -59,6 +62,14 @@ const UserReviewList = () => {
     }
   }, [select]);
 
+  const dispatch = useDispatch()
+
+  const reviewHandler = (review) => {
+    dispatch(setPickedReview(review))
+    dispatch(setModal(true));
+    dispatch(setContent(modalPaths.REVIEW_INFO));
+  };
+
   return (
     <div className={cls['review']}>
       <div className={cls['review__header']}>
@@ -90,22 +101,22 @@ const UserReviewList = () => {
         {isLoading ? (
           <Loader />
         ) : data.results.length > 0 ? (
-          data.results.map(({ comment, product, stars, id, created_at }) => (
-            <div key={comment} className={cls['review__body__child']}>
+          data.results.map((item) => (
+            <div onClick={() => reviewHandler(item)} key={item?.comment} className={cls['review__body__child']}>
               <div>
-                <span>{id}</span>
+                <span>{item?.id}</span>
                 <img
                   src={
-                    product?.images.find((item) => item.is_feature === true)
+                    item?.product?.images.find((item) => item.is_feature === true)
                       ?.image
                   }
                   alt="review-list"
                 />
-                <p>{comment}</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident cupiditate, illum iste natus impedit explicabo enim dignissimos eos et cumque nemo praesentium ipsum sint, molestias at corporis aut, eligendi quos?</p>
               </div>
               <div>
-                <Rating productRating={stars} />
-                <p>{dateParser(created_at)}</p>
+                <Rating productRating={item?.stars} />
+                <p>{dateParser(item?.created_at)}</p>
               </div>
             </div>
           ))

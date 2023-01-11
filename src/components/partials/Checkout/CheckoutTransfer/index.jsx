@@ -182,10 +182,6 @@ const CheckoutTransfer = () => {
     token: localStorage.getItem('accessToken'),
   });
 
-  console.log(
-    mathTotal(activeCurrency, singleOrder?.length ? singleOrder : carts, 0, 0)
-  );
-
   const { data: currencyData } = useGetCurrencyQuery();
 
   return (

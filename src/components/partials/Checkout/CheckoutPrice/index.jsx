@@ -95,7 +95,10 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
               {mathModalTotal(
                 data?.currency,
                 data?.order_items,
-                +mathShipping(data?.shipping_fee, +data?.currency?.currency_price),
+                +mathShipping(
+                  data?.shipping_fee,
+                  +data?.currency?.currency_price
+                ),
                 data?.point_used
               )?.toFixed(2)}
             </span>
@@ -105,7 +108,10 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
             {mathModalTotal(
               mainCurrency(currencyData?.results),
               data?.order_items,
-              +mathShipping(data?.shipping_fee, +mainCurrency(currencyData?.results)?.currency_price),
+              +mathShipping(
+                data?.shipping_fee,
+                +mainCurrency(currencyData?.results)?.currency_price
+              ),
               data?.point_used
             )?.toFixed(2)}
           </b>
@@ -134,6 +140,7 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
                       : prices[0]?.package}
                   </span>
                   <p>
+                    {activeCurrency?.currency_value}{' '}
                     {mathCurrency(
                       pickedPackage?.selling_price,
                       activeCurrency?.currency_price
@@ -197,7 +204,10 @@ const CheckoutPrice = ({ data, isOrder = false }) => {
             {mathTotal(
               mainCurrency(currencyData?.results),
               data,
-              +mathShipping(data, +mainCurrency(currencyData?.results)?.currency_price),
+              +mathShipping(
+                data,
+                +mainCurrency(currencyData?.results)?.currency_price
+              ),
               points
             )?.toFixed(2)}
           </b>

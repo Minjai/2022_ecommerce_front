@@ -244,7 +244,7 @@ const CheckoutCondition = () => {
                   }))
                 }
                 type="text"
-                placeholder="YYYY-MM-DD"
+                placeholder="MM-DD-YYYY"
               />
               {!state.date_of_birth && required && (
                 <b>* This field is required</b>

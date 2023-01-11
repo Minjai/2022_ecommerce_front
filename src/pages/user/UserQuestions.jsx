@@ -11,7 +11,7 @@ const UserQuestions = () => {
 
   const [date, setDate] = useState('');
 
-  const [select, setSelect] = useState('select range');
+  const [select, setSelect] = useState('Select Range');
   const [isRange, setRange] = useState(false);
 
   const [page, setPage] = useState(1);

@@ -35,7 +35,7 @@ const ReviewItem = ({ review }) => {
         <span>
           <b>{nameClose(user?.username)}</b> {dateParser(created_at)}
         </span>
-        <p>{comment}</p>
+        <p>{comment} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero eveniet similique consectetur, voluptatibus, distinctio praesentium esse expedita perspiciatis, nostrum iure ullam dolores in impedit? Ut amet veritatis blanditiis quibusdam fugit?</p>
       </div>
     </div>
   );

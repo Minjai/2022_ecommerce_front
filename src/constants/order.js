@@ -4,5 +4,6 @@ export const orderStatus = {
   PREPARING_FOR_DELIVERY: 'preparing_for_delivery',
   SHIPPED: 'shipped',
   DELIVIRED: 'delivered',
-  CANCELED: 'canceled'
+  CANCELED: 'canceled',
+  RETRY: 'retry_upload_receipt'
 };

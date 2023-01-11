@@ -13,6 +13,7 @@ import Logo from '../../elements/UI/Logo';
 import { useEffect, useState } from 'react';
 import { useGetCurrencyQuery } from '../../../store/query/currency';
 import { initCurrency } from '../../../store/slices/currency';
+import { nameClose } from '../../../utils/nameCloser';
 
 const HeaderModal = () => {
   const { isActive } = useSelector((state) => state.burger);
@@ -77,7 +78,7 @@ const HeaderModal = () => {
             <div className={cls['modal-wrapper__container']}>
               <div className={cls['modal-wrapper__mid__links']}>
                 {isAuth ? (
-                  <h3>Hello {userInfo.username}</h3>
+                  <h3>Hello {nameClose(userInfo?.email)}</h3>
                 ) : (
                   <>
                     <span onClick={() => navigateHandler(`/${paths.LOGIN}`)}>

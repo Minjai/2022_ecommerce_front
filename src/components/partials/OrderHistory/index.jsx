@@ -11,7 +11,7 @@ import { DateRangePicker } from 'rsuite';
 import 'rsuite/dist/rsuite.css';
 
 const OrderHistory = () => {
-  const [select, setSelect] = useState('select range');
+  const [select, setSelect] = useState('Select Range');
   const [date, setDate] = useState([
     new Date('2000-01-01 01:00:00'),
     new Date('2030-01-01 01:00:00'),

@@ -11,8 +11,8 @@ const PolicyInfo = () => {
         <Loader />
       ) : (
         <>
-          <h4>{data?.results[0].title}</h4>
-          <p>{data?.results[0].description}</p>
+          <h4>{data?.results[0]?.title}</h4>
+          <p>{data?.results[0]?.description}</p>
         </>
       )}
     </div>

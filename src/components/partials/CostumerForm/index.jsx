@@ -14,6 +14,7 @@ import { paths } from '../../../constants/paths';
 import { setAlert, setAlertContent } from '../../../store/slices/alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { nameClose } from '../../../utils/nameCloser';
 
 const schema = yup.object().shape({
   detail: yup.string().required(),
@@ -108,7 +109,7 @@ const CostumerForm = () => {
               className={cls['costumer-input']}
               type="text"
               name="username"
-              placeholder={userInfo.username}
+              placeholder={nameClose(userInfo?.email)}
             />
           </label>
           <label>

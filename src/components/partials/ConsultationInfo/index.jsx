@@ -5,6 +5,7 @@ import { dateParser } from '../../../utils/dateParser';
 import { useDispatch, useSelector } from 'react-redux';
 import { nameClose } from '../../../utils/nameCloser';
 import PageTitle from '../../elements/UI/PageTitle';
+import { paths } from '../../../constants/paths';
 import cls from './consultationInfo.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { BiEnvelope } from 'react-icons/bi';
@@ -53,10 +54,11 @@ const ConsultationInfo = () => {
           }
         );
       }
-
+      
       setComment('');
       dispatch(setAlert(true));
       dispatch(setAlertContent('Your comment has been added !'));
+      navigate(`/${paths.CUSTOMER_HELP}/${paths.CONSULTATION}`)
     } catch (error) {
       console.log(error.response);
     }

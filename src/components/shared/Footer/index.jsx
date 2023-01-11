@@ -1,5 +1,4 @@
 import { useGetFooterInfoQuery } from '../../../store/query/footerQuery';
-import { useGetContactsQuery } from '../../../store/query/settingsQuery';
 import { paths } from '../../../constants/paths';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../elements/UI/Logo';
@@ -10,7 +9,6 @@ const Footer = () => {
 
   const { data } = useGetFooterInfoQuery()
 
-  const { data: contactData } = useGetContactsQuery()
 
   const navigateHandler = (path) => {
     window.scrollTo(window.scrollX, 0);
@@ -24,7 +22,6 @@ const Footer = () => {
           <div className={cls['footer-upper__logo']}>
             <Logo />
             {<p className={cls['footer-line']}>{data?.results[0]?.description}</p>}
-            <p>Email: {contactData?.results[0]?.email}</p>
           </div>
           <div className={cls['footer-upper__links']}>
             <ul>

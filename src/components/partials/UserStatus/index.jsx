@@ -10,6 +10,7 @@ import { AiOutlineRight } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import cls from './userStatus.module.scss';
 import { useSelector } from 'react-redux';
+import { nameClose } from '../../../utils/nameCloser';
 
 const UserStatus = () => {
   const navigate = useNavigate();
@@ -58,7 +59,7 @@ const UserStatus = () => {
   return (
     <div className={cls['user']}>
       <div className={cls['user-board']}>
-        <h3>Hello {userInfo.email}</h3>
+        <h3>Hello {nameClose(userInfo?.email)}</h3>
         <div className={cls['user-board__body']}>
           <div
             onClick={() =>

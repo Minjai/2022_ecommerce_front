@@ -53,7 +53,7 @@ const SingleProduct = () => {
         ) : (
           <>
             <ProductInfo data={data} />
-            <ProductDescription list={data.descriptions} />
+            <ProductDescription list={data?.descriptions} />
           </>
         )}
         <MainReviews productId={id} />

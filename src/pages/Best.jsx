@@ -47,7 +47,12 @@ const Best = () => {
     });
 
     setNewData(arr);
-    dispatch(setInitPickedCategories(arr));
+    dispatch(
+      setInitPickedCategories([
+        { title: 'All Categories', isActive: true },
+        ...arr,
+      ])
+    );
   }, [data, dispatch]);
 
   useEffect(() => {

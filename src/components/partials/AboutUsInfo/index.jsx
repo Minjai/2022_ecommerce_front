@@ -10,11 +10,11 @@ const AboutUsInfo = () => {
   return (
     <div className={cls['about']}>
       <div className={cls['about__body']}>
-        <img src={data?.results[0].image} alt="about-pic" />
+        <img src={data?.results[0]?.image} alt="about-pic" />
         <div>
           <Logo />
-          <p className={cls['active']}>Address: {data?.results[0].address}</p>
-          <p>Email : {data?.results[0].email}</p>
+          <p className={cls['active']}>Address: {data?.results[0]?.address}</p>
+          <p>Email : {data?.results[0]?.email}</p>
         </div>
       </div>
       <div className={cls['about__footer']}>
